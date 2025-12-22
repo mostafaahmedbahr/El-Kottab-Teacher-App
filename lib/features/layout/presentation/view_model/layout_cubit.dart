@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view.dart';
 
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
@@ -10,12 +11,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   static LayoutCubit get(context) => BlocProvider.of(context);
 
-  static int pageIndex = 2;
+  static int pageIndex = 0;
 
 
 
   List screens = [
-   Text("1"),
+   HomeView(),
    Text("2"),
     AppointmentsView(),
    Text("4"),

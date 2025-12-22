@@ -1,5 +1,5 @@
-import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../../main_imports.dart';
+import '../../../../notifications/presentation/views/notifications_view.dart';
 
 class ProfileNameAndNotificationIcon extends StatelessWidget {
   const ProfileNameAndNotificationIcon({super.key});
@@ -30,10 +30,10 @@ class ProfileNameAndNotificationIcon extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            // AppNav.customNavigator(
-            //   context: context,
-            //   screen: const NotificationView(),
-            // );
+            AppNav.customNavigator(
+              context: context,
+              screen: const NotificationView(),
+            );
           },
           child: SvgPicture.asset(
             SvgImages.notify,
