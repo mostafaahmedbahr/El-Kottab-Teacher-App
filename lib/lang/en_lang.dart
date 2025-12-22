@@ -56,6 +56,14 @@ class EnLang {
     "saturday": "Saturday",
     "chooseTheTimePeriodYouWantForTheSessions": "Choose the time period you want for the sessions",
     "availableAppointmentsThatYouCanChooseFrom": "Available appointments that you can choose from",
+    "available": "Available",
+    "rating": "Rating",
+    "reviews": "Reviews",
+    "balance": "Balance",
+    "minuteRemaining": "Minute Remaining",
+    "withdrawBalance": "Withdraw Balance",
+    "performanceIndicator": "Performance Indicator",
+
 
 
 

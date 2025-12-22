@@ -72,12 +72,14 @@ abstract class LangKeys
   static const sendVerificationCode = "sendVerificationCode";
   static const resendCode = "resendCode";
   static const pleaseEnterValidOtp = "pleaseEnterValidOtp";
-
-
-
   static const available = "available";
   static const rating = "rating";
   static const reviews = "reviews";
+  static const balance = "balance";
+  static const minuteRemaining = "minuteRemaining";
+  static const withdrawBalance = "withdrawBalance";
+  static const performanceIndicator = "performanceIndicator";
+
 
 
 

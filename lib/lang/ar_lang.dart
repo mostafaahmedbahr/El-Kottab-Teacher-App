@@ -56,6 +56,13 @@ class ArLang {
     "saturday": "السبت",
     "chooseTheTimePeriodYouWantForTheSessions": "اختر الفترة الزمنية التي تريدها للجلسات",
     "availableAppointmentsThatYouCanChooseFrom": "المواعيد المتاحة التي يمكنك الاختيار منها",
+    "available": "متاح",
+    "rating": "التقييم",
+    "reviews": "التقييمات",
+    "balance": "الرصيد",
+    "minuteRemaining": "الدقائق المتبقية",
+    "withdrawBalance": "سحب الرصيد",
+    "performanceIndicator": "مؤشر الأداء",
 
 
 
