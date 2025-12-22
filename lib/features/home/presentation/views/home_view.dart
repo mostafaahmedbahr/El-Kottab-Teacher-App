@@ -1,4 +1,6 @@
+import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/balance_and_performance.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_slider_images.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/teacher_rating_and_status.dart';
 
 import '../../../../core/app_services/remote_services/service_locator.dart';
 import '../../../../main_imports.dart';
@@ -24,12 +26,12 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              // SliverToBoxAdapter(
-              //   child: const StartFreeLearning(),
-              // ),
-              // SliverToBoxAdapter(
-              //   child: const BrowsePackages(),
-              // ),
+              SliverToBoxAdapter(
+                child: const TeacherRatingAndStatus(),
+              ),
+              SliverToBoxAdapter(
+                child: const BalanceAndPerformance(),
+              ),
               // SliverToBoxAdapter(
               //   child: const BestTeachers(),
               // ),

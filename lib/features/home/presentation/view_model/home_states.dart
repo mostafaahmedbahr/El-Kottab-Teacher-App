@@ -20,8 +20,4 @@ class GetHomeSliderSuccessState extends HomeStates{
 
 
 
-
-
-
-
-
+class ChangeStatusState extends HomeStates{}

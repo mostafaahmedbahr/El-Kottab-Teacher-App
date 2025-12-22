@@ -20,7 +20,12 @@ class HomeCubit extends Cubit<HomeStates> {
 
 
 
-
+  bool status = true;
+  changeStatus(newStatus)
+  {
+    status = newStatus;
+    emit(ChangeStatusState());
+  }
 
 
 

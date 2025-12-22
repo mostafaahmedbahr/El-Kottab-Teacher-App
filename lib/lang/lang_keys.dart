@@ -74,4 +74,11 @@ abstract class LangKeys
   static const pleaseEnterValidOtp = "pleaseEnterValidOtp";
 
 
+
+  static const available = "available";
+  static const rating = "rating";
+  static const reviews = "reviews";
+
+
+
 }
