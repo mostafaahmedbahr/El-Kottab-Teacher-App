@@ -47,7 +47,6 @@ abstract class LangKeys
   static const studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions = "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions";
   static const addAppointmentsNow = "addAppointmentsNow";
   static const chooseTheDaysOnWhichYouWantToGiveLessons = "chooseTheDaysOnWhichYouWantToGiveLessons";
-
   static const friday = "friday";
   static const thursday = "thursday";
   static const wednesday = "wednesday";

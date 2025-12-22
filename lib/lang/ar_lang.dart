@@ -46,6 +46,16 @@ class ArLang {
     "noAppointmentsAreScheduledYet": "لا توجد مواعيد مجدولة بعد",
     "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions": "الطلاب الذين يحضرون الدروس بانتظام معك سيكونون قادرين على حجز عدد أكبر من الجلسات",
     "addAppointmentsNow": "أضف مواعيد الآن",
+    "friday": "الجمعة",
+    "thursday": "الخميس",
+    "wednesday": "الأربعاء",
+    "tuesday": "الثلاثاء",
+    "monday": "الاثنين",
+    "sunday": "الأحد",
+    "saturday": "السبت",
+    "chooseTheTimePeriodYouWantForTheSessions": "اختر الفترة الزمنية التي تريدها للجلسات",
+    "availableAppointmentsThatYouCanChooseFrom": "المواعيد المتاحة التي يمكنك الاختيار منها",
+
 
 
 

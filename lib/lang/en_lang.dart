@@ -46,6 +46,16 @@ class EnLang {
     "noAppointmentsAreScheduledYet": "No appointments are scheduled yet",
     "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions": "Students who regularly attend classes with you will be able to book a larger number of sessions",
     "addAppointmentsNow": "Add appointments now",
+    "friday": "Friday",
+    "thursday": "Thursday",
+    "wednesday": "Wednesday",
+    "tuesday": "Tuesday",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "saturday": "Saturday",
+    "chooseTheTimePeriodYouWantForTheSessions": "Choose the time period you want for the sessions",
+    "availableAppointmentsThatYouCanChooseFrom": "Available appointments that you can choose from",
+
 
 
 
