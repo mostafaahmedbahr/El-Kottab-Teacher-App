@@ -63,6 +63,11 @@ class EnLang {
     "minuteRemaining": "Minute Remaining",
     "withdrawBalance": "Withdraw Balance",
     "performanceIndicator": "Performance Indicator",
+    "successfulCalls": "Successful Calls",
+    "viewAll": "View All",
+    "showDetails": "Show Details",
+    "show": "Show",
+
 
 
 

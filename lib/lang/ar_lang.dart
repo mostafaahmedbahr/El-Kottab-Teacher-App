@@ -63,6 +63,10 @@ class ArLang {
     "minuteRemaining": "الدقائق المتبقية",
     "withdrawBalance": "سحب الرصيد",
     "performanceIndicator": "مؤشر الأداء",
+    "successfulCalls": "المكالمات الناجحة",
+    "viewAll": "عرض الكل",
+    "showDetails": "عرض التفاصيل",
+    "show": "عرض",
 
 
 
