@@ -60,6 +60,18 @@ abstract class LangKeys
 
   static const notifications = "notifications";
   static const deleteAll = "deleteAll";
+  static const signIn = "signIn";
+  static const doNotHaveAnAccount = "doNotHaveAnAccount";
+  static const signUp = "signUp";
+  static const forgetPassword = "forgetPassword";
+  static const email = "email";
+  static const password = "password";
+  static const verifyOtpCode = "verifyOtpCode";
+  static const resendEmailOtp = "resendEmailOtp";
+  static const confirmYourEmail = "confirmYourEmail";
+  static const sendVerificationCode = "sendVerificationCode";
+  static const resendCode = "resendCode";
+  static const pleaseEnterValidOtp = "pleaseEnterValidOtp";
 
 
 }
