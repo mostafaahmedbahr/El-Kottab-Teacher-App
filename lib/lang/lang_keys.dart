@@ -81,6 +81,12 @@ abstract class LangKeys
   static const performanceIndicator = "performanceIndicator";
 
 
+  static const successfulCalls = "successfulCalls";
+  static const viewAll = "viewAll";
+  static const showDetails = "showDetails";
+  static const show = "show";
+
+
 
 
 }
