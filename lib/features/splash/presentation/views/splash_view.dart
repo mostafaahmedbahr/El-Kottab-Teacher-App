@@ -1,4 +1,5 @@
 import '../../../../main_imports.dart';
+import '../../../layout/presentation/views/layout_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -27,10 +28,10 @@ class SplashViewState extends State<SplashView>
       if (status == AnimationStatus.completed) {
         final String? userToken = CacheTokenManger.userToken;
         // if ( userToken != null && userToken.isNotEmpty) {
-        //   AppNav.customNavigator(
-        //     context: context,
-        //     screen: const LayoutView(),
-        //   );
+          AppNav.customNavigator(
+            context: context,
+            screen: const LayoutView(),
+          );
         // } else {
         //   AppNav.customNavigator(
         //     context: context,

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../main_imports.dart';
+import '../../../appointments/presentation/views/appointments_view.dart';
 import 'layout_states.dart';
 
 
@@ -9,16 +10,16 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   static LayoutCubit get(context) => BlocProvider.of(context);
 
-  static int pageIndex = 0;
+  static int pageIndex = 2;
 
 
 
   List screens = [
    Text("1"),
    Text("2"),
-   Text("3"),
+    AppointmentsView(),
    Text("4"),
-   Text("5"),
+
 
   ];
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
 import 'api_service.dart';
 
 
@@ -7,9 +8,9 @@ final getIt = GetIt.instance;
 
 void setup() {
   getIt.registerSingleton<ApiService>(ApiService(Dio()));
-  // getIt.registerSingleton<LoginRepoImpl>(LoginRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
+  getIt.registerSingleton<AddAppointmentsRepoImpl>(AddAppointmentsRepoImpl(
+    getIt.get<ApiService>(),
+  ));
   // getIt.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
   //   getIt.get<ApiService>(),
   // ));

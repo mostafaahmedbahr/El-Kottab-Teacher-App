@@ -39,6 +39,24 @@ abstract class LangKeys
   static const callLog = "callLog";
   static const appointments = "appointments";
   static const ratings = "ratings";
+  static const theSessionWasCanceledBeforeTheScheduledTime = "theSessionWasCanceledBeforeTheScheduledTime";
+  static const youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime = "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime";
+  static const theStudentDidNotAttendTheSession = "theStudentDidNotAttendTheSession";
+  static const theBooked30OfMinutesWillBeAddedToYourBalance = "theBooked30OfMinutesWillBeAddedToYourBalance";
+  static const noAppointmentsAreScheduledYet = "noAppointmentsAreScheduledYet";
+  static const studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions = "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions";
+  static const addAppointmentsNow = "addAppointmentsNow";
+  static const chooseTheDaysOnWhichYouWantToGiveLessons = "chooseTheDaysOnWhichYouWantToGiveLessons";
+
+  static const friday = "friday";
+  static const thursday = "thursday";
+  static const wednesday = "wednesday";
+  static const tuesday = "tuesday";
+  static const monday = "monday";
+  static const sunday = "sunday";
+  static const saturday = "saturday";
+  static const chooseTheTimePeriodYouWantForTheSessions = "chooseTheTimePeriodYouWantForTheSessions";
+  static const availableAppointmentsThatYouCanChooseFrom = "availableAppointmentsThatYouCanChooseFrom";
 
 
 }
