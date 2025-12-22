@@ -29,11 +29,16 @@ abstract class LangKeys
   static const urlMissingProtocol = "urlMissingProtocol";
   static const repeatPasswordRequired = "repeatPasswordRequired";
   static const enterPasswordFirst = "enterPasswordFirst";
-  static const passwordsDontMatch = "passwordsDontMatch";
+  static const passwordsDoNotMatch = "passwordsDoNotMatch";
   static const phoneRequired = "phoneRequired";
   static const phoneEgyptInvalid = "phoneEgyptInvalid";
   static const phoneUSInvalid = "phoneUSInvalid";
   static const phoneInternationalInvalid = "phoneInternationalInvalid";
+  static const exit = "exit";
+  static const home = "home";
+  static const callLog = "callLog";
+  static const appointments = "appointments";
+  static const ratings = "ratings";
 
 
 }

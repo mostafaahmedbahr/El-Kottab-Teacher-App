@@ -151,7 +151,7 @@ class AppValidators {
     }
 
     if (value != password) {
-      return LangKeys.passwordsDontMatch.tr(); // "Passwords don't match"
+      return LangKeys.passwordsDoNotMatch.tr(); // "Passwords don't match"
     }
 
     return null;
