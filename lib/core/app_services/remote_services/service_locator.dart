@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
+import '../../../features/notifications/data/repos/notifications_repo_imple.dart';
 import 'api_service.dart';
 
 
@@ -11,9 +12,9 @@ void setup() {
   getIt.registerSingleton<AddAppointmentsRepoImpl>(AddAppointmentsRepoImpl(
     getIt.get<ApiService>(),
   ));
-  // getIt.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
+  getIt.registerSingleton<NotificationsRepoImpl>(NotificationsRepoImpl(
+    getIt.get<ApiService>(),
+  ));
   // getIt.registerSingleton<OtpRepoImpl>(OtpRepoImpl(
   //   getIt.get<ApiService>(),
   // ));

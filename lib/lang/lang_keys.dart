@@ -58,4 +58,8 @@ abstract class LangKeys
   static const availableAppointmentsThatYouCanChooseFrom = "availableAppointmentsThatYouCanChooseFrom";
 
 
+  static const notifications = "notifications";
+  static const deleteAll = "deleteAll";
+
+
 }
