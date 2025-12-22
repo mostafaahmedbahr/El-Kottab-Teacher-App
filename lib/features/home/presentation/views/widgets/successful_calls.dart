@@ -75,8 +75,11 @@ class SuccessfulCalls extends StatelessWidget {
                         ),
                       ),
                       Gap(8.w),
-                      SvgPicture.asset(context.isArabic ? SvgImages.arrowLeft :SvgImages.arrowRight )
-                    ],
+                      Icon(
+                        context.isArabic ? Icons.chevron_right : Icons.chevron_left,
+                        size: 20.sp,
+                        color: AppColors.darkOlive,
+                      )                    ],
                   ),
                 ),
               ],
