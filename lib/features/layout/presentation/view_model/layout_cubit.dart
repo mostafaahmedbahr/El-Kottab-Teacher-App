@@ -3,6 +3,7 @@ import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view
 
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
+import '../../../call_log/presentation/views/call_log_view.dart';
 import 'layout_states.dart';
 
 
@@ -17,7 +18,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   List screens = [
    HomeView(),
-   Text("2"),
+   CallLogView(),
     AppointmentsView(),
    Text("4"),
 
