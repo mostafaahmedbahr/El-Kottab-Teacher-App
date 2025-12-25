@@ -67,6 +67,17 @@ class EnLang {
     "viewAll": "View All",
     "showDetails": "Show Details",
     "show": "Show",
+    "resetPassword": "Reset Password",
+    "enterEmailToReceiveResetCode": "Enter your email to receive reset code",
+    "enterYourEmailToResetPassword": "Enter your email to reset password",
+    "changePassword": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "all": "All",
+    "completed": "Completed",
+    "canceled": "Canceled",
+    "totalCalls": "Total Calls",
+
 
 
 

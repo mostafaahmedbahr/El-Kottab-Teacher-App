@@ -8,6 +8,7 @@ import '../../../features/home/data/repos/home_repo_impl.dart';
 import '../../../features/login/data/repos/login_repo_impl.dart';
 import '../../../features/notifications/data/repos/notifications_repo_imple.dart';
  import '../../../features/otp/data/repos/otp_repo_imple.dart';
+import '../../../features/reviews/data/repos/reviews_repo_impl.dart';
 import '../../../features/student_profile/data/repos/student_repo_impl.dart';
 import 'api_service.dart';
 
@@ -43,9 +44,9 @@ void setup() {
   getIt.registerSingleton<CallLogsRepoImpl>(CallLogsRepoImpl(
     getIt.get<ApiService>(),
   ));
-  // getIt.registerSingleton<BalanceRepoImpl>(BalanceRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
+  getIt.registerSingleton<ReviewsRepoImpl>(ReviewsRepoImpl(
+    getIt.get<ApiService>(),
+  ));
   // getIt.registerSingleton<FreeLearningRepoImpl>(FreeLearningRepoImpl(
   //   getIt.get<ApiService>(),
   // ));

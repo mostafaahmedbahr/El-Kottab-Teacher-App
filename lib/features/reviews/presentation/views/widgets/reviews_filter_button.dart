@@ -1,23 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/call_log/presentation/view_models/call_logs_cubit.dart';
-import 'package:el_kottab_teacher_app/features/call_log/presentation/view_models/call_logs_states.dart';
-
 import '../../../../../main_imports.dart';
+import '../../view_model/reviews_cubit.dart';
+import '../../view_model/reviews_states.dart';
 
-class FilterButton extends StatelessWidget {
-  const FilterButton({super.key, required this.text, required this.index});
+class ReviewsFilterButton extends StatelessWidget {
+  const ReviewsFilterButton({super.key, required this.text, required this.index});
   final  String text;
   final  int index;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CallLogsCubit , CallLogsStates>(
+    return BlocBuilder<ReviewsCubit , ReviewsStates>(
       builder: (context,state){
-        var callLogsCubit = context.read<CallLogsCubit>();
-        bool isSelected = callLogsCubit.selectedFilter == index;
+        var reviewsCubit = context.read<ReviewsCubit>();
+        bool isSelected = reviewsCubit.selectedFilter == index;
         return Expanded(
           child: GestureDetector(
             onTap: () {
-              callLogsCubit.changeSelectedFilter(index);
+              reviewsCubit.changeSelectedFilter(index);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),

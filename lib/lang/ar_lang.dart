@@ -67,6 +67,16 @@ class ArLang {
     "viewAll": "عرض الكل",
     "showDetails": "عرض التفاصيل",
     "show": "عرض",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "enterEmailToReceiveResetCode": "أدخل بريدك الإلكتروني لاستلام رمز إعادة التعيين",
+    "enterYourEmailToResetPassword": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+    "changePassword": "تغيير كلمة المرور",
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "all": "الكل",
+    "completed": "مكتمل",
+    "canceled": "ملغي",
+    "totalCalls": "إجمالي المكالمات",
 
 
 

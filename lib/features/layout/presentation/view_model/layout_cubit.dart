@@ -4,6 +4,7 @@ import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
 import '../../../call_log/presentation/views/call_log_view.dart';
+import '../../../reviews/presentation/views/reviews_view.dart';
 import 'layout_states.dart';
 
 
@@ -20,7 +21,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
    HomeView(),
    CallLogView(),
     AppointmentsView(),
-   Text("4"),
+    ReviewsView(),
 
 
   ];
