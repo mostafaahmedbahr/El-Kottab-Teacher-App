@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
+import '../../../features/call_log/data/repos/call_logs_repo_impl.dart';
 import '../../../features/change_password/data/repos/change_password_repo_imple.dart';
 import '../../../features/forget_password/data/repos/forget_password_repo_impl.dart';
 import '../../../features/home/data/repos/home_repo_impl.dart';
@@ -39,9 +40,9 @@ void setup() {
   getIt.registerSingleton<ForgetPasswordRepoImpl>(ForgetPasswordRepoImpl(
     getIt.get<ApiService>(),
   ));
-  // getIt.registerSingleton<ProfileRepoImpl>(ProfileRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
+  getIt.registerSingleton<CallLogsRepoImpl>(CallLogsRepoImpl(
+    getIt.get<ApiService>(),
+  ));
   // getIt.registerSingleton<BalanceRepoImpl>(BalanceRepoImpl(
   //   getIt.get<ApiService>(),
   // ));

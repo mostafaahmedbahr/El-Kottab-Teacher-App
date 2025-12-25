@@ -1,34 +1,24 @@
-import 'package:el_kottab_teacher_app/features/call_log/presentation/models/call_log_model.dart';
-import 'package:el_kottab_teacher_app/features/call_log/presentation/view_models/call_log_view_model.dart';
-import 'package:flutter/material.dart';
+import 'package:el_kottab_teacher_app/main_imports.dart';
+import 'call_type_indicator.dart';
 
 class CallLogItem extends StatelessWidget {
-  final CallLogModel call;
-  final CallLogViewModel viewModel;
-
-  const CallLogItem({super.key, required this.call, required this.viewModel});
-
+  const CallLogItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: InkWell(
-        onTap: () {
-          // Handle call log tap - show details
-        },
-        borderRadius: BorderRadius.circular(16),
+        onTap: () {},
+        borderRadius: BorderRadius.circular(16.r),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding:   EdgeInsets.all(16.r),
           child: Row(
             children: [
-              // Profile Avatar
-              _buildAvatar(),
-              const SizedBox(width: 16),
-
-              // Call Details
+              CustomNetWorkImage(imageUrl: "", raduis: 50.r,height: 50.h,width: 50.w,),
+              Gap(16.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,9 +27,9 @@ class CallLogItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            call.studentName,
-                            style: const TextStyle(
-                              fontSize: 16,
+                             "name",
+                            style:   TextStyle(
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
                               color: Colors.black87,
                             ),
@@ -47,10 +37,10 @@ class CallLogItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        _buildCallTypeIndicator(),
+                         CallTypeIndicator(),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    Gap(8.h),
 
                     Row(
                       children: [
@@ -61,7 +51,7 @@ class CallLogItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          viewModel.formatDate(call.callTime),
+                          "callTime",
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[600],
@@ -75,7 +65,7 @@ class CallLogItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          viewModel.formatDuration(call.callDuration),
+                           "callDuration",
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[600],
@@ -88,16 +78,17 @@ class CallLogItem extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          call.isOutgoing ? Icons.call_made : Icons.call_received,
-                          size: 14,
-                          color: _getStatusColor(call.status),
+                          Icons.call_made,
+                          //  Icons.call_made : Icons.call_received,
+                          size: 14.sp,
+                          // color: _getStatusColor("call.status"),
                         ),
-                        const SizedBox(width: 4),
+                        Gap(4.w),
                         Text(
-                          _getStatusText(call.status),
+                           "call.status",
                           style: TextStyle(
                             fontSize: 13,
-                            color: _getStatusColor(call.status),
+                            color: AppColors.cream,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -111,7 +102,7 @@ class CallLogItem extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   // Show more options
-                  _showOptions(context);
+                  // _showOptions(context);
                 },
                 icon: Icon(
                   Icons.more_vert,
@@ -126,176 +117,95 @@ class CallLogItem extends StatelessWidget {
     );
   }
 
-  Widget _buildAvatar() {
-    return Stack(
-      children: [
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: _getStatusColor(call.status).withOpacity(0.3),
-              width: 2,
-            ),
-          ),
-          child: ClipOval(
-            child: Image.network(
-              call.studentImage,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[200],
-                  child: const Icon(
-                    Icons.person,
-                    size: 28,
-                    color: Colors.grey,
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        // Online/Status Indicator
-        if (call.status == CallStatus.completed)
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              width: 12,
-              height: 12,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
 
-  Widget _buildCallTypeIndicator() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: _getStatusColor(call.status).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        call.isOutgoing ? 'صادر' : 'وارد',
-        style: TextStyle(
-          fontSize: 11,
-          color: _getStatusColor(call.status),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
 
-  Color _getStatusColor(CallStatus status) {
-    switch (status) {
-      case CallStatus.completed:
-        return Colors.green;
-      case CallStatus.canceled:
-        return Colors.orange;
-      case CallStatus.missed:
-        return Colors.red;
-    }
-  }
 
-  String _getStatusText(CallStatus status) {
-    switch (status) {
-      case CallStatus.completed:
-        return 'مكتملة';
-      case CallStatus.canceled:
-        return 'ملغاة';
-      case CallStatus.missed:
-        return 'فائتة';
-    }
-  }
 
-  void _showOptions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.info, color: Colors.blue),
-                title: const Text('عرض التفاصيل'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showCallDetails(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.call, color: Colors.green),
-                title: const Text('الاتصال مرة أخرى'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // Implement call back logic
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.message, color: Colors.purple),
-                title: const Text('إرسال رسالة'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // Implement message logic
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.delete, color: Colors.red),
-                title: const Text('حذف السجل'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showDeleteConfirmation(context);
-                },
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('إلغاء'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
-  void _showCallDetails(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('تفاصيل المكالمة - ${call.studentName}'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildDetailRow('الوقت:', viewModel.formatDate(call.callTime)),
-            _buildDetailRow('المدة:', viewModel.formatDuration(call.callDuration)),
-            _buildDetailRow('النوع:', call.isOutgoing ? 'صادر' : 'وارد'),
-            _buildDetailRow('الحالة:', _getStatusText(call.status)),
-            // if (call.note != null && call.note!.isNotEmpty)
-            //   _buildDetailRow('ملاحظة:', call.note!),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('حسنًا'),
-          ),
-        ],
-      ),
-    );
-  }
+
+
+
+  // void _showOptions(BuildContext context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (context) {
+  //       return SafeArea(
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             ListTile(
+  //               leading: const Icon(Icons.info, color: Colors.blue),
+  //               title: const Text('عرض التفاصيل'),
+  //               onTap: () {
+  //                 Navigator.pop(context);
+  //                 _showCallDetails(context);
+  //               },
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.call, color: Colors.green),
+  //               title: const Text('الاتصال مرة أخرى'),
+  //               onTap: () {
+  //                 Navigator.pop(context);
+  //                 // Implement call back logic
+  //               },
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.message, color: Colors.purple),
+  //               title: const Text('إرسال رسالة'),
+  //               onTap: () {
+  //                 Navigator.pop(context);
+  //                 // Implement message logic
+  //               },
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.delete, color: Colors.red),
+  //               title: const Text('حذف السجل'),
+  //               onTap: () {
+  //                 Navigator.pop(context);
+  //                 _showDeleteConfirmation(context);
+  //               },
+  //             ),
+  //             const SizedBox(height: 8),
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context),
+  //               child: const Text('إلغاء'),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  // void _showCallDetails(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Text('تفاصيل المكالمة - ${call.studentName}'),
+  //       content: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           _buildDetailRow('الوقت:', viewModel.formatDate(call.callTime)),
+  //           _buildDetailRow('المدة:', viewModel.formatDuration(call.callDuration)),
+  //           _buildDetailRow('النوع:', call.isOutgoing ? 'صادر' : 'وارد'),
+  //           _buildDetailRow('الحالة:', _getStatusText(call.status)),
+  //           // if (call.note != null && call.note!.isNotEmpty)
+  //           //   _buildDetailRow('ملاحظة:', call.note!),
+  //         ],
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           child: const Text('حسنًا'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
@@ -335,7 +245,7 @@ class CallLogItem extends StatelessWidget {
               // Implement delete logic
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('تم حذف سجل مكالمة ${call.studentName}'),
+                  content: Text('تم حذف سجل مكالمة ${"studentName"}'),
                   backgroundColor: Colors.green,
                 ),
               );

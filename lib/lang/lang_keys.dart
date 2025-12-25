@@ -93,4 +93,10 @@ abstract class LangKeys
   static const newPassword = "newPassword";
 
 
+  static const all = "all";
+  static const completed = "completed";
+  static const canceled = "canceled";
+  static const totalCalls = "totalCalls";
+
+
 }
