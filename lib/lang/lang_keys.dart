@@ -85,6 +85,12 @@ abstract class LangKeys
   static const show = "show";
 
 
+  static const resetPassword = "resetPassword";
+  static const enterEmailToReceiveResetCode = "enterEmailToReceiveResetCode";
+  static const enterYourEmailToResetPassword = "enterYourEmailToResetPassword";
+  static const changePassword = "changePassword";
+  static const oldPassword = "oldPassword";
+  static const newPassword = "newPassword";
 
 
 }

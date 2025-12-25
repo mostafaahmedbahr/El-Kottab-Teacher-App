@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
+import '../../../features/change_password/data/repos/change_password_repo_imple.dart';
+import '../../../features/forget_password/data/repos/forget_password_repo_impl.dart';
 import '../../../features/home/data/repos/home_repo_impl.dart';
 import '../../../features/login/data/repos/login_repo_impl.dart';
 import '../../../features/notifications/data/repos/notifications_repo_imple.dart';
-import '../../../features/otp/data/repos/otp_repo_impl.dart';
+ import '../../../features/otp/data/repos/otp_repo_imple.dart';
 import '../../../features/student_profile/data/repos/student_repo_impl.dart';
 import 'api_service.dart';
 
@@ -31,12 +33,12 @@ void setup() {
   getIt.registerSingleton<StudentRepoImpl>(StudentRepoImpl(
     getIt.get<ApiService>(),
   ));
-  // getIt.registerSingleton<TeacherDetailsRepoImpl>(TeacherDetailsRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
-  // getIt.registerSingleton<SessionsRepoImpl>(SessionsRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
+  getIt.registerSingleton<ChangePasswordRepoImpl>(ChangePasswordRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<ForgetPasswordRepoImpl>(ForgetPasswordRepoImpl(
+    getIt.get<ApiService>(),
+  ));
   // getIt.registerSingleton<ProfileRepoImpl>(ProfileRepoImpl(
   //   getIt.get<ApiService>(),
   // ));

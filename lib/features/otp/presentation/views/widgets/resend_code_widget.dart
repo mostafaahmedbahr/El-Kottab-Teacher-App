@@ -1,14 +1,21 @@
-
-
 import 'package:easy_localization/easy_localization.dart';
-
 import '../../../../../main_imports.dart';
 import '../../view_model/otp_cubit.dart';
 import '../../view_model/otp_states.dart';
 
-class ResendCodeWidget extends StatelessWidget {
-  const ResendCodeWidget({super.key});
+class ResendCodeWidget extends StatefulWidget {
+  final String email;
 
+  const ResendCodeWidget({
+    super.key,
+    required this.email,
+  });
+
+  @override
+  State<ResendCodeWidget> createState() => _ResendCodeWidgetState();
+}
+
+class _ResendCodeWidgetState extends State<ResendCodeWidget> {
   String _formatTime(int totalSeconds) {
     final minutes = (totalSeconds ~/ 60).toString().padLeft(2, '0');
     final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
@@ -18,39 +25,33 @@ class ResendCodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OtpCubit, OtpStates>(
-      buildWhen: (previous, current) {
-
-        return current is OtpTimerTickState ||
-            current is OtpTimerFinishedState ||
-            current is ResendOtpLoadingState ||
-            current is ResendOtpErrorState ||
-            current is ResendOtpSuccessState ||
-            current is OtpInitState;
+      listenWhen: (previous, current) {
+        return current is ResendOtpSuccessState ||
+            current is ResendOtpErrorState;
       },
       listener: (context, state) {
-        // if (state is ResendOtpSuccessState) {
-        //   NewToast.showNewSuccessToast(
-        //     msg: state.resendOtpModel.message.toString(),
-        //     context: context,
-        //   );
-        // }
-        // if (state is ResendOtpErrorState) {
-        //   NewToast.showNewErrorToast(
-        //     msg: state.error.toString(),
-        //     context: context,
-        //   );
-        // }
+        if (state is ResendOtpSuccessState) {
+          Toast.showSuccessToast(
+            msg: state.resendOtpModel.message.toString(),
+            context: context,
+          );
+        }
+        if (state is ResendOtpErrorState) {
+          Toast.showErrorToast(
+            msg: state.error.toString(),
+            context: context,
+          );
+        }
       },
       builder: (context, state) {
         final cubit = context.read<OtpCubit>();
 
+        // الحالات المختلفة
+        if (state is ResendOtpLoadingState) {
+          return const Center(child: CustomLoading());
+        }
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (state is! OtpTimerTickState && state is! OtpTimerFinishedState && state is !ResendOtpLoadingState) {
-            cubit.startOtpTimer();
-          }
-        });
-
+        // عرض التايمر إذا كان نشطاً
         if (state is OtpTimerTickState) {
           return Center(
             child: Row(
@@ -61,47 +62,75 @@ class ResendCodeWidget extends StatelessWidget {
                   style: AppStyles.black12SemiBold,
                 ),
                 Gap(5.w),
-                BlocBuilder<OtpCubit, OtpStates>(
-                  buildWhen: (previous, current) => current is OtpTimerTickState,
-                  builder: (context, state) {
-                    if (state is OtpTimerTickState) {
-                      return Text(
-                         _formatTime(state.secondsRemaining),
-                        style: AppStyles.gray14SemiBold.copyWith(
-                          color: AppColors.black,
-                        ),
-                      );
-                    }
-                    return const SizedBox();
-                  },
+                Text(
+                  _formatTime(state.secondsRemaining),
+                  style: AppStyles.gray14SemiBold.copyWith(
+                    color: AppColors.darkOlive, // يمكنك تغيير اللون حسب احتياجك
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
           );
         }
 
-        if (state is OtpTimerFinishedState || state is OtpInitState || state is ResendOtpSuccessState) {
+        if (state is OtpTimerFinishedState) {
           return Center(
-            child: state is ResendOtpLoadingState
-                ? const CustomLoading()
-                : GestureDetector(
+            child: GestureDetector(
               onTap: () {
-                // cubit.resendOtp(
-                //   email: CacheHelper.getData(key: "userEmail")?.toString() ?? "",
-                // );
+                cubit.resendOtp(email: widget.email);
               },
               child: Text(
                 LangKeys.resendCode.tr(),
                 style: AppStyles.gray14SemiBold.copyWith(
-                  color: AppColors.white,
+                  color: AppColors.darkOlive,
                   decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           );
         }
 
-        return const Center(child: CustomLoading());
+        // الحالة الافتراضية - تحقق من حالة التايمر في الكيوبت
+        if (cubit.isTimerActive && cubit.secondsRemaining > 0) {
+          return Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${LangKeys.resendCode.tr()} بعد",
+                  style: AppStyles.black12SemiBold,
+                ),
+                Gap(5.w),
+                Text(
+                  _formatTime(cubit.secondsRemaining),
+                  style: AppStyles.gray14SemiBold.copyWith(
+                    color: AppColors.darkOlive,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        // إذا انتهى التايمر
+        return Center(
+          child: GestureDetector(
+            onTap: () {
+              cubit.resendOtp(email: widget.email);
+            },
+            child: Text(
+              LangKeys.resendCode.tr(),
+              style: AppStyles.gray14SemiBold.copyWith(
+                color: AppColors.darkOlive,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
       },
     );
   }

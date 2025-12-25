@@ -9,7 +9,7 @@ class OtpInitState extends OtpStates{}
 
 class VerifyOtpLoadingState extends OtpStates{}
 class VerifyOtpSuccessState extends OtpStates{
-  VerifyOtpModel verifyOtpModel;
+  dynamic verifyOtpModel;
   VerifyOtpSuccessState(this.verifyOtpModel);
 }
 class VerifyOtpErrorState extends OtpStates{

@@ -42,17 +42,17 @@ class ResendEmailOtpButton extends StatelessWidget {
 
               onPressed: () {
     if (formKey.currentState!.validate()) {
-      if(otpCubit.phoneNumber.isEmpty){
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(
-        //     content: Text(AppStrings.phoneRequired),
-        //     duration: const Duration(seconds: 2),
-        //     backgroundColor: AppColors.redColor,
-        //   ),
-        // );
-      }else{
-        //otpCubit.resendOtp(email: otpCubit.emailCon.text);
-      }
+      // if(otpCubit.phoneNumber.isEmpty){
+      //   // ScaffoldMessenger.of(context).showSnackBar(
+      //   //   SnackBar(
+      //   //     content: Text(AppStrings.phoneRequired),
+      //   //     duration: const Duration(seconds: 2),
+      //   //     backgroundColor: AppColors.redColor,
+      //   //   ),
+      //   // );
+      // }else{
+      //   //otpCubit.resendOtp(email: otpCubit.emailCon.text);
+      // }
 
     }
 
