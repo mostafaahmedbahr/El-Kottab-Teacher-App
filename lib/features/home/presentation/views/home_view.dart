@@ -13,31 +13,21 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context)=>HomeCubit(getIt.get<HomeRepoImpl>()),
-        child: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    HomeSliderImages(),
-                    Gap(12.h),
-                  ],
+    return SafeArea(
+      child: Scaffold(
+        body: BlocProvider(
+          create: (context) => HomeCubit(getIt.get<HomeRepoImpl>()),
+          child: SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(children: [HomeSliderImages(), Gap(12.h)]),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: const TeacherRatingAndStatus(),
-              ),
-              SliverToBoxAdapter(
-                child: const BalanceAndPerformance(),
-              ),
-              SliverToBoxAdapter(
-                child:   SuccessfulCalls(),
-              ),
-
-            ],
+                SliverToBoxAdapter(child: const TeacherRatingAndStatus()),
+                SliverToBoxAdapter(child: const BalanceAndPerformance()),
+                SliverToBoxAdapter(child: SuccessfulCalls()),
+              ],
+            ),
           ),
         ),
       ),

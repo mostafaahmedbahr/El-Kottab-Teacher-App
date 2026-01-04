@@ -15,14 +15,18 @@ class ArLang {
     "messageTooLong": "الرسالة طويلة جداً",
     "emailValidate2": "صيغة البريد الإلكتروني غير صحيحة",
     "emailNoSpaces": "البريد الإلكتروني لا يمكن أن يحتوي على مسافات",
-    "emailInvalidDots": "بريد إلكتروني غير صالح (نقاط متتالية أو نقاط في البداية/النهاية)",
+    "emailInvalidDots":
+        "بريد إلكتروني غير صالح (نقاط متتالية أو نقاط في البداية/النهاية)",
     "emailMultipleAt": "البريد الإلكتروني لا يمكن أن يحتوي على أكثر من رمز @",
     "passwordMinLength": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
     "passwordMaxLength": "لا يمكن أن تتجاوز كلمة المرور 32 حرفاً",
-    "passwordRequireUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
-    "passwordRequireLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+    "passwordRequireUppercase":
+        "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+    "passwordRequireLowercase":
+        "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
     "passwordRequireNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
-    "passwordRequireSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+    "passwordRequireSpecial":
+        "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
     "passwordRequirements": "متطلبات كلمة المرور",
     "urlRequired": "الرابط مطلوب",
     "urlInvalid": "رابط غير صالح",
@@ -39,23 +43,30 @@ class ArLang {
     "callLog": "سجل المكالمات",
     "appointments": "المواعيد",
     "ratings": "التقييمات",
-    "theSessionWasCanceledBeforeTheScheduledTime": "تم إلغاء الجلسة قبل الوقت المحدد",
-    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime": "يمكنك إلغاء أي جلسة حتى 12 ساعة قبل وقتها المحدد",
+    "theSessionWasCanceledBeforeTheScheduledTime":
+        "تم إلغاء الجلسة قبل الوقت المحدد",
+    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime":
+        "يمكنك إلغاء أي جلسة حتى 12 ساعة قبل وقتها المحدد",
     "theStudentDidNotAttendTheSession": "الطالب لم يحضر الجلسة",
-    "theBooked30OfMinutesWillBeAddedToYourBalance": "سيتم إضافة 30٪ من الدقائق المحجوزة إلى رصيدك",
+    "theBooked30OfMinutesWillBeAddedToYourBalance":
+        "سيتم إضافة 30٪ من الدقائق المحجوزة إلى رصيدك",
     "noAppointmentsAreScheduledYet": "لا توجد مواعيد مجدولة بعد",
-    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions": "الطلاب الذين يحضرون الدروس بانتظام معك سيكونون قادرين على حجز عدد أكبر من الجلسات",
+    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions":
+        "الطلاب الذين يحضرون الدروس بانتظام معك سيكونون قادرين على حجز عدد أكبر من الجلسات",
     "addAppointmentsNow": "أضف مواعيد الآن",
-    "chooseTheDaysOnWhichYouWantToGiveLessons": "اختر الأيام التي تريد تقديم الدروس فيها",
-        "friday": "الجمعة",
+    "chooseTheDaysOnWhichYouWantToGiveLessons":
+        "اختر الأيام التي تريد تقديم الدروس فيها",
+    "friday": "الجمعة",
     "thursday": "الخميس",
     "wednesday": "الأربعاء",
     "tuesday": "الثلاثاء",
     "monday": "الاثنين",
     "sunday": "الأحد",
     "saturday": "السبت",
-    "chooseTheTimePeriodYouWantForTheSessions": "اختر الفترة الزمنية التي تريدها للجلسات",
-    "availableAppointmentsThatYouCanChooseFrom": "المواعيد المتاحة التي يمكنك الاختيار منها",
+    "chooseTheTimePeriodYouWantForTheSessions":
+        "اختر الفترة الزمنية التي تريدها للجلسات",
+    "availableAppointmentsThatYouCanChooseFrom":
+        "المواعيد المتاحة التي يمكنك الاختيار منها",
     "available": "متاح",
     "rating": "التقييم",
     "reviews": "التقييمات",
@@ -68,8 +79,10 @@ class ArLang {
     "showDetails": "عرض التفاصيل",
     "show": "عرض",
     "resetPassword": "إعادة تعيين كلمة المرور",
-    "enterEmailToReceiveResetCode": "أدخل بريدك الإلكتروني لاستلام رمز إعادة التعيين",
-    "enterYourEmailToResetPassword": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+    "enterEmailToReceiveResetCode":
+        "أدخل بريدك الإلكتروني لاستلام رمز إعادة التعيين",
+    "enterYourEmailToResetPassword":
+        "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور",
     "changePassword": "تغيير كلمة المرور",
     "oldPassword": "كلمة المرور القديمة",
     "newPassword": "كلمة المرور الجديدة",
@@ -77,13 +90,15 @@ class ArLang {
     "completed": "مكتمل",
     "canceled": "ملغي",
     "totalCalls": "إجمالي المكالمات",
-
-
-
-
-
-
-
-
+    "accountMustBeVerified": "يجب تأكيد الحساب",
+    "exploreElKottab": "استكشف الكُتّاب",
+    "privacyAndTerms": "السياسة والشروط",
+    "deleteAccount": "حذف الحساب",
+    "aboutUs": "معلومات عنا",
+    "confirmDeleteAccount": "تأكيد حذف الحساب",
+    "areYouSureToDeleteYourAccount": "هل أنت متأكد من حذف حسابك",
+    "cancel": "الغاء",
+    "delete": "حذف",
+    "settings": "الإعدادات",
   };
 }

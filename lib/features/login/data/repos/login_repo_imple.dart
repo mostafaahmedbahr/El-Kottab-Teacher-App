@@ -16,7 +16,8 @@ class LoginRepoImpl implements LoginRepo {
     try {
       var data = FormData.fromMap({
         'email': email,
-        'password': password
+        'password': password,
+        'fcm_token': CacheHelper.getData(key: "fcmToken"),
       });
       var response = await apiService!.postData(
         endPoint: EndPoints.login,

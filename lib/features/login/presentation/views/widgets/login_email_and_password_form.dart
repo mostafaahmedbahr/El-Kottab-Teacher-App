@@ -1,5 +1,4 @@
- import 'package:easy_localization/easy_localization.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../../../../main_imports.dart';
 import '../../view_model/login_cubit.dart';
 import '../../view_model/login_states.dart';

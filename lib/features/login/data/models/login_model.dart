@@ -29,16 +29,18 @@ class Data {
   String? email;
   String? phone;
   String? gender;
-  Image? image;
+  String? image;
   dynamic description;
   String? type;
   dynamic avaliable;
   String? role;
-  String? token;
+  bool? isVerified;
+  dynamic token;
   String? categoryId;
   dynamic attachments;
+  String? country;
 
-  Data({this.id, this.name, this.email, this.phone, this.gender, this.image, this.description, this.type, this.avaliable, this.role, this.token, this.categoryId, this.attachments});
+  Data({this.id, this.name, this.email, this.phone, this.gender, this.image, this.description, this.type, this.avaliable, this.role, this.isVerified, this.token, this.categoryId, this.attachments, this.country});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -46,14 +48,16 @@ class Data {
     email = json["email"];
     phone = json["phone"];
     gender = json["gender"];
-    image = json["image"] == null ? null : Image.fromJson(json["image"]);
+    image = json["image"];
     description = json["description"];
     type = json["type"];
     avaliable = json["avaliable"];
     role = json["role"];
+    isVerified = json["is_verified"];
     token = json["token"];
     categoryId = json["category_id"];
     attachments = json["attachments"];
+    country = json["country"];
   }
 
   Map<String, dynamic> toJson() {
@@ -63,30 +67,16 @@ class Data {
     _data["email"] = email;
     _data["phone"] = phone;
     _data["gender"] = gender;
-    if(image != null) {
-      _data["image"] = image?.toJson();
-    }
+    _data["image"] = image;
     _data["description"] = description;
     _data["type"] = type;
     _data["avaliable"] = avaliable;
     _data["role"] = role;
+    _data["is_verified"] = isVerified;
     _data["token"] = token;
     _data["category_id"] = categoryId;
     _data["attachments"] = attachments;
-    return _data;
-  }
-}
-
-class Image {
-  Image();
-
-  Image.fromJson(Map<String, dynamic> json) {
-
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-
+    _data["country"] = country;
     return _data;
   }
 }

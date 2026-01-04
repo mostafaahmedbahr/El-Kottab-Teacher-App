@@ -6,18 +6,26 @@ class CallLogItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(0xFFFBFAF8),
       elevation: 2,
+      shadowColor: Color(0xFF8CB982).withOpacity(0.4),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.r),
+        side: BorderSide(color: Color(0xFFE1E6E1)),
       ),
       child: InkWell(
         onTap: () {},
         borderRadius: BorderRadius.circular(16.r),
         child: Padding(
-          padding:   EdgeInsets.all(16.r),
+          padding: EdgeInsets.all(16.r),
           child: Row(
             children: [
-              CustomNetWorkImage(imageUrl: "", raduis: 50.r,height: 50.h,width: 50.w,),
+              CustomNetWorkImage(
+                imageUrl: "",
+                raduis: 50.r,
+                height: 50.h,
+                width: 50.w,
+              ),
               Gap(16.w),
               Expanded(
                 child: Column(
@@ -27,17 +35,17 @@ class CallLogItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                             "name",
-                            style:   TextStyle(
+                            "name",
+                            style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: Color(0xFF2F3E34),
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                         CallTypeIndicator(),
+                        CallTypeIndicator(),
                       ],
                     ),
                     Gap(8.h),
@@ -47,28 +55,24 @@ class CallLogItem extends StatelessWidget {
                         Icon(
                           Icons.access_time,
                           size: 14,
-                          color: Colors.grey[500],
+                          color: Color(0xFF8BAF9C),
                         ),
                         const SizedBox(width: 4),
                         Text(
                           "callTime",
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey[600],
+                            color: Color(0xFF7A8A80),
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Icon(
-                          Icons.timer,
-                          size: 14,
-                          color: Colors.grey[500],
-                        ),
+                        Icon(Icons.timer, size: 14, color: Color(0xFF8BAF9C)),
                         const SizedBox(width: 4),
                         Text(
-                           "callDuration",
+                          "callDuration",
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey[600],
+                            color: Color(0xFF7A8A80),
                           ),
                         ),
                       ],
@@ -85,11 +89,11 @@ class CallLogItem extends StatelessWidget {
                         ),
                         Gap(4.w),
                         Text(
-                           "call.status",
+                          "call.status",
                           style: TextStyle(
                             fontSize: 13,
-                            color: AppColors.cream,
-                            fontWeight: FontWeight.w500,
+                            color: AppColors.gold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -104,10 +108,7 @@ class CallLogItem extends StatelessWidget {
                   // Show more options
                   // _showOptions(context);
                 },
-                icon: Icon(
-                  Icons.more_vert,
-                  color: Colors.grey[500],
-                ),
+                icon: Icon(Icons.more_vert, color: Color(0xFF9EADA3)),
                 splashRadius: 20,
               ),
             ],
@@ -116,14 +117,6 @@ class CallLogItem extends StatelessWidget {
       ),
     );
   }
-
-
-
-
-
-
-
-
 
   // void _showOptions(BuildContext context) {
   //   showModalBottomSheet(
@@ -212,16 +205,10 @@ class CallLogItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Text(
-            label,
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(color: Colors.grey),
-            ),
+            child: Text(value, style: const TextStyle(color: Colors.grey)),
           ),
         ],
       ),
@@ -233,7 +220,9 @@ class CallLogItem extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('حذف سجل المكالمة'),
-        content: const Text('هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.'),
+        content: const Text(
+          'هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -250,9 +239,7 @@ class CallLogItem extends StatelessWidget {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             child: const Text('حذف'),
           ),
         ],

@@ -49,6 +49,9 @@ class ChangePasswordButton extends StatelessWidget {
               btnText: LangKeys.changePassword.tr(),
               onPressed: (){
                 if (formKey.currentState!.validate()){
+                  print(context.read<ChangePasswordCubit>().oldPasswordCon.text);
+                  print(context.read<ChangePasswordCubit>().newPasswordCon.text);
+                  print(context.read<ChangePasswordCubit>().confirmNewPasswordCon.text);
                  context.read<ChangePasswordCubit>().changePassword(
                    screenName: screenName,
                    oldPassword: context.read<ChangePasswordCubit>().oldPasswordCon.text,

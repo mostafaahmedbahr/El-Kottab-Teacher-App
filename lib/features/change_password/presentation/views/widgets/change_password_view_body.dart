@@ -1,4 +1,5 @@
-  import '../../../../../main_imports.dart';
+import 'package:el_kottab_teacher_app/main_imports.dart';
+
 import 'change_password_button.dart';
 import 'change_password_form.dart';
 import 'change_password_image.dart';
@@ -9,18 +10,17 @@ class ChangePasswordViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    return   Padding(
+    return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Form(
         key: formKey,
-        child: Column(
+        child: ListView(
           children: [
-              ChangePasswordForm(screenName: screenName,),
+            ChangePasswordForm(screenName: screenName),
             Gap(30.h),
-             ChangePasswordButton(formKey: formKey,screenName: screenName,),
+            ChangePasswordButton(formKey: formKey, screenName: screenName),
             Gap(70.h),
             const ChangePasswordImage(),
-
           ],
         ),
       ),

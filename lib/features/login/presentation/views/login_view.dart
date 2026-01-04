@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/login/presentation/view_model/login_cubit.dart';
 import 'package:el_kottab_teacher_app/features/login/presentation/views/widgets/do_not_have_account.dart';
 import 'package:el_kottab_teacher_app/features/login/presentation/views/widgets/forget_password.dart';
 import 'package:el_kottab_teacher_app/features/login/presentation/views/widgets/login_button.dart';
@@ -6,9 +7,10 @@ import 'package:el_kottab_teacher_app/features/login/presentation/views/widgets/
 import 'package:el_kottab_teacher_app/features/login/presentation/views/widgets/logo_widget.dart';
 
 import '../../../../core/app_services/remote_services/service_locator.dart';
+import '../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
 import '../../../../main_imports.dart';
-import '../../data/repos/login_repo_impl.dart';
-import '../view_model/login_cubit.dart';
+import '../../../layout/presentation/views/layout_view.dart';
+import '../../data/repos/login_repo_imple.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -16,16 +18,12 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginKey = GlobalKey<FormState>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          LangKeys.signIn.tr(),
-        ),
-      ),
+      appBar: AppBar(title: Text(LangKeys.signIn.tr())),
       body: BlocProvider(
-          create: (context) => LoginCubit(getIt.get<LoginRepoImpl>()),
+        create: (context) => LoginCubit(getIt.get<LoginRepoImpl>()),
         child: SingleChildScrollView(
           child: Padding(
-            padding:   EdgeInsets.all(20.r),
+            padding: EdgeInsets.all(20.r),
             child: Form(
               key: loginKey,
               child: Column(
@@ -36,19 +34,31 @@ class LoginView extends StatelessWidget {
                   Gap(30.h),
                   LoginEmailAndPasswordForm(),
                   Gap(12.h),
-                  LoginButton(formKey: loginKey,),
+                  LoginButton(formKey: loginKey),
+                  Gap(24.h),
+                  TextButton(
+                    onPressed: () {
+                      context.read<AuthCubit>().loginAsGuest();
+                      AppNav.customNavigator(
+                        context: context,
+                        screen: LayoutView(),
+                      );
+                    },
+                    child: Text(
+                      LangKeys.exploreElKottab.tr(),
+                      style: AppStyles.primary16SemiBold,
+                    ),
+                  ),
                   Gap(24.h),
                   ForgetPassword(),
                   Gap(24.h),
                   DoNotHaveAccount(),
-
                 ],
               ),
             ),
           ),
         ),
       ),
-
     );
   }
 }

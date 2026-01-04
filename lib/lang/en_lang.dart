@@ -19,10 +19,13 @@ class EnLang {
     "emailMultipleAt": "Email cannot contain multiple @ symbols",
     "passwordMinLength": "Password must be at least 8 characters",
     "passwordMaxLength": "Password cannot exceed 32 characters",
-    "passwordRequireUppercase": "Password must contain at least one uppercase letter",
-    "passwordRequireLowercase": "Password must contain at least one lowercase letter",
+    "passwordRequireUppercase":
+        "Password must contain at least one uppercase letter",
+    "passwordRequireLowercase":
+        "Password must contain at least one lowercase letter",
     "passwordRequireNumber": "Password must contain at least one number",
-    "passwordRequireSpecial": "Password must contain at least one special character",
+    "passwordRequireSpecial":
+        "Password must contain at least one special character",
     "passwordRequirements": "Password requirements",
     "urlRequired": "URL is required",
     "urlInvalid": "Invalid URL",
@@ -39,23 +42,31 @@ class EnLang {
     "callLog": "Call Log",
     "appointments": "Appointments",
     "ratings": "Ratings",
-    "theSessionWasCanceledBeforeTheScheduledTime": "The session was canceled before the scheduled time",
-    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime": "You can cancel any session up to 12 hours before its scheduled time",
-    "theStudentDidNotAttendTheSession": "The student did not attend the session",
-    "theBooked30OfMinutesWillBeAddedToYourBalance": "30% of the booked minutes will be added to your balance",
+    "theSessionWasCanceledBeforeTheScheduledTime":
+        "The session was canceled before the scheduled time",
+    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime":
+        "You can cancel any session up to 12 hours before its scheduled time",
+    "theStudentDidNotAttendTheSession":
+        "The student did not attend the session",
+    "theBooked30OfMinutesWillBeAddedToYourBalance":
+        "30% of the booked minutes will be added to your balance",
     "noAppointmentsAreScheduledYet": "No appointments are scheduled yet",
-    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions": "Students who regularly attend classes with you will be able to book a larger number of sessions",
+    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions":
+        "Students who regularly attend classes with you will be able to book a larger number of sessions",
     "addAppointmentsNow": "Add appointments now",
-    "chooseTheDaysOnWhichYouWantToGiveLessons": "Choose the days on which you want to give lessons",
-        "friday": "Friday",
+    "chooseTheDaysOnWhichYouWantToGiveLessons":
+        "Choose the days on which you want to give lessons",
+    "friday": "Friday",
     "thursday": "Thursday",
     "wednesday": "Wednesday",
     "tuesday": "Tuesday",
     "monday": "Monday",
     "sunday": "Sunday",
     "saturday": "Saturday",
-    "chooseTheTimePeriodYouWantForTheSessions": "Choose the time period you want for the sessions",
-    "availableAppointmentsThatYouCanChooseFrom": "Available appointments that you can choose from",
+    "chooseTheTimePeriodYouWantForTheSessions":
+        "Choose the time period you want for the sessions",
+    "availableAppointmentsThatYouCanChooseFrom":
+        "Available appointments that you can choose from",
     "available": "Available",
     "rating": "Rating",
     "reviews": "Reviews",
@@ -77,13 +88,15 @@ class EnLang {
     "completed": "Completed",
     "canceled": "Canceled",
     "totalCalls": "Total Calls",
-
-
-
-
-
-
-
-
+    "accountMustBeVerified": "Account must be verified",
+    "exploreElKottab": "Explore El Kottab",
+    "privacyAndTerms": "Privacy and Terms",
+    "deleteAccount": "Delete Account",
+    "aboutUs": "About Us",
+    "confirmDeleteAccount": "Confirm Delete Account",
+    "areYouSureToDeleteYourAccount": "Are you sure to delete your account",
+    "cancel": "cancel",
+    "delete": "delete",
+    "settings": "settings",
   };
 }

@@ -1,7 +1,6 @@
 import '../../main_imports.dart';
 
 class AppStyles {
-
   static const FontWeight light = FontWeight.w300;
   static const FontWeight regular = FontWeight.w400;
   static const FontWeight medium = FontWeight.w500;
@@ -26,6 +25,7 @@ class AppStyles {
       decoration: decoration,
     );
   }
+
   static final TextStyle white12SemiBold = _createStyle(
     fontSize: 12.sp,
     fontWeight: semiBold,
@@ -34,7 +34,7 @@ class AppStyles {
   static final TextStyle gray14Medium = _createStyle(
     fontSize: 14.sp,
     fontWeight: medium,
-    color: AppColors.gray,
+    color: AppColors.grayDark,
   );
 
   static final TextStyle white8SemiBold = _createStyle(
@@ -56,7 +56,8 @@ class AppStyles {
     fontSize: 24.sp,
     fontWeight: semiBold,
     color: AppColors.black,
-  ); static final TextStyle gray14SemiBold = _createStyle(
+  );
+  static final TextStyle gray14SemiBold = _createStyle(
     fontSize: 14.sp,
     fontWeight: semiBold,
     color: AppColors.gray,
@@ -68,7 +69,7 @@ class AppStyles {
     color: AppColors.grayDark,
   );
 
-  static final TextStyle gray10Medium= _createStyle(
+  static final TextStyle gray10Medium = _createStyle(
     fontSize: 10.sp,
     fontWeight: medium,
     color: AppColors.gray,
@@ -96,7 +97,6 @@ class AppStyles {
     color: AppColors.black,
   );
 
-
   static final TextStyle black14Medium = _createStyle(
     fontSize: 14.sp,
     fontWeight: medium,
@@ -115,8 +115,6 @@ class AppStyles {
     color: AppColors.darkOlive,
   );
 
-
-
   static final TextStyle black14Regular = _createStyle(
     fontSize: 14.sp,
     fontWeight: regular,
@@ -128,5 +126,4 @@ class AppStyles {
     fontWeight: bold,
     color: AppColors.black,
   );
-
 }

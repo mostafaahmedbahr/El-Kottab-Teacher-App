@@ -1,5 +1,9 @@
-abstract class LangKeys
-{
+abstract class LangKeys {
+  static const accountMustBeVerified = "accountMustBeVerified";
+  static const exploreElKottab = "exploreElKottab";
+  static const privacyAndTerms = "privacyAndTerms";
+  static const deleteAccount = "deleteAccount";
+  static const aboutUs = "aboutUs";
   static const continuee = "continuee";
   static const error = "error";
   static const search = "search";
@@ -39,14 +43,20 @@ abstract class LangKeys
   static const callLog = "callLog";
   static const appointments = "appointments";
   static const ratings = "ratings";
-  static const theSessionWasCanceledBeforeTheScheduledTime = "theSessionWasCanceledBeforeTheScheduledTime";
-  static const youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime = "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime";
-  static const theStudentDidNotAttendTheSession = "theStudentDidNotAttendTheSession";
-  static const theBooked30OfMinutesWillBeAddedToYourBalance = "theBooked30OfMinutesWillBeAddedToYourBalance";
+  static const theSessionWasCanceledBeforeTheScheduledTime =
+      "theSessionWasCanceledBeforeTheScheduledTime";
+  static const youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime =
+      "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime";
+  static const theStudentDidNotAttendTheSession =
+      "theStudentDidNotAttendTheSession";
+  static const theBooked30OfMinutesWillBeAddedToYourBalance =
+      "theBooked30OfMinutesWillBeAddedToYourBalance";
   static const noAppointmentsAreScheduledYet = "noAppointmentsAreScheduledYet";
-  static const studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions = "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions";
+  static const studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions =
+      "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions";
   static const addAppointmentsNow = "addAppointmentsNow";
-  static const chooseTheDaysOnWhichYouWantToGiveLessons = "chooseTheDaysOnWhichYouWantToGiveLessons";
+  static const chooseTheDaysOnWhichYouWantToGiveLessons =
+      "chooseTheDaysOnWhichYouWantToGiveLessons";
   static const friday = "friday";
   static const thursday = "thursday";
   static const wednesday = "wednesday";
@@ -54,9 +64,10 @@ abstract class LangKeys
   static const monday = "monday";
   static const sunday = "sunday";
   static const saturday = "saturday";
-  static const chooseTheTimePeriodYouWantForTheSessions = "chooseTheTimePeriodYouWantForTheSessions";
-  static const availableAppointmentsThatYouCanChooseFrom = "availableAppointmentsThatYouCanChooseFrom";
-
+  static const chooseTheTimePeriodYouWantForTheSessions =
+      "chooseTheTimePeriodYouWantForTheSessions";
+  static const availableAppointmentsThatYouCanChooseFrom =
+      "availableAppointmentsThatYouCanChooseFrom";
 
   static const notifications = "notifications";
   static const deleteAll = "deleteAll";
@@ -94,9 +105,11 @@ abstract class LangKeys
   static const canceled = "canceled";
   static const totalCalls = "totalCalls";
 
-
   static const teachers = "teachers";
   static const students = "students";
-
-
+  static const confirmDeleteAccount = "confirmDeleteAccount";
+  static const areYouSureToDeleteYourAccount = "areYouSureToDeleteYourAccount";
+  static const cancel = "cancel";
+  static const delete = "delete";
+  static const settings = "settings";
 }

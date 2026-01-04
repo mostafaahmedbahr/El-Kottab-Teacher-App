@@ -20,12 +20,6 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginErrorState(failure.errMessage));
     }, (data) async {
         loginModel = data;
-        cacheUserInfo(
-          token: "${data.data!.token}",
-          phone: data.data!.phone.toString(),
-          id:  data.data!.id!,
-          email: "${data.data!.email}",
-        );
         emit(LoginSuccessState(data));
     });
   }

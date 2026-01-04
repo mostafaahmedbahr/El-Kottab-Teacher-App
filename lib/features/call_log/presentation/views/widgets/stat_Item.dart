@@ -3,10 +3,18 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../../../../main_imports.dart';
 
 class StatItem extends StatelessWidget {
-  const StatItem({super.key, required this.icon, required this.value, required this.label, required this.color});
+  const StatItem({
+    super.key,
+    required this.color,
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.boxcolor,
+  });
   final IconData icon;
   final String value;
   final String label;
+  final Color boxcolor;
   final Color color;
   @override
   Widget build(BuildContext context) {
@@ -14,9 +22,9 @@ class StatItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
+          color: boxcolor.withValues(alpha: 0.12),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withValues(alpha: 0.3)),
+          border: Border.all(color: boxcolor.withValues(alpha: 0.35)),
         ),
         child: Column(
           children: [
@@ -32,10 +40,7 @@ class StatItem extends StatelessWidget {
             ),
             Text(
               label.tr(),
-              style:   TextStyle(
-                fontSize: 11.sp,
-                color: Colors.grey,
-              ),
+              style: TextStyle(fontSize: 11.sp, color: AppColors.grayDarkest),
             ),
           ],
         ),

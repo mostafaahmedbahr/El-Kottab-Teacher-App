@@ -4,13 +4,17 @@ import '../../view_model/reviews_cubit.dart';
 import '../../view_model/reviews_states.dart';
 
 class ReviewsFilterButton extends StatelessWidget {
-  const ReviewsFilterButton({super.key, required this.text, required this.index});
-  final  String text;
-  final  int index;
+  const ReviewsFilterButton({
+    super.key,
+    required this.text,
+    required this.index,
+  });
+  final String text;
+  final int index;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ReviewsCubit , ReviewsStates>(
-      builder: (context,state){
+    return BlocBuilder<ReviewsCubit, ReviewsStates>(
+      builder: (context, state) {
         var reviewsCubit = context.read<ReviewsCubit>();
         bool isSelected = reviewsCubit.selectedFilter == index;
         return Expanded(
@@ -21,7 +25,7 @@ class ReviewsFilterButton extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
-                color: isSelected ? Theme.of(context).primaryColor : Colors.grey[100],
+                color: isSelected ? AppColors.darkOlive : Colors.grey[100],
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isSelected
@@ -43,7 +47,6 @@ class ReviewsFilterButton extends StatelessWidget {
           ),
         );
       },
-
     );
   }
 }

@@ -36,7 +36,7 @@ class _OtpViewState extends State<OtpView> {
     super.initState();
     // حفظ الإيميل في الـ cache عند فتح الشاشة
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      CacheHelper.saveData(key: "userEmail", value: widget.email);
+      // CacheHelper.saveData(key: "userEmail", value: widget.email);
     });
   }
 
@@ -49,9 +49,7 @@ class _OtpViewState extends State<OtpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(LangKeys.verifyOtpCode.tr()),
-      ),
+      appBar: AppBar(title: Text(LangKeys.verifyOtpCode.tr())),
       body: BlocProvider(
         create: (context) {
           _otpCubit = OtpCubit(getIt.get<OtpRepoImpl>());
@@ -63,7 +61,8 @@ class _OtpViewState extends State<OtpView> {
               padding: EdgeInsets.all(20.0.r),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height -
+                  minHeight:
+                      MediaQuery.of(context).size.height -
                       kToolbarHeight -
                       MediaQuery.of(context).padding.top,
                 ),
@@ -85,12 +84,14 @@ class _OtpViewState extends State<OtpView> {
                       children: [
                         VerifyOtpButton(
                           controller: _otpController,
-                          goToLayoutOrResetPassword: widget.goToLayoutOrResetPassword,
+                          goToLayoutOrResetPassword:
+                              widget.goToLayoutOrResetPassword,
                           email: widget.email,
                           screenName: widget.screenName,
                         ),
                         SizedBox(
-                          height: 80.h + MediaQuery.of(context).viewInsets.bottom,
+                          height:
+                              80.h + MediaQuery.of(context).viewInsets.bottom,
                         ),
                       ],
                     ),

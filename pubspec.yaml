@@ -68,6 +68,8 @@ dependencies:
   animated_toggle_switch: ^0.8.5
   skeletonizer: ^2.1.2
   auto_size_text: ^3.0.0
+  html: ^0.15.6
+  flutter_html: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -10,7 +10,8 @@ class StudentsReviews extends StatelessWidget {
       {
         'name': 'أحمد محمد',
         'rating': 4.5,
-        'description': 'مادة ممتازة والشرح واضح جداً، أنصح جميع الطلاب بحضور هذه المحاضرة',
+        'description':
+            'مادة ممتازة والشرح واضح جداً، أنصح جميع الطلاب بحضور هذه المحاضرة',
         'date': '15 يناير 2024',
         'minutes': 45,
         'lectureType': 'محاضرة نظرية',
@@ -18,7 +19,8 @@ class StudentsReviews extends StatelessWidget {
       {
         'name': 'سارة خالد',
         'rating': 5.0,
-        'description': 'أفضل مدرس واجهته في مسيرتي الدراسية، شرحه مبسط وسهل الفهم',
+        'description':
+            'أفضل مدرس واجهته في مسيرتي الدراسية، شرحه مبسط وسهل الفهم',
         'date': '14 يناير 2024',
         'minutes': 60,
         'lectureType': 'محاضرة عملية',

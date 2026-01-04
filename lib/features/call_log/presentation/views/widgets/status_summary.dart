@@ -9,11 +9,29 @@ class StatusSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        StatItem(icon: Icons.call, value: "4", label: LangKeys.totalCalls, color: Colors.blue),
+        StatItem(
+          icon: Icons.call,
+          value: "4",
+          label: LangKeys.totalCalls,
+          boxcolor: AppColors.successGreen,
+          color: AppColors.darkOlive,
+        ),
         Gap(12.w),
-        StatItem(icon: Icons.check_circle, value: "1", label: LangKeys.completed, color: Colors.green),
+        StatItem(
+          icon: Icons.check_circle,
+          value: "1",
+          label: LangKeys.completed,
+          boxcolor: AppColors.successVeryDark,
+          color: AppColors.success,
+        ),
         Gap(12.w),
-        StatItem(icon: Icons.cancel, value: "0", label: LangKeys.canceled, color: Colors.red),
+        StatItem(
+          icon: Icons.cancel,
+          value: "0",
+          label: LangKeys.canceled,
+          boxcolor: AppColors.dangerRed,
+          color: AppColors.errorDark,
+        ),
       ],
     );
   }

@@ -6,16 +6,16 @@ class CallTypeIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.darkOlive.withValues(alpha: 0.1),
+        color: const Color.fromARGB(82, 168, 177, 151),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-         'وارد',
+        'وارد',
         style: TextStyle(
-          fontSize: 11.sp,
-          color:AppColors.darkOlive.withValues(alpha: 0.1),
+          fontSize: 12.sp,
+          color: Color.fromARGB(255, 117, 138, 117),
           fontWeight: FontWeight.w500,
         ),
       ),

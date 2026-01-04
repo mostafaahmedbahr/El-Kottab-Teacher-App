@@ -6,12 +6,12 @@ import '../../../../../main_imports.dart';
 
 class FilterButton extends StatelessWidget {
   const FilterButton({super.key, required this.text, required this.index});
-  final  String text;
-  final  int index;
+  final String text;
+  final int index;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CallLogsCubit , CallLogsStates>(
-      builder: (context,state){
+    return BlocBuilder<CallLogsCubit, CallLogsStates>(
+      builder: (context, state) {
         var callLogsCubit = context.read<CallLogsCubit>();
         bool isSelected = callLogsCubit.selectedFilter == index;
         return Expanded(
@@ -22,21 +22,21 @@ class FilterButton extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
-                color: isSelected ? Theme.of(context).primaryColor : Colors.grey[100],
+                color: isSelected ? AppColors.darkOlive : AppColors.filterBg,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isSelected
-                      ? Theme.of(context).primaryColor
-                      : Colors.grey[300]!,
+                      ? AppColors.darkOlive
+                      : AppColors.filterBorder,
                 ),
               ),
               child: Center(
                 child: Text(
                   text.tr(),
                   style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.grey[700],
+                    color: isSelected ? Colors.white : AppColors.darkOlive,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),
@@ -44,7 +44,6 @@ class FilterButton extends StatelessWidget {
           ),
         );
       },
-
     );
   }
 }

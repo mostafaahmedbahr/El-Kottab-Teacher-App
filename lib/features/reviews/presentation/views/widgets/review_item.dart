@@ -21,6 +21,7 @@ class ReviewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.backgroundLight,
       margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -95,13 +96,10 @@ class ReviewItem extends StatelessWidget {
                     Icon(
                       Icons.calendar_today,
                       size: 14.sp,
-                      color: AppColors.gray,
+                      color: AppColors.grayDark,
                     ),
                     Gap(4.h),
-                    Text(
-                      date,
-                      style: AppStyles.gray14Medium,
-                    ),
+                    Text(date, style: AppStyles.gray14Medium),
                   ],
                 ),
 
@@ -111,27 +109,24 @@ class ReviewItem extends StatelessWidget {
                     Icon(
                       Icons.access_time,
                       size: 14.sp,
-                      color: AppColors.gray,
+                      color: AppColors.grayDark,
                     ),
                     Gap(4.h),
-                    Text(
-                      '$minutes دقيقة',
-                      style: AppStyles.gray14Medium,
-                    ),
+                    Text('$minutes دقيقة', style: AppStyles.gray14Medium),
                   ],
                 ),
 
                 // Lecture Type
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.backgroundLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text(
-                    lectureType,
-                    style: AppStyles.primary14Medium,
-                  ),
+                  child: Text(lectureType, style: AppStyles.primary14Medium),
                 ),
               ],
             ),
