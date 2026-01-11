@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/register/signup.dart';
+import 'package:el_kottab_teacher_app/features/register/presentation/views/register_view.dart';
 
 import '../../../../../main_imports.dart';
 
@@ -14,7 +14,7 @@ class DoNotHaveAccount extends StatelessWidget {
         Text(LangKeys.doNotHaveAnAccount.tr(), style: AppStyles.black16Medium),
         TextButton(
           onPressed: () {
-            AppNav.customNavigator(context: context, screen: Signup());
+            AppNav.customNavigator(context: context, screen: RegisterView());
           },
           child: Text(
             textAlign: TextAlign.center,
