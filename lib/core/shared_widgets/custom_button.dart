@@ -30,10 +30,7 @@ class CustomButton extends StatelessWidget {
       if (child != null) {
         return child!;
       } else {
-        return Text(
-          btnText!,
-          style: AppStyles.white16SemiBold,
-        );
+        return Text(btnText!, style: AppStyles.white16SemiBold);
       }
     }
 
@@ -52,7 +49,7 @@ class CustomButton extends StatelessWidget {
           ),
           backgroundColor: btnColor ?? AppColors.darkOlive,
           foregroundColor: AppColors.darkOlive,
-          padding: padding ??   EdgeInsets.symmetric(horizontal: 16.w),
+          padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
         ),
         child: buildChild(),
       ),

@@ -1,5 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:el_kottab_teacher_app/features/forget_password/data/repos/forget_password_repo.dart';
 import 'package:el_kottab_teacher_app/features/login/data/repos/login_repo_imple.dart';
+import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo.dart';
+import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
+import 'package:el_kottab_teacher_app/features/register/data/repos/register_repos.dart';
+import 'package:el_kottab_teacher_app/features/register/data/repos/register_repos_imple.dart';
+import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
 import '../../../features/call_log/data/repos/call_logs_repo_impl.dart';
@@ -52,4 +58,17 @@ void setup() {
   // getIt.registerSingleton<ChatRepoImpl>(ChatRepoImpl(
   //   getIt.get<ApiService>(),
   // ));
+  getIt.registerSingleton<ProfileRepo>(
+    ProfileRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<ForgetPasswordRepo>(
+    ForgetPasswordRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<SettingsRepoImpl>(
+    SettingsRepoImpl(getIt.get<ApiService>()),
+  );
+
+  getIt.registerSingleton<RegisterRepo>(
+    RegisterRepoImpl(getIt.get<ApiService>()),
+  );
 }
