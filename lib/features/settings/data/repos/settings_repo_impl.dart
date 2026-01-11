@@ -30,7 +30,9 @@ class SettingsRepoImpl implements SettingsRepo {
   @override
   Future<Either<Failure, WhoWeAreModel>> getWhoWeAre() async {
     try {
-      var response = await apiService!.getData(endPoint: EndPoints.whoWeAre);
+      var response = await apiService!.getData(
+        endPoint: EndPoints.settingsWhoWeAre,
+      );
       WhoWeAreModel result = WhoWeAreModel.fromJson(response.data);
       return right(result);
     } catch (e) {
