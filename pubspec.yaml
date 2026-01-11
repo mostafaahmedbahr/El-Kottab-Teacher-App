@@ -70,6 +70,8 @@ dependencies:
   auto_size_text: ^3.0.0
   html: ^0.15.6
   flutter_html: ^3.0.0
+  file: ^7.0.1
+  open_file: ^3.5.10
 
 dev_dependencies:
   flutter_test:

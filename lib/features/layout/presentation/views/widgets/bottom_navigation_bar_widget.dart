@@ -22,20 +22,16 @@ class BottomNavigationBarWidget extends StatelessWidget {
           selectedItemColor: AppColors.darkOlive,
           unselectedItemColor: AppColors.gray,
           backgroundColor: AppColors.white,
-          selectedLabelStyle:   TextStyle(
+          selectedLabelStyle: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 12.sp,
           ),
-          unselectedLabelStyle:   TextStyle(
+          unselectedLabelStyle: TextStyle(
             fontWeight: FontWeight.normal,
-            fontSize:12.sp,
+            fontSize: 12.sp,
           ),
           items: [
-            _buildTabItem(
-              icon: SvgImages.home,
-              title: LangKeys.home,
-              index: 0,
-            ),
+            _buildTabItem(icon: SvgImages.home, title: LangKeys.home, index: 0),
             _buildTabItem(
               icon: SvgImages.teachers,
               title: LangKeys.callLog,
@@ -50,6 +46,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
               icon: SvgImages.profile,
               title: LangKeys.ratings,
               index: 3,
+            ),
+            _buildTabItem(
+              icon: SvgImages.profile,
+              title: LangKeys.profile,
+              index: 4,
             ),
           ],
         );
@@ -68,9 +69,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
         width: 24.w,
         height: 24.h,
         colorFilter: ColorFilter.mode(
-          LayoutCubit.pageIndex == index
-              ? AppColors.darkOlive
-              : AppColors.gray,
+          LayoutCubit.pageIndex == index ? AppColors.darkOlive : AppColors.gray,
           BlendMode.srcIn,
         ),
       ),
@@ -78,10 +77,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
         icon,
         width: 24.w,
         height: 24.h,
-        colorFilter: ColorFilter.mode(
-          AppColors.darkOlive,
-          BlendMode.srcIn,
-        ),
+        colorFilter: ColorFilter.mode(AppColors.darkOlive, BlendMode.srcIn),
       ),
       label: title.tr(),
     );

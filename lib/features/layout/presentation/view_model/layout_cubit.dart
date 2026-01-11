@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view.dart';
+import 'package:el_kottab_teacher_app/features/profile/presentation/views/profile_view.dart';
 
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
 import '../../../call_log/presentation/views/call_log_view.dart';
 import '../../../reviews/presentation/views/reviews_view.dart';
 import 'layout_states.dart';
-
 
 class LayoutCubit extends Cubit<LayoutStates> {
   LayoutCubit() : super(LayoutInitState());
@@ -15,31 +15,28 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   static int pageIndex = 0;
 
-
-
   List screens = [
-   HomeView(),
-   CallLogView(),
+    HomeView(),
+    CallLogView(),
     AppointmentsView(),
     ReviewsView(),
-
-
+    ProfileView(),
   ];
 
-
-  changeBottomNav(index ,context) {
+  changeBottomNav(index, context) {
     pageIndex = index;
     emit(ChangeBottomNavState());
   }
 
   DateTime? _lastPressed;
-  void onPopInvoked(bool didPop,BuildContext context) {
+  void onPopInvoked(bool didPop, BuildContext context) {
     if (didPop) {
       return;
     }
-    if(pageIndex==0){
+    if (pageIndex == 0) {
       DateTime now = DateTime.now();
-      if (_lastPressed == null || now.difference(_lastPressed!) > const Duration(seconds: 2)) {
+      if (_lastPressed == null ||
+          now.difference(_lastPressed!) > const Duration(seconds: 2)) {
         _lastPressed = now;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -50,10 +47,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
       } else {
         SystemNavigator.pop();
       }
-    }else{
+    } else {
       changeBottomNav(0, context);
-
     }
-
   }
 }
