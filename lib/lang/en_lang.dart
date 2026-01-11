@@ -98,5 +98,23 @@ class EnLang {
     "cancel": "cancel",
     "delete": "delete",
     "settings": "settings",
+    "logout": "logout",
+    'confirmLogout': 'confirmLogout',
+    'areYouSureLogout': 'areYouSureLogout',
+    'contactUs': 'contactUs',
+    'editProfile': 'editProfile',
+    'signUpMsg': 'signUpMsg',
+    'pleaseEnterTheFollowingData': 'pleaseEnterTheFollowingData',
+    'enterTheFollowingInformationToSuccessfullyCreateAnAccount':
+        'enterTheFollowingInformationToSuccessfullyCreateAnAccount',
+    'primaryData': 'primaryData',
+    'name': 'name',
+    'pleaseSelectYourGender': 'pleaseSelectYourGender',
+    'gender': 'gender',
+    'save': 'save',
+    'female': 'female',
+    'male': 'male',
+    'phoneNumber': 'phoneNumber',
+    'educationalPath': 'educationalPath',
   };
 }

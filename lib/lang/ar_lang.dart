@@ -100,5 +100,20 @@ class ArLang {
     "cancel": "الغاء",
     "delete": "حذف",
     "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    'confirmLogout': 'تأكيد تسجيل الخروج',
+    'areYouSureLogout': 'هل أنت متأكد من تسجيل الخروج',
+    'contactUs': 'اتصل بنا',
+    'editProfile': 'تعديل الملف الشخصي',
+    'signUpMsg': 'قم بإنشاء حسابك للبدء في استخدام التطبيق',
+    'pleaseEnterTheFollowingData': 'يرجى إدخال البيانات التالية',
+    'enterTheFollowingInformationToSuccessfullyCreateAnAccount':
+        'أدخل المعلومات التالية لإنشاء حساب بنجاح',
+    'primaryData': 'البيانات الأساسية',
+    'name': 'الاسم',
+    'confirmPassword': 'تأكيد كلمة المرور',
+    'save': 'حفظ',
+    'phoneNumber': 'رقم الهاتف',
+    'educationalPath': 'المسار التعليمي',
   };
 }

@@ -1,3 +1,5 @@
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 abstract class LangKeys {
   static const accountMustBeVerified = "accountMustBeVerified";
   static const exploreElKottab = "exploreElKottab";
@@ -112,4 +114,24 @@ abstract class LangKeys {
   static const cancel = "cancel";
   static const delete = "delete";
   static const settings = "settings";
+  static const logout = "logout";
+  static const confirmLogout = "confirmLogout";
+  static const areYouSureLogout = "areYouSureLogout";
+  static const contactUs = "contactUs";
+  static const editProfile = "editProfile";
+  static const profile = "profile";
+  static const pleaseEnterTheFollowingData = "pleaseEnterTheFollowingData";
+  static const signUpMsg = "signUpMsg";
+  static const enterTheFollowingInformationToSuccessfullyCreateAnAccount =
+      'enterTheFollowingInformationToSuccessfullyCreateAnAccount';
+  static const primaryData = "primaryData";
+  static const name = "name";
+  static const confirmPassword = "confirmPassword";
+  static const pleaseSelectYourGender = "pleaseSelectYourGender";
+  static const gender = "gender";
+  static const save = "save";
+  static const female = "female";
+  static const male = "male";
+  static const phoneNumber = "phoneNumber";
+  static const educationalPath = "educationalPath";
 }
