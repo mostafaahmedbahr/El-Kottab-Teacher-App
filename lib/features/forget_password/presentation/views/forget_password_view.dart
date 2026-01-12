@@ -7,8 +7,10 @@ class ForgetPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(LangKeys.resetPassword.tr())),
-      body: ForgetPasswordViewBody(),
+      appBar: AppBar(
+        title: Text(LangKeys.resetPassword.tr() ),
+      ),
+      body:   ForgetPasswordViewBody(),
     );
   }
 }
