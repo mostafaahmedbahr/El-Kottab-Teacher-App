@@ -31,7 +31,7 @@ class SettingsRepoImpl implements SettingsRepo {
   Future<Either<Failure, WhoWeAreModel>> getWhoWeAre() async {
     try {
       var response = await apiService!.getData(
-        endPoint: EndPoints.settingsWhoWeAre,
+        endPoint: EndPoints.whoWeAre,
       );
       WhoWeAreModel result = WhoWeAreModel.fromJson(response.data);
       return right(result);

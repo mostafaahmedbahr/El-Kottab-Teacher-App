@@ -1,5 +1,3 @@
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 abstract class LangKeys {
   static const accountMustBeVerified = "accountMustBeVerified";
   static const exploreElKottab = "exploreElKottab";
@@ -134,4 +132,8 @@ abstract class LangKeys {
   static const male = "male";
   static const phoneNumber = "phoneNumber";
   static const educationalPath = "educationalPath";
+
+
+  static const typeMessage = "typeMessage";
+  static const noMessagesFound = "noMessagesFound";
 }
