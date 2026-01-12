@@ -9,8 +9,8 @@ class Logout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
-    return InkWell(
-      onTap: () {
+    return  InkWell(
+      onTap: (){
         showLogoutDialog(context);
       },
       child: Container(
@@ -19,7 +19,9 @@ class Logout extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
           color: AppColors.white,
-          border: Border.all(color: AppColors.errorDark),
+          border: Border.all(
+            color: AppColors.errorDark
+          )
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,28 +42,19 @@ class Logout extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      LangKeys.logout.tr(),
-                      style: AppStyles.black16SemiBold.copyWith(
-                        color: AppColors.errorLight,
-                      ),
-                    ),
+                    Text(LangKeys.logout.tr(),style: AppStyles.black16SemiBold.copyWith(
+                      color: AppColors.errorLight
+                    ),),
                   ],
                 ),
               ],
             ),
-            IconButton(
-              onPressed: () {
-                showLogoutDialog(context);
-              },
-              icon: SvgPicture.asset(
-                isArabic ? SvgImages.arrowLeft : SvgImages.arrowRight,
-                colorFilter: ColorFilter.mode(
-                  AppColors.errorLight,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+            IconButton(onPressed: (){
+              showLogoutDialog(context);
+            }, icon: SvgPicture.asset(
+              isArabic? SvgImages.arrowLeft:
+              SvgImages.arrowRight,colorFilter: ColorFilter.mode(AppColors.errorLight, BlendMode.srcIn),),),
+
           ],
         ),
       ),

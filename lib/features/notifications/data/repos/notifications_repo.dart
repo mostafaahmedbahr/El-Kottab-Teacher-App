@@ -7,10 +7,10 @@ import '../models/read_all_notifications_model.dart';
 
 abstract class NotificationsRepo{
 
-  // Future<Either<Failure , NotificationsModel>> getAllNotifications({int page = 1});
-  // Future<Either<Failure , ReadAllNotificationsModel>> readAllNotifications();
-  // Future<Either<Failure , NotificationsCountModel>> notificationsCount();
-  //  Future<Either<Failure , DeleteNotificationModel>> deleteNotification({required String notifyId });
+   Future<Either<Failure , NotificationsModel>> getAllNotifications();
+  Future<Either<Failure , ReadAllNotificationsModel>> readAllNotifications();
+  Future<Either<Failure , NotificationsCountModel>> getNotificationsCount();
+   Future<Either<Failure , DeleteAllNotificationsModel>> deleteAllNotification();
 
 }
 

@@ -145,4 +145,5 @@ abstract class LangKeys {
   static const change = "change";
   static const successfullyCreateAnAccount = "successfullyCreateAnAccount";
   static const goToHome = "goToHome";
+  static const noNotifications = "noNotifications";
 }

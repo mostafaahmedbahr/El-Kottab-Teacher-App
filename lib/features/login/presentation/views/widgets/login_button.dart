@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/layout/presentation/views/layout_view.dart';
-import 'package:el_kottab_teacher_app/features/otp/presentation/views/otp_view.dart';
-
 import '../../../../../main_imports.dart';
+import '../../../../layout/presentation/views/layout_view.dart';
+import '../../../../otp/presentation/views/otp_view.dart';
 import '../../view_model/login_cubit.dart';
 import '../../view_model/login_states.dart';
 
@@ -25,10 +24,10 @@ class LoginButton extends StatelessWidget {
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
           context.read<LoginCubit>().cacheUserInfo(
-            token: loginCubit.loginModel?.data?.token ?? "",
-            phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
-            id: loginCubit.loginModel?.data?.id ?? 0,
-            email: loginCubit.loginModel?.data?.email ?? "",
+              token: loginCubit.loginModel?.data?.token ?? "",
+              phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
+              id: loginCubit.loginModel?.data?.id ?? 0,
+              email: loginCubit.loginModel?.data?.email ?? "",
           );
           if (loginCubit.loginModel!.data!.isVerified == true) {
             AppNav.customNavigator(
@@ -66,9 +65,9 @@ class LoginButton extends StatelessWidget {
             return CustomButton(
               btnText: LangKeys.signIn.tr(),
               onPressed: () {
-                loginCubit.emailCon.text = "mustafa.bahr12323@gmail.com";
-                // loginCubit.emailCon.text = "mohamedmagdymohamed982@gmail.com";
-                loginCubit.passwordCon.text = "Mm@123456";
+               //  loginCubit.emailCon.text = "mustafa.bahr12323@gmail.com";
+              // loginCubit.emailCon.text = "mohamedmagdymohamed982@gmail.com";
+                //    loginCubit.passwordCon.text = "Mm@123456";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,

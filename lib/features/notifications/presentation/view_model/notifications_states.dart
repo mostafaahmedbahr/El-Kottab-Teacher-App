@@ -2,6 +2,7 @@
 import '../../data/models/delete_notification_model.dart';
 import '../../data/models/notifications_count_model.dart';
 import '../../data/models/notifications_model.dart';
+import '../../data/models/read_all_notifications_model.dart';
 
 abstract class NotificationsStates{}
 
@@ -23,8 +24,8 @@ class GetAllNotificationsLoadingMoreState extends NotificationsStates {}
 
 class ReadAllNotificationsLoadingState extends NotificationsStates{}
 class ReadAllNotificationsSuccessState extends NotificationsStates{
-  // ReadAllNotificationsModel readAllNotificationsModel;
-  // ReadAllNotificationsSuccessState(this.readAllNotificationsModel);
+  ReadAllNotificationsModel readAllNotificationsModel;
+  ReadAllNotificationsSuccessState(this.readAllNotificationsModel);
 }
 class ReadAllNotificationsErrorState extends NotificationsStates{
   final String error;
@@ -43,7 +44,7 @@ class NotificationsCountErrorState extends NotificationsStates{
 
 class DeleteNotificationsLoadingState extends NotificationsStates{}
 class DeleteNotificationsSuccessState extends NotificationsStates{
-  DeleteNotificationModel deleteNotificationModel;
+  DeleteAllNotificationsModel deleteNotificationModel;
   DeleteNotificationsSuccessState(this.deleteNotificationModel);
 }
 class DeleteNotificationsErrorState extends NotificationsStates{

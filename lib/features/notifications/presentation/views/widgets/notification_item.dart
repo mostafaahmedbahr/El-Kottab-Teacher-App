@@ -1,3 +1,5 @@
+
+
 import '../../../../../main_imports.dart';
 import '../../view_model/notifications_cubit.dart';
 import '../../view_model/notifications_states.dart';
@@ -14,7 +16,7 @@ class NotificationItem extends StatelessWidget {
     required this.onTap,
   });
 
-  final String id;
+  final int id;
   final String title;
   final String message;
   final String time;
@@ -24,19 +26,22 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NotificationsCubit, NotificationsStates>(
+    return BlocBuilder<NotificationsCubit , NotificationsStates>(
       // buildWhen: (previous, current){
       //   return current is DeleteNotificationsErrorState || current is DeleteNotificationsSuccessState || current is DeleteNotificationsLoadingState;
       // },
-      builder: (context, state) {
+      builder: (context,state){
         return GestureDetector(
           onTap: onTap,
           child: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 250, 255, 246),
+              color:   Colors.white,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200, width: 1),
+              border: Border.all(
+                color:   Colors.grey.shade200 ,
+                width:   1  ,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.05),
@@ -54,7 +59,11 @@ class NotificationItem extends StatelessWidget {
                     color: AppColors.darkOlive.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, color: AppColors.darkOlive, size: 20),
+                  child: Icon(
+                    icon,
+                    color: AppColors.darkOlive,
+                    size: 20,
+                  ),
                 ),
                 Gap(12.h),
                 Expanded(
@@ -69,8 +78,8 @@ class NotificationItem extends StatelessWidget {
                             child: Text(
                               title,
                               style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                fontWeight:  FontWeight.w500  ,
                                 color: AppColors.black,
                               ),
                               maxLines: 1,
@@ -78,23 +87,18 @@ class NotificationItem extends StatelessWidget {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              //     context.read<NotificationsCubit>().deleteNotification(notifyId: id);
+                            onTap: (){
+                         //     context.read<NotificationsCubit>().deleteNotification(notifyId: id);
                             },
                             child: Container(
-                              padding: EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: AppColors.errorLight.withValues(
-                                  alpha: 0.2,
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.errorDark.withValues(alpha: 0.2),
+                                  shape: BoxShape.circle,
                                 ),
-                                shape: BoxShape.circle,
-                              ),
-                              child: SvgPicture.asset(
-                                SvgImages.trash,
-                                height: 19.h,
-                              ),
-                            ),
+                                child: SvgPicture.asset(SvgImages.trash,height: 16.h,)),
                           ),
+
                         ],
                       ),
                       Gap(4.h),
@@ -123,6 +127,9 @@ class NotificationItem extends StatelessWidget {
           ),
         );
       },
+
     );
   }
+
+
 }

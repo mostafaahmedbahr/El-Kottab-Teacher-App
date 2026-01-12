@@ -1,22 +1,22 @@
 
-class DeleteNotificationModel {
-  int? code;
-  dynamic data;
+class DeleteAllNotificationsModel {
   String? message;
+  int? status;
+  dynamic data;
 
-  DeleteNotificationModel({this.code, this.data, this.message});
+  DeleteAllNotificationsModel({this.message, this.status, this.data});
 
-  DeleteNotificationModel.fromJson(Map<String, dynamic> json) {
-    code = json["code"];
-    data = json["data"];
+  DeleteAllNotificationsModel.fromJson(Map<String, dynamic> json) {
     message = json["message"];
+    status = json["status"];
+    data = json["data"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["code"] = code;
-    _data["data"] = data;
     _data["message"] = message;
+    _data["status"] = status;
+    _data["data"] = data;
     return _data;
   }
 }
