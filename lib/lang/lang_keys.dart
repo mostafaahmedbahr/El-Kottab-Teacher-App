@@ -143,4 +143,6 @@ abstract class LangKeys {
   static const editProfileInfo = "editProfileInfo";
   static const profilePhoto = "profilePhoto";
   static const change = "change";
+  static const successfullyCreateAnAccount = "successfullyCreateAnAccount";
+  static const goToHome = "goToHome";
 }
