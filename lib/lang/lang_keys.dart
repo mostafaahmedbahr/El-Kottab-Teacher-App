@@ -136,4 +136,8 @@ abstract class LangKeys {
 
   static const typeMessage = "typeMessage";
   static const noMessagesFound = "noMessagesFound";
+  static const title = "title";
+  static const message = "message";
+  static const send = "send";
+  static const followUsOnSocialMedia = "followUsOnSocialMedia";
 }
