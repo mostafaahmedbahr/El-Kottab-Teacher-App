@@ -140,4 +140,7 @@ abstract class LangKeys {
   static const message = "message";
   static const send = "send";
   static const followUsOnSocialMedia = "followUsOnSocialMedia";
+  static const editProfileInfo = "editProfileInfo";
+  static const profilePhoto = "profilePhoto";
+  static const change = "change";
 }
