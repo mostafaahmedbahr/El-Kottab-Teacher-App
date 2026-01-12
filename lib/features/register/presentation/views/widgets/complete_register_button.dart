@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../../main_imports.dart';
+import '../../../../documents/presentation/views/upload_personal_proof_view.dart';
 import '../../../../otp/presentation/views/otp_view.dart';
 import '../../../../register/presentation/view_model/register_cubit.dart';
 import '../../../../register/presentation/view_model/register_states.dart';
@@ -39,19 +40,21 @@ class CompleteRegisterButton extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     if(registerCubit.gender==""){
                       Toast.showErrorToast(msg: LangKeys.pleaseSelectYourGender.tr(), context: context);
-                    }else{
-                    registerCubit.register(
-                      name: registerCubit.nameCon.text,
-                      email: registerCubit.emailCon.text,
-                      phone: registerCubit.phoneNumber,
-                      password:  registerCubit.passCon.text,
-                      confirmPassword:  registerCubit.confirmPassCon.text,
-                      categoryId: registerCubit.categoryId!,
-                      gender: registerCubit.gender!,
-                      country: registerCubit.countryName,
-
-                    );
                     }
+                    AppNav.customNavigator(context: context, screen: UploadPersonalProofView());
+                    // else{
+                    // registerCubit.register(
+                    //   name: registerCubit.nameCon.text,
+                    //   email: registerCubit.emailCon.text,
+                    //   phone: registerCubit.phoneNumber,
+                    //   password:  registerCubit.passCon.text,
+                    //   confirmPassword:  registerCubit.confirmPassCon.text,
+                    //   categoryId: registerCubit.categoryId!,
+                    //   gender: registerCubit.gender!,
+                    //   country: registerCubit.countryName,
+                    //
+                    // );
+                    // }
                   }
                 },
               );

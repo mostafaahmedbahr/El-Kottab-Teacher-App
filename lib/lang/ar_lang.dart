@@ -115,5 +115,11 @@ class ArLang {
     'save': 'حفظ',
     'phoneNumber': 'رقم الهاتف',
     'educationalPath': 'المسار التعليمي',
+    "signIn": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgetPassword": "نسيت كلمة المرور؟",
+    "doNotHaveAnAccount": "ليس لديك حساب؟",
+    "signUp": "إنشاء حساب",
   };
 }

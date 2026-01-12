@@ -68,12 +68,13 @@ class LoginButton extends StatelessWidget {
                //  loginCubit.emailCon.text = "mustafa.bahr12323@gmail.com";
               // loginCubit.emailCon.text = "mohamedmagdymohamed982@gmail.com";
                 //    loginCubit.passwordCon.text = "Mm@123456";
-                if (formKey.currentState!.validate()) {
-                  loginCubit.login(
-                    email: loginCubit.emailCon.text,
-                    password: loginCubit.passwordCon.text,
-                  );
-                }
+                // if (formKey.currentState!.validate()) {
+                //   loginCubit.login(
+                //     email: loginCubit.emailCon.text,
+                //     password: loginCubit.passwordCon.text,
+                //   );
+                // }
+                AppNav.customNavigator(context: context, screen: LayoutView());
               },
             );
           },

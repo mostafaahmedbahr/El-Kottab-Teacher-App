@@ -3,9 +3,6 @@ import 'package:el_kottab_teacher_app/features/register/presentation/views/widge
 import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_name_email_password_form.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 
-import '../../../../core/app_services/remote_services/service_locator.dart';
-import '../../data/repos/register_repos_imple.dart';
-
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
@@ -23,17 +20,18 @@ class RegisterView extends StatelessWidget {
               Row(
                 children: [
                   Text(LangKeys.signUpMsg.tr()),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      LangKeys.signIn.tr(),
-                      style: AppStyles.primary16SemiBold,
-                    ),
-                  ),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: Text(
+                  //     LangKeys.signIn.tr(),
+                  //     style: AppStyles.primary16SemiBold,
+                  //   ),
+                  // ),
                 ],
               ),
+              Gap(32.h),
               RegisterNameEmailPasswordForm(),
               Gap(32.h),
               RegisterButton(formKey: formKey),

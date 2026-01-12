@@ -116,5 +116,9 @@ class EnLang {
     'male': 'male',
     'phoneNumber': 'phoneNumber',
     'educationalPath': 'educationalPath',
+    "signIn": "Sign In",
+    "doNotHaveAnAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "forgetPassword": "Forgot Password?",
   };
 }

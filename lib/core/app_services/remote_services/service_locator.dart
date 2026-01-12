@@ -10,6 +10,8 @@ import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
 import '../../../features/call_log/data/repos/call_logs_repo_impl.dart';
 import '../../../features/change_password/data/repos/change_password_repo_imple.dart';
+import '../../../features/chat/data/repos/chat_repo_imple.dart';
+import '../../../features/contact_us/data/repos/contact_us_repo_impl.dart';
 import '../../../features/forget_password/data/repos/forget_password_repo_impl.dart';
 import '../../../features/home/data/repos/home_repo_impl.dart';
 
@@ -49,26 +51,20 @@ void setup() {
   getIt.registerSingleton<ReviewsRepoImpl>(
     ReviewsRepoImpl(getIt.get<ApiService>()),
   );
-  // getIt.registerSingleton<FreeLearningRepoImpl>(FreeLearningRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
-  // getIt.registerSingleton<PackagesRepoImpl>(PackagesRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
-  // getIt.registerSingleton<ChatRepoImpl>(ChatRepoImpl(
-  //   getIt.get<ApiService>(),
-  // ));
-  getIt.registerSingleton<ProfileRepo>(
+  getIt.registerSingleton<ChatRepoImpl>(ChatRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<ContactUsRepoImpl>(ContactUsRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<ProfileRepoImpl>(
     ProfileRepoImpl(getIt.get<ApiService>()),
-  );
-  getIt.registerSingleton<ForgetPasswordRepo>(
-    ForgetPasswordRepoImpl(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<SettingsRepoImpl>(
     SettingsRepoImpl(getIt.get<ApiService>()),
   );
 
-  getIt.registerSingleton<RegisterRepo>(
+  getIt.registerSingleton<RegisterRepoImpl>(
     RegisterRepoImpl(getIt.get<ApiService>()),
   );
 }

@@ -1,5 +1,7 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/documents/presentation/views/widgets/custom_file_picker.dart';
+import 'package:el_kottab_teacher_app/features/layout/presentation/views/layout_view.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import '../view_model/upload_documents_cubit.dart';
 import '../view_model/upload_documents_state.dart';
@@ -58,6 +60,15 @@ class UploadPersonalProofView extends StatelessWidget {
                     placeholderAsset: PngImages.id,
                     onTap: cubit.pickIdBack,
                   ),
+                  SizedBox(height: 10.h),
+                  CustomButton(
+                    borderColor: AppColors.white,
+                    btnText: LangKeys.save.tr(),
+                    onPressed: (){
+                        AppNav.customNavigator(context: context, screen: LayoutView());
+
+                    },
+                  )
                 ],
               );
             },
