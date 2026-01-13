@@ -1,5 +1,7 @@
-  import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
- import '../../../../../main_imports.dart';
+import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
+
+import '../../../../../main_imports.dart';
+import '../../../../change_password/presentation/views/change_password_view.dart';
 import '../../../../contact_us/presentation/views/contact_us_view.dart';
 import '../../../../settings/presentation/views/settings_view.dart';
 
@@ -16,20 +18,20 @@ class ProfileListItems extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // ProfileListItem(
-          //   title: LangKeys.balance,
-          //   svgImage: SvgImages.dollar,
-          //   onTap: (){
-          //     AppNav.customNavigator(context: context, screen: BalanceView());
-          //   },
-          // ),
-          // ProfileListItem(
-          //   title: LangKeys.changePassword,
-          //   svgImage: SvgImages.lock,
-          //   onTap: (){
-          //     AppNav.customNavigator(context: context, screen: ChangePasswordView(screenName: "",));
-          //   },
-          // ),
+          ProfileListItem(
+            title: LangKeys.balance,
+            svgImage: SvgImages.dollar,
+            onTap: (){
+
+            },
+          ),
+          ProfileListItem(
+            title: LangKeys.changePassword,
+            svgImage: SvgImages.lock,
+            onTap: (){
+              AppNav.customNavigator(context: context, screen: ChangePasswordView(screenName: "",));
+            },
+          ),
           ProfileListItem(
             title: LangKeys.contactUs,
             svgImage: SvgImages.callCalling,

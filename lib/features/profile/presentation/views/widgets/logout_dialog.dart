@@ -14,6 +14,7 @@ void showLogoutDialog(BuildContext context) {
           Toast.showSuccessToast(msg: state.logoutModel.message.toString(), context: context);
           AppNav.customNavigator(context: context, screen: LoginView(),finish: true);
           LayoutCubit.pageIndex=0;
+          CacheTokenManger.clearUserToken();
         }
         else if(state is LogoutErrorState){
           Toast.showErrorToast(msg: state.error.toString(), context: context);

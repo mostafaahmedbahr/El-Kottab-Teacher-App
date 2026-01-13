@@ -1,5 +1,6 @@
  import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_image.dart';
+
 import '../../../../../main_imports.dart';
 import '../../../../edit_profile/presentation/views/edit_profile_info_view.dart';
 import '../../view_model/profile_cubit.dart';
