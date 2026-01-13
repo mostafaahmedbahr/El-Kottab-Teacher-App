@@ -108,7 +108,7 @@ class OtpCubit extends Cubit<OtpStates> {
   @override
   Future<void> close() {
     cancelOtpTimer();
-   // emailCon.dispose();
+   emailCon.dispose();
     return super.close();
   }
 

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/change_password/presentation/views/change_password_view.dart';
 import '../../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
 import '../../../../../main_imports.dart';
-import '../../../../change_password/presentation/views/change_password_view.dart';
 import '../../../../layout/presentation/views/layout_view.dart';
 import '../../view_model/otp_cubit.dart';
 import '../../view_model/otp_states.dart';
@@ -25,7 +25,7 @@ class VerifyOtpButton extends StatelessWidget {
     return BlocConsumer<OtpCubit, OtpStates>(
       listenWhen: (previous, current) {
         // استمع فقط للحالات المطلوبة
-        return current is VerifyOtpSuccessState ||
+        return current is VerifyOtpSuccessState || current is VerifyOtpLoadingState||
             current is VerifyOtpErrorState;
       },
       listener: (context, state) {
@@ -58,8 +58,8 @@ class VerifyOtpButton extends StatelessWidget {
       },
       buildWhen: (previous, current) {
         // اعمل build فقط للحالات المتعلقة بـ verify
-        return current is VerifyOtpLoadingState ||
-            current is! VerifyOtpLoadingState;
+        return current is VerifyOtpSuccessState || current is VerifyOtpLoadingState||
+            current is VerifyOtpErrorState;
       },
       builder: (context, state) {
         final isLoading = state is VerifyOtpLoadingState;

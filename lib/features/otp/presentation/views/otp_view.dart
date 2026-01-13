@@ -3,7 +3,7 @@ import 'package:el_kottab_teacher_app/features/otp/presentation/views/widgets/ot
 import 'package:el_kottab_teacher_app/features/otp/presentation/views/widgets/pin_code_fields_widget.dart';
 import 'package:el_kottab_teacher_app/features/otp/presentation/views/widgets/resend_code_widget.dart';
 import 'package:el_kottab_teacher_app/features/otp/presentation/views/widgets/verify_otp_button.dart';
-import '../../../../core/app_services/remote_services/service_locator.dart';
+ import '../../../../core/app_services/remote_services/service_locator.dart';
 import '../../../../main_imports.dart';
 import '../../../login/presentation/views/widgets/logo_widget.dart';
 import '../../data/repos/otp_repo_imple.dart';
@@ -42,7 +42,7 @@ class _OtpViewState extends State<OtpView> {
 
   @override
   void dispose() {
-    _otpController.dispose();
+    // _otpController.dispose();
     super.dispose();
   }
 

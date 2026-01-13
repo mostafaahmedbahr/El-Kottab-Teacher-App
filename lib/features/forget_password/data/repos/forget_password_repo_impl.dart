@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import '../../../../main_imports.dart';
 import '../models/forgot_password_by_email_model.dart';
@@ -16,11 +18,12 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
   })
   async {
     try {
+      var data = json.encode({
+        "email": email,
+      }  );
       var response = await apiService!.postData(
         endPoint: EndPoints.forgotPassword,
-        data: {
-          "email": email,
-        },
+        data: data,
       );
       ForgotPasswordByEmailModel result = ForgotPasswordByEmailModel.fromJson(
         response.data,
