@@ -1,3 +1,5 @@
+import 'package:el_kottab_teacher_app/features/home/data/models/update_availability_model.dart';
+
 import '../../data/models/home_banners_model.dart';
 
 abstract class HomeStates{}
@@ -21,3 +23,13 @@ class GetHomeSliderSuccessState extends HomeStates{
 
 
 class ChangeStatusState extends HomeStates{}
+class ChangeStatusLoadingState extends HomeStates{}
+class ChangeStatusSuccessState extends HomeStates{
+  final UpdateAvailabilityModel updateAvailabilityModel;
+  ChangeStatusSuccessState(this.updateAvailabilityModel);
+}
+class ChangeStatusErrorState extends HomeStates{
+  final String error;
+  ChangeStatusErrorState(this.error);
+
+}

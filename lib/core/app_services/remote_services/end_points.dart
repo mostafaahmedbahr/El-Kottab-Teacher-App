@@ -28,6 +28,7 @@ class EndPoints {
   static const String  notificationsDeleteAll = 'notifications/delete-all';
   static const String  sendMessage = 'chats/messages';
   static const String  favourites = 'favourites';
+  static const String  updateAvailability = 'update/availability';
 
 
 

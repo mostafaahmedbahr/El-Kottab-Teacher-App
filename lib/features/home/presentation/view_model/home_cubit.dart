@@ -1,4 +1,7 @@
+import 'package:el_kottab_teacher_app/features/home/data/models/update_availability_model.dart';
+
 import '../../../../main_imports.dart';
+import '../../data/models/home_banners_model.dart';
 import '../../data/repos/home_repo.dart';
 import 'home_states.dart';
 
@@ -25,9 +28,34 @@ class HomeCubit extends Cubit<HomeStates> {
   {
     status = newStatus;
     emit(ChangeStatusState());
+    updateAvailability(status: status ? "active": "inactive");
   }
 
+  HomeBannersModel? homeBannersModel;
+  Future<void> getHomeBanners()
+  async {
+    emit(GetHomeSliderLoadingState());
+    var result = await homeRepo!.getHomeBanners();
+    return result.fold((failure) {
+      emit(GetHomeSliderErrorState(failure.errMessage));
+    }, (data) async {
+      homeBannersModel = data;
+      emit(GetHomeSliderSuccessState(data));
+    });
+  }
 
+  UpdateAvailabilityModel? updateAvailabilityModel;
+  Future<void> updateAvailability({required String status})
+  async {
+    emit(ChangeStatusLoadingState());
+    var result = await homeRepo!.updateAvailability(status: status);
+    return result.fold((failure) {
+      emit(ChangeStatusErrorState(failure.errMessage));
+    }, (data) async {
+      updateAvailabilityModel = data;
+      emit(ChangeStatusSuccessState(data));
+    });
+  }
 
 
 }

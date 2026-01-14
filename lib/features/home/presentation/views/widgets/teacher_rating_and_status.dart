@@ -20,7 +20,15 @@ class TeacherRatingAndStatus extends StatelessWidget {
                 LangKeys.available.tr(),
                 style: AppStyles.black16SemiBold,
               ),
-              BlocBuilder<HomeCubit, HomeStates>(
+              BlocConsumer<HomeCubit, HomeStates>(
+                listener: (context,state){
+                  if(state is ChangeStatusSuccessState){
+                    Toast.showSuccessToast(msg: state.updateAvailabilityModel.message.toString(), context: context);
+                  }else if(state is ChangeStatusErrorState){
+                    Toast.showErrorToast(msg: state.error.toString(), context: context);
+
+                  }
+                },
                 builder: (context, state) {
                   var homeCubit = context.read<HomeCubit>();
                   return CupertinoSwitch(
