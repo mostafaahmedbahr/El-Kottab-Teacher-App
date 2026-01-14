@@ -132,8 +132,6 @@ abstract class LangKeys {
   static const male = "male";
   static const phoneNumber = "phoneNumber";
   static const educationalPath = "educationalPath";
-
-
   static const typeMessage = "typeMessage";
   static const noMessagesFound = "noMessagesFound";
   static const title = "title";
@@ -146,4 +144,18 @@ abstract class LangKeys {
   static const successfullyCreateAnAccount = "successfullyCreateAnAccount";
   static const goToHome = "goToHome";
   static const noNotifications = "noNotifications";
+  static const uploadingPersonalIdentification = "uploadingPersonalIdentification";
+  static const personalPhoto = "personalPhoto";
+  static const cv = "cv";
+  static const personalIDCardFront = "personalIDCardFront";
+  static const personalIDCardBack = "personalIDCardBack";
+  static const next = "next";
+  static const pleaseSelectTheEducationalPath = "pleaseSelectTheEducationalPath";
+  static const pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
+
+
+  static const pleaseUploadYourPhoto = "pleaseUploadYourPhoto";
+  static const pleaseUploadYourCv = "pleaseUploadYourCv";
+  static const pleaseUploadYourPersonalIDCardFront = "pleaseUploadYourPersonalIDCardFront";
+  static const pleaseUploadYourPersonalIDCardBack = "pleaseUploadYourPersonalIDCardBack";
 }

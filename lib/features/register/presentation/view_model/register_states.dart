@@ -37,3 +37,5 @@ class GetAllCategoriesSuccessState extends RegisterStates {
 }
 
 class CategorySelectedState extends RegisterStates {}
+
+class RegisterPickFileState extends RegisterStates {}

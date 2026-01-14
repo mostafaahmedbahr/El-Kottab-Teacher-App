@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_button.dart';
+import 'package:el_kottab_teacher_app/features/register/presentation/views/complete_register_view.dart';
+import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_next_button.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_name_email_password_form.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 
@@ -34,7 +35,7 @@ class RegisterView extends StatelessWidget {
               Gap(32.h),
               RegisterNameEmailPasswordForm(),
               Gap(32.h),
-              RegisterButton(formKey: formKey),
+              RegisterNextButton(screen: CompleteRegisterView(),formKey: formKey,screenName: "RegisterView",),
             ],
           ),
         ),

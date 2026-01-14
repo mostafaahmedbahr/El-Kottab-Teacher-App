@@ -18,6 +18,9 @@ class RegisterNameEmailPasswordForm extends StatelessWidget {
             Text(LangKeys.name.tr(), style: AppStyles.black14Medium),
             Gap(8.h),
             CustomTextFormField(
+              onFieldSubmitted: (String value) {
+                FocusScope.of(context).requestFocus(registerCubit.emailFocusNode);
+              },
               controller: registerCubit.nameCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.name.tr(),
@@ -39,6 +42,10 @@ class RegisterNameEmailPasswordForm extends StatelessWidget {
             Text(LangKeys.email.tr()),
             Gap(8.h),
             CustomTextFormField(
+              onFieldSubmitted: (String value) {
+                FocusScope.of(context).requestFocus(registerCubit.passwordFocusNode);
+              },
+              focusNode: registerCubit.emailFocusNode,
               controller: registerCubit.emailCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.email.tr(),
@@ -63,6 +70,10 @@ class RegisterNameEmailPasswordForm extends StatelessWidget {
             Text(LangKeys.password.tr(), style: AppStyles.black14Medium),
             Gap(8.h),
             CustomTextFormField(
+              onFieldSubmitted: (String value) {
+                FocusScope.of(context).requestFocus(registerCubit.confirmPasswordFocusNode);
+              },
+              focusNode: registerCubit.passwordFocusNode,
               controller: registerCubit.passCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.password.tr(),
@@ -97,6 +108,7 @@ class RegisterNameEmailPasswordForm extends StatelessWidget {
             Text(LangKeys.confirmPassword.tr(), style: AppStyles.black14Medium),
             Gap(8.h),
             CustomTextFormField(
+              focusNode: registerCubit.confirmPasswordFocusNode,
               controller: registerCubit.confirmPassCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.confirmPassword.tr(),

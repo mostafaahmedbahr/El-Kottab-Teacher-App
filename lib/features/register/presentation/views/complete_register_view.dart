@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
-
-import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/complete_register_button.dart';
+import 'package:el_kottab_teacher_app/features/register/presentation/views/register_docs_view.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/complete_register_form.dart';
+import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_next_button.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 
 class CompleteRegisterView extends StatelessWidget {
-  const CompleteRegisterView({super.key});
+    CompleteRegisterView({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(title: Text(LangKeys.primaryData.tr())),
       body: Padding(
@@ -31,7 +31,7 @@ class CompleteRegisterView extends StatelessWidget {
               Gap(20.h),
               CompleteRegisterForm(),
               Gap(32.h),
-              CompleteRegisterButton(formKey: formKey),
+              RegisterNextButton(screen: RegisterDocsView(),formKey: formKey,screenName: "CompleteRegisterView",),
             ],
           ),
         ),

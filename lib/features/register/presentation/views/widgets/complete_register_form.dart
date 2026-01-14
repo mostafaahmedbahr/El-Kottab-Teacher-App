@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/shared_widgets/custom_drop_down.dart';
-import 'package:el_kottab_teacher_app/features/login/data/models/login_model.dart';
 import 'package:el_kottab_teacher_app/features/register/data/models/categories_model.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/view_model/register_cubit.dart';
-
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
-
 import '../../../../register/presentation/view_model/register_states.dart';
 
 class CompleteRegisterForm extends StatelessWidget {
@@ -19,8 +16,6 @@ class CompleteRegisterForm extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterStates>(
       builder: (context, state) {
         var registerCubit = context.read<RegisterCubit>();
-        print(registerCubit.countryName);
-        print("object");
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

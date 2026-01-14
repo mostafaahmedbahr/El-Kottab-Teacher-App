@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:el_kottab_teacher_app/features/register/data/models/categories_model.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/view_model/register_states.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/register_model.dart';
 import '../../data/repos/register_repos.dart';
@@ -35,32 +40,33 @@ class RegisterCubit extends Cubit<RegisterStates> {
   var phoneCon = TextEditingController();
 
   RegisterModel? registerModel;
-  Future<void> register({
-    required String name,
-    required String email,
-    required String phone,
-    required String gender,
-    // required File? image,
-    required int categoryId,
-    required String password,
-    required String confirmPassword,
-    required String country,
-  }) async {
+  Future<void> register()
+  async {
     emit(SignUpLoading());
     FormData formData = FormData.fromMap({
-      "name": name,
-      "email": email,
-      "phone": phone,
+      "name": nameCon.text,
+      "email": emailCon.text,
+      "phone": phoneNumber,
       "gender": gender,
-      "country": country,
-      // "image": image != null
-      //     ? await MultipartFile.fromFile(image.path, filename: image.path.split('/').last)
-      //     : null,
-      "role": "user",
-      "password": password,
-      "password_confirmation": password,
+      "country": countryName,
+      "image": personalPhoto != null
+          ? await MultipartFile.fromFile(personalPhoto!.path, filename: personalPhoto!.path.split('/').last)
+          : null,
+      "role": "teacher",
+      "password": passCon.text,
+      "password_confirmation":  confirmPassCon.text,
       "category_id": categoryId,
       'fcm_token': CacheHelper.getData(key: "fcmToken"),
+      // "attachments[0]" : attachments,
+      "cv_file" : cvFile != null
+          ? await MultipartFile.fromFile(cvFile!.path, filename: cvFile!.path.split('/').last)
+          : null,
+      "kyc_front" : idFront != null
+          ? await MultipartFile.fromFile(idFront!.path, filename: idFront!.path.split('/').last)
+          : null,
+      "kyc_back" : idBack != null
+          ? await MultipartFile.fromFile(idBack!.path, filename: idBack!.path.split('/').last)
+          : null
     });
     final result = await registerRepo!.register(data: formData);
     return result.fold(
@@ -70,14 +76,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
       (data) async {
         registerModel = data;
         emit(SignUpSuccess(data));
-        CacheHelper.saveData(key: "userEmail", value: email);
-        // cacheUserInfo(
-        //   token: "${data.data!.token}",
-        //   phone: data.data!.phone.toString(),
-        //   id:  data.data!.id!,
-        //   email: "${data.data!.email}",
-        // );
-        // clearProfileImage();
         clearControllers();
       },
     );
@@ -89,6 +87,13 @@ class RegisterCubit extends Cubit<RegisterStates> {
     passCon.clear();
     confirmPassCon.clear();
     phoneCon.clear();
+    gender=null;
+    phoneNumber='';
+    selectedCategory=null;
+    idBack=null;
+    idFront=null;
+    cvFile=null;
+    personalPhoto=null;
     emit(RegisterInitState());
   }
 
@@ -135,4 +140,59 @@ class RegisterCubit extends Cubit<RegisterStates> {
     categoryId = category.id;
     emit(CategorySelectedState());
   }
+
+
+  File? personalPhoto;
+  File? cvFile;
+  File? idFront;
+  File? idBack;
+  String? get personalPhotoPath => personalPhoto?.path;
+  String? get cvPath => cvFile?.path;
+  String? get idFrontPath => idFront?.path;
+  String? get idBackPath => idBack?.path;
+
+
+  Future<void> pickRegisterFile(RegisterFileType type) async {
+    final picker = ImagePicker();
+    XFile? pickedFile;
+    if (type == RegisterFileType.cv) {
+      // ملفات PDF / DOC
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'doc', 'docx'],
+      );
+      if (result != null) {
+        cvFile = File(result.files.single.path!);
+      }
+    } else {
+      // صور
+      pickedFile = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        final file = File(pickedFile.path);
+        switch (type) {
+          case RegisterFileType.personalPhoto:
+            personalPhoto = file;
+            break;
+          case RegisterFileType.idFront:
+            idFront = file;
+            break;
+          case RegisterFileType.idBack:
+            idBack = file;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
+    emit(RegisterPickFileState());
+  }
+
+
+
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+  final FocusNode confirmPasswordFocusNode = FocusNode();
+
 }
