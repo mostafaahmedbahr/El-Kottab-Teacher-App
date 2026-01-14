@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
+
 import '../../../../main_imports.dart';
+import '../models/teacher_reviews_model.dart';
 import 'reviews_repo.dart';
 
 
@@ -7,21 +10,24 @@ class ReviewsRepoImpl implements ReviewsRepo {
   ReviewsRepoImpl(this.apiService);
 
 
-// @override
-// Future<Either<Failure, HomeBannersModel>> getHomeBanners() async{
-//   try {
-//     var response = await apiService!.getData(
-//       endPoint: EndPoints.banners,
-//     );
-//     HomeBannersModel result = HomeBannersModel.fromJson(response.data);
-//     return right(result);
-//   } catch (e) {
-//     return left(handleError(e));
-//   }
-// }
-//
-//
-//
+@override
+Future<Either<Failure, TeacherReviewsModel>> getTeacherReviews({required String type}) async{
+  try {
+    var response = await apiService!.getData(
+      endPoint: EndPoints.teacherReviews,
+      query: {
+        "type" : type,
+      }
+    );
+    TeacherReviewsModel result = TeacherReviewsModel.fromJson(response.data);
+    return right(result);
+  } catch (e) {
+    return left(handleError(e));
+  }
+}
+
+
+
 
 
 

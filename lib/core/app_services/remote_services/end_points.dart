@@ -29,6 +29,7 @@ class EndPoints {
   static const String  sendMessage = 'chats/messages';
   static const String  favourites = 'favourites';
   static const String  updateAvailability = 'update/availability';
+  static const String  teacherReviews = 'rate';
 
 
 
