@@ -7,9 +7,7 @@ import 'login_repo.dart';
 
 class LoginRepoImpl implements LoginRepo {
   final ApiService? apiService;
-
   LoginRepoImpl(this.apiService);
-
 
   @override
   Future<Either<Failure, LoginModel>> login({required String email , required String password}) async{
@@ -18,7 +16,7 @@ class LoginRepoImpl implements LoginRepo {
         'email': email,
         'password': password,
         'fcm_token': CacheHelper.getData(key: "fcmToken"),
-        'role': "user",
+        'role': "teacher",
       });
       var response = await apiService!.postData(
         endPoint: EndPoints.login,

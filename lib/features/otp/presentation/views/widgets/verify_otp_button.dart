@@ -3,7 +3,6 @@ import 'package:el_kottab_teacher_app/features/change_password/presentation/view
 import 'package:el_kottab_teacher_app/features/login/presentation/views/login_view.dart';
 import '../../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
 import '../../../../../main_imports.dart';
-import '../../../../layout/presentation/views/layout_view.dart';
 import '../../view_model/otp_cubit.dart';
 import '../../view_model/otp_states.dart';
 
