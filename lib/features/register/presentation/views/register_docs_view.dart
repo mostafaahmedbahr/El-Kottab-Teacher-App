@@ -27,7 +27,7 @@ class RegisterDocsView extends StatelessWidget {
             final registerCubit = context.read<RegisterCubit>();
             return Form(
               key: _formKey,
-              child: Column(
+              child: ListView(
                 children: [
                   CustomFilePicker(
                     title: LangKeys.personalPhoto,

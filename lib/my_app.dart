@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
+import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/forget_password/data/repos/forget_password_repo.dart';
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           builder: (context) {
             return MultiBlocProvider(
               providers: [
+                BlocProvider(create: (context) => AuthCubit()),
                 BlocProvider(create: (context) => LanguageCubit()),
                 BlocProvider(create: (context) => LayoutCubit()),
                 BlocProvider(create: (context) => ForgetPasswordCubit(getIt<ForgetPasswordRepo>()),),
