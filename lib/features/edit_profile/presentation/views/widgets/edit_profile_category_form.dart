@@ -85,15 +85,17 @@ class _EditProfileCategoryFormState
                   focusNode, onFieldSubmitted) {
                 // ✅ تهيئة بقيمة الملف الشخصي إذا كانت موجودة
                 if (textEditingController.text.isEmpty &&
-                    profile?.data?.categoryId != null) {
+                    profile?.data?.plan?.categories != null &&
+                    profile!.data!.plan!.categories!.isNotEmpty) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    textEditingController.text =
-                    profile!.data!.categoryId!;
+                    // أخذ أول category id من المصفوفة
+                    int? firstCategoryId = profile!.data!.plan!.categories![0].id;
+                    if (firstCategoryId != null) {
+                      textEditingController.text = firstCategoryId.toString();
 
-                    // أيضاً تهيئة الـ ID
-                    // if (profile.data?.categoryId != null) {
-                    //   editPersonalInfoCubit.selectedCategoryId = profile.data!.categoryId;
-                    // }
+                      // أيضاً تهيئة الـ ID
+                      // editPersonalInfoCubit. = firstCategoryId;
+                    }
                   });
                 }
 

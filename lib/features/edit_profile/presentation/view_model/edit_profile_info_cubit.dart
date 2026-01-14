@@ -118,7 +118,6 @@ void initDateControllers(ProfileModel profile) {
   nameCon.text = profile.data?.name ?? '';
   emailCon.text = profile.data?.email ?? '';
   phoneNumber = profile.data?.phone ?? '';
-  descriptionCon.text = profile.data?.description ?? ''; // Add this line
   gender = profile.data?.gender; // Initialize gender from profile
   
   // Rest of the method remains the same
@@ -129,8 +128,8 @@ void initDateControllers(ProfileModel profile) {
     phoneCon.text = phone ?? '';
   }
 
-  if (profile.data?.categoryId != null) {
-    categoryController.text = profile.data!.categoryId!;
+  if (profile.data?.plan?.categories != null && profile.data!.plan!.categories!.isNotEmpty) {
+    categoryController.text = profile.data!.plan!.categories![0].id.toString();
   }
 }
 
