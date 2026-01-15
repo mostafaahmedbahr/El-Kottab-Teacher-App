@@ -1,80 +1,45 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_states.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
-
 import '../../view_model/add_appointments_cubit.dart';
+import '../day_appointments_view.dart';
 
 class Days extends StatelessWidget {
   const Days({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddAppointmentsCubit, AddAppointmentsStates>(
-      builder: (context, state) {
-        var addAppointmentsCubit = context.read<AddAppointmentsCubit>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              LangKeys.chooseTheDaysOnWhichYouWantToGiveLessons.tr(),
-              style: AppStyles.black16SemiBold,
-            ),
-            Gap(12.h),
-            SizedBox(
-              height: 100.h, // Increased height to accommodate text better
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  String dayName = addAppointmentsCubit.nameOfDays[index];
-                  bool isSelected = addAppointmentsCubit.selectedDay == dayName;
-                  return GestureDetector(
-                    onTap: () {
-                      addAppointmentsCubit.selectDay(dayName);
-                    },
-                    child: Container(
-                      height: 80.h,
-                      width: 80.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isSelected ? AppColors.darkOlive : Colors.grey[300],
-                        border: isSelected
-                            ? Border.all(color: AppColors.darkOlive, width: 2)
-                            : null,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            dayName,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: isSelected ? Colors.white : Colors.grey[700],
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Gap(4.h),
-                          Text(
-                            "${index + 1}",
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: isSelected ? Colors.white : AppColors.darkOlive,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Gap(8.w);
-                },
-                itemCount: addAppointmentsCubit.nameOfDays.length,
+    final cubit = context.read<AddAppointmentsCubit>();
+
+    return ListView.separated(
+      itemCount: cubit.nameOfDays.length,
+      separatorBuilder: (_, __) => Gap(12.h),
+      itemBuilder: (context, index) {
+        final day = cubit.nameOfDays[index];
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: cubit,
+                  child: DayAppointmentsView(dayName: day),
+                ),
               ),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(16.r),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: Colors.grey[200],
             ),
-          ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(day, style: AppStyles.black16SemiBold),
+                const Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
         );
       },
     );

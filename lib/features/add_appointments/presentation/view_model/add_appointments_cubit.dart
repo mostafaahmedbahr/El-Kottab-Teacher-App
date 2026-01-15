@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-
+import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
+import '../../data/models/appointment_model.dart';
 import 'add_appointments_states.dart';
 
 class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
   AddAppointmentsCubit() : super(AddAppointmentsInitState());
 
-  static AddAppointmentsCubit get(context) => BlocProvider.of(context);
-
-
+  /// الأيام
   List<String> nameOfDays = [
     LangKeys.saturday.tr(),
     LangKeys.sunday.tr(),
@@ -19,58 +18,105 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     LangKeys.friday.tr(),
   ];
 
+  /// مواعيد كل يوم
+  Map<String, List<AppointmentModel>> appointments = {};
 
-  String selectedDay = '';
-  void selectDay(String day){
-    selectedDay = day;
-    emit(SelectDayState());
+  /// إضافة عنصر فاضي
+  void addEmptyAppointment(String day) {
+    appointments.putIfAbsent(day, () => []);
+    appointments[day]!.add(AppointmentModel());
+    emit(UpdateAppointmentsState());
   }
 
-
-
-  List<Map<String, String>> timeSlots = [
-    {
-      'label': '12AM - 4AM',
-      'icon': '🌙',
-      'description': 'Late Night',
-    },
-    {
-      'label': '4AM - 8AM',
-      'icon': '🌅',
-      'description': 'Early Morning',
-    },
-    {
-      'label': '8AM - 12PM',
-      'icon': '☀️',
-      'description': 'Morning',
-    },
-    {
-      'label': '12PM - 4PM',
-      'icon': '🏙️',
-      'description': 'Afternoon',
-    },
-    {
-      'label': '4PM - 8PM',
-      'icon': '🌆',
-      'description': 'Evening',
-    },
-    {
-      'label': '8PM - 12AM',
-      'icon': '🌃',
-      'description': 'Night',
-    },
-  ];
-
-  String selectedTimePeriod = '';
-  void selectTimePeriod(String timePeriod){
-    selectedTimePeriod = timePeriod;
-    emit(SelectTimePeriodState());
+  /// حذف موعد
+  void removeAppointment(String day, int index) {
+    appointments[day]!.removeAt(index);
+    emit(UpdateAppointmentsState());
   }
 
-  String selectedTime = '';
-  void selectTime(String time){
-    selectedTime = time;
-    emit(SelectTimeState());
+  /// تعيين وقت البداية
+  AppointmentResult setStartTime(
+      String day,
+      int index,
+      TimeOfDay start,
+      ) {
+    final current = appointments[day]![index];
+
+    if (current.end != null &&
+        !_isEndAfterStart(start, current.end!)) {
+      return AppointmentResult.endBeforeStart;
+    }
+
+    if (current.end != null &&
+        _hasConflict(day, start, current.end!, index)) {
+      return AppointmentResult.conflict;
+    }
+
+    current.start = start;
+    emit(UpdateAppointmentsState());
+    return AppointmentResult.success;
   }
-  List<String> times = ["4:00" , "5:00" , "6:15" , "8:00" , "8:30"];
+
+  /// تعيين وقت النهاية
+  AppointmentResult setEndTime(
+      String day,
+      int index,
+      TimeOfDay end,
+      ) {
+    final current = appointments[day]![index];
+
+    if (current.start == null) {
+      current.end = end;
+      emit(UpdateAppointmentsState());
+      return AppointmentResult.success;
+    }
+
+    if (!_isEndAfterStart(current.start!, end)) {
+      return AppointmentResult.endBeforeStart;
+    }
+
+    if (_hasConflict(day, current.start!, end, index)) {
+      return AppointmentResult.conflict;
+    }
+
+    current.end = end;
+    emit(UpdateAppointmentsState());
+    return AppointmentResult.success;
+  }
+
+  /// ================= Helpers =================
+
+  int _toMinutes(TimeOfDay time) {
+    return time.hour * 60 + time.minute;
+  }
+
+  bool _isEndAfterStart(TimeOfDay start, TimeOfDay end) {
+    return _toMinutes(end) > _toMinutes(start);
+  }
+
+  bool _hasConflict(
+      String day,
+      TimeOfDay start,
+      TimeOfDay end,
+      int currentIndex,
+      ) {
+    final list = appointments[day] ?? [];
+
+    for (int i = 0; i < list.length; i++) {
+      if (i == currentIndex) continue;
+
+      final other = list[i];
+      if (other.start == null || other.end == null) continue;
+
+      final s1 = _toMinutes(start);
+      final e1 = _toMinutes(end);
+      final s2 = _toMinutes(other.start!);
+      final e2 = _toMinutes(other.end!);
+
+      if (s1 < e2 && e1 > s2) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

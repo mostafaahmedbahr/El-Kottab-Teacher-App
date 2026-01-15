@@ -120,6 +120,7 @@ class EnLang {
     "successfullyCreateAnAccount": "Successfully created an account",
     "goToHome": "Go to home",
     "noNotifications": "No notifications",
+    "notifications": "Notifications",
     "uploadingPersonalIdentification": "Uploading personal identification",
     "personalPhoto": "Personal photo",
     "cv": "CV",
@@ -144,6 +145,12 @@ class EnLang {
     "signUp": "Sign Up",
     "forgetPassword": "Forgot Password?",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "noReviewsYet": "No Reviews Yet",
+    "from": "From",
+    "to": "To",
+    "theEndTimeShouldBeAfterTheStartTime": "The end time should be after the start time",
+    "thisAppointmentOverlapsWithAnotherAppointment": "This appointment overlaps with another appointment",
+
   };
 }

@@ -4,3 +4,8 @@ enum RegisterFileType {
   idFront,
   idBack,
 }
+enum AppointmentResult {
+  success,
+  endBeforeStart,
+  conflict,
+}

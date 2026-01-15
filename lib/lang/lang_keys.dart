@@ -156,7 +156,9 @@ abstract class LangKeys {
   static const pleaseUploadYourCv = "pleaseUploadYourCv";
   static const pleaseUploadYourPersonalIDCardFront = "pleaseUploadYourPersonalIDCardFront";
   static const pleaseUploadYourPersonalIDCardBack = "pleaseUploadYourPersonalIDCardBack";
-
-
   static const noReviewsYet = "noReviewsYet";
+  static const from = "from";
+  static const to = "to";
+  static const theEndTimeShouldBeAfterTheStartTime = "theEndTimeShouldBeAfterTheStartTime";
+  static const thisAppointmentOverlapsWithAnotherAppointment = "thisAppointmentOverlapsWithAnotherAppointment";
 }

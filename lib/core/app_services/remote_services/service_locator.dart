@@ -51,12 +51,10 @@ void setup() {
   getIt.registerSingleton<ReviewsRepoImpl>(
     ReviewsRepoImpl(getIt.get<ApiService>()),
   );
-  getIt.registerSingleton<ChatRepoImpl>(ChatRepoImpl(
-    getIt.get<ApiService>(),
-  ));
-  getIt.registerSingleton<ContactUsRepoImpl>(ContactUsRepoImpl(
-    getIt.get<ApiService>(),
-  ));
+  getIt.registerSingleton<ChatRepoImpl>(ChatRepoImpl(getIt.get<ApiService>()));
+  getIt.registerSingleton<ContactUsRepoImpl>(
+    ContactUsRepoImpl(getIt.get<ApiService>()),
+  );
   getIt.registerSingleton<ProfileRepoImpl>(
     ProfileRepoImpl(getIt.get<ApiService>()),
   );

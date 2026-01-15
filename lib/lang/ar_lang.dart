@@ -120,6 +120,7 @@ class ArLang {
     "successfullyCreateAnAccount": "تم إنشاء الحساب بنجاح",
     "goToHome": "الذهاب للرئيسية",
     "noNotifications": "لا توجد إشعارات",
+    "notifications": "إشعارات",
     "uploadingPersonalIdentification": "رفع بيانات الهوية الشخصية",
     "personalPhoto": "الصورة الشخصية",
     "cv": "السيرة الذاتية",
@@ -144,6 +145,12 @@ class ArLang {
     "signUp": "إنشاء حساب",
     "forgetPassword": "نسيت كلمة المرور؟",
     "email": "البريد الإلكتروني",
-    "password": "كلمة المرور"
+    "password": "كلمة المرور",
+    "noReviewsYet": "لا توجد تقييمات بعد",
+    "from": "من",
+    "to": "إلى",
+    "theEndTimeShouldBeAfterTheStartTime": "يجب أن يكون وقت الانتهاء بعد وقت البدء",
+    "thisAppointmentOverlapsWithAnotherAppointment": "هذا الموعد يتعارض مع موعد آخر",
+
   };
 }
