@@ -14,7 +14,7 @@ class ReviewsRepoImpl implements ReviewsRepo {
 Future<Either<Failure, TeacherReviewsModel>> getTeacherReviews({required String type}) async{
   try {
     var response = await apiService!.getData(
-      endPoint: EndPoints.teacherReviews,
+      endPoint: "${EndPoints.teacherReviews}/${CacheHelper.getData(key: "userId")}",
       query: {
         "type" : type,
       }

@@ -6,17 +6,12 @@ class ReviewItem extends StatelessWidget {
     required this.name,
     required this.rating,
     required this.description,
-    required this.date,
-    required this.minutes,
-    required this.lectureType,
   });
 
   final String name;
-  final double rating;
+  final dynamic rating;
   final String description;
-  final String date;
-  final int minutes;
-  final String lectureType;
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,43 +86,43 @@ class ReviewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Date
-                Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 14.sp,
-                      color: AppColors.grayDark,
-                    ),
-                    Gap(4.h),
-                    Text(date, style: AppStyles.gray14Medium),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Icon(
+                //       Icons.calendar_today,
+                //       size: 14.sp,
+                //       color: AppColors.grayDark,
+                //     ),
+                //     Gap(4.h),
+                //     Text(date, style: AppStyles.gray14Medium),
+                //   ],
+                // ),
 
                 // Minutes
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      size: 14.sp,
-                      color: AppColors.grayDark,
-                    ),
-                    Gap(4.h),
-                    Text('$minutes دقيقة', style: AppStyles.gray14Medium),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Icon(
+                //       Icons.access_time,
+                //       size: 14.sp,
+                //       color: AppColors.grayDark,
+                //     ),
+                //     Gap(4.h),
+                //     Text('$minutes دقيقة', style: AppStyles.gray14Medium),
+                //   ],
+                // ),
 
                 // Lecture Type
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundLight,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(lectureType, style: AppStyles.primary14Medium),
-                ),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(
+                //     horizontal: 8,
+                //     vertical: 4,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: AppColors.backgroundLight,
+                //     borderRadius: BorderRadius.circular(8),
+                //   ),
+                //   child: Text(lectureType, style: AppStyles.primary14Medium),
+                // ),
               ],
             ),
           ],

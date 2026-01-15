@@ -1,4 +1,6 @@
 
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../main_imports.dart';
 
 class EmptyWidget extends StatelessWidget {
@@ -11,7 +13,7 @@ class EmptyWidget extends StatelessWidget {
       children: [
         SvgPicture.asset(SvgImages.empty,height: 100.h,colorFilter: ColorFilter.mode(AppColors.gold, BlendMode.srcIn),)  ,
         Gap(12.h),
-        Text(msg,style: AppStyles.primary16SemiBold,),
+        Text(msg.tr(),style: AppStyles.primary16SemiBold,),
       ],
     );
   }

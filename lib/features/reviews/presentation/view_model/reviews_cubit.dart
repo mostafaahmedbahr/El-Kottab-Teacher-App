@@ -9,11 +9,12 @@ class ReviewsCubit extends Cubit<ReviewsStates> {
   ReviewsRepo? reviewsRepo;
   static ReviewsCubit get(context) => BlocProvider.of(context);
 
-  int selectedFilter = 0;
+  int selectedFilter = 1;
   changeSelectedFilter(int newIndex)
   {
     selectedFilter = newIndex;
     emit(ChangeSelectedFilterState());
+    getTeacherReviews(type: selectedFilter==1 ? "teacher" : "student");
   }
 
 

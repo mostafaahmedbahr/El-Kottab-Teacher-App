@@ -152,10 +152,11 @@ abstract class LangKeys {
   static const next = "next";
   static const pleaseSelectTheEducationalPath = "pleaseSelectTheEducationalPath";
   static const pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
-
-
   static const pleaseUploadYourPhoto = "pleaseUploadYourPhoto";
   static const pleaseUploadYourCv = "pleaseUploadYourCv";
   static const pleaseUploadYourPersonalIDCardFront = "pleaseUploadYourPersonalIDCardFront";
   static const pleaseUploadYourPersonalIDCardBack = "pleaseUploadYourPersonalIDCardBack";
+
+
+  static const noReviewsYet = "noReviewsYet";
 }
