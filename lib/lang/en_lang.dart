@@ -24,10 +24,13 @@ class EnLang {
     "emailMultipleAt": "Email cannot contain multiple @ symbols",
     "passwordMinLength": "Password must be at least 8 characters",
     "passwordMaxLength": "Password cannot exceed 32 characters",
-    "passwordRequireUppercase": "Password must contain at least one uppercase letter",
-    "passwordRequireLowercase": "Password must contain at least one lowercase letter",
+    "passwordRequireUppercase":
+        "Password must contain at least one uppercase letter",
+    "passwordRequireLowercase":
+        "Password must contain at least one lowercase letter",
     "passwordRequireNumber": "Password must contain at least one number",
-    "passwordRequireSpecial": "Password must contain at least one special character",
+    "passwordRequireSpecial":
+        "Password must contain at least one special character",
     "passwordRequirements": "Password requirements",
     "urlRequired": "URL is required",
     "urlInvalid": "Invalid URL",
@@ -44,14 +47,20 @@ class EnLang {
     "callLog": "Call Log",
     "appointments": "Appointments",
     "ratings": "Ratings",
-    "theSessionWasCanceledBeforeTheScheduledTime": "The session was canceled before the scheduled time",
-    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime": "You can cancel any session up to 12 hours before its scheduled time",
-    "theStudentDidNotAttendTheSession": "The student did not attend the session",
-    "theBooked30OfMinutesWillBeAddedToYourBalance": "30% of the booked minutes will be added to your balance",
+    "theSessionWasCanceledBeforeTheScheduledTime":
+        "The session was canceled before the scheduled time",
+    "youCanCancelAnySessionUpTo12HoursBeforeItsScheduledTime":
+        "You can cancel any session up to 12 hours before its scheduled time",
+    "theStudentDidNotAttendTheSession":
+        "The student did not attend the session",
+    "theBooked30OfMinutesWillBeAddedToYourBalance":
+        "30% of the booked minutes will be added to your balance",
     "noAppointmentsAreScheduledYet": "No appointments are scheduled yet",
-    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions": "Students who regularly attend classes with you will be able to book a larger number of sessions",
+    "studentsWhoRegularlyAttendClassesWithYouWillBeAbleToBookLargerNumberOfSessions":
+        "Students who regularly attend classes with you will be able to book a larger number of sessions",
     "addAppointmentsNow": "Add appointments now",
-    "chooseTheDaysOnWhichYouWantToGiveLessons": "Choose the days on which you want to give lessons",
+    "chooseTheDaysOnWhichYouWantToGiveLessons":
+        "Choose the days on which you want to give lessons",
     "friday": "Friday",
     "thursday": "Thursday",
     "wednesday": "Wednesday",
@@ -59,8 +68,10 @@ class EnLang {
     "monday": "Monday",
     "sunday": "Sunday",
     "saturday": "Saturday",
-    "chooseTheTimePeriodYouWantForTheSessions": "Choose the time period you want for the sessions",
-    "availableAppointmentsThatYouCanChooseFrom": "Available appointments that you can choose from",
+    "chooseTheTimePeriodYouWantForTheSessions":
+        "Choose the time period you want for the sessions",
+    "availableAppointmentsThatYouCanChooseFrom":
+        "Available appointments that you can choose from",
     "available": "Available",
     "rating": "Rating",
     "reviews": "Reviews",
@@ -97,7 +108,8 @@ class EnLang {
     "profile": "Profile",
     "pleaseEnterTheFollowingData": "Please enter the following data",
     "signUpMsg": "Create your account to start using the app",
-    "enterTheFollowingInformationToSuccessfullyCreateAnAccount": "Enter the following information to successfully create an account",
+    "enterTheFollowingInformationToSuccessfullyCreateAnAccount":
+        "Enter the following information to successfully create an account",
     "primaryData": "Primary Data",
     "name": "Name",
     "confirmPassword": "Confirm Password",
@@ -131,8 +143,10 @@ class EnLang {
     "pleaseEnterYourPhoneNumber": "Please enter your phone number",
     "pleaseUploadYourPhoto": "Please upload your photo",
     "pleaseUploadYourCv": "Please upload your CV",
-    "pleaseUploadYourPersonalIDCardFront": "Please upload your personal ID card front",
-    "pleaseUploadYourPersonalIDCardBack": "Please upload your personal ID card back",
+    "pleaseUploadYourPersonalIDCardFront":
+        "Please upload your personal ID card front",
+    "pleaseUploadYourPersonalIDCardBack":
+        "Please upload your personal ID card back",
     "verifyOtpCode": "Verify OTP Code",
     "resendEmailOtp": "Resend Email OTP",
     "confirmYourEmail": "Confirm Your Email",
@@ -149,8 +163,14 @@ class EnLang {
     "noReviewsYet": "No Reviews Yet",
     "from": "From",
     "to": "To",
-    "theEndTimeShouldBeAfterTheStartTime": "The end time should be after the start time",
-    "thisAppointmentOverlapsWithAnotherAppointment": "This appointment overlaps with another appointment",
+    "theEndTimeShouldBeAfterTheStartTime":
+        "The end time should be after the start time",
+    "thisAppointmentOverlapsWithAnotherAppointment":
+        "This appointment overlaps with another appointment",
 
+    'noAppointments': 'No Appointments',
+    'edit': 'Edit',
+    "add": "Add",
+    "addAppointment": "addAppointment",
   };
 }

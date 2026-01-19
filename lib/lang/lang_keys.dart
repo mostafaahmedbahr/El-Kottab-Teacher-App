@@ -144,21 +144,33 @@ abstract class LangKeys {
   static const successfullyCreateAnAccount = "successfullyCreateAnAccount";
   static const goToHome = "goToHome";
   static const noNotifications = "noNotifications";
-  static const uploadingPersonalIdentification = "uploadingPersonalIdentification";
+  static const uploadingPersonalIdentification =
+      "uploadingPersonalIdentification";
   static const personalPhoto = "personalPhoto";
   static const cv = "cv";
   static const personalIDCardFront = "personalIDCardFront";
   static const personalIDCardBack = "personalIDCardBack";
   static const next = "next";
-  static const pleaseSelectTheEducationalPath = "pleaseSelectTheEducationalPath";
+  static const pleaseSelectTheEducationalPath =
+      "pleaseSelectTheEducationalPath";
   static const pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
   static const pleaseUploadYourPhoto = "pleaseUploadYourPhoto";
   static const pleaseUploadYourCv = "pleaseUploadYourCv";
-  static const pleaseUploadYourPersonalIDCardFront = "pleaseUploadYourPersonalIDCardFront";
-  static const pleaseUploadYourPersonalIDCardBack = "pleaseUploadYourPersonalIDCardBack";
+  static const pleaseUploadYourPersonalIDCardFront =
+      "pleaseUploadYourPersonalIDCardFront";
+  static const pleaseUploadYourPersonalIDCardBack =
+      "pleaseUploadYourPersonalIDCardBack";
   static const noReviewsYet = "noReviewsYet";
   static const from = "from";
   static const to = "to";
-  static const theEndTimeShouldBeAfterTheStartTime = "theEndTimeShouldBeAfterTheStartTime";
-  static const thisAppointmentOverlapsWithAnotherAppointment = "thisAppointmentOverlapsWithAnotherAppointment";
+  static const theEndTimeShouldBeAfterTheStartTime =
+      "theEndTimeShouldBeAfterTheStartTime";
+  static const thisAppointmentOverlapsWithAnotherAppointment =
+      "thisAppointmentOverlapsWithAnotherAppointment";
+
+  static const noAppointments = "noAppointments";
+  static const edit = "edit";
+
+  static const add = "add";
+  static const addAppointment = "addAppointment";
 }
