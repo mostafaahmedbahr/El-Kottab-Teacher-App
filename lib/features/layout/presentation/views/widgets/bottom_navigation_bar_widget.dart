@@ -43,7 +43,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
               index: 2,
             ),
             _buildTabItem(
-              icon: SvgImages.profile,
+              icon: SvgImages.rating,
               title: LangKeys.ratings,
               index: 3,
             ),
