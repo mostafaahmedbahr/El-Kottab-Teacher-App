@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/documents/presentation/views/widgets/custom_file_picker.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/views/layout_view.dart';
@@ -36,39 +35,41 @@ class UploadPersonalProofView extends StatelessWidget {
                   CustomFilePicker(
                     title: 'الصورة الشخصية',
                     imagePath: model.personalPhotoPath,
-                    placeholderAsset: PngImages.presonalphoto,
+                    placeholderAsset: SvgImages.camera2,
                     onTap: cubit.pickPersonalPhoto,
                   ),
                   SizedBox(height: 10.h),
                   CustomFilePicker(
                     title: 'السيرة الذاتية',
                     filePath: model.cvPath,
-                    placeholderAsset: PngImages.cv,
+                    placeholderAsset: SvgImages.cv,
                     onTap: cubit.pickCV,
                   ),
                   SizedBox(height: 10.h),
                   CustomFilePicker(
                     title: 'البطاقة الشخصية (امام)',
                     imagePath: model.idFrontPath,
-                    placeholderAsset: PngImages.id,
+                    placeholderAsset: SvgImages.id,
                     onTap: cubit.pickIdFront,
                   ),
                   SizedBox(height: 10.h),
                   CustomFilePicker(
                     title: 'البطاقة الشخصية (خلف)',
                     imagePath: model.idBackPath,
-                    placeholderAsset: PngImages.id,
+                    placeholderAsset: SvgImages.id,
                     onTap: cubit.pickIdBack,
                   ),
                   SizedBox(height: 10.h),
                   CustomButton(
                     borderColor: AppColors.white,
                     btnText: LangKeys.save.tr(),
-                    onPressed: (){
-                        AppNav.customNavigator(context: context, screen: LayoutView());
-
+                    onPressed: () {
+                      AppNav.customNavigator(
+                        context: context,
+                        screen: LayoutView(),
+                      );
                     },
-                  )
+                  ),
                 ],
               );
             },

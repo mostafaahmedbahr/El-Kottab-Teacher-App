@@ -5,7 +5,7 @@ import 'package:el_kottab_teacher_app/features/register/presentation/views/widge
 import 'package:el_kottab_teacher_app/main_imports.dart';
 
 class CompleteRegisterView extends StatelessWidget {
-    CompleteRegisterView({super.key});
+  CompleteRegisterView({super.key});
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -31,7 +31,11 @@ class CompleteRegisterView extends StatelessWidget {
               Gap(20.h),
               CompleteRegisterForm(),
               Gap(32.h),
-              RegisterNextButton(screen: RegisterDocsView(),formKey: formKey,screenName: "CompleteRegisterView",),
+              RegisterNextButton(
+                screen: RegisterDocsView(),
+                formKey: formKey,
+                screenName: "CompleteRegisterView",
+              ),
             ],
           ),
         ),

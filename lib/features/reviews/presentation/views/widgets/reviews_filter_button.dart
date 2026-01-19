@@ -29,7 +29,7 @@ class ReviewsFilterButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isSelected
-                      ? Theme.of(context).primaryColor
+                      ? Theme.of(context).cardColor
                       : Colors.grey[300]!,
                 ),
               ),

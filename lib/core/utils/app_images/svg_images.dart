@@ -1,6 +1,4 @@
-class SvgImages
-{
-
+class SvgImages {
   static const String svgPath = "assets/images/svgs";
   static const String mobile = "$svgPath/mobile.svg";
   static const String lock = "$svgPath/lock.svg";
@@ -18,7 +16,8 @@ class SvgImages
   static const String search = "$svgPath/search-normal.svg";
   static const String filter = "$svgPath/filter-svgrepo-com.svg";
   static const String phone = "$svgPath/phone-calling-rounded-svgrepo-com.svg";
-  static const String video = "$svgPath/video-player-headphones-svgrepo-com.svg";
+  static const String video =
+      "$svgPath/video-player-headphones-svgrepo-com.svg";
   static const String fav = "$svgPath/favourite-svgrepo-com.svg";
   static const String star = "$svgPath/star-svgrepo-com.svg";
   static const String empty = "$svgPath/empty-set-slash-svgrepo-com.svg";
@@ -48,19 +47,9 @@ class SvgImages
   static const String instagram = '$svgPath/instagram-svgrepo-com.svg';
   static const String youtube = '$svgPath/youtube-svgrepo-com.svg';
   static const String whatsapp = '$svgPath/whatsapp-svgrepo-com.svg';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  static const String camera2 = '$svgPath/camera2.svg';
+  static const String cv = '$svgPath/cv.svg';
+  static const String id = '$svgPath/id1.svg';
+  static const String rating = '$svgPath/review3.svg';
+  static const String rating2 = '$svgPath/review2.svg';
 }

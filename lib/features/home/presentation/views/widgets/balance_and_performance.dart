@@ -11,9 +11,9 @@ class BalanceAndPerformance extends StatelessWidget {
       child: Row(
         children: [
           // Balance Container
-          Expanded(
+          Flexible(
             child: Container(
-              padding: EdgeInsets.all(16.r),
+              padding: EdgeInsets.all(11.r),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16.r),
@@ -153,7 +153,9 @@ class BalanceAndPerformance extends StatelessWidget {
                             value: 0.85, // 85%
                             strokeWidth: 8,
                             backgroundColor: Colors.grey[200],
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.green,
+                            ),
                           ),
                         ),
 
@@ -205,10 +207,7 @@ class BalanceAndPerformance extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: Colors.grey[600],
-          ),
+          style: TextStyle(fontSize: 12.sp, color: Colors.grey[600]),
         ),
         Text(
           value,

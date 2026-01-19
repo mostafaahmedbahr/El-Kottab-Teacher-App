@@ -22,7 +22,8 @@ class CustomFilePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasFile = imagePath != null || (filePath != null && fileName != null);
+    final bool hasFile =
+        imagePath != null || (filePath != null && fileName != null);
 
     Widget leftWidget;
     String displayText;
@@ -40,7 +41,7 @@ class CustomFilePicker extends StatelessWidget {
         );
         displayText = _getFileNameFromPath(imagePath!);
       } else {
-        leftWidget = Image.asset(
+        leftWidget = SvgPicture.asset(
           placeholderAsset,
           width: 70.w,
           height: 70.h,
@@ -49,10 +50,10 @@ class CustomFilePicker extends StatelessWidget {
         displayText = _getFileNameFromPath(fileName!);
       }
     } else {
-      leftWidget = Image.asset(
+      leftWidget = SvgPicture.asset(
         placeholderAsset,
-        width: 70.w,
-        height: 70.h,
+        width: 55.w,
+        height: 60.h,
         fit: BoxFit.cover,
       );
       displayText = title.tr();
@@ -75,19 +76,13 @@ class CustomFilePicker extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (!hasFile)
-                    Text(
-                      title.tr(),
-                      style: AppStyles.primary16SemiBold,
-                    ),
+                    Text(title.tr(), style: AppStyles.primary16SemiBold),
                   if (hasFile)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          title.tr(),
-                          style: AppStyles.black14Regular,
-                        ),
-                        Gap(4.h),
+                        Text(title.tr(), style: AppStyles.black14Regular),
+                        Gap(8.h),
                         Text(
                           displayText,
                           style: AppStyles.primary14Medium.copyWith(

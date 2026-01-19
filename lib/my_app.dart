@@ -3,6 +3,7 @@ import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
+import 'package:el_kottab_teacher_app/features/layout/presentation/views/layout_view.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/view_model/register_cubit.dart';
 import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo_impl.dart';
@@ -38,12 +39,27 @@ class MyApp extends StatelessWidget {
                 BlocProvider(create: (context) => AuthCubit()),
                 BlocProvider(create: (context) => LanguageCubit()),
                 BlocProvider(create: (context) => LayoutCubit()),
-                BlocProvider(create: (context) => ForgetPasswordCubit(getIt<ForgetPasswordRepoImpl>()),),
-                BlocProvider(create: (context) => SettingsCubit(getIt<SettingsRepoImpl>())..getWhoWeAre()..getTermsAndConditions(),),
-                BlocProvider(create: (context) => RegisterCubit(getIt<RegisterRepoImpl>())..getAllCategories(),),
-                BlocProvider(create: (context) => ProfileCubit(getIt<ProfileRepoImpl>()),),
-                BlocProvider(create: (context)=> NotificationsCubit(getIt.get<NotificationsRepoImpl>())),
-
+                BlocProvider(
+                  create: (context) =>
+                      ForgetPasswordCubit(getIt<ForgetPasswordRepoImpl>()),
+                ),
+                BlocProvider(
+                  create: (context) => SettingsCubit(getIt<SettingsRepoImpl>())
+                    ..getWhoWeAre()
+                    ..getTermsAndConditions(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      RegisterCubit(getIt<RegisterRepoImpl>())
+                        ..getAllCategories(),
+                ),
+                BlocProvider(
+                  create: (context) => ProfileCubit(getIt<ProfileRepoImpl>()),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      NotificationsCubit(getIt.get<NotificationsRepoImpl>()),
+                ),
               ],
               child: BlocBuilder<LanguageCubit, Locale>(
                 builder: (context, locale) {
@@ -70,7 +86,7 @@ class MyApp extends StatelessWidget {
                             backgroundColor: AppColors.white,
                           ),
                     ),
-                    home: const SplashView(),
+                    home: const LayoutView(),
                     builder: (context, child) {
                       SystemChrome.setSystemUIOverlayStyle(
                         const SystemUiOverlayStyle(

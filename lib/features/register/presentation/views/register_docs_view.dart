@@ -4,23 +4,21 @@ import 'package:el_kottab_teacher_app/features/register/presentation/views/widge
 import 'package:el_kottab_teacher_app/features/register/presentation/views/widgets/register_button.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
- import '../view_model/register_cubit.dart';
+import '../view_model/register_cubit.dart';
 
 class RegisterDocsView extends StatelessWidget {
-    RegisterDocsView({super.key, });
+  RegisterDocsView({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LangKeys.uploadingPersonalIdentification.tr(),
-        ),
+        title: Text(LangKeys.uploadingPersonalIdentification.tr()),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: BlocBuilder<RegisterCubit, RegisterStates>(
-          buildWhen: (previous, current){
+          buildWhen: (previous, current) {
             return current is RegisterPickFileState;
           },
           builder: (context, state) {
@@ -32,7 +30,7 @@ class RegisterDocsView extends StatelessWidget {
                   CustomFilePicker(
                     title: LangKeys.personalPhoto,
                     imagePath: registerCubit.personalPhotoPath,
-                    placeholderAsset: PngImages.presonalphoto,
+                    placeholderAsset: SvgImages.camera2,
                     onTap: () => registerCubit.pickRegisterFile(
                       RegisterFileType.personalPhoto,
                     ),
@@ -42,16 +40,15 @@ class RegisterDocsView extends StatelessWidget {
                     title: LangKeys.cv,
                     fileName: registerCubit.cvPath,
                     filePath: registerCubit.cvPath,
-                    placeholderAsset: PngImages.cv,
-                    onTap: () => registerCubit.pickRegisterFile(
-                      RegisterFileType.cv,
-                    ),
+                    placeholderAsset: SvgImages.cv,
+                    onTap: () =>
+                        registerCubit.pickRegisterFile(RegisterFileType.cv),
                   ),
                   Gap(10.h),
                   CustomFilePicker(
                     title: LangKeys.personalIDCardFront,
                     imagePath: registerCubit.idFrontPath,
-                    placeholderAsset: PngImages.id,
+                    placeholderAsset: SvgImages.id,
                     onTap: () => registerCubit.pickRegisterFile(
                       RegisterFileType.idFront,
                     ),
@@ -61,14 +58,12 @@ class RegisterDocsView extends StatelessWidget {
                   CustomFilePicker(
                     title: LangKeys.personalIDCardBack,
                     imagePath: registerCubit.idBackPath,
-                    placeholderAsset: PngImages.id,
-                    onTap: () => registerCubit.pickRegisterFile(
-                      RegisterFileType.idBack,
-                    ),
+                    placeholderAsset: SvgImages.id,
+                    onTap: () =>
+                        registerCubit.pickRegisterFile(RegisterFileType.idBack),
                   ),
                   Gap(24.h),
-                  RegisterButton(formKey: _formKey,),
-
+                  RegisterButton(formKey: _formKey),
                 ],
               ),
             );
