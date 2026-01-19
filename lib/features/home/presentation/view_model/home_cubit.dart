@@ -1,3 +1,4 @@
+import 'package:el_kottab_teacher_app/features/home/data/models/teacher_stats_model.dart';
 import 'package:el_kottab_teacher_app/features/home/data/models/update_availability_model.dart';
 
 import '../../../../main_imports.dart';
@@ -43,6 +44,20 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(GetHomeSliderSuccessState(data));
     });
   }
+
+  TeacherStatsModel? teacherStatsModel;
+  Future<void> getTeacherStats({required int teacherId})
+  async {
+    emit(GetTeacherStatsLoadingState());
+    var result = await homeRepo!.getTeacherStats(teacherId: teacherId);
+    return result.fold((failure) {
+      emit(GetTeacherStatsErrorState(failure.errMessage));
+    }, (data) async {
+      teacherStatsModel = data;
+      emit(GetTeacherStatsSuccessState(data));
+    });
+  }
+
 
   UpdateAvailabilityModel? updateAvailabilityModel;
   Future<void> updateAvailability({required String status})

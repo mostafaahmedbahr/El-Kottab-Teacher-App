@@ -128,9 +128,9 @@ void initDateControllers(ProfileModel profile) {
     phoneCon.text = phone ?? '';
   }
 
-  if (profile.data?.plan?.categories != null && profile.data!.plan!.categories!.isNotEmpty) {
-    categoryController.text = profile.data!.plan!.categories![0].id.toString();
-  }
+  // if (profile.data?.plan?.categories != null && profile.data!.plan!.categories!.isNotEmpty) {
+  //   categoryController.text = profile.data!.plan!.categories![0].id.toString();
+  // }
 }
 
 // Add this method to clear country/city selection

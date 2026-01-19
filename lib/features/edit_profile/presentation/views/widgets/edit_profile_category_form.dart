@@ -84,20 +84,20 @@ class _EditProfileCategoryFormState
               fieldViewBuilder: (context, textEditingController,
                   focusNode, onFieldSubmitted) {
                 // ✅ تهيئة بقيمة الملف الشخصي إذا كانت موجودة
-                if (textEditingController.text.isEmpty &&
-                    profile?.data?.plan?.categories != null &&
-                    profile!.data!.plan!.categories!.isNotEmpty) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    // أخذ أول category id من المصفوفة
-                    int? firstCategoryId = profile!.data!.plan!.categories![0].id;
-                    if (firstCategoryId != null) {
-                      textEditingController.text = firstCategoryId.toString();
-
-                      // أيضاً تهيئة الـ ID
-                      // editPersonalInfoCubit. = firstCategoryId;
-                    }
-                  });
-                }
+                // if (textEditingController.text.isEmpty &&
+                //     profile?.data?.plan?.categories != null &&
+                //     profile!.data!.plan!.categories!.isNotEmpty) {
+                //   WidgetsBinding.instance.addPostFrameCallback((_) {
+                //     // أخذ أول category id من المصفوفة
+                //     int? firstCategoryId = profile!.data!.plan!.categories![0].id;
+                //     if (firstCategoryId != null) {
+                //       textEditingController.text = firstCategoryId.toString();
+                //
+                //       // أيضاً تهيئة الـ ID
+                //       // editPersonalInfoCubit. = firstCategoryId;
+                //     }
+                //   });
+                // }
 
                 return CustomTextFormField(
                   controller: textEditingController,

@@ -1,3 +1,4 @@
+import 'package:el_kottab_teacher_app/features/home/data/models/teacher_stats_model.dart';
 import 'package:el_kottab_teacher_app/features/home/data/models/update_availability_model.dart';
 
 import '../../data/models/home_banners_model.dart';
@@ -20,6 +21,17 @@ class GetHomeSliderSuccessState extends HomeStates{
 
 }
 
+class GetTeacherStatsLoadingState extends HomeStates{}
+class GetTeacherStatsErrorState extends HomeStates{
+  final String error;
+  GetTeacherStatsErrorState(this.error);
+
+}
+class GetTeacherStatsSuccessState extends HomeStates{
+  final TeacherStatsModel teacherStatsModel;
+  GetTeacherStatsSuccessState(this.teacherStatsModel);
+
+}
 
 
 class ChangeStatusState extends HomeStates{}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "444097571990",
+    "project_id": "el-kottab",
+    "storage_bucket": "el-kottab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444097571990:android:31b668dd5ad23ab622e6b7",
+        "android_client_info": {
+          "package_name": "com.zerobugs.el_kotab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmFFq05k9quTwArIQrwK8AbboUapWA_L4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444097571990:android:7e4510bd3ddd8a2c22e6b7",
+        "android_client_info": {
+          "package_name": "com.zerobugs.el_kotab_teacher_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmFFq05k9quTwArIQrwK8AbboUapWA_L4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

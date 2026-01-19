@@ -30,6 +30,7 @@ class EndPoints {
   static const String  favourites = 'favourites';
   static const String  updateAvailability = 'update/availability';
   static const String  teacherReviews = 'rate';
+  static const String  teacherStats = 'teacher/stats';
 
 
 

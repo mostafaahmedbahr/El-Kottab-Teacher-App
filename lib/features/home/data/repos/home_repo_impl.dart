@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../main_imports.dart';
  import '../models/home_banners_model.dart';
+import '../models/teacher_stats_model.dart';
 import '../models/update_availability_model.dart';
 import 'home_repo.dart';
 
@@ -22,6 +23,20 @@ Future<Either<Failure, HomeBannersModel>> getHomeBanners() async{
     return left(handleError(e));
   }
 }
+
+  @override
+  Future<Either<Failure, TeacherStatsModel>> getTeacherStats({required int teacherId}) async{
+    try {
+      var response = await apiService!.getData(
+        endPoint: "${EndPoints.teacherStats}/$teacherId",
+      );
+      TeacherStatsModel result = TeacherStatsModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
 
 
   @override
