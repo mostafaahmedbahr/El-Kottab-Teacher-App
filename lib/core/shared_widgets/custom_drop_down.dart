@@ -1,4 +1,3 @@
-
 import '../../main_imports.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
@@ -40,18 +39,14 @@ class CustomDropdown<T> extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: DropdownButton<T>(
+        dropdownColor: backgroundColor,
+
         padding: padding,
         isExpanded: true,
         underline: const SizedBox.shrink(),
         value: value,
-        hint: Text(
-          hint,
-          style: TextStyle(color: hintColor),
-        ),
-        style: const TextStyle(
-          color: AppColors.black,
-          fontSize: 14,
-        ),
+        hint: Text(hint, style: TextStyle(color: hintColor)),
+        style: const TextStyle(color: AppColors.black, fontSize: 14),
         items: items.map((T item) {
           return DropdownMenuItem<T>(
             value: item,
