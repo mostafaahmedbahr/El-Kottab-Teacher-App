@@ -5,12 +5,15 @@ import 'package:el_kottab_teacher_app/features/add_appointments/data/models/dele
 import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/appointment_model.dart';
+import '../../data/models/update_schedule_model.dart';
 import '../../data/repos/add_appointments_repo.dart';
 import 'add_appointments_states.dart';
 
 class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
-  AddAppointmentsCubit(this.addAppointmentsRepo) : super(AddAppointmentsInitState());
+  AddAppointmentsCubit(this.addAppointmentsRepo)
+    : super(AddAppointmentsInitState());
   AddAppointmentsRepo? addAppointmentsRepo;
+
   /// الأيام
   List<String> nameOfDays = [
     LangKeys.saturday.tr(),
@@ -39,20 +42,14 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
   }
 
   /// تعيين وقت البداية
-  AppointmentResult setStartTime(
-      String day,
-      int index,
-      TimeOfDay start,
-      ) {
+  AppointmentResult setStartTime(String day, int index, TimeOfDay start) {
     final current = appointments[day]![index];
 
-    if (current.end != null &&
-        !_isEndAfterStart(start, current.end!)) {
+    if (current.end != null && !_isEndAfterStart(start, current.end!)) {
       return AppointmentResult.endBeforeStart;
     }
 
-    if (current.end != null &&
-        _hasConflict(day, start, current.end!, index)) {
+    if (current.end != null && _hasConflict(day, start, current.end!, index)) {
       return AppointmentResult.conflict;
     }
 
@@ -62,11 +59,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
   }
 
   /// تعيين وقت النهاية
-  AppointmentResult setEndTime(
-      String day,
-      int index,
-      TimeOfDay end,
-      ) {
+  AppointmentResult setEndTime(String day, int index, TimeOfDay end) {
     final current = appointments[day]![index];
 
     if (current.start == null) {
@@ -99,11 +92,11 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
   }
 
   bool _hasConflict(
-      String day,
-      TimeOfDay start,
-      TimeOfDay end,
-      int currentIndex,
-      ) {
+    String day,
+    TimeOfDay start,
+    TimeOfDay end,
+    int currentIndex,
+  ) {
     final list = appointments[day] ?? [];
 
     for (int i = 0; i < list.length; i++) {
@@ -124,65 +117,86 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     return false;
   }
 
-
-
   AddAppointmentModel? addAppointmentModel;
 
   Future<void> addAppointment({
     required String day,
     required String from,
     required String to,
-  })
-  async {
+  }) async {
     emit(AddAppointmentsLoadingState());
-    var result = await addAppointmentsRepo!.addAppointment(day: day, from: from, to: to);
+    var result = await addAppointmentsRepo!.addAppointment(
+      day: day,
+      from: from,
+      to: to,
+    );
     return result.fold(
-          (failure) {
+      (failure) {
         emit(AddAppointmentsErrorState(failure.errMessage));
       },
-          (data) async {
-            addAppointmentModel = data;
+      (data) async {
+        addAppointmentModel = data;
         emit(AddAppointmentsSuccessState(data));
       },
     );
   }
 
-
-
   DeleteScheduleModel? deleteScheduleModel;
 
-  Future<void> deleteSchedule({
-    required String scheduleId,
-
-  })
-  async {
+  Future<void> deleteSchedule({required String scheduleId}) async {
     emit(DeleteScheduleLoadingState());
-    var result = await addAppointmentsRepo!.deleteSchedule(scheduleId: scheduleId);
+    var result = await addAppointmentsRepo!.deleteSchedule(
+      scheduleId: scheduleId,
+    );
     return result.fold(
-          (failure) {
+      (failure) {
         emit(DeleteScheduleErrorState(failure.errMessage));
       },
-          (data) async {
-            deleteScheduleModel = data;
+      (data) async {
+        deleteScheduleModel = data;
         emit(DeleteScheduleSuccessState(data));
       },
     );
   }
 
-
   AllSchedulesModel? allSchedulesModel;
 
-  Future<void> getAllSchedules()
-  async {
+  Future<void> getAllSchedules() async {
     emit(GetAllScheduleLoadingState());
     var result = await addAppointmentsRepo!.getAllSchedules();
     return result.fold(
-          (failure) {
+      (failure) {
         emit(GetAllScheduleErrorState(failure.errMessage));
       },
-          (data) async {
-            allSchedulesModel = data;
+      (data) async {
+        allSchedulesModel = data;
         emit(GetAllScheduleSuccessState(data));
+      },
+    );
+  }
+
+  UpdateScheduleModel? updateScheduleModel;
+
+  Future<void> updateSchedule({
+    required String scheduleId,
+    required String day,
+    required String from,
+    required String to,
+  }) async {
+    emit(UpdateScheduleLoadingState());
+    var result = await addAppointmentsRepo!.updateSchedule(
+      scheduleId: scheduleId,
+      day: day,
+      from: from,
+      to: to,
+    );
+    return result.fold(
+      (failure) {
+        emit(UpdateScheduleErrorState(failure.errMessage));
+      },
+      (data) async {
+        updateScheduleModel = data;
+        emit(UpdateScheduleSuccessState(data));
       },
     );
   }

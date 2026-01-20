@@ -2,6 +2,8 @@ import 'package:el_kottab_teacher_app/features/add_appointments/data/models/add_
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/all_schedules_model.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/delete_schedules_model.dart';
 
+import '../../data/models/update_schedule_model.dart';
+
 abstract class AddAppointmentsStates{}
 
 class AddAppointmentsInitState extends AddAppointmentsStates{}
@@ -44,5 +46,17 @@ class GetAllScheduleSuccessState extends AddAppointmentsStates {
 class GetAllScheduleErrorState extends AddAppointmentsStates {
   final String error;
   GetAllScheduleErrorState(this.error);
+
+}
+
+
+class UpdateScheduleLoadingState extends AddAppointmentsStates {}
+class UpdateScheduleSuccessState extends AddAppointmentsStates {
+  final UpdateScheduleModel updateScheduleModel;
+  UpdateScheduleSuccessState(this.updateScheduleModel);
+}
+class UpdateScheduleErrorState extends AddAppointmentsStates {
+  final String error;
+  UpdateScheduleErrorState(this.error);
 
 }

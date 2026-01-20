@@ -3,6 +3,7 @@ import '../../../../main_imports.dart';
 import '../models/add_appointment_model.dart';
 import '../models/all_schedules_model.dart';
 import '../models/delete_schedules_model.dart';
+import '../models/update_schedule_model.dart';
 import 'add_appointments_repo.dart';
 
 
@@ -70,6 +71,25 @@ async{
     }
   }
 
+
+  @override
+  Future<Either<Failure, UpdateScheduleModel>> updateSchedule({
+    required String scheduleId,
+    required String day,
+    required String from,
+    required String to,
+  })
+  async{
+    try {
+      var response = await apiService!.deleteData(
+        endPoint: "${EndPoints.teacherSchdules}/$scheduleId",
+      );
+      UpdateScheduleModel result = UpdateScheduleModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
 
 
 
