@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
                             backgroundColor: AppColors.white,
                           ),
                     ),
-                    home: const LayoutView(),
+                    home: const SplashView(),
                     builder: (context, child) {
                       SystemChrome.setSystemUIOverlayStyle(
                         const SystemUiOverlayStyle(

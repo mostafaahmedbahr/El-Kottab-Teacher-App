@@ -1,3 +1,4 @@
+import 'package:el_kottab_teacher_app/core/extensions/log_util.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/balance_and_performance.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_slider_images.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/successful_calls.dart';
@@ -17,8 +18,8 @@ class HomeView extends StatelessWidget {
       child: Scaffold(
         body: BlocProvider(
           create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())
-            ..getHomeBanners(),
-            // ..getTeacherStats(teacherId: CacheHelper.getData(key: "userId")),
+            ..getHomeBanners()
+            ..getTeacherStats(teacherId: CacheHelper.getData(key: "userId")),
           child: SafeArea(
             child: CustomScrollView(
               slivers: [

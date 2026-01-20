@@ -29,18 +29,17 @@ class SplashViewState extends State<SplashView>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         final String? userToken = CacheTokenManger.userToken;
-        // if ( userToken != null && userToken.isNotEmpty) {
+        if ( userToken != null && userToken.isNotEmpty) {
         AppNav.customNavigator(
           context: context,
-          screen: LoginView(),
-          // screen: const LayoutView(),
+          screen: const LayoutView(),
         );
-        // } else {
-        //   AppNav.customNavigator(
-        //     context: context,
-        //     screen: const LoginView(),
-        //   );
-        // }
+        } else {
+          AppNav.customNavigator(
+            context: context,
+            screen: const LoginView(),
+          );
+        }
       }
     });
   }
