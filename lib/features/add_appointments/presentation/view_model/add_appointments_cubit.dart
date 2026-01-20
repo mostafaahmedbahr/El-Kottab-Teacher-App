@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/add_appointment_model.dart';
+import 'package:el_kottab_teacher_app/features/add_appointments/data/models/all_schedules_model.dart';
+import 'package:el_kottab_teacher_app/features/add_appointments/data/models/delete_schedules_model.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/appointment_model.dart';
@@ -141,6 +143,46 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
           (data) async {
             addAppointmentModel = data;
         emit(AddAppointmentsSuccessState(data));
+      },
+    );
+  }
+
+
+
+  DeleteScheduleModel? deleteScheduleModel;
+
+  Future<void> deleteSchedule({
+    required String scheduleId,
+
+  })
+  async {
+    emit(DeleteScheduleLoadingState());
+    var result = await addAppointmentsRepo!.deleteSchedule(scheduleId: scheduleId);
+    return result.fold(
+          (failure) {
+        emit(DeleteScheduleErrorState(failure.errMessage));
+      },
+          (data) async {
+            deleteScheduleModel = data;
+        emit(DeleteScheduleSuccessState(data));
+      },
+    );
+  }
+
+
+  AllSchedulesModel? allSchedulesModel;
+
+  Future<void> getAllSchedules()
+  async {
+    emit(GetAllScheduleLoadingState());
+    var result = await addAppointmentsRepo!.getAllSchedules();
+    return result.fold(
+          (failure) {
+        emit(GetAllScheduleErrorState(failure.errMessage));
+      },
+          (data) async {
+            allSchedulesModel = data;
+        emit(GetAllScheduleSuccessState(data));
       },
     );
   }
