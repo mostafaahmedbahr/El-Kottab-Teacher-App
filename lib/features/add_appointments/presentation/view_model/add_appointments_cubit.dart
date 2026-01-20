@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/add_appointments/data/models/add_appointment_model.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/appointment_model.dart';
+import '../../data/repos/add_appointments_repo.dart';
 import 'add_appointments_states.dart';
 
 class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
-  AddAppointmentsCubit() : super(AddAppointmentsInitState());
-
+  AddAppointmentsCubit(this.addAppointmentsRepo) : super(AddAppointmentsInitState());
+  AddAppointmentsRepo? addAppointmentsRepo;
   /// الأيام
   List<String> nameOfDays = [
     LangKeys.saturday.tr(),
@@ -118,5 +120,28 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
       }
     }
     return false;
+  }
+
+
+
+  AddAppointmentModel? addAppointmentModel;
+
+  Future<void> addAppointment({
+    required String day,
+    required String from,
+    required String to,
+  })
+  async {
+    emit(AddAppointmentsLoadingState());
+    var result = await addAppointmentsRepo!.addAppointment(day: day, from: from, to: to);
+    return result.fold(
+          (failure) {
+        emit(AddAppointmentsErrorState(failure.errMessage));
+      },
+          (data) async {
+            addAppointmentModel = data;
+        emit(AddAppointmentsSuccessState(data));
+      },
+    );
   }
 }

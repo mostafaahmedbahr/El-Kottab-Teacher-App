@@ -65,4 +65,5 @@ void setup() {
   getIt.registerSingleton<RegisterRepoImpl>(
     RegisterRepoImpl(getIt.get<ApiService>()),
   );
+
 }
