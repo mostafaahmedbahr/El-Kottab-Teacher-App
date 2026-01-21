@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
                   create: (context) =>
                       NotificationsCubit(getIt.get<NotificationsRepoImpl>()),
                 ),
+
               ],
               child: BlocBuilder<LanguageCubit, Locale>(
                 builder: (context, locale) {

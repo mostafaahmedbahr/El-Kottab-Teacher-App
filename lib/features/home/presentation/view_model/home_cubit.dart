@@ -3,6 +3,7 @@ import 'package:el_kottab_teacher_app/features/home/data/models/update_availabil
 
 import '../../../../main_imports.dart';
 import '../../data/models/home_banners_model.dart';
+import '../../data/models/successful_calls_model.dart';
 import '../../data/repos/home_repo.dart';
 import 'home_states.dart';
 
@@ -72,5 +73,21 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+
+  SuccessfulCallsModel? successfulCallsModel;
+
+  Future<void> getSuccessfulCalls(    {  int? limit}) async {
+    emit(GetSuccessfulCallsLoadingState());
+    var result = await homeRepo!.getSuccessfulCalls(limit: limit);
+    result.fold(
+          (failure) {
+        emit(GetSuccessfulCallsErrorState(failure.errMessage));
+      },
+          (data) {
+            successfulCallsModel = data;
+        emit(GetSuccessfulCallsSuccessState(data));
+      },
+    );
+  }
 
 }

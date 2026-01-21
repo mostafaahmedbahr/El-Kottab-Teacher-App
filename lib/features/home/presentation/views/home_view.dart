@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
         body: BlocProvider(
           create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())
             ..getHomeBanners()
-            ..getTeacherStats(teacherId: CacheHelper.getData(key: "userId")),
+            ..getTeacherStats(teacherId: CacheHelper.getData(key: "userId"))..getSuccessfulCalls(),
           child: SafeArea(
             child: CustomScrollView(
               slivers: [

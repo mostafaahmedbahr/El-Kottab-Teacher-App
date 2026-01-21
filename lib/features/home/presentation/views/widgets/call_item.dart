@@ -1,20 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/successful_calls.dart';
-
+import 'package:el_kottab_teacher_app/features/home/data/models/successful_calls_model.dart';
 import '../../../../../main_imports.dart';
 import '../../../../student_profile/presentation/views/student_profile_view.dart';
 
 class CallItem extends StatelessWidget {
   const CallItem({super.key, required this.call});
-  final CallItemModel call;
+  final Data call;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
         AppNav.customNavigator(context: context, screen:StudentProfileView(
             personId: "1",
-            personName: call.name,
-            personImage: call.imageUrl,
+            personName: call.user!.name.toString(),
+            personImage: call.user!.image.toString(),
         ) );
       },
       child: Container(
@@ -41,7 +40,7 @@ class CallItem extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.grey[200],
               ),
-              child: CustomNetWorkImage(imageUrl: call.imageUrl, raduis: 50.r),
+              child: CustomNetWorkImage(imageUrl: call.user!.image.toString(), raduis: 50.r),
             ),
             Gap(12.w),
 
@@ -52,7 +51,7 @@ class CallItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    call.name,
+                    call.user!.name.toString(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -71,7 +70,7 @@ class CallItem extends StatelessWidget {
                       ),
                       Gap(4.w),
                       Text(
-                        call.time,
+                        call.startedAt.toString(),
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.grey[600],
@@ -90,7 +89,7 @@ class CallItem extends StatelessWidget {
                       ),
                       Gap(4.w),
                       Text(
-                        call.date,
+                        call.createdAt.toString(),
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.grey[600],

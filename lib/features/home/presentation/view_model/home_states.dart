@@ -2,6 +2,7 @@ import 'package:el_kottab_teacher_app/features/home/data/models/teacher_stats_mo
 import 'package:el_kottab_teacher_app/features/home/data/models/update_availability_model.dart';
 
 import '../../data/models/home_banners_model.dart';
+import '../../data/models/successful_calls_model.dart';
 
 abstract class HomeStates{}
 
@@ -44,4 +45,14 @@ class ChangeStatusErrorState extends HomeStates{
   final String error;
   ChangeStatusErrorState(this.error);
 
+}
+
+class GetSuccessfulCallsLoadingState extends HomeStates{}
+class GetSuccessfulCallsSuccessState extends HomeStates{
+  final SuccessfulCallsModel successfulCallsModel;
+  GetSuccessfulCallsSuccessState(this.successfulCallsModel);
+}
+class GetSuccessfulCallsErrorState extends HomeStates{
+  final String error;
+  GetSuccessfulCallsErrorState(this.error);
 }
