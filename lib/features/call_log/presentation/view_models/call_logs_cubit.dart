@@ -12,9 +12,10 @@ class CallLogsCubit extends Cubit<CallLogsStates> {
   final CallLogsRepo callLogsRepo;
 
   int selectedFilter = 0;
-
+  String? status;
   void changeSelectedFilter(int newIndex) {
     selectedFilter = newIndex;
+    emit(ChangeSelectedFilterState());
 
     String? status;
     if (newIndex == 1) {
@@ -26,8 +27,8 @@ class CallLogsCubit extends Cubit<CallLogsStates> {
     }
 
     getAllCalls(status);
-    emit(ChangeSelectedFilterState());
   }
+
 
   CallsModel? callsModel;
 
