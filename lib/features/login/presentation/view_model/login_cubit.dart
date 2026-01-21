@@ -20,7 +20,12 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginErrorState(failure.errMessage));
     }, (data) async {
         loginModel = data;
+        await CacheTokenManger.saveUserToken(loginModel?.data?.token);
+        CacheHelper.saveData(key: "userPhone", value: loginModel?.data?.phone);
+        CacheHelper.saveData(key: "userId", value: loginModel?.data?.id);
+        CacheHelper.saveData(key: "userEmail", value: loginModel?.data?.email);
         emit(LoginSuccessState(data));
+
     });
   }
 

@@ -1,5 +1,7 @@
-import '../../../../core/app_services/remote_services/api_service.dart';
- import 'call_logs_repo.dart';
+import 'package:dartz/dartz.dart';
+import '../../../../main_imports.dart';
+import '../models/calls_model.dart';
+import 'call_logs_repo.dart';
 
 
 class CallLogsRepoImpl implements CallLogsRepo {
@@ -9,18 +11,25 @@ class CallLogsRepoImpl implements CallLogsRepo {
 
 
 
-// @override
-// Future<Either<Failure, TryThisProductsModel>> getTryThisProductsData() async{
-//   try {
-//     var response = await apiService!.getData(
-//       endPoint: EndPoints.mostSellingProducts,
-//     );
-//     TryThisProductsModel result = TryThisProductsModel.fromJson(response.data);
-//     return right(result);
-//   } catch (e) {
-//     return left(handleError(e));
-//   }
-// }
+  @override
+  Future<Either<Failure, CallsModel>> getAllCalls(String? type) async {
+    try {
+      var response = await apiService!.getData(
+        endPoint: EndPoints.teacherCalls,
+        query: type == null
+            ? null
+            : {
+          "status": type,
+        },
+      );
+
+      CallsModel result = CallsModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
 
 
 

@@ -32,6 +32,7 @@ class EndPoints {
   static const String  teacherReviews = 'rate';
   static const String  teacherStats = 'teacher/stats';
   static const String  teacherSchdules = 'teacher/schdules';
+  static const String  teacherCalls = 'teacher/calls';
 
 
 

@@ -13,9 +13,10 @@ class CallLogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => CallLogsCubit(getIt.get<CallLogsRepoImpl>()),
+        create: (context) => CallLogsCubit(getIt.get<CallLogsRepoImpl>())..getAllCalls(null),
         child: SafeArea(
-          child: Padding(
+          child:
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
             child: Column(
               children: [
