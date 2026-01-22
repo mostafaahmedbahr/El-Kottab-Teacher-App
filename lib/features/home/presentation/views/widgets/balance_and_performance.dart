@@ -16,6 +16,7 @@ class BalanceAndPerformance extends StatelessWidget {
         || current is GetTeacherStatsErrorState
         || current is GetTeacherStatsLoadingState;
       },
+
       builder: (context, state) {
         var homeCubit = context.read<HomeCubit>();
         return Padding(
