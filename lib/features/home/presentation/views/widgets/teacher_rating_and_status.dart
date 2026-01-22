@@ -6,6 +6,8 @@ import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/t
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'availability_shimmer.dart';
+
 class TeacherRatingAndStatus extends StatelessWidget {
   const TeacherRatingAndStatus({super.key});
 
@@ -22,7 +24,17 @@ class TeacherRatingAndStatus extends StatelessWidget {
                 LangKeys.available.tr(),
                 style: AppStyles.black16SemiBold,
               ),
+
               BlocConsumer<HomeCubit, HomeStates>(
+                buildWhen: (previous, current) {
+                  return current is GetTeacherStatsLoadingState ||
+                      current is GetTeacherStatsSuccessState ||
+                      current is GetTeacherStatsErrorState;
+                },
+                listenWhen: (previous, current) {
+                  return current is ChangeStatusSuccessState ||
+                      current is ChangeStatusErrorState;
+                },
                 listener: (context, state) {
                   if (state is ChangeStatusSuccessState) {
                     Toast.showSuccessToast(
@@ -38,6 +50,18 @@ class TeacherRatingAndStatus extends StatelessWidget {
                 },
                 builder: (context, state) {
                   final homeCubit = context.read<HomeCubit>();
+
+                  // 🔹 Loading
+                  if (state is GetTeacherStatsLoadingState) {
+                    return const AvailabilityShimmer();
+                  }
+
+                  // 🔹 Error
+                  if (state is GetTeacherStatsErrorState) {
+                    return Icon(Icons.error, color: Colors.red);
+                  }
+
+                  // 🔹 Success
                   return CupertinoSwitch(
                     activeTrackColor: AppColors.darkOlive,
                     value: homeCubit.status,
@@ -47,6 +71,7 @@ class TeacherRatingAndStatus extends StatelessWidget {
               ),
             ],
           ),
+
 
           Gap(12.w),
 
