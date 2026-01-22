@@ -16,13 +16,13 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
 
   /// الأيام
   List<String> nameOfDays = [
-    LangKeys.saturday.tr(),
-    LangKeys.sunday.tr(),
-    LangKeys.monday.tr(),
-    LangKeys.tuesday.tr(),
-    LangKeys.wednesday.tr(),
-    LangKeys.thursday.tr(),
-    LangKeys.friday.tr(),
+    LangKeys.saturday,
+    LangKeys.sunday,
+    LangKeys.monday,
+    LangKeys.tuesday,
+    LangKeys.wednesday,
+    LangKeys.thursday,
+    LangKeys.friday,
   ];
 
   /// مواعيد كل يوم

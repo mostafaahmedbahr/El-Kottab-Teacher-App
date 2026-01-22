@@ -81,7 +81,7 @@ async{
   })
   async{
     try {
-      var response = await apiService!.deleteData(
+      var response = await apiService!.postData(
         endPoint: "${EndPoints.teacherSchdules}/$scheduleId",
       );
       UpdateScheduleModel result = UpdateScheduleModel.fromJson(response.data);
