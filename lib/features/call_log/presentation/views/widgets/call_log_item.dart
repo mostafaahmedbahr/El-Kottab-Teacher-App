@@ -8,7 +8,7 @@ class CallLogItem extends StatelessWidget {
     return Card(
       color: Color(0xFFFBFAF8),
       elevation: 2,
-      shadowColor: Color(0xFF8CB982).withOpacity(0.4),
+      shadowColor: Color(0xFF8CB982).withValues(alpha: 0.4),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.r),
         side: BorderSide(color: Color(0xFFE1E6E1)),
@@ -200,50 +200,50 @@ class CallLogItem extends StatelessWidget {
   //   );
   // }
 
-  Widget _buildDetailRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(value, style: const TextStyle(color: Colors.grey)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildDetailRow(String label, String value) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 4),
+  //     child: Row(
+  //       children: [
+  //         Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+  //         const SizedBox(width: 8),
+  //         Expanded(
+  //           child: Text(value, style: const TextStyle(color: Colors.grey)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  void _showDeleteConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('حذف سجل المكالمة'),
-        content: const Text(
-          'هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // Implement delete logic
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('تم حذف سجل مكالمة ${"studentName"}'),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('حذف'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showDeleteConfirmation(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: const Text('حذف سجل المكالمة'),
+  //       content: const Text(
+  //         'هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.',
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           child: const Text('إلغاء'),
+  //         ),
+  //         ElevatedButton(
+  //           onPressed: () {
+  //             Navigator.pop(context);
+  //             // Implement delete logic
+  //             ScaffoldMessenger.of(context).showSnackBar(
+  //               SnackBar(
+  //                 content: Text('تم حذف سجل مكالمة ${"studentName"}'),
+  //                 backgroundColor: Colors.green,
+  //               ),
+  //             );
+  //           },
+  //           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+  //           child: const Text('حذف'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

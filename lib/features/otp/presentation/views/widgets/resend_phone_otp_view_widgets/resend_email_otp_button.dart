@@ -29,7 +29,7 @@ class ResendEmailOtpButton extends StatelessWidget {
         // }
       },
       builder: (context, state) {
-        var otpCubit = context.read<OtpCubit>();
+        // var otpCubit = context.read<OtpCubit>();
         return ConditionalBuilder(
           condition: state is! ResendOtpLoadingState,
           fallback: (context) => const CustomLoading(),

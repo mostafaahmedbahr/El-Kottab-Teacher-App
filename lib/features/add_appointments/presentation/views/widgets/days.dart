@@ -86,7 +86,7 @@ class Days extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(.08),
+                  color: Colors.black.withValues(alpha: .08),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -137,7 +137,7 @@ class Days extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: hasAppointments
-                        ? Colors.white.withOpacity(.15)
+                        ? Colors.white.withValues(alpha: .15)
                         : AppColors.darkOlive,
                     borderRadius: BorderRadius.circular(20.r),
                   ),

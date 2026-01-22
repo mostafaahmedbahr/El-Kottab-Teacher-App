@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import '../../../../main_imports.dart';
-import '../../../forget_password/data/models/verify_reset_otp_model.dart';
 import '../../data/models/resend_otp_model.dart';
-import '../../data/models/verify_otp_model.dart';
 import '../../data/repos/otp_repo.dart';
 import 'otp_states.dart';
 

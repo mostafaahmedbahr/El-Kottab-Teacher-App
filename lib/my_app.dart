@@ -3,7 +3,6 @@ import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
-import 'package:el_kottab_teacher_app/features/layout/presentation/views/layout_view.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
 import 'package:el_kottab_teacher_app/features/register/presentation/view_model/register_cubit.dart';
 import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo_impl.dart';

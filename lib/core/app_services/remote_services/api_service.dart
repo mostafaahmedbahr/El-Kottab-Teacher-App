@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
- import '../../../main_imports.dart';
-  import '../../errors/failure.dart';
-import '../local_services/cache_token.dart';
-import 'end_points.dart';
+import '../../../main_imports.dart';
 
 class ApiService {
   final Dio _dio;
@@ -14,41 +11,43 @@ class ApiService {
     _dio.options.receiveTimeout = const Duration(seconds: 30);
 
     // Attach interceptors
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        // Add default headers
-        options.headers["Accept"] = "application/json";
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // Add default headers
+          options.headers["Accept"] = "application/json";
 
-        // Add user token if available
-        if (CacheTokenManger.userToken != null &&
-            CacheTokenManger.userToken!.isNotEmpty) {
-          options.headers["Authorization"] =
-          "Bearer ${CacheTokenManger.userToken}";
-        }
+          // Add user token if available
+          if (CacheTokenManger.userToken != null &&
+              CacheTokenManger.userToken!.isNotEmpty) {
+            options.headers["Authorization"] =
+                "Bearer ${CacheTokenManger.userToken}";
+          }
 
-        debugPrint("➡️ [REQUEST] ${options.method} ${options.uri}");
-        debugPrint("Headers: ${options.headers}");
-        debugPrint("Data: ${options.data}");
-        debugPrint("Query: ${options.queryParameters}");
+          debugPrint("➡️ [REQUEST] ${options.method} ${options.uri}");
+          debugPrint("Headers: ${options.headers}");
+          debugPrint("Data: ${options.data}");
+          debugPrint("Query: ${options.queryParameters}");
 
-        return handler.next(options); // continue
-      },
-      onResponse: (response, handler) {
-        debugPrint("✅ [RESPONSE] [${response.statusCode}] ${response.requestOptions.uri}");
-        debugPrint("Response Data: ${response.data}");
-        return handler.next(response); // continue
-      },
-      onError: (DioException error, handler) async {
-        debugPrint("❌ [ERROR] ${error.message}");
-        debugPrint("Request: ${error.requestOptions.uri}");
-        // Example: handle token expiration (401 Unauthorized)
-        final failure = ServerFailure.fromDioError(error);
-        debugPrint("❌ [ERROR] ${failure.errMessage}");
-        return handler.reject(error.copyWith(
-          error: failure,
-        ));
-      },
-    ));
+          return handler.next(options); // continue
+        },
+        onResponse: (response, handler) {
+          debugPrint(
+            "✅ [RESPONSE] [${response.statusCode}] ${response.requestOptions.uri}",
+          );
+          debugPrint("Response Data: ${response.data}");
+          return handler.next(response); // continue
+        },
+        onError: (DioException error, handler) async {
+          debugPrint("❌ [ERROR] ${error.message}");
+          debugPrint("Request: ${error.requestOptions.uri}");
+          // Example: handle token expiration (401 Unauthorized)
+          final failure = ServerFailure.fromDioError(error);
+          debugPrint("❌ [ERROR] ${failure.errMessage}");
+          return handler.reject(error.copyWith(error: failure));
+        },
+      ),
+    );
 
     if (kDebugMode) {
       _dio.interceptors.add(

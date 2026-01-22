@@ -150,7 +150,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
         Container(
           padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
-            color: AppColors.darkOlive.withOpacity(0.1),
+            color: AppColors.darkOlive.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, size: 20.sp, color: AppColors.darkOlive),
@@ -285,7 +285,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                 decoration: BoxDecoration(
-                  color: _getStatusColor(session.status).withOpacity(0.1),
+                  color: _getStatusColor(session.status).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4.r),
                 ),
                 child: Text(
@@ -469,7 +469,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                   _submitReport(reason);
                 },
               );
-            }).toList(),
+            }),
             Gap(8.h),
             TextButton(
               onPressed: () => Navigator.pop(context),

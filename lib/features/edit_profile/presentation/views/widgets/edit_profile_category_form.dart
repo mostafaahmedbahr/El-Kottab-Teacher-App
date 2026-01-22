@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-
+import 'package:el_kottab_teacher_app/core/extensions/log_util.dart';
 import '../../../../../main_imports.dart';
-import '../../../../profile/presentation/view_model/profile_cubit.dart';
 import '../../../../register/data/models/categories_model.dart';
 import '../../../../register/presentation/view_model/register_cubit.dart';
 import '../../../../register/presentation/view_model/register_states.dart';
@@ -34,7 +33,7 @@ class _EditProfileCategoryFormState
       builder: (context, state) {
         final registerCubit = context.read<RegisterCubit>();
         final editPersonalInfoCubit = EditProfileInfoCubit.get(context);
-        final profile = context.read<ProfileCubit>().profileModel;
+        // final profile = context.read<ProfileCubit>().profileModel;
 
         return Column(
           children: [
@@ -79,7 +78,7 @@ class _EditProfileCategoryFormState
                 setState(() {});
 
                 // إضافة أي منطق إضافي هنا إذا لزم
-                print('Selected category: ${selection.name}, ID: ${selection.id}');
+                logSuccess('Selected category: ${selection.name}, ID: ${selection.id}');
               },
               fieldViewBuilder: (context, textEditingController,
                   focusNode, onFieldSubmitted) {

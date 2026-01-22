@@ -2,7 +2,7 @@ import 'dart:ui';
 import '../../../../../main_imports.dart';
 
 class SliderOverlay extends StatelessWidget {
-  const SliderOverlay();
+  const SliderOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class SliderOverlay extends StatelessWidget {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  AppColors.darkOlive.withOpacity(0.9),
-                  AppColors.darkOlive.withOpacity(0.3),
+                  AppColors.darkOlive.withValues(alpha: 0.9),
+                  AppColors.darkOlive.withValues(alpha: 0.3),
                 ],
               ),
             ),

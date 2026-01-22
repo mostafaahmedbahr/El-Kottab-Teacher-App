@@ -18,7 +18,7 @@ class BalanceAndPerformance extends StatelessWidget {
       },
 
       builder: (context, state) {
-        var homeCubit = context.read<HomeCubit>();
+        // var homeCubit = context.read<HomeCubit>();
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           child: Row(

@@ -202,7 +202,6 @@ import '../../../../core/utils/enums.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/register_model.dart';
 import '../../data/repos/register_repos.dart';
-import 'package:dio/dio.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit(this.registerRepo) : super(RegisterInitState());

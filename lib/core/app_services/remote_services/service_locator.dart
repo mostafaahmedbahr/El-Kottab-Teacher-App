@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:el_kottab_teacher_app/features/forget_password/data/repos/forget_password_repo.dart';
 import 'package:el_kottab_teacher_app/features/login/data/repos/login_repo_imple.dart';
-import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
-import 'package:el_kottab_teacher_app/features/register/data/repos/register_repos.dart';
 import 'package:el_kottab_teacher_app/features/register/data/repos/register_repos_imple.dart';
 import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:get_it/get_it.dart';

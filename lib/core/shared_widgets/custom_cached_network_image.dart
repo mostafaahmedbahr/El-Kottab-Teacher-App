@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../main_imports.dart';
 
 class CustomNetWorkImage extends StatelessWidget {

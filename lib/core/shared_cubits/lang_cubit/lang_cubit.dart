@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import '../../../main_imports.dart';
-import '../../utils/app_consts/storage_keys.dart';
 
 class LanguageCubit extends Cubit<Locale> {
   LanguageCubit() : super(_getSavedLocale());

@@ -23,13 +23,13 @@ Future<TimeOfDay?> customTimePicker(
               borderRadius: BorderRadius.circular(12),
             ),
             dayPeriodTextColor: Colors.black,
-            dayPeriodColor: MaterialStateColor.resolveWith(
-              (states) => states.contains(MaterialState.selected)
-                  ? Colors.white.withOpacity(.2)
+            dayPeriodColor: WidgetStateColor.resolveWith(
+                  (states) => states.contains(WidgetState.selected)
+                  ? Colors.white.withValues(alpha: .2)
                   : Colors.transparent,
             ),
             dialHandColor: Colors.black,
-            dialBackgroundColor: Colors.white.withOpacity(.08),
+            dialBackgroundColor: Colors.white.withValues(alpha: .08),
             entryModeIconColor: Colors.white,
           ),
         ),
