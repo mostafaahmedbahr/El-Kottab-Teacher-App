@@ -173,4 +173,10 @@ abstract class LangKeys {
 
   static const add = "add";
   static const addAppointment = "addAppointment";
+
+
+
+
+
+  static const noSuccessfulCallsYet = "noSuccessfulCallsYet";
 }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/home/data/models/successful_calls_model.dart';
+import '../../../../../core/helpers/convert_date.dart';
 import '../../../../../main_imports.dart';
 import '../../../../student_profile/presentation/views/student_profile_view.dart';
 
@@ -70,7 +71,7 @@ class CallItem extends StatelessWidget {
                       ),
                       Gap(4.w),
                       Text(
-                        call.startedAt.toString(),
+                        DateFormatterClass.toDateOnly(call.startedAt.toString()),
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.grey[600],
@@ -89,7 +90,7 @@ class CallItem extends StatelessWidget {
                       ),
                       Gap(4.w),
                       Text(
-                        call.createdAt.toString(),
+                        DateFormatterClass.toTimeAgo(call.createdAt.toString()),
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.grey[600],
