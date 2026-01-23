@@ -77,9 +77,10 @@ class AppointmentItem extends StatelessWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () {
-                  cubit.removeAppointment(dayName, index);
+                onTap: () async {
+                  await cubit.removeAppointment(dayName, index);
                 },
+
                 child: const Icon(Icons.close, color: Colors.white),
               ),
             ],

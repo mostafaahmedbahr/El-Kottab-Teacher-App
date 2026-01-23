@@ -34,11 +34,11 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     emit(UpdateAppointmentsState());
   }
 
-  /// حذف موعد
-  void removeAppointment(String day, int index) {
-    appointments[day]!.removeAt(index);
-    emit(UpdateAppointmentsState());
-  }
+  // /// حذف موعد
+  // void removeAppointment(String day, int index) {
+  //   appointments[day]!.removeAt(index);
+  //   emit(UpdateAppointmentsState());
+  // }
 
   /// تعيين وقت البداية
   AppointmentResult setStartTime(String day, int index, TimeOfDay start) {
@@ -154,6 +154,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
       },
       (data) async {
         deleteScheduleModel = data;
+        getAllSchedules();
         emit(DeleteScheduleSuccessState(data));
       },
     );
@@ -256,5 +257,36 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
       minute: int.parse(parts[1]),
     );
   }
+
+
+  Future<void> removeAppointment(String day, int index) async {
+    final appointment = appointments[day]![index];
+
+    // 🔹 لو مش محفوظ في الداتابيز
+    if (appointment.scheduleId == null) {
+      appointments[day]!.removeAt(index);
+      emit(UpdateAppointmentsState());
+      return;
+    }
+
+    // 🔹 لو محفوظ في الداتابيز
+    emit(DeleteScheduleLoadingState());
+
+    final result = await addAppointmentsRepo!.deleteSchedule(
+      scheduleId: appointment.scheduleId!,
+    );
+
+    result.fold(
+          (failure) {
+        emit(DeleteScheduleErrorState(failure.errMessage));
+      },
+          (data) {
+        appointments[day]!.removeAt(index);
+        emit(DeleteScheduleSuccessState(data));
+        emit(UpdateAppointmentsState());
+      },
+    );
+  }
+
 
 }
