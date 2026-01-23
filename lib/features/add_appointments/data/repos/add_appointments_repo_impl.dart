@@ -72,6 +72,7 @@ async{
   }
 
 
+
   @override
   Future<Either<Failure, UpdateScheduleModel>> updateSchedule({
     required String scheduleId,
@@ -81,8 +82,14 @@ async{
   })
   async{
     try {
+      var data = FormData.fromMap({
+        'day': day,
+        'from': from,
+        'to': to,
+      });
       var response = await apiService!.postData(
         endPoint: "${EndPoints.teacherSchdules}/$scheduleId",
+        data: data,
       );
       UpdateScheduleModel result = UpdateScheduleModel.fromJson(response.data);
       return right(result);

@@ -22,7 +22,15 @@ class AppointmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddAppointmentsCubit>();
+
+    /// 👇 هنا السر
+    final bool isLoading =
+    context.select<AddAppointmentsCubit, bool>(
+          (cubit) => cubit.loadingIndex == index,
+    );
+
     final canSave = appointment.start != null && appointment.end != null;
+    final isEdit = appointment.scheduleId != null;
 
     return Container(
       margin: EdgeInsets.only(bottom: 8.h),
@@ -42,10 +50,10 @@ class AppointmentItem extends StatelessWidget {
                     context,
                     appointment.start ?? TimeOfDay.now(),
                   );
-
                   if (!context.mounted || time == null) return;
 
-                  final result = cubit.setStartTime(dayName, index, time);
+                  final result =
+                  cubit.setStartTime(dayName, index, time);
                   _handleResult(context, result);
                 },
                 child: Text(
@@ -60,12 +68,14 @@ class AppointmentItem extends StatelessWidget {
                 onTap: () async {
                   final time = await customTimePicker(
                     context,
-                    appointment.end ?? appointment.start ?? TimeOfDay.now(),
+                    appointment.end ??
+                        appointment.start ??
+                        TimeOfDay.now(),
                   );
-
                   if (!context.mounted || time == null) return;
 
-                  final result = cubit.setEndTime(dayName, index, time);
+                  final result =
+                  cubit.setEndTime(dayName, index, time);
                   _handleResult(context, result);
                 },
                 child: Text(
@@ -77,83 +87,87 @@ class AppointmentItem extends StatelessWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () async {
-                  await cubit.removeAppointment(dayName, index);
+                onTap: () {
+                  cubit.removeAppointment(dayName, index);
                 },
-
                 child: const Icon(Icons.close, color: Colors.white),
               ),
             ],
           ),
 
-          /// SAVE BUTTON صغير وأنيق
+          /// SAVE / EDIT BUTTON
           if (canSave) ...[
             Gap(8.h),
-            BlocConsumer<AddAppointmentsCubit, AddAppointmentsStates>(
-              listener: (context, state) {
-                if (state is AddAppointmentsSuccessState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('تم حفظ المعاد بنجاح'),
-                      backgroundColor: Colors.green,
+            SizedBox(
+              width: 80.w,
+              height: 32.h,
+              child: GestureDetector(
+                onTap: isLoading
+                    ? null
+                    : () {
+                  if (isEdit) {
+                    print(appointment.scheduleId!);
+                    print(dayName);
+                    cubit.updateSchedule(
+                      scheduleId:
+                      appointment.scheduleId!,
+                      day: dayName,
+                      from: formatTimeTo24H(
+                          appointment.start!),
+                      to: formatTimeTo24H(
+                          appointment.end!),
+                      index: index, // 👈 مهم
+                    );
+                  } else {
+                    cubit.addAppointment(
+                      day: dayName,
+                      from: formatTimeTo24H(
+                          appointment.start!),
+                      to: formatTimeTo24H(
+                          appointment.end!),
+                      index: index, // 👈 مهم
+                    );
+                  }
+                },
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: isLoading
+                      ? const Center(
+                    key: ValueKey('loading'),
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2,
                     ),
-                  );
-                } else if (state is AddAppointmentsErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.error),
-                      backgroundColor: Colors.red,
+                  )
+                      : Container(
+                    key: const ValueKey('button'),
+                    decoration: BoxDecoration(
+                      color: isEdit
+                          ? Colors.orange
+                          : Colors.green,
+                      borderRadius:
+                      BorderRadius.circular(16.r),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 2,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is AddAppointmentsLoadingState) {
-                  return SizedBox(
-                    width: 80.w,
-                    height: 32.h,
-                    child: const Center(
-                      child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                    ),
-                  );
-                }
-
-                return SizedBox(
-                  width: 80.w,   // عرض أصغر
-                  height: 32.h,  // ارتفاع أصغر
-                  child: GestureDetector(
-                    onTap: () {
-                      cubit.addAppointment(
-                        day: dayName,
-                        from: formatTimeTo24H(appointment.start!),
-                        to: formatTimeTo24H(appointment.end!),
-                      );
-
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green, // أو gradient خفيف
-                        borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 2,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'حفظ',
-                        style: AppStyles.white16SemiBold, // حجم أصغر
-                      ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      isEdit
+                          ? LangKeys.edit.tr()
+                          : LangKeys.save.tr(),
+                      style:
+                      AppStyles.white16SemiBold,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ],
-
         ],
       ),
     );
@@ -161,20 +175,33 @@ class AppointmentItem extends StatelessWidget {
 
   void _handleResult(BuildContext context, AppointmentResult result) {
     if (result == AppointmentResult.endBeforeStart) {
-      _showError(
+      _showSnack(
         context,
-        LangKeys.theEndTimeShouldBeAfterTheStartTime,
+        LangKeys.theEndTimeShouldBeAfterTheStartTime.tr(),
+        isError: true,
       );
     } else if (result == AppointmentResult.conflict) {
-      _showError(
+      _showSnack(
         context,
-        LangKeys.thisAppointmentOverlapsWithAnotherAppointment,
+        LangKeys
+            .thisAppointmentOverlapsWithAnotherAppointment
+            .tr(),
+        isError: true,
       );
     }
   }
 
-  void _showError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message.tr())));
+  void _showSnack(
+      BuildContext context,
+      String message, {
+        bool isError = false,
+      }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor:
+        isError ? Colors.red : Colors.green,
+      ),
+    );
   }
 }

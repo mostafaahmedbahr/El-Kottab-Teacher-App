@@ -122,24 +122,32 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     required String day,
     required String from,
     required String to,
+    required int index,
   }) async {
-    emit(AddAppointmentsLoadingState());
+    loadingIndex = index;
+    isUpdating = false;
+    emit(UpdateAppointmentsState());
+
     var result = await addAppointmentsRepo!.addAppointment(
       day: day,
       from: from,
       to: to,
     );
-    return result.fold(
-      (failure) {
+
+    result.fold(
+          (failure) {
+        loadingIndex = null;
         emit(AddAppointmentsErrorState(failure.errMessage));
       },
-      (data) async {
-        addAppointmentModel = data;
-        getAllSchedules();
+          (data) {
+        appointments[day]![index].scheduleId =
+            data.data?.id.toString();
+        loadingIndex = null;
         emit(AddAppointmentsSuccessState(data));
       },
     );
   }
+
 
   DeleteScheduleModel? deleteScheduleModel;
 
@@ -190,24 +198,31 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     required String day,
     required String from,
     required String to,
+    required int index,
   }) async {
-    emit(UpdateScheduleLoadingState());
+    loadingIndex = index;
+    isUpdating = true;
+    emit(UpdateAppointmentsState());
+
     var result = await addAppointmentsRepo!.updateSchedule(
       scheduleId: scheduleId,
       day: day,
       from: from,
       to: to,
     );
-    return result.fold(
-      (failure) {
+
+    result.fold(
+          (failure) {
+        loadingIndex = null;
         emit(UpdateScheduleErrorState(failure.errMessage));
       },
-      (data) async {
-        updateScheduleModel = data;
+          (data) {
+        loadingIndex = null;
         emit(UpdateScheduleSuccessState(data));
       },
     );
   }
+
 
 
   String mapApiDayToLangKey(String apiDay) {
@@ -288,5 +303,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     );
   }
 
+  int? loadingIndex;
+  bool isUpdating = false;
 
 }
