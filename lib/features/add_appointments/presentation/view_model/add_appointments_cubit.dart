@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/add_appointment_model.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/all_schedules_model.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/data/models/delete_schedules_model.dart';
@@ -136,6 +135,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
       },
       (data) async {
         addAppointmentModel = data;
+        getAllSchedules();
         emit(AddAppointmentsSuccessState(data));
       },
     );
@@ -163,17 +163,24 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
 
   Future<void> getAllSchedules() async {
     emit(GetAllScheduleLoadingState());
+
     var result = await addAppointmentsRepo!.getAllSchedules();
+
     return result.fold(
-      (failure) {
+          (failure) {
         emit(GetAllScheduleErrorState(failure.errMessage));
       },
-      (data) async {
+          (data) async {
         allSchedulesModel = data;
+
+        // ⭐⭐⭐ السطر ده هو السر
+        fillAppointmentsFromApi(data);
+
         emit(GetAllScheduleSuccessState(data));
       },
     );
   }
+
 
   UpdateScheduleModel? updateScheduleModel;
 
@@ -200,4 +207,54 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
       },
     );
   }
+
+
+  String mapApiDayToLangKey(String apiDay) {
+    switch (apiDay.toLowerCase()) {
+      case 'saturday':
+        return LangKeys.saturday;
+      case 'sunday':
+        return LangKeys.sunday;
+      case 'monday':
+        return LangKeys.monday;
+      case 'tuesday':
+        return LangKeys.tuesday;
+      case 'wednesday':
+        return LangKeys.wednesday;
+      case 'thursday':
+        return LangKeys.thursday;
+      case 'friday':
+        return LangKeys.friday;
+      default:
+        return '';
+    }
+  }
+  void fillAppointmentsFromApi(AllSchedulesModel model) {
+    appointments.clear();
+
+    for (var item in model.data!) {
+      final dayKey = mapApiDayToLangKey(item.day.toString());
+      if (dayKey.isEmpty) continue;
+
+      appointments.putIfAbsent(dayKey, () => []);
+
+      appointments[dayKey]!.add(
+        AppointmentModel(
+          start: _parseTime(item.from.toString()),
+          end: _parseTime(item.to.toString()),
+          scheduleId: item.id.toString(),
+        ),
+      );
+    }
+
+    emit(UpdateAppointmentsState());
+  }
+  TimeOfDay _parseTime(String time) {
+    final parts = time.split(':');
+    return TimeOfDay(
+      hour: int.parse(parts[0]),
+      minute: int.parse(parts[1]),
+    );
+  }
+
 }

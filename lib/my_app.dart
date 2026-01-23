@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
+import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
+import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
@@ -9,6 +11,7 @@ import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo
 import 'package:el_kottab_teacher_app/features/settings/presentation/view_model/settings_cubit.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'core/shared_cubits/lang_cubit/lang_cubit.dart';
+import 'features/add_appointments/data/repos/add_appointments_repo_impl.dart';
 import 'features/forget_password/data/repos/forget_password_repo_impl.dart';
 import 'features/notifications/data/repos/notifications_repo_imple.dart';
 import 'features/notifications/presentation/view_model/notifications_cubit.dart';
@@ -59,7 +62,10 @@ class MyApp extends StatelessWidget {
                   create: (context) =>
                       NotificationsCubit(getIt.get<NotificationsRepoImpl>()),
                 ),
-
+                BlocProvider(
+                  create: (context) =>
+                      AddAppointmentsCubit(getIt.get<AddAppointmentsRepoImpl>())..getAllSchedules(),
+                ),
               ],
               child: BlocBuilder<LanguageCubit, Locale>(
                 builder: (context, locale) {
