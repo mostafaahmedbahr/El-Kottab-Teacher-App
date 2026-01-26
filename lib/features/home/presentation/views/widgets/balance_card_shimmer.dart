@@ -25,31 +25,19 @@ class BalanceCardShimmer extends StatelessWidget {
                 ),
               ),
               Gap(8.w),
-              Container(
-                width: 80.w,
-                height: 12.h,
-                color: Colors.white,
-              ),
+              Container(width: 80.w, height: 12.h, color: Colors.white),
             ],
           ),
 
           Gap(16.h),
 
           // Balance
-          Container(
-            width: 120.w,
-            height: 22.h,
-            color: Colors.white,
-          ),
+          Container(width: 120.w, height: 22.h, color: Colors.white),
 
           Gap(10.h),
 
           // Minutes
-          Container(
-            width: 140.w,
-            height: 12.h,
-            color: Colors.white,
-          ),
+          Container(width: 140.w, height: 12.h, color: Colors.white),
         ],
       ),
     );

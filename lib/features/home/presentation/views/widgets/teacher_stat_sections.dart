@@ -9,10 +9,7 @@ class TeacherStatSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        TeacherRatingAndStatus(),
-        BalanceAndPerformance(),
-      ],
+      children: const [TeacherRatingAndStatus(), BalanceAndPerformance()],
     );
   }
 }
