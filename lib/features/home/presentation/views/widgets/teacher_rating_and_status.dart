@@ -20,17 +20,17 @@ class TeacherRatingAndStatus extends StatelessWidget {
           // ================= Availability =================
           Column(
             children: [
-              Text(
-                LangKeys.available.tr(),
-                style: AppStyles.black16SemiBold,
-              ),
+              Text(LangKeys.available.tr(), style: AppStyles.black16SemiBold),
 
+              Gap(6.h),
               BlocConsumer<HomeCubit, HomeStates>(
                 buildWhen: (previous, current) {
                   return current is GetTeacherStatsLoadingState ||
                       current is GetTeacherStatsSuccessState ||
-                      current is GetTeacherStatsErrorState;
+                      current is GetTeacherStatsErrorState ||
+                      current is ChangeStatusSuccessState;
                 },
+
                 listenWhen: (previous, current) {
                   return current is ChangeStatusSuccessState ||
                       current is ChangeStatusErrorState;
@@ -51,17 +51,15 @@ class TeacherRatingAndStatus extends StatelessWidget {
                 builder: (context, state) {
                   final homeCubit = context.read<HomeCubit>();
 
-                  // 🔹 Loading
-                  if (state is GetTeacherStatsLoadingState) {
+                  if (state is GetTeacherStatsLoadingState ||
+                      homeCubit.teacherStatsModel == null) {
                     return const AvailabilityShimmer();
                   }
 
-                  // 🔹 Error
                   if (state is GetTeacherStatsErrorState) {
-                    return Icon(Icons.error, color: Colors.red);
+                    return const Icon(Icons.error, color: Colors.red);
                   }
 
-                  // 🔹 Success
                   return CupertinoSwitch(
                     activeTrackColor: AppColors.darkOlive,
                     value: homeCubit.status,
@@ -71,7 +69,6 @@ class TeacherRatingAndStatus extends StatelessWidget {
               ),
             ],
           ),
-
 
           Gap(12.w),
 
@@ -135,8 +132,7 @@ class TeacherRatingAndStatus extends StatelessWidget {
                                 LangKeys.rating.tr(),
                                 style: TextStyle(
                                   fontSize: 12.sp,
-                                  color:
-                                  Colors.white.withValues(alpha: 0.8),
+                                  color: Colors.white.withValues(alpha: 0.8),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -160,8 +156,7 @@ class TeacherRatingAndStatus extends StatelessWidget {
                                 "/5",
                                 style: TextStyle(
                                   fontSize: 14.sp,
-                                  color:
-                                  Colors.white.withValues(alpha: 0.6),
+                                  color: Colors.white.withValues(alpha: 0.6),
                                 ),
                               ),
                             ],
@@ -183,8 +178,7 @@ class TeacherRatingAndStatus extends StatelessWidget {
                           Row(
                             children: List.generate(5, (i) {
                               return Padding(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 1.w),
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
                                 child: Icon(
                                   i + 1 <= rate
                                       ? Icons.star_rounded
@@ -203,16 +197,14 @@ class TeacherRatingAndStatus extends StatelessWidget {
                               Icon(
                                 Icons.people_rounded,
                                 size: 12.sp,
-                                color:
-                                Colors.white.withValues(alpha: 0.7),
+                                color: Colors.white.withValues(alpha: 0.7),
                               ),
                               Gap(2.w),
                               Text(
                                 "$totalRates ${LangKeys.reviews.tr()}",
                                 style: TextStyle(
                                   fontSize: 10.sp,
-                                  color:
-                                  Colors.white.withValues(alpha: 0.7),
+                                  color: Colors.white.withValues(alpha: 0.7),
                                 ),
                               ),
                             ],

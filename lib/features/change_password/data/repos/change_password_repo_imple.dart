@@ -16,20 +16,22 @@ class ChangePasswordRepoImpl implements ChangePasswordRepo {
     required String screenName,
   }) async {
     try {
-      var formData =  FormData.fromMap({
+      var formData = FormData.fromMap({
         "email": CacheHelper.getData(key: "userEmail"),
         "otp": CacheHelper.getData(key: "otp"),
         "password": newPassword,
         "password_confirmation": newPasswordConfirmation,
       });
-      var data = {
+      var data = FormData.fromMap({
         "old_password": oldPassword,
         "password": newPassword,
         "password_confirmation": newPasswordConfirmation,
-      };
+      });
       var response = await apiService!.postData(
-        endPoint:screenName=="ForgetPasswordView" ?  EndPoints.resetPassword: EndPoints.changePassword,
-        data:screenName=="ForgetPasswordView" ? formData: data,
+        endPoint: screenName == "ForgetPasswordView"
+            ? EndPoints.resetPassword
+            : EndPoints.changePassword,
+        data: screenName == "ForgetPasswordView" ? formData : data,
       );
       ChangePasswordModel result = ChangePasswordModel.fromJson(response.data);
       return right(result);

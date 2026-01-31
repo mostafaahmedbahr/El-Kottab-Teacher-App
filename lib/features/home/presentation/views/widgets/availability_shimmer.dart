@@ -10,23 +10,13 @@ class AvailabilityShimmer extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
-      child: Column(
-        children: [
-          Container(
-            width: 70.w,
-            height: 14.h,
-            color: Colors.white,
-          ),
-          Gap(8.h),
-          Container(
-            width: 40.w,
-            height: 20.h,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ],
+      child: Container(
+        width: 42.w,
+        height: 24.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
       ),
     );
   }

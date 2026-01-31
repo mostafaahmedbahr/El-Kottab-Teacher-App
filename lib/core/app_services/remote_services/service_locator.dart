@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:el_kottab_teacher_app/features/edit_profile/data/repos/edit_profile_repo_imple.dart';
 import 'package:el_kottab_teacher_app/features/login/data/repos/login_repo_imple.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
 import 'package:el_kottab_teacher_app/features/register/data/repos/register_repos_imple.dart';
@@ -62,5 +63,7 @@ void setup() {
   getIt.registerSingleton<RegisterRepoImpl>(
     RegisterRepoImpl(getIt.get<ApiService>()),
   );
-
+  getIt.registerSingleton<EditProfileInfoRepoImpl>(
+    EditProfileInfoRepoImpl(getIt.get<ApiService>()),
+  );
 }

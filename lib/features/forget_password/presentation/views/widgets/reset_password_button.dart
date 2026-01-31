@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
- import '../../../../../main_imports.dart';
+import '../../../../../main_imports.dart';
 import '../../../../otp/presentation/views/otp_view.dart';
 import '../../view_model/forget_password_cubit.dart';
 import '../../view_model/forget_password_states.dart';

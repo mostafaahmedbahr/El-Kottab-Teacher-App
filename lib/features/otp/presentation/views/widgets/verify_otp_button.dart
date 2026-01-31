@@ -17,7 +17,7 @@ class VerifyOtpButton extends StatelessWidget {
     required this.controller,
     required this.goToLayoutOrResetPassword,
     required this.email,
-    required this.screenName
+    required this.screenName,
   });
 
   @override
@@ -25,40 +25,45 @@ class VerifyOtpButton extends StatelessWidget {
     return BlocConsumer<OtpCubit, OtpStates>(
       listenWhen: (previous, current) {
         // استمع فقط للحالات المطلوبة
-        return current is VerifyOtpSuccessState || current is VerifyOtpLoadingState||
+        return current is VerifyOtpSuccessState ||
+            current is VerifyOtpLoadingState ||
             current is VerifyOtpErrorState;
       },
       listener: (context, state) {
         if (state is VerifyOtpSuccessState) {
-          screenName=="ForgetPasswordView" ?  AppNav.customNavigator(
-            context: context,
-            screen: const ChangePasswordView(screenName: "ForgetPasswordView",),
-            finish: false,
-          ):
-          AppNav.customNavigator(
-            context: context,
-            screen: const LoginView(),
-            finish: goToLayoutOrResetPassword == "Layout",
-          );
+          screenName == "ForgetPasswordView"
+              ? AppNav.customNavigator(
+                  context: context,
+                  screen: const ChangePasswordView(
+                    screenName: "ForgetPasswordView",
+                  ),
+                  finish: false,
+                )
+              : AppNav.customNavigator(
+                  context: context,
+                  screen: const LoginView(),
+                  finish: goToLayoutOrResetPassword == "Layout",
+                );
           Toast.showSuccessToast(
-            msg:screenName!="ForgetPasswordView" ? state.verifyOtpModel.message?.toString() ?? "" : state.verifyOtpModel.message?.toString() ?? "",
+            msg: screenName != "ForgetPasswordView"
+                ? state.verifyOtpModel.message?.toString() ?? ""
+                : state.verifyOtpModel.message?.toString() ?? "",
             context: context,
           );
-          if(screenName!="ForgetPasswordView" ){
-            context.read<AuthCubit>().loginWithToken(state.verifyOtpModel.data!.token.toString());
+          if (screenName != "ForgetPasswordView") {
+            context.read<AuthCubit>().loginWithToken(
+              state.verifyOtpModel.data!.token.toString(),
+            );
           }
-
         }
         if (state is VerifyOtpErrorState) {
-          Toast.showErrorToast(
-            msg: state.error.toString(),
-            context: context,
-          );
+          Toast.showErrorToast(msg: state.error.toString(), context: context);
         }
       },
       buildWhen: (previous, current) {
         // اعمل build فقط للحالات المتعلقة بـ verify
-        return current is VerifyOtpSuccessState || current is VerifyOtpLoadingState||
+        return current is VerifyOtpSuccessState ||
+            current is VerifyOtpLoadingState ||
             current is VerifyOtpErrorState;
       },
       builder: (context, state) {
@@ -67,21 +72,27 @@ class VerifyOtpButton extends StatelessWidget {
         return isLoading
             ? const CustomLoading()
             : CustomButton(
-          btnText: LangKeys.continuee.tr(),
-          onPressed: () {
-            if (controller.text.length == 6) {
-              context.read<OtpCubit>().verifyOtp(
-                otpCode: controller.text,
-                email: CacheHelper.getData(key: "userEmail"),
-                screenName: screenName,
+                btnText: LangKeys.continuee.tr(),
+                onPressed: () {
+                  if (controller.text.length == 6) {
+                    // خزننا email من cache أو fallback للإيميل اللي جاي من parameter
+                    final emailToUse =
+                        CacheHelper.getData(key: "userEmail") ?? email;
+
+                    context.read<OtpCubit>().verifyOtp(
+                      otpCode: controller.text,
+                      email: emailToUse,
+                      screenName: screenName,
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(LangKeys.pleaseEnterValidOtp.tr()),
+                      ),
+                    );
+                  }
+                },
               );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(LangKeys.pleaseEnterValidOtp.tr())),
-              );
-            }
-          },
-        );
       },
     );
   }

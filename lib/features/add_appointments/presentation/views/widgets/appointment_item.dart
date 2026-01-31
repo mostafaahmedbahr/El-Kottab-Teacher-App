@@ -24,9 +24,8 @@ class AppointmentItem extends StatelessWidget {
     final cubit = context.read<AddAppointmentsCubit>();
 
     /// 👇 هنا السر
-    final bool isLoading =
-    context.select<AddAppointmentsCubit, bool>(
-          (cubit) => cubit.loadingIndex == index,
+    final bool isLoading = context.select<AddAppointmentsCubit, bool>(
+      (cubit) => cubit.loadingIndex == index,
     );
 
     final canSave = appointment.start != null && appointment.end != null;
@@ -52,8 +51,7 @@ class AppointmentItem extends StatelessWidget {
                   );
                   if (!context.mounted || time == null) return;
 
-                  final result =
-                  cubit.setStartTime(dayName, index, time);
+                  final result = cubit.setStartTime(dayName, index, time);
                   _handleResult(context, result);
                 },
                 child: Text(
@@ -68,14 +66,11 @@ class AppointmentItem extends StatelessWidget {
                 onTap: () async {
                   final time = await customTimePicker(
                     context,
-                    appointment.end ??
-                        appointment.start ??
-                        TimeOfDay.now(),
+                    appointment.end ?? appointment.start ?? TimeOfDay.now(),
                   );
                   if (!context.mounted || time == null) return;
 
-                  final result =
-                  cubit.setEndTime(dayName, index, time);
+                  final result = cubit.setEndTime(dayName, index, time);
                   _handleResult(context, result);
                 },
                 child: Text(
@@ -105,65 +100,54 @@ class AppointmentItem extends StatelessWidget {
                 onTap: isLoading
                     ? null
                     : () {
-                  if (isEdit) {
-                    print(appointment.scheduleId!);
-                    print(dayName);
-                    cubit.updateSchedule(
-                      scheduleId:
-                      appointment.scheduleId!,
-                      day: dayName,
-                      from: formatTimeTo24H(
-                          appointment.start!),
-                      to: formatTimeTo24H(
-                          appointment.end!),
-                      index: index, // 👈 مهم
-                    );
-                  } else {
-                    cubit.addAppointment(
-                      day: dayName,
-                      from: formatTimeTo24H(
-                          appointment.start!),
-                      to: formatTimeTo24H(
-                          appointment.end!),
-                      index: index, // 👈 مهم
-                    );
-                  }
-                },
+                        if (isEdit) {
+                          print(appointment.scheduleId!);
+                          print(dayName);
+                          cubit.updateSchedule(
+                            scheduleId: appointment.scheduleId!,
+                            day: dayName,
+                            from: formatTimeTo24H(appointment.start!),
+                            to: formatTimeTo24H(appointment.end!),
+                            index: index, // 👈 مهم
+                          );
+                        } else {
+                          cubit.addAppointment(
+                            day: dayName,
+                            from: formatTimeTo24H(appointment.start!),
+                            to: formatTimeTo24H(appointment.end!),
+                            index: index, // 👈 مهم
+                          );
+                        }
+                      },
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   child: isLoading
                       ? const Center(
-                    key: ValueKey('loading'),
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 2,
-                    ),
-                  )
+                          key: ValueKey('loading'),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
                       : Container(
-                    key: const ValueKey('button'),
-                    decoration: BoxDecoration(
-                      color: isEdit
-                          ? Colors.orange
-                          : Colors.green,
-                      borderRadius:
-                      BorderRadius.circular(16.r),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 2,
-                          offset: Offset(0, 2),
+                          key: const ValueKey('button'),
+                          decoration: BoxDecoration(
+                            color: isEdit ? AppColors.gold : AppColors.success,
+                            borderRadius: BorderRadius.circular(16.r),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 2,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            isEdit ? LangKeys.edit.tr() : LangKeys.save.tr(),
+                            style: AppStyles.white16SemiBold,
+                          ),
                         ),
-                      ],
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      isEdit
-                          ? LangKeys.edit.tr()
-                          : LangKeys.save.tr(),
-                      style:
-                      AppStyles.white16SemiBold,
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -183,24 +167,21 @@ class AppointmentItem extends StatelessWidget {
     } else if (result == AppointmentResult.conflict) {
       _showSnack(
         context,
-        LangKeys
-            .thisAppointmentOverlapsWithAnotherAppointment
-            .tr(),
+        LangKeys.thisAppointmentOverlapsWithAnotherAppointment.tr(),
         isError: true,
       );
     }
   }
 
   void _showSnack(
-      BuildContext context,
-      String message, {
-        bool isError = false,
-      }) {
+    BuildContext context,
+    String message, {
+    bool isError = false,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor:
-        isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? Colors.red : Colors.green,
       ),
     );
   }
