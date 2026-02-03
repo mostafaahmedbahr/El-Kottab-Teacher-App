@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/extensions/lang.dart';
-import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
+import 'package:el_kottab_teacher_app/features/settings/presentation/views/price_policy_view.dart';
+import 'package:el_kottab_teacher_app/features/settings/presentation/views/refund_policy_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/terms_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/who_we_are_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/widgets/show_delete_account_dialog.dart';
-import 'package:el_kottab_teacher_app/main_imports.dart';
+import '../../../../main_imports.dart';
+import '../../../profile/presentation/views/widgets/profile_list_item.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -30,11 +32,27 @@ class SettingsView extends StatelessWidget {
             ),
             Gap(12.h),
             ProfileListItem(
-              isLast: true,
               title: LangKeys.privacyAndTerms,
               svgImage: SvgImages.terms,
               onTap: () {
                 AppNav.customNavigator(context: context, screen: TermsView());
+              },
+            ),
+            Gap(12.h),
+            ProfileListItem(
+              title: LangKeys.pricePolicy,
+              svgImage: SvgImages.title,
+              onTap: () {
+                AppNav.customNavigator(context: context, screen: PricePolicyView());
+              },
+            ),
+            Gap(12.h),
+            ProfileListItem(
+              isLast: true,
+              title: LangKeys.refundPolicy,
+              svgImage: SvgImages.settings,
+              onTap: () {
+                AppNav.customNavigator(context: context, screen: RefundPolicyView());
               },
             ),
             Gap(24.h),

@@ -175,5 +175,8 @@ class EnLang {
     "qualification": "Qualification",
     "degreePath": "degreePath",
     'upload': 'upload',
+    "refundPolicy": "Refund policy",
+    "pricePolicy": "Price policy",
+
   };
 }

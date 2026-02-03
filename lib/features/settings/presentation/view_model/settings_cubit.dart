@@ -4,6 +4,8 @@ import 'package:el_kottab_teacher_app/features/settings/data/models/who_we_are_m
 import 'package:el_kottab_teacher_app/features/settings/presentation/view_model/settings_states.dart';
 
 import '../../../../main_imports.dart';
+import '../../data/models/privacy_policy_model.dart';
+import '../../data/models/refund_policy_model.dart';
 import '../../data/repos/settings_repo.dart';
 
 class SettingsCubit extends Cubit<SettingsStates> {
@@ -53,6 +55,37 @@ class SettingsCubit extends Cubit<SettingsStates> {
       (data) async {
         deleteAccountModel = data;
         emit(DeleteAccountSuccessState(data));
+      },
+    );
+  }
+
+  RefundPolicyModel? refundPolicyModel;
+  Future<void> getRefundPolicy() async {
+    emit(GetRefundPolicyLoadingState());
+    var result = await settingsRepo!.getRefundPolicy();
+    return result.fold(
+          (failure) {
+        emit(GetRefundPolicyErrorState(failure.errMessage));
+      },
+          (data) async {
+        refundPolicyModel = data;
+        emit(GetRefundPolicySuccessState(data));
+      },
+    );
+  }
+
+
+  PrivacyPolicyModel? privacyPolicyModel;
+  Future<void> getPrivacyPolicy() async {
+    emit(GetPrivacyPolicyLoadingState());
+    var result = await settingsRepo!.getPrivacyPolicy();
+    return result.fold(
+          (failure) {
+        emit(GetPrivacyPolicyErrorState(failure.errMessage));
+      },
+          (data) async {
+        privacyPolicyModel = data;
+        emit(GetPrivacyPolicySuccessState(data));
       },
     );
   }

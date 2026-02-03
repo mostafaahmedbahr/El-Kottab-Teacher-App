@@ -33,6 +33,9 @@ class EndPoints {
   static const String  teacherStats = 'teacher/stats';
   static const String  teacherSchdules = 'teacher/schdules';
   static const String  teacherCalls = 'teacher/calls';
+  static const String  refundPolicy = 'settings/refund_policy';
+  static const String  privacyPolicy = 'settings/privacy_policy';
+  static const String  settings = 'settings';
 
 
 

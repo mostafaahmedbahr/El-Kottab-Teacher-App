@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
                 BlocProvider(
                   create: (context) => SettingsCubit(getIt<SettingsRepoImpl>())
                     ..getWhoWeAre()
-                    ..getTermsAndConditions(),
+                    ..getTermsAndConditions()..getRefundPolicy()..getPrivacyPolicy(),
                 ),
                 BlocProvider(
                   create: (context) =>

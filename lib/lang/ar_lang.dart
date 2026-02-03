@@ -174,5 +174,7 @@ class ArLang {
     "qualifications": "المؤهل",
     "degreePath": "الإجازات",
     "upload": "رفع",
+    "refundPolicy": "سياسة الاسترجاع",
+    "pricePolicy": "سياسة الأسعار",
   };
 }

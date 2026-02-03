@@ -3,6 +3,8 @@ import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo
 
 import '../../../../main_imports.dart';
 import '../models/delete_account_model.dart';
+import '../models/privacy_policy_model.dart';
+import '../models/refund_policy_model.dart';
 import '../models/terms_and_conditions_model.dart';
 import '../models/who_we_are_model.dart';
 
@@ -47,6 +49,37 @@ class SettingsRepoImpl implements SettingsRepo {
         endPoint: EndPoints.deleteAccount,
       );
       DeleteAccountModel result = DeleteAccountModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, RefundPolicyModel>> getRefundPolicy() async {
+    try {
+      var response = await apiService!.getData(
+        endPoint: EndPoints.refundPolicy,
+      );
+      RefundPolicyModel result = RefundPolicyModel.fromJson(
+        response.data,
+      );
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PrivacyPolicyModel>> getPrivacyPolicy() async {
+    try {
+      var response = await apiService!.getData(
+        endPoint: EndPoints.privacyPolicy,
+      );
+      PrivacyPolicyModel result = PrivacyPolicyModel.fromJson(
+        response.data,
+      );
       return right(result);
     } catch (e) {
       return left(handleError(e));

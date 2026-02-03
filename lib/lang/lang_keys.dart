@@ -167,15 +167,14 @@ abstract class LangKeys {
       "theEndTimeShouldBeAfterTheStartTime";
   static const thisAppointmentOverlapsWithAnotherAppointment =
       "thisAppointmentOverlapsWithAnotherAppointment";
-
   static const noAppointments = "noAppointments";
   static const edit = "edit";
-
   static const add = "add";
   static const addAppointment = "addAppointment";
-
   static const noSuccessfulCallsYet = "noSuccessfulCallsYet";
   static const qualifications = "qualifications";
   static const degreePath = "degreePath";
   static const upload = "upload";
+  static const refundPolicy = "refundPolicy";
+  static const pricePolicy = "pricePolicy";
 }
