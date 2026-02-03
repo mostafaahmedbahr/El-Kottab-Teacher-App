@@ -73,15 +73,12 @@ class VerifyOtpButton extends StatelessWidget {
             ? const CustomLoading()
             : CustomButton(
                 btnText: LangKeys.continuee.tr(),
+
                 onPressed: () {
                   if (controller.text.length == 6) {
-                    // خزننا email من cache أو fallback للإيميل اللي جاي من parameter
-                    final emailToUse =
-                        CacheHelper.getData(key: "userEmail") ?? email;
-
                     context.read<OtpCubit>().verifyOtp(
                       otpCode: controller.text,
-                      email: emailToUse,
+                      email: CacheHelper.getData(key: "userEmail") ?? email,
                       screenName: screenName,
                     );
                   } else {

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
-import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
+
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
@@ -64,7 +64,8 @@ class MyApp extends StatelessWidget {
                 ),
                 BlocProvider(
                   create: (context) =>
-                      AddAppointmentsCubit(getIt.get<AddAppointmentsRepoImpl>())..getAllSchedules(),
+                      AddAppointmentsCubit(getIt.get<AddAppointmentsRepoImpl>())
+                        ..getAllSchedules(),
                 ),
               ],
               child: BlocBuilder<LanguageCubit, Locale>(

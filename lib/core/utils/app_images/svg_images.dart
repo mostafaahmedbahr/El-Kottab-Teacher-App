@@ -52,4 +52,6 @@ class SvgImages {
   static const String id = '$svgPath/id1.svg';
   static const String rating = '$svgPath/review3.svg';
   static const String rating2 = '$svgPath/review2.svg';
+  static const String degree = '$svgPath/degree-svgrepo-com (3).svg';
+  static const String qualifications = '$svgPath/qualification.svg';
 }

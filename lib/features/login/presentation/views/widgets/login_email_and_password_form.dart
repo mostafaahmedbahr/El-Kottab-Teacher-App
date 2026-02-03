@@ -8,11 +8,11 @@ class LoginEmailAndPasswordForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit , LoginStates>(
-      buildWhen: (previous, current){
+    return BlocBuilder<LoginCubit, LoginStates>(
+      buildWhen: (previous, current) {
         return current is ChangePasswordVisibleState;
       },
-      builder: (context,state){
+      builder: (context, state) {
         var loginCubit = context.read<LoginCubit>();
         return Column(
           children: [
@@ -22,25 +22,45 @@ class LoginEmailAndPasswordForm extends StatelessWidget {
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.email.tr(),
               prefixIcon: Padding(
-                padding:   EdgeInsets.all(10.0.r),
-                child: SvgPicture.asset(SvgImages.email,colorFilter: ColorFilter.mode(AppColors.black, BlendMode.srcIn),),
+                padding: EdgeInsets.all(10.0.r),
+                child: SvgPicture.asset(
+                  SvgImages.email,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
-              validator: (value)=> AppValidators.emailValidator(value),
+              validator: (value) => AppValidators.emailValidator(value),
             ),
             Gap(20.h),
+
             /// Password Field
             CustomTextFormField(
               controller: loginCubit.passwordCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.password.tr(),
               prefixIcon: Padding(
-                padding:   EdgeInsets.all(10.0.r),
-                child: SvgPicture.asset(SvgImages.lock,colorFilter: ColorFilter.mode(AppColors.black, BlendMode.srcIn),),
+                padding: EdgeInsets.all(10.0.r),
+                child: SvgPicture.asset(
+                  SvgImages.lock,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               suffixIcon: IconButton(
                 color: AppColors.gray,
-                icon: SvgPicture.asset(loginCubit.isPasswordVisible ?
-                SvgImages.eye : SvgImages.openEye ,colorFilter: ColorFilter.mode(AppColors.black, BlendMode.srcIn),),
+                icon: SvgPicture.asset(
+                  loginCubit.isPasswordVisible
+                      ? SvgImages.eye
+                      : SvgImages.openEye,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 onPressed: loginCubit.changePasswordVisible,
               ),
               obscureText: loginCubit.isPasswordVisible,
@@ -49,7 +69,6 @@ class LoginEmailAndPasswordForm extends StatelessWidget {
           ],
         );
       },
-
     );
   }
 }

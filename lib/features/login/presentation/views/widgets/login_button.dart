@@ -24,10 +24,10 @@ class LoginButton extends StatelessWidget {
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
           context.read<LoginCubit>().cacheUserInfo(
-              token: loginCubit.loginModel?.data?.token ?? "",
-              phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
-              id: loginCubit.loginModel?.data?.id ?? 0,
-              email: loginCubit.loginModel?.data?.email ?? "",
+            token: loginCubit.loginModel?.data?.token ?? "",
+            phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
+            id: loginCubit.loginModel?.data?.id ?? 0,
+            email: loginCubit.loginModel?.data?.email ?? "",
           );
           if (loginCubit.loginModel!.data!.isVerified == true) {
             AppNav.customNavigator(
@@ -66,15 +66,15 @@ class LoginButton extends StatelessWidget {
               btnText: LangKeys.signIn.tr(),
               onPressed: () {
                 // loginCubit.emailCon.text = "teacher@test.com";
-               loginCubit.emailCon.text = "teacher_male_3@kotab.test";
-                 loginCubit.passwordCon.text = "password123";
+                //  loginCubit.emailCon.text = "teacher_male_3@kotab.test";
+                //    loginCubit.passwordCon.text = "password123";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,
                     password: loginCubit.passwordCon.text,
                   );
                 }
-               // AppNav.customNavigator(context: context, screen: LayoutView());
+                // AppNav.customNavigator(context: context, screen: LayoutView());
               },
             );
           },
