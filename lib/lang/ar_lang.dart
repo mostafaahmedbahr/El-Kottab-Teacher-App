@@ -171,5 +171,8 @@ class ArLang {
     "edit": "تعديل",
     "add": "اضافة",
     "addAppointments": "اضافة مواعيد",
+    "qualifications": "المؤهل",
+    "degreePath": "الإجازات",
+    "upload": "رفع",
   };
 }

@@ -172,5 +172,8 @@ class EnLang {
     'edit': 'Edit',
     "add": "Add",
     "addAppointment": "addAppointment",
+    "qualification": "Qualification",
+    "degreePath": "degreePath",
+    'upload': 'upload',
   };
 }

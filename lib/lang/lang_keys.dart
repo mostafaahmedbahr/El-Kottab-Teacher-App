@@ -174,9 +174,8 @@ abstract class LangKeys {
   static const add = "add";
   static const addAppointment = "addAppointment";
 
-
-
-
-
   static const noSuccessfulCallsYet = "noSuccessfulCallsYet";
+  static const qualifications = "qualifications";
+  static const degreePath = "degreePath";
+  static const upload = "upload";
 }
