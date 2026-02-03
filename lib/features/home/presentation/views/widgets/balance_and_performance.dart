@@ -123,7 +123,7 @@ class BalanceAndPerformance extends StatelessWidget {
                     }
 
                     // 🔹 Success:
-                    final int performance = stats.averageRate ?? 0;
+                    final dynamic performance = stats.averageRate ?? 0;
                     final double progress = performance / 100;
 
                     return Column(

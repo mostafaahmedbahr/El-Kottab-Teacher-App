@@ -20,100 +20,108 @@ class CustomFilePicker extends StatelessWidget {
     required this.placeholderAsset,
   });
 
+  bool get hasImage => imagePath != null;
+  bool get hasFile => imagePath != null || filePath != null || fileName != null;
+
+  String get displayName {
+    if (imagePath != null) {
+      return _fileName(imagePath!);
+    }
+    if (fileName != null) return fileName!;
+    if (filePath != null) return _fileName(filePath!);
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
-    final bool hasFile =
-        imagePath != null || (filePath != null && fileName != null);
-
-    Widget leftWidget;
-    String displayText;
-
-    if (hasFile) {
-      if (imagePath != null) {
-        leftWidget = ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.file(
-            File(imagePath!),
-            width: 70.w,
-            height: 70.h,
-            fit: BoxFit.cover,
-          ),
-        );
-        displayText = _getFileNameFromPath(imagePath!);
-      } else {
-        leftWidget = SvgPicture.asset(
-          placeholderAsset,
-          width: 70.w,
-          height: 70.h,
-          fit: BoxFit.cover,
-        );
-        displayText = _getFileNameFromPath(fileName!);
-      }
-    } else {
-      leftWidget = SvgPicture.asset(
-        placeholderAsset,
-        width: 55.w,
-        height: 60.h,
-        fit: BoxFit.cover,
-      );
-      displayText = title.tr();
-    }
-
-    return Card(
-      color: AppColors.cream,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: AppColors.darkOlive),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 18),
-        child: Row(
-          children: [
-            leftWidget,
-            Gap(8.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (!hasFile)
-                    Text(title.tr(), style: AppStyles.primary16SemiBold),
-                  if (hasFile)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(title.tr(), style: AppStyles.black14Regular),
-                        Gap(8.h),
-                        Text(
-                          displayText,
-                          style: AppStyles.primary14Medium.copyWith(
-                            overflow: TextOverflow.ellipsis,
+    return SizedBox(
+      height: 260.h,
+      child: Card(
+        color: AppColors.cream,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(color: AppColors.darkOlive),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(12.w),
+          child: Column(
+            children: [
+              /// 🔹 Preview Area (ثابت)
+              SizedBox(
+                height: 90.h,
+                child: Center(
+                  child: hasImage
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.file(
+                            File(imagePath!),
+                            fit: BoxFit.cover,
+                            width: 90.w,
+                            height: 90.h,
                           ),
-                          maxLines: 1,
+                        )
+                      : SvgPicture.asset(
+                          placeholderAsset,
+                          width: 50.w,
+                          height: 50.h,
                         ),
-                      ],
-                    ),
-                ],
-              ),
-            ),
-            Gap(8.w),
-            ElevatedButton(
-              onPressed: onTap,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.darkOlive,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Icon(Icons.upload_file, color: Colors.white),
-            ),
-          ],
+
+              Gap(8.h),
+
+              /// 🔹 Title (سطرين ثابتين)
+              SizedBox(
+                height: 45.h,
+                child: Text(
+                  title.tr(),
+                  style: AppStyles.primary16SemiBold,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+
+              /// 🔹 File name (Expandable)
+              Expanded(
+                child: hasFile
+                    ? Center(
+                        child: Text(
+                          displayName,
+                          style: AppStyles.primary14Medium,
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    : const SizedBox(),
+              ),
+
+              /// 🔹 Button (Pinned)
+              SizedBox(
+                width: double.infinity,
+                height: 40.h,
+                child: ElevatedButton.icon(
+                  onPressed: onTap,
+                  icon: const Icon(Icons.upload_file, color: Colors.white),
+                  label: Text(
+                    LangKeys.upload.tr(),
+                    style: AppStyles.white12SemiBold,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.darkOlive,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  String _getFileNameFromPath(String path) {
-    final file = File(path);
-    return file.path.split('/').last;
-  }
+  String _fileName(String path) => path.split(Platform.pathSeparator).last;
 }
