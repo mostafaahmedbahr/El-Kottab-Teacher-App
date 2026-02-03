@@ -17,13 +17,13 @@ class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final contactUsKey = GlobalKey<FormState>();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(LangKeys.contactUs.tr()),
-      ),
-      body: BlocProvider(
-        create: (context)=>ContactUsCubit(getIt.get<ContactUsRepoImpl>()),
-        child: BlocBuilder<ContactUsCubit , ContactUsStates>(
+    return BlocProvider(
+      create: (context)=>ContactUsCubit(getIt.get<ContactUsRepoImpl>())..getSettingsData(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(LangKeys.contactUs.tr()),
+        ),
+        body: BlocBuilder<ContactUsCubit , ContactUsStates>(
           builder: (context,state){
             var contactUsCubit = context.read<ContactUsCubit>();
             return  Padding(
@@ -126,8 +126,10 @@ class ContactUsView extends StatelessWidget {
           },
 
         ),
+        bottomNavigationBar:SizedBox(
+            height: 130.h,
+            child: SocialMediaIcons()) ,
       ),
-      bottomNavigationBar:SocialMediaIcons() ,
     );
   }
 }

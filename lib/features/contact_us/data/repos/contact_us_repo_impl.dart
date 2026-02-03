@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import '../../../../main_imports.dart';
 import '../models/contact_us_model.dart';
+import '../models/settings_model.dart';
 import 'contact_us_repo.dart';
 
 
@@ -44,7 +45,19 @@ Future<Either<Failure, ContactUsModel>> contactUs({
 
 
 
-
+  @override
+  Future<Either<Failure, SettingsModel>> getSettingsData()
+  async{
+    try {
+      var response = await apiService!.getData(
+        endPoint: EndPoints.settings,
+      );
+      SettingsModel result = SettingsModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
 
 
 }

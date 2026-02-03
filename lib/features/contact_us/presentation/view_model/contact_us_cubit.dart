@@ -1,5 +1,6 @@
 import '../../../../main_imports.dart';
 import '../../data/models/contact_us_model.dart';
+import '../../data/models/settings_model.dart';
 import '../../data/repos/contact_us_repo.dart';
 import 'contact_us_states.dart';
 
@@ -40,4 +41,21 @@ class ContactUsCubit extends Cubit<ContactUsStates> {
   String countryCode = '';
   String countryName = 'Egypt';
 
+
+
+  SettingsModel? settingsModel;
+
+  Future<void> getSettingsData() async {
+    emit(GetSettingsDataLoadingState());
+    var result = await contactUsRepo!.getSettingsData();
+    return result.fold(
+          (failure) {
+        emit(GetSettingsDataErrorState(failure.errMessage));
+      },
+          (data) async {
+        settingsModel = data;
+        emit(GetSettingsDataSuccessState(data));
+      },
+    );
+  }
 }

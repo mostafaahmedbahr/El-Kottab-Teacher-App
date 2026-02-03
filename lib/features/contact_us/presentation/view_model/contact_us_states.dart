@@ -1,5 +1,6 @@
 
 import '../../data/models/contact_us_model.dart';
+import '../../data/models/settings_model.dart';
 
 abstract class ContactUsStates{}
 
@@ -17,3 +18,14 @@ class ContactUsSuccessState extends ContactUsStates{
 
 }
 
+class GetSettingsDataLoadingState extends ContactUsStates{}
+class GetSettingsDataErrorState extends ContactUsStates{
+  final String error;
+  GetSettingsDataErrorState(this.error);
+
+}
+class GetSettingsDataSuccessState extends ContactUsStates{
+  final SettingsModel settingsModel;
+  GetSettingsDataSuccessState(this.settingsModel);
+
+}
