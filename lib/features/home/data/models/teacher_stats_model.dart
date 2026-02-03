@@ -1,4 +1,3 @@
-
 class TeacherStatsModel {
   String? message;
   int? status;
@@ -16,7 +15,7 @@ class TeacherStatsModel {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["message"] = message;
     _data["status"] = status;
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -25,28 +24,36 @@ class TeacherStatsModel {
 
 class Data {
   int? totalRates;
-  int? averageRate;
-  int? walletMoney;
+  dynamic averageRate;
+  dynamic walletMoney;
   int? walletMinutes;
   String? currency;
 
-  Data({this.totalRates, this.averageRate, this.walletMoney, this.walletMinutes, this.currency});
+  Data({
+    this.totalRates,
+    this.averageRate,
+    this.walletMoney,
+    this.walletMinutes,
+    this.currency,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     totalRates = json["total_rates"];
+
     averageRate = json["average_rate"];
     walletMoney = json["wallet_money"];
+
     walletMinutes = json["wallet_minutes"];
-    currency = json["currency"];
+    currency = json["currency"]?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["total_rates"] = totalRates;
-    _data["average_rate"] = averageRate;
-    _data["wallet_money"] = walletMoney;
-    _data["wallet_minutes"] = walletMinutes;
-    _data["currency"] = currency;
-    return _data;
+    return {
+      "total_rates": totalRates,
+      "average_rate": averageRate,
+      "wallet_money": walletMoney,
+      "wallet_minutes": walletMinutes,
+      "currency": currency,
+    };
   }
 }
