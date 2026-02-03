@@ -3,9 +3,8 @@ enum RegisterFileType {
   cv,
   idFront,
   idBack,
+  qualification,
+  degreePath,
 }
-enum AppointmentResult {
-  success,
-  endBeforeStart,
-  conflict,
-}
+
+enum AppointmentResult { success, endBeforeStart, conflict }
