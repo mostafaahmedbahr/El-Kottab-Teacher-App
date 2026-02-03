@@ -3,8 +3,8 @@ class TeacherReviewsModel {
   String? message;
   int? status;
   List<Data>? data;
-  int? avgRate;
-  int? totalCount;
+  dynamic avgRate;
+  dynamic totalCount;
   bool? hasMorePages;
 
   TeacherReviewsModel({this.message, this.status, this.data, this.avgRate, this.totalCount, this.hasMorePages});
@@ -33,7 +33,7 @@ class TeacherReviewsModel {
 }
 
 class Data {
-  int? rate;
+  dynamic rate;
   String? comment;
   User? user;
 

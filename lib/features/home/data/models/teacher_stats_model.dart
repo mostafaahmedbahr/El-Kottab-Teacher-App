@@ -23,10 +23,10 @@ class TeacherStatsModel {
 }
 
 class Data {
-  int? totalRates;
+  dynamic totalRates;
   dynamic averageRate;
   dynamic walletMoney;
-  int? walletMinutes;
+  dynamic walletMinutes;
   String? currency;
 
   Data({

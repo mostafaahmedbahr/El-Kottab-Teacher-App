@@ -28,7 +28,7 @@ class Data {
   int? userId;
   int? teacherId;
   String? roomId;
-  int? durationMinutes;
+  num? durationMinutes;
   String? status;
   String? startedAt;
   dynamic endedAt;
