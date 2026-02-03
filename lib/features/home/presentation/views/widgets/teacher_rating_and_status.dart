@@ -3,9 +3,11 @@ import 'package:el_kottab_teacher_app/core/errors/error_ui.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_states.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/teacher_rating_shimmer.dart';
+import 'package:el_kottab_teacher_app/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../../profile/presentation/view_model/profile_states.dart';
 import 'availability_shimmer.dart';
 
 class TeacherRatingAndStatus extends StatelessWidget {
@@ -23,49 +25,59 @@ class TeacherRatingAndStatus extends StatelessWidget {
               Text(LangKeys.available.tr(), style: AppStyles.black16SemiBold),
 
               Gap(6.h),
-              BlocConsumer<HomeCubit, HomeStates>(
-                buildWhen: (previous, current) {
-                  return current is GetTeacherStatsLoadingState ||
-                      current is GetTeacherStatsSuccessState ||
-                      current is GetTeacherStatsErrorState ||
-                      current is ChangeStatusSuccessState;
-                },
-
-                listenWhen: (previous, current) {
-                  return current is ChangeStatusSuccessState ||
-                      current is ChangeStatusErrorState;
-                },
+              BlocListener<ProfileCubit, ProfileStates>(
                 listener: (context, state) {
-                  if (state is ChangeStatusSuccessState) {
-                    Toast.showSuccessToast(
-                      msg: state.updateAvailabilityModel.message.toString(),
-                      context: context,
-                    );
-                  } else if (state is ChangeStatusErrorState) {
-                    Toast.showErrorToast(
-                      msg: state.error.toString(),
-                      context: context,
-                    );
+                  if (state is GetProfileDataSuccessState) {
+                    final isAvailable =
+                        context.read<ProfileCubit>().isAvailable;
+
+                    context.read<HomeCubit>().initStatus(isAvailable);
                   }
                 },
-                builder: (context, state) {
-                  final homeCubit = context.read<HomeCubit>();
-
-                  if (state is GetTeacherStatsLoadingState ||
-                      homeCubit.teacherStatsModel == null) {
-                    return const AvailabilityShimmer();
-                  }
-
-                  if (state is GetTeacherStatsErrorState) {
-                    return const Icon(Icons.error, color: Colors.red);
-                  }
-
-                  return CupertinoSwitch(
-                    activeTrackColor: AppColors.darkOlive,
-                    value: homeCubit.status,
-                    onChanged: homeCubit.changeStatus,
-                  );
-                },
+                child: BlocConsumer<HomeCubit, HomeStates>(
+                  buildWhen: (previous, current) {
+                    return current is GetTeacherStatsLoadingState ||
+                        current is GetTeacherStatsSuccessState ||
+                        current is GetTeacherStatsErrorState ||
+                        current is ChangeStatusSuccessState;
+                  },
+                
+                  listenWhen: (previous, current) {
+                    return current is ChangeStatusSuccessState ||
+                        current is ChangeStatusErrorState;
+                  },
+                  listener: (context, state) {
+                    if (state is ChangeStatusSuccessState) {
+                      Toast.showSuccessToast(
+                        msg: state.updateAvailabilityModel.message.toString(),
+                        context: context,
+                      );
+                    } else if (state is ChangeStatusErrorState) {
+                      Toast.showErrorToast(
+                        msg: state.error.toString(),
+                        context: context,
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    final homeCubit = context.read<HomeCubit>();
+                
+                    if (state is GetTeacherStatsLoadingState ||
+                        homeCubit.teacherStatsModel == null) {
+                      return const AvailabilityShimmer();
+                    }
+                
+                    if (state is GetTeacherStatsErrorState) {
+                      return const Icon(Icons.error, color: Colors.red);
+                    }
+                
+                    return CupertinoSwitch(
+                      activeTrackColor: AppColors.darkOlive,
+                      value: homeCubit.status,
+                      onChanged: homeCubit.changeStatus,
+                    );
+                  },
+                ),
               ),
             ],
           ),

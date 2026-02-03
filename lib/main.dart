@@ -19,7 +19,8 @@ void main() async {
   await CacheHelper.init();
   //
  await _initFirebaseMessaging();
-
+  String? token = await CacheTokenManger.getUserToken();
+  debugPrint("Retrieved token: $token");
   setup();
   Bloc.observer = MyBlocObserver();
 

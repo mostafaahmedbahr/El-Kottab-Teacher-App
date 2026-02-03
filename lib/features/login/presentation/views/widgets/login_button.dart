@@ -18,7 +18,7 @@ class LoginButton extends StatelessWidget {
             current is LoginLoadingState ||
             current is LoginErrorState;
       },
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is LoginErrorState) {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         } else if (state is LoginSuccessState) {
@@ -66,8 +66,8 @@ class LoginButton extends StatelessWidget {
               btnText: LangKeys.signIn.tr(),
               onPressed: () {
                 // loginCubit.emailCon.text = "teacher@test.com";
-                //  loginCubit.emailCon.text = "teacher_male_3@kotab.test";
-                //    loginCubit.passwordCon.text = "password123";
+                 loginCubit.emailCon.text = "teacher_male_1@kotab.test";
+                    loginCubit.passwordCon.text = "password123";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,

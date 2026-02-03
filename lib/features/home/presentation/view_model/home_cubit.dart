@@ -25,13 +25,23 @@ class HomeCubit extends Cubit<HomeStates> {
 
 
 
-  bool status = true;
-  changeStatus(newStatus)
-  {
+  bool status = false;
+
+  void initStatus(bool newStatus) {
     status = newStatus;
     emit(ChangeStatusState());
-    updateAvailability(status: status ? "active": "inactive");
   }
+
+  void changeStatus(bool newStatus) {
+    status = newStatus;
+
+    emit(ChangeStatusState());
+
+    updateAvailability(
+      status: newStatus ? "active" : "inactive",
+    );
+  }
+
 
   HomeBannersModel? homeBannersModel;
   Future<void> getHomeBanners()

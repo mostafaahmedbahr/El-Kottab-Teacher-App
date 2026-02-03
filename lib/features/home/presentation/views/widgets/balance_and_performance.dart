@@ -21,7 +21,6 @@ class BalanceAndPerformance extends StatelessWidget {
       builder: (context, state) {
         final homeCubit = context.read<HomeCubit>();
         final stats = homeCubit.teacherStatsModel?.data;
-
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           child: Row(

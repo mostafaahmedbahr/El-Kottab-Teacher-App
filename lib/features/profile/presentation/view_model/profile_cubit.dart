@@ -38,6 +38,8 @@ class ProfileCubit extends Cubit<ProfileStates> {
       emit(GetProfileDataSuccessState(data));
     });
   }
+  bool get isAvailable =>
+      profileModel?.data?.avaliable == "active";
 
 
 }
