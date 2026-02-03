@@ -9,6 +9,7 @@ import '../view_model/register_cubit.dart';
 class RegisterDocsView extends StatelessWidget {
   RegisterDocsView({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,46 +24,77 @@ class RegisterDocsView extends StatelessWidget {
           },
           builder: (context, state) {
             final registerCubit = context.read<RegisterCubit>();
+
+            final List<Widget> cards = [
+              CustomFilePicker(
+                title: LangKeys.personalPhoto,
+
+                imagePath: registerCubit.personalPhotoPath,
+                placeholderAsset: SvgImages.camera2,
+                onTap: () => registerCubit.pickRegisterFile(
+                  RegisterFileType.personalPhoto,
+                ),
+              ),
+              CustomFilePicker(
+                title: LangKeys.cv,
+
+                filePath: registerCubit.cvPath,
+                placeholderAsset: SvgImages.cv,
+                onTap: () =>
+                    registerCubit.pickRegisterFile(RegisterFileType.cv),
+              ),
+              CustomFilePicker(
+                title: LangKeys.personalIDCardFront,
+                imagePath: registerCubit.idFrontPath,
+                placeholderAsset: SvgImages.id,
+                onTap: () =>
+                    registerCubit.pickRegisterFile(RegisterFileType.idFront),
+              ),
+              CustomFilePicker(
+                title: LangKeys.personalIDCardBack,
+                imagePath: registerCubit.idBackPath,
+                placeholderAsset: SvgImages.id,
+                onTap: () =>
+                    registerCubit.pickRegisterFile(RegisterFileType.idBack),
+              ),
+
+              CustomFilePicker(
+                title: LangKeys.qualifications,
+                filePath: registerCubit.qualificationPath,
+                placeholderAsset: SvgImages.qualifications,
+                onTap: () => registerCubit.pickRegisterFile(
+                  RegisterFileType.qualification,
+                ),
+              ),
+
+              CustomFilePicker(
+                title: LangKeys.degreePath,
+                filePath: registerCubit.degree,
+                placeholderAsset: SvgImages.degree,
+                onTap: () =>
+                    registerCubit.pickRegisterFile(RegisterFileType.degreePath),
+              ),
+            ];
+
             return Form(
               key: _formKey,
-              child: ListView(
+              child: Column(
                 children: [
-                  CustomFilePicker(
-                    title: LangKeys.personalPhoto,
-                    imagePath: registerCubit.personalPhotoPath,
-                    placeholderAsset: SvgImages.camera2,
-                    onTap: () => registerCubit.pickRegisterFile(
-                      RegisterFileType.personalPhoto,
-                    ),
-                  ),
-                  Gap(10.h),
-                  CustomFilePicker(
-                    title: LangKeys.cv,
-                    fileName: registerCubit.cvPath,
-                    filePath: registerCubit.cvPath,
-                    placeholderAsset: SvgImages.cv,
-                    onTap: () =>
-                        registerCubit.pickRegisterFile(RegisterFileType.cv),
-                  ),
-                  Gap(10.h),
-                  CustomFilePicker(
-                    title: LangKeys.personalIDCardFront,
-                    imagePath: registerCubit.idFrontPath,
-                    placeholderAsset: SvgImages.id,
-                    onTap: () => registerCubit.pickRegisterFile(
-                      RegisterFileType.idFront,
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: cards.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.w,
+                        mainAxisSpacing: 10.h,
+                        childAspectRatio: 0.65,
+                      ),
+                      itemBuilder: (context, index) {
+                        return cards[index];
+                      },
                     ),
                   ),
 
-                  Gap(10.h),
-                  CustomFilePicker(
-                    title: LangKeys.personalIDCardBack,
-                    imagePath: registerCubit.idBackPath,
-                    placeholderAsset: SvgImages.id,
-                    onTap: () =>
-                        registerCubit.pickRegisterFile(RegisterFileType.idBack),
-                  ),
-                  Gap(24.h),
                   RegisterButton(formKey: _formKey),
                 ],
               ),
