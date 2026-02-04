@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/notifications/presentation/views/widgets/notification_list.dart';
-import '../../../../main_imports.dart';
+ import '../../../../main_imports.dart';
 import '../view_model/notifications_cubit.dart';
 import '../view_model/notifications_states.dart';
 
@@ -28,6 +28,8 @@ class _NotificationViewState extends State<NotificationView> {
             context: context,
           );
           context.read<NotificationsCubit>().getAllNotifications();
+          context.read<NotificationsCubit>().getNotificationsCount();
+          context.read<NotificationsCubit>().readAllNotifications();
         } else if (state is DeleteNotificationsErrorState) {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         }

@@ -27,9 +27,6 @@ class NotificationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotificationsCubit , NotificationsStates>(
-      // buildWhen: (previous, current){
-      //   return current is DeleteNotificationsErrorState || current is DeleteNotificationsSuccessState || current is DeleteNotificationsLoadingState;
-      // },
       builder: (context,state){
         return GestureDetector(
           onTap: onTap,
@@ -40,12 +37,12 @@ class NotificationItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color:   Colors.grey.shade200 ,
-                width:   1  ,
+                width:   1.w  ,
               ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 8,
+                  blurRadius: 8.r,
                   offset: Offset(0, 2),
                 ),
               ],
@@ -62,7 +59,7 @@ class NotificationItem extends StatelessWidget {
                   child: Icon(
                     icon,
                     color: AppColors.darkOlive,
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
                 Gap(12.h),
@@ -78,7 +75,7 @@ class NotificationItem extends StatelessWidget {
                             child: Text(
                               title,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight:  FontWeight.w500  ,
                                 color: AppColors.black,
                               ),

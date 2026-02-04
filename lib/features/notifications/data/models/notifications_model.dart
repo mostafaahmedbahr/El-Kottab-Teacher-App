@@ -41,12 +41,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["body"] = body;
-    _data["is_read"] = isRead;
-    _data["created_at"] = createdAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    data["body"] = body;
+    data["is_read"] = isRead;
+    data["created_at"] = createdAt;
+    return data;
   }
 }

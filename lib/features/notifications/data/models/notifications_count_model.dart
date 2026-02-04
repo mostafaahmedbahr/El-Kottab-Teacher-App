@@ -33,8 +33,8 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["count"] = count;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["count"] = count;
+    return data;
   }
 }

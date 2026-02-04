@@ -181,6 +181,7 @@ abstract class LangKeys {
 
   static const theQualificationCertificateMustBeUploaded = "theQualificationCertificateMustBeUploaded";
   static const theVacationCertificateMustBeUploaded = "theVacationCertificateMustBeUploaded";
+  static const unAvailable = "unAvailable";
 }
 
 

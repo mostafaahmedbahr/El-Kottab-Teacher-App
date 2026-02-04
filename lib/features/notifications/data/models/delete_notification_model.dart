@@ -13,10 +13,10 @@ class DeleteAllNotificationsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["message"] = message;
-    _data["status"] = status;
-    _data["data"] = data;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["message"] = message;
+    data["status"] = status;
+    data["data"] = data;
+    return data;
   }
 }

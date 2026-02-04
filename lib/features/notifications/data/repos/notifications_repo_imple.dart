@@ -31,7 +31,7 @@ class NotificationsRepoImpl implements NotificationsRepo {
   @override
   Future<Either<Failure, ReadAllNotificationsModel>> readAllNotifications() async {
     try {
-      var response = await apiService!.getData(
+      var response = await apiService!.postData(
         endPoint: EndPoints.notificationsMarkAllAsRead,
       );
       ReadAllNotificationsModel result = ReadAllNotificationsModel.fromJson(
