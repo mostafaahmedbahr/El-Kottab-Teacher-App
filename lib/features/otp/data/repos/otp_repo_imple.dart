@@ -18,18 +18,18 @@ class OtpRepoImpl implements OtpRepo {
     required String screenName,
   }) async{
     try {
-      var formData = FormData.fromMap({
+      var forgetPasswordFormData = FormData.fromMap({
         'code': otpCode,
         'email': email,
       });
-      var data =  FormData.fromMap({
+      var verifyResetOtpData =  FormData.fromMap({
         'otp': otpCode,
         'email': email,
       });
       var response = await apiService!.postData(
         endPoint:  screenName!="ForgetPasswordView" ? EndPoints.verify : EndPoints.verifyResetOtp,
         isMultipart: true,
-        data:screenName!="ForgetPasswordView" ? formData :data,
+        data:screenName!="ForgetPasswordView" ? forgetPasswordFormData :verifyResetOtpData,
 
       );
       VerifyOtpModel result = VerifyOtpModel.fromJson(response.data);

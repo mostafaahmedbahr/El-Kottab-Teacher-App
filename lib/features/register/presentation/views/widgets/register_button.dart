@@ -59,6 +59,18 @@ class RegisterButton extends StatelessWidget {
                       msg: LangKeys.pleaseUploadYourPersonalIDCardBack.tr(),
                       context: context,
                     );
+                  }
+                  else if (registerCubit.qualificationFile == null) {
+                    Toast.showErrorToast(
+                      msg: LangKeys.theQualificationCertificateMustBeUploaded.tr(),
+                      context: context,
+                    );
+                  }
+                  else if (registerCubit.degreePath == null) {
+                    Toast.showErrorToast(
+                      msg: LangKeys.theVacationCertificateMustBeUploaded.tr(),
+                      context: context,
+                    );
                   } else {
                     registerCubit.register();
                   }

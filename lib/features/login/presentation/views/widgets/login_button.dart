@@ -23,13 +23,13 @@ class LoginButton extends StatelessWidget {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
-          context.read<LoginCubit>().cacheUserInfo(
-            token: loginCubit.loginModel?.data?.token ?? "",
-            phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
-            id: loginCubit.loginModel?.data?.id ?? 0,
-            email: loginCubit.loginModel?.data?.email ?? "",
-          );
           if (loginCubit.loginModel!.data!.isVerified == true) {
+            context.read<LoginCubit>().cacheUserInfo(
+              token: loginCubit.loginModel?.data?.token ?? "",
+              phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
+              id: loginCubit.loginModel?.data?.id ?? 0,
+              email: loginCubit.loginModel?.data?.email ?? "",
+            );
             AppNav.customNavigator(
               context: context,
               screen: LayoutView(),

@@ -45,14 +45,14 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["name"] = name;
-    _data["email"] = email;
-    _data["phone"] = phone;
-    _data["gender"] = gender;
-    _data["image"] = image;
-    _data["token"] = token;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["name"] = name;
+    data["email"] = email;
+    data["phone"] = phone;
+    data["gender"] = gender;
+    data["image"] = image;
+    data["token"] = token;
+    return data;
   }
 }

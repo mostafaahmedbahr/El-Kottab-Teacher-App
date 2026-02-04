@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab_teacher_app/features/change_password/presentation/views/change_password_view.dart';
 import 'package:el_kottab_teacher_app/features/login/presentation/views/login_view.dart';
-import '../../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
+ import '../../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
 import '../../../../../main_imports.dart';
+import '../../../../change_password/presentation/views/change_password_view.dart';
+import '../../../../layout/presentation/views/layout_view.dart';
 import '../../view_model/otp_cubit.dart';
 import '../../view_model/otp_states.dart';
 
@@ -42,7 +43,8 @@ class VerifyOtpButton extends StatelessWidget {
               : AppNav.customNavigator(
                   context: context,
                   screen: const LoginView(),
-                  finish: goToLayoutOrResetPassword == "Layout",
+                  finish: true
+                  // finish: goToLayoutOrResetPassword == "Layout",
                 );
           Toast.showSuccessToast(
             msg: screenName != "ForgetPasswordView"
@@ -73,12 +75,12 @@ class VerifyOtpButton extends StatelessWidget {
             ? const CustomLoading()
             : CustomButton(
                 btnText: LangKeys.continuee.tr(),
-
                 onPressed: () {
                   if (controller.text.length == 6) {
                     context.read<OtpCubit>().verifyOtp(
                       otpCode: controller.text,
-                      email: CacheHelper.getData(key: "userEmail") ?? email,
+
+                      email: CacheHelper.getData(key: "userEmail"),
                       screenName: screenName,
                     );
                   } else {

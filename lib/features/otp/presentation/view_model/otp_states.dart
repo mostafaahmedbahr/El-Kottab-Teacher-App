@@ -1,4 +1,6 @@
+
 import '../../data/models/resend_otp_model.dart';
+import '../../data/models/verify_otp_model.dart';
 
 abstract class OtpStates{}
 

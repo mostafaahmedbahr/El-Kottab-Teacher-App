@@ -28,7 +28,6 @@ class RegisterDocsView extends StatelessWidget {
             final List<Widget> cards = [
               CustomFilePicker(
                 title: LangKeys.personalPhoto,
-
                 imagePath: registerCubit.personalPhotoPath,
                 placeholderAsset: SvgImages.camera2,
                 onTap: () => registerCubit.pickRegisterFile(
@@ -37,7 +36,6 @@ class RegisterDocsView extends StatelessWidget {
               ),
               CustomFilePicker(
                 title: LangKeys.cv,
-
                 filePath: registerCubit.cvPath,
                 placeholderAsset: SvgImages.cv,
                 onTap: () =>

@@ -193,13 +193,13 @@ class RegisterCubit extends Cubit<RegisterStates> {
         );
       }
       if (qualificationFile != null && await qualificationFile!.exists()) {
-        dataMap["qualification_file"] = await MultipartFile.fromFile(
+        dataMap["attachments[0]"] = await MultipartFile.fromFile(
           qualificationFile!.path,
           filename: qualificationFile!.path.split('/').last,
         );
       }
       if (degreePath != null && await degreePath!.exists()) {
-        dataMap["degree_file"] = await MultipartFile.fromFile(
+        dataMap["attachments[1]"] = await MultipartFile.fromFile(
           degreePath!.path,
           filename: degreePath!.path.split('/').last,
         );
@@ -214,6 +214,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       ) async {
         registerModel = data;
         emit(SignUpSuccess(data));
+        CacheHelper.saveData(key: "userEmail", value:  emailCon.text);
         clearControllers();
       });
     } on DioException catch (e) {

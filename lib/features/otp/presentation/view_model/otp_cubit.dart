@@ -11,7 +11,6 @@ class OtpCubit extends Cubit<OtpStates> {
   static OtpCubit get(context) => BlocProvider.of(context);
 
   OtpCubit(this.otpRepo) : super(OtpInitState()) {
-    // بدء التايمر تلقائياً عند إنشاء الكيوبت
     WidgetsBinding.instance.addPostFrameCallback((_) {
       startOtpTimer();
     });
@@ -65,7 +64,6 @@ class OtpCubit extends Cubit<OtpStates> {
           (data) {
         resendOtpModel = data;
         emit(ResendOtpSuccessState(data));
-        // بدء التايمر من جديد بعد إعادة الإرسال
         startOtpTimer();
       },
     );
