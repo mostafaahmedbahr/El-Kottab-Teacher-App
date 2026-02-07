@@ -46,7 +46,12 @@ class HomeSliderImages extends StatelessWidget {
                                 raduis: 0,
                                 fit: BoxFit.cover,
                               ),
-                              const SliderOverlay(),
+                              SliderOverlay(
+                                description: homeCubit.homeBannersModel!.data!
+                                    .map((item) => item.description ?? '')
+                                    .where((desc) => desc.isNotEmpty)
+                                    .join('\n'),
+                              ),
                             ],
                           ),
                         ),

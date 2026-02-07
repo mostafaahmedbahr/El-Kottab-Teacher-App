@@ -251,7 +251,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
     personalPhoto = null;
     qualificationFile = null;
     degreePath = null;
-
     emit(RegisterInitState());
   }
 

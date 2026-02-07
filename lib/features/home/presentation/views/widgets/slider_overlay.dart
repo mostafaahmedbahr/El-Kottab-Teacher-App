@@ -2,8 +2,8 @@ import 'dart:ui';
 import '../../../../../main_imports.dart';
 
 class SliderOverlay extends StatelessWidget {
-  const SliderOverlay({super.key});
-
+  const SliderOverlay({super.key, required this.description});
+  final String? description;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -33,10 +33,10 @@ class SliderOverlay extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Read the Quran', style: AppStyles.white12SemiBold),
-                const SizedBox(height: 4),
+                Text(description ??"", style: AppStyles.white12SemiBold),
+                Gap(4.h),
                 Text(
-                  'تابع تلاوة القرآن الكريم',
+                  description ??"",
                   style: AppStyles.white12SemiBold,
                 ),
               ],

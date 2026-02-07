@@ -25,16 +25,19 @@ class HomeBannersModel {
 
 class Data {
   String? image;
+  String? description;
 
-  Data({this.image});
+  Data({this.image,this.description});
 
   Data.fromJson(Map<String, dynamic> json) {
     image = json["image"];
+    description = json["description"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["image"] = image;
+    _data["description"] = description;
     return _data;
   }
 }
