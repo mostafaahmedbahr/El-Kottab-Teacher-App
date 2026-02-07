@@ -4,16 +4,18 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/app_services/remote_services/service_locator.dart';
 import 'core/utils/bloc_observer.dart';
+import 'core/utils/zego_service.dart';
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+   await dotenv.load(fileName: ".env");
    await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
@@ -23,6 +25,12 @@ void main() async {
   debugPrint("Retrieved token: $token");
   setup();
   Bloc.observer = MyBlocObserver();
+  ZegoService().init(
+    userId: CacheHelper.getData(key: "userId").toString(),
+    userName:  CacheHelper.getData(key: "userName").toString(),
+    fcmToken: CacheHelper.getData(key: "fcmToken").toString(),
+  );
+
 
   runApp(
     EasyLocalization(

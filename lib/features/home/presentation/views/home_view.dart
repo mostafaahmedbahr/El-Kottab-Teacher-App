@@ -1,15 +1,12 @@
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_content.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_stats_shimmer.dart';
-import '../../../../core/app_services/remote_services/service_locator.dart';
 import '../../../../core/errors/error_ui.dart';
 import '../../../../main_imports.dart';
-import '../../data/repos/home_repo_impl.dart';
 import '../view_model/home_cubit.dart';
 import '../view_model/home_states.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

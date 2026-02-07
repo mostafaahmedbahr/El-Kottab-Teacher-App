@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view.dart';
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/profile_view.dart';
-
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
 import '../../../call_log/presentation/views/call_log_view.dart';
@@ -51,4 +50,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
       changeBottomNav(0, context);
     }
   }
+
+
 }

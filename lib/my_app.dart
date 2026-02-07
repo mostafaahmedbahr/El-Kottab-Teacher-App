@@ -26,8 +26,10 @@ import 'main_imports.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -52,7 +54,9 @@ class MyApp extends StatelessWidget {
                 BlocProvider(
                   create: (context) => SettingsCubit(getIt<SettingsRepoImpl>())
                     ..getWhoWeAre()
-                    ..getTermsAndConditions()..getRefundPolicy()..getPrivacyPolicy(),
+                    ..getTermsAndConditions()
+                    ..getRefundPolicy()
+                    ..getPrivacyPolicy(),
                 ),
                 BlocProvider(
                   create: (context) =>
@@ -67,7 +71,9 @@ class MyApp extends StatelessWidget {
                       NotificationsCubit(getIt.get<NotificationsRepoImpl>()),
                 ),
                 BlocProvider(
-                  create: (context)=>ReviewsCubit(getIt.get<ReviewsRepoImpl>())..getTeacherReviews(type: "teacher"),
+                  create: (context) =>
+                      ReviewsCubit(getIt.get<ReviewsRepoImpl>())
+                        ..getTeacherReviews(type: "teacher"),
                 ),
                 BlocProvider(
                   create: (_) => HomeCubit(getIt.get<HomeRepoImpl>())

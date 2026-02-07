@@ -29,6 +29,7 @@ class LoginButton extends StatelessWidget {
               phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
               id: loginCubit.loginModel?.data?.id ?? 0,
               email: loginCubit.loginModel?.data?.email ?? "",
+              name: loginCubit.loginModel?.data?.name ?? "",
             );
             AppNav.customNavigator(
               context: context,

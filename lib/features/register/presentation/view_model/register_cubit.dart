@@ -215,6 +215,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         registerModel = data;
         emit(SignUpSuccess(data));
         CacheHelper.saveData(key: "userEmail", value:  emailCon.text);
+        CacheHelper.saveData(key: "userName", value: nameCon.text);
         clearControllers();
       });
     } on DioException catch (e) {
@@ -260,10 +261,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String phone,
     required int id,
     required String email,
+    required String name,
   }) async {
     await CacheTokenManger.saveUserToken(token);
     CacheHelper.saveData(key: "userPhone", value: phone);
     CacheHelper.saveData(key: "userId", value: id);
     CacheHelper.saveData(key: "userEmail", value: email);
+    CacheHelper.saveData(key: "userName", value: name);
   }
 }

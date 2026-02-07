@@ -35,12 +35,14 @@ class LoginCubit extends Cubit<LoginStates> {
     required String phone ,
     required int id ,
     required String email,
+    required String name,
   })
   async {
     await CacheTokenManger.saveUserToken(token);
     CacheHelper.saveData(key: "userPhone", value: phone);
     CacheHelper.saveData(key: "userId", value: id);
     CacheHelper.saveData(key: "userEmail", value: email);
+    CacheHelper.saveData(key: "userName", value: name);
   }
   var emailCon = TextEditingController();
   var passwordCon = TextEditingController();
