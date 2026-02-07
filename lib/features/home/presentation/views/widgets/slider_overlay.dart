@@ -33,8 +33,8 @@ class SliderOverlay extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(description ??"", style: AppStyles.white12SemiBold),
-                Gap(4.h),
+                // Text(description ??"", style: AppStyles.white12SemiBold),
+                // Gap(4.h),
                 Text(
                   description ??"",
                   style: AppStyles.white12SemiBold,
