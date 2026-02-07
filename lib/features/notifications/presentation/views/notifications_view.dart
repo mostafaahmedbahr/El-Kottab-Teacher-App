@@ -15,6 +15,7 @@ class _NotificationViewState extends State<NotificationView> {
   @override
   void initState() {
     context.read<NotificationsCubit>().getAllNotifications();
+    context.read<NotificationsCubit>().readAllNotifications();
     super.initState();
   }
 
@@ -28,8 +29,8 @@ class _NotificationViewState extends State<NotificationView> {
             context: context,
           );
           context.read<NotificationsCubit>().getAllNotifications();
-          context.read<NotificationsCubit>().getNotificationsCount();
-          context.read<NotificationsCubit>().readAllNotifications();
+          // context.read<NotificationsCubit>().getNotificationsCount();
+          // context.read<NotificationsCubit>().readAllNotifications();
         } else if (state is DeleteNotificationsErrorState) {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         }

@@ -96,10 +96,13 @@ class SuccessfulCalls extends StatelessWidget {
                 final calls = state.successfulCallsModel.data ?? [];
 
                 if (calls.isEmpty) {
-                  return Center(
-                    child: Text(
-                      LangKeys.noSuccessfulCallsYet.tr(),
-                      style: AppStyles.black16SemiBold,
+                  return SizedBox(
+                    height: 100.h,
+                    child: Center(
+                      child: Text(
+                        LangKeys.noSuccessfulCallsYet.tr(),
+                        style: AppStyles.black16SemiBold,
+                      ),
                     ),
                   );
                 }

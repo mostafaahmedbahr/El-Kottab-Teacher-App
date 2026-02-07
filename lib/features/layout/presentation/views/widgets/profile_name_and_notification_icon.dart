@@ -1,28 +1,21 @@
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../../../../core/shared_cubits/auth_cubit/auth_cubit.dart';
 import '../../../../../main_imports.dart';
 import '../../../../notifications/presentation/view_model/notifications_cubit.dart';
 import '../../../../notifications/presentation/view_model/notifications_states.dart';
 import 'package:badges/badges.dart' as badges;
-
 import '../../../../notifications/presentation/views/notifications_view.dart';
 import '../../../../profile/presentation/view_model/profile_cubit.dart';
 import '../../../../profile/presentation/view_model/profile_states.dart';
+
 class ProfileNameAndNotificationIcon extends StatefulWidget {
   const ProfileNameAndNotificationIcon({super.key});
-
   @override
   State<ProfileNameAndNotificationIcon> createState() => _ProfileNameAndNotificationIconState();
 }
-
 class _ProfileNameAndNotificationIconState extends State<ProfileNameAndNotificationIcon> {
   @override
   void initState() {
     super.initState();
-
-    final authCubit = context.read<AuthCubit>();
-
-    if (authCubit.isGuest) return;
 
     final profileCubit = context.read<ProfileCubit>();
     final notificationsCubit = context.read<NotificationsCubit>();
@@ -32,7 +25,7 @@ class _ProfileNameAndNotificationIconState extends State<ProfileNameAndNotificat
     }
 
     notificationsCubit.getNotificationsCount();
-    notificationsCubit.getAllNotifications();
+    // notificationsCubit.getAllNotifications();
   }
 
   @override

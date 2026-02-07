@@ -19,7 +19,9 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
       emit(GetAllNotificationsErrorState(failure.errMessage));
     }, (data) async {
       notificationsModel = data;
+      getNotificationsCount();
       emit(GetAllNotificationsSuccessState(data));
+
     });
   }
 
@@ -33,7 +35,6 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
     }, (data) async {
         readAllNotificationsModel = data;
         emit(ReadAllNotificationsSuccessState(data));
-        getNotificationsCount();
     });
   }
 
