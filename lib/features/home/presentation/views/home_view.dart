@@ -12,43 +12,35 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeCubit(getIt.get<HomeRepoImpl>())
-        ..getHomeBanners()
-        ..getTeacherStats(
-          teacherId: CacheHelper.getData(key: "userId"),
-        )
-        ..getSuccessfulCalls(),
-      child: Scaffold(
-        body: SafeArea(
-          child: BlocBuilder<HomeCubit, HomeStates>(
-            buildWhen: (previous, current) =>
-            current is GetTeacherStatsLoadingState ||
-                current is GetTeacherStatsErrorState ||
-                current is GetTeacherStatsSuccessState,
-            builder: (context, state) {
-              // 🔹 Loading
-              if (state is GetTeacherStatsLoadingState) {
-                return const HomeStatsShimmer();
-              }
+    return Scaffold(
+      body: SafeArea(
+        child: BlocBuilder<HomeCubit, HomeStates>(
+          buildWhen: (previous, current) =>
+          current is GetTeacherStatsLoadingState ||
+              current is GetTeacherStatsErrorState ||
+              current is GetTeacherStatsSuccessState,
+          builder: (context, state) {
+            // 🔹 Loading
+            if (state is GetTeacherStatsLoadingState) {
+              return const HomeStatsShimmer();
+            }
 
-              // 🔹 Error
-              if (state is GetTeacherStatsErrorState) {
-                return ErrorUi(
-                  errorState: state.error,
-                  onPressed: () {
-                    context.read<HomeCubit>().getTeacherStats(
-                      teacherId:
-                      CacheHelper.getData(key: "userId"),
-                    );
-                  },
-                );
-              }
+            // 🔹 Error
+            if (state is GetTeacherStatsErrorState) {
+              return ErrorUi(
+                errorState: state.error,
+                onPressed: () {
+                  context.read<HomeCubit>().getTeacherStats(
+                    teacherId:
+                    CacheHelper.getData(key: "userId"),
+                  );
+                },
+              );
+            }
 
-              // 🔹 Success
-              return const HomeContent();
-            },
-          ),
+            // 🔹 Success
+            return const HomeContent();
+          },
         ),
       ),
     );
