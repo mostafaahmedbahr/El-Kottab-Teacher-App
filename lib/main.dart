@@ -5,6 +5,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:zego_uikit/zego_uikit.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 import 'core/app_services/remote_services/service_locator.dart';
 import 'core/utils/bloc_observer.dart';
@@ -12,7 +15,7 @@ import 'core/utils/zego_service.dart';
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
-
+final GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
    await dotenv.load(fileName: ".env");
@@ -25,28 +28,41 @@ void main() async {
   debugPrint("Retrieved token: $token");
   setup();
   Bloc.observer = MyBlocObserver();
+  /// zego
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigateKey);
   ZegoService().init(
     userId: CacheHelper.getData(key: "userId").toString(),
     userName:  CacheHelper.getData(key: "userName").toString(),
     fcmToken: CacheHelper.getData(key: "fcmToken").toString(),
-  );
 
-
-  runApp(
-    EasyLocalization(
-      startLocale: const Locale('ar', ''),
-      supportedLocales: const [
-        Locale('ar', ''),
-        Locale('en', ''),
-      ],
-      path: 'lib/lang',
-      saveLocale: true,
-      fallbackLocale: const Locale('en', ''),
-      useOnlyLangCode: true,
-      assetLoader: const CodegenLoader(),
-      child: const MyApp(),
-    ),
   );
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    /// all time-consuming and waiting operations are DONE!!
+    /// jump to call page page if app active by offline call
+    ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
+  });
+  await ZegoUIKit().initLog().then((value) async {
+    await ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+      [ZegoUIKitSignalingPlugin()],
+    );
+    runApp(
+      EasyLocalization(
+        startLocale: const Locale('ar', ''),
+        supportedLocales: const [
+          Locale('ar', ''),
+          Locale('en', ''),
+        ],
+        path: 'lib/lang',
+        saveLocale: true,
+        fallbackLocale: const Locale('en', ''),
+        useOnlyLangCode: true,
+        assetLoader: const CodegenLoader(),
+        child: const MyApp(),
+      ),
+    );
+
+  });
+
 }
 
 Future<void> _initFirebaseMessaging() async {

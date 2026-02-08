@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:zego_uikit/zego_uikit.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
@@ -18,6 +19,31 @@ class ZegoService {
     final service = ZegoUIKitPrebuiltCallInvitationService();
 
     service.init(
+      notificationConfig: ZegoCallInvitationNotificationConfig(
+        androidNotificationConfig: ZegoCallAndroidNotificationConfig(
+          callIDVisibility: true
+        ),
+        iOSNotificationConfig:ZegoCallIOSNotificationConfig(
+          isSandboxEnvironment: true
+        ) ,
+      ),
+      ringtoneConfig:  ZegoCallRingtoneConfig(
+        incomingCallPath: "assets/sounds/ringTone.mp3",
+      ),
+      requireConfig: (ZegoCallInvitationData data) {
+        var config = (data.invitees.length > 1)
+            ? ZegoCallInvitationType.videoCall == data.type
+            ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
+            : ZegoUIKitPrebuiltCallConfig.groupVoiceCall()
+            : ZegoCallInvitationType.videoCall == data.type
+            ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
+            : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
+        // Modify your custom configurations here.
+        config.layout = ZegoLayout.gallery(
+          addBorderRadiusAndSpacingBetweenView: false,
+        );
+        return config;
+      },
       appID: appID,
       appSign: appSign,
       userID: userId,

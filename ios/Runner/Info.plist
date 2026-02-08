@@ -5,9 +5,16 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSCameraUsageDescription</key>
-    <string>We require camera access to connect to a call</string>
+    <string>We require camera access to connect</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>We require microphone access to connect to a call</string>
+    <string>We require microphone access to connect</string>
+    <key>NSAppTransportSecurity</key>
+       <dict>
+           <key>NSAllowsArbitraryLoads</key>
+           <true/>
+       </dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Photo library access is required</string>
 	<key>CFBundleDisplayName</key>
 	<string>El Kottab Teacher App</string>
 	<key>CFBundleExecutable</key>
