@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/app_services/remote_services/service_locator.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/zego_service.dart';
+// import 'services/firebase_call_service.dart'; // TODO: Re-enable after fixing Gradle
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
@@ -28,6 +29,10 @@ final GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _requestPermissions();
+
+  // TODO: Re-enable Firebase Call Service after fixing Gradle
+  // await FirebaseCallService().initialize();
+
   await dotenv.load(fileName: ".env");
   if (Platform.isIOS) {
     await Firebase.initializeApp();
