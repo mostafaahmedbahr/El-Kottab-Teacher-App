@@ -22,13 +22,13 @@ import 'features/register/data/repos/register_repos_imple.dart';
 import 'features/reviews/data/repos/reviews_repo_impl.dart';
 import 'features/reviews/presentation/view_model/reviews_cubit.dart';
 import 'features/splash/presentation/views/splash_view.dart';
+import 'main.dart';
 import 'main_imports.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.navigatorKey});
+  final GlobalKey navigatorKey;
 
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, locale) {
                   context.setLocale(locale);
                   return MaterialApp(
-                    navigatorKey: navigatorKey,
+                    navigatorKey:navigateKey,
                     localizationsDelegates: context.localizationDelegates,
                     supportedLocales: context.supportedLocales,
                     locale: context.locale,

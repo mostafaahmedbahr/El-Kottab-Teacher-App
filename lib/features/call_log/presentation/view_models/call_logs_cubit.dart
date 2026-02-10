@@ -29,19 +29,31 @@ class CallLogsCubit extends Cubit<CallLogsStates> {
     getAllCalls(status);
   }
 
-
   CallsModel? callsModel;
 
   Future<void> getAllCalls(String? type) async {
     emit(GetCallsLoadingState());
     var result = await callLogsRepo.getAllCalls(type);
     result.fold(
-          (failure) {
+      (failure) {
         emit(GetCallsErrorState(failure.errMessage));
       },
-          (data) {
+      (data) {
         callsModel = data;
         emit(GetCallsSuccessState(data));
+      },
+    );
+  }
+
+  Future<void> addCallRevision(int callId, String revision) async {
+    emit(AddRevisionLoadingState());
+    var result = await callLogsRepo.addCallRevision(callId, revision);
+    result.fold(
+      (failure) {
+        emit(AddRevisionErrorState(failure.errMessage));
+      },
+      (data) {
+        emit(AddRevisionSuccessState(data));
       },
     );
   }

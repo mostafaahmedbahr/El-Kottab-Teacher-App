@@ -50,7 +50,12 @@ android {
 flutter {
     source = "../.."
 }
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
+    
+    // Firebase dependencies for FCM
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-analytics")
 }

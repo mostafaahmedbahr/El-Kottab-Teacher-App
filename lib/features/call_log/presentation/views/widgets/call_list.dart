@@ -1,4 +1,4 @@
-  import '../../../../../main_imports.dart';
+import '../../../../../main_imports.dart';
 import '../../view_models/call_logs_cubit.dart';
 import 'call_log_item.dart';
 
@@ -19,12 +19,9 @@ class CallList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.only(bottom: 12.h),
-          child: CallLogItem(
-            // model: calls[index],
-          ),
+          child: CallLogItem(callData: calls[index]),
         );
       },
     );
   }
 }
-

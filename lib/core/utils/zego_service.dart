@@ -16,33 +16,45 @@ class ZegoService {
     required String userName,
     required String fcmToken,
   }) {
+    print(
+      '🔔 ZegoService Init - UserID: $userId, UserName: $userName, FCM: $fcmToken',
+    );
+
     final service = ZegoUIKitPrebuiltCallInvitationService();
 
     service.init(
       notificationConfig: ZegoCallInvitationNotificationConfig(
         androidNotificationConfig: ZegoCallAndroidNotificationConfig(
-          callIDVisibility: true
+          callIDVisibility: true,
         ),
-        iOSNotificationConfig:ZegoCallIOSNotificationConfig(
-          isSandboxEnvironment: true
-        ) ,
+        iOSNotificationConfig: ZegoCallIOSNotificationConfig(
+          isSandboxEnvironment: true,
+        ),
       ),
-      ringtoneConfig:  ZegoCallRingtoneConfig(
-        incomingCallPath: "assets/sounds/ringTone.mp3",
+      ringtoneConfig: ZegoCallRingtoneConfig(
+        // Temporarily disable ringtone to test audio session issue
+        // incomingCallPath: "assets/sounds/ringTone.mp3",
       ),
       requireConfig: (ZegoCallInvitationData data) {
-        var config = (data.invitees.length > 1)
-            ? ZegoCallInvitationType.videoCall == data.type
-            ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
-            : ZegoUIKitPrebuiltCallConfig.groupVoiceCall()
-            : ZegoCallInvitationType.videoCall == data.type
-            ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
-            : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
-        // Modify your custom configurations here.
-        config.layout = ZegoLayout.gallery(
-          addBorderRadiusAndSpacingBetweenView: false,
-        );
-        return config;
+        print('📞 Incoming call data: ${data.toString()}');
+        try {
+          var config = (data.invitees.length > 1)
+              ? ZegoCallInvitationType.videoCall == data.type
+                    ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
+                    : ZegoUIKitPrebuiltCallConfig.groupVoiceCall()
+              : ZegoCallInvitationType.videoCall == data.type
+              ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
+              : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
+          // Modify your custom configurations here.
+          config.layout = ZegoLayout.gallery(
+            addBorderRadiusAndSpacingBetweenView: false,
+          );
+          return config;
+        } catch (e) {
+          print('❌ Error in requireConfig: $e');
+          // Return a default config if there's an error
+          return ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall();
+        }
       },
       appID: appID,
       appSign: appSign,
@@ -51,11 +63,12 @@ class ZegoService {
       plugins: [ZegoUIKitSignalingPlugin()],
     );
 
-    // /// ⭐ أهم سطر للمكالمات المغلقة
-    // service.setPushConfig(
-    //   resourceID: "zego_push",
-    //   pushToken: fcmToken,
-    // );
+    /// ⭐ أهم سطر للمكالمات المغلقة
+    // The service is already initialized with plugins, which should handle push notifications
+    // Make sure FCM token is properly configured in your Zego dashboard
+    ZegoUIKit().init(appID: appID, appSign: appSign);
+
+    print('✅ ZegoService initialized successfully');
   }
 
   void unInit() {
