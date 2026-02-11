@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
                     ..getTeacherStats(
                       teacherId: CacheHelper.getData(key: "userId"),
                     )
-                    ..getSuccessfulCalls(),
+                    ..getSuccessfulCalls()..getTeacherPerformance(),
                 ),
                 BlocProvider(
                   create: (context) =>

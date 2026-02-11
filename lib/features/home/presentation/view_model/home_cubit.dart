@@ -103,10 +103,10 @@ class HomeCubit extends Cubit<HomeStates> {
 
   TeacherPerformanceModel? teacherPerformanceModel;
 
-  Future<void> getTeacherPerformance({required int teacherId}) async {
+  Future<void> getTeacherPerformance() async {
     emit(GetTeacherPerformanceLoadingState());
 
-    var result = await homeRepo!.getTeacherPerformance(teacherId: teacherId);
+    var result = await homeRepo!.getTeacherPerformance( );
 
     result.fold(
       (failure) {

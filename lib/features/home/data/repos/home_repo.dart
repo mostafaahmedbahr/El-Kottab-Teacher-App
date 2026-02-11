@@ -18,7 +18,5 @@ abstract class HomeRepo {
     int? limit,
   });
 
-  Future<Either<Failure, TeacherPerformanceModel>> getTeacherPerformance({
-    required int teacherId,
-  });
+  Future<Either<Failure, TeacherPerformanceModel>> getTeacherPerformance();
 }

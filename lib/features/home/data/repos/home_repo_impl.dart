@@ -77,9 +77,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, TeacherPerformanceModel>> getTeacherPerformance({
-    required int teacherId,
-  }) async {
+  Future<Either<Failure, TeacherPerformanceModel>> getTeacherPerformance() async {
     try {
       var response = await apiService!.getData(
         endPoint: EndPoints.teacherStatisics,

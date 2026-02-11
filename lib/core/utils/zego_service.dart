@@ -34,8 +34,8 @@ class ZegoService {
         ),
       ),
       ringtoneConfig: ZegoCallRingtoneConfig(
-        // Enable ringtone for calls
-        incomingCallPath: "assets/sounds/ringTone.mp3",
+        // Temporarily disable ringtone to fix audio session issue
+        // incomingCallPath: "assets/sounds/ringTone.mp3",
       ),
       requireConfig: (ZegoCallInvitationData data) {
         print('📞 Incoming call data: ${data.toString()}');

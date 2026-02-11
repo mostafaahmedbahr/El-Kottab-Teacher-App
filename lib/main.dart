@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
-import 'package:el_kottab_teacher_app/services/zego_init_service.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,7 +10,6 @@ import 'core/app_services/local_services/cache_helper.dart';
 import 'core/utils/zego_service.dart';
 import 'services/call_notification_service.dart';
 // import 'services/firebase_call_service.dart'; // TODO: Re-enable after fixing Gradle
-// import 'services/zego_init_service.dart'; // Using original ZegoService instead
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
@@ -155,12 +151,38 @@ Future<void> _initializeZegoServices() async {
   try {
     debugPrint('🎯 Initializing Zego services...');
 
-    // Initialize Zego using the dedicated service
-    await ZegoInitService().initializeZego(navigateKey);
+    // Set navigator key for Zego
+    ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigateKey);
+
+    // Initialize Zego log
+    await ZegoUIKit().initLog();
+
+    // Use system calling UI with signaling plugin
+    await ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI([
+      ZegoUIKitSignalingPlugin(),
+    ]);
+
+    // Get user data from cache
+    String userId = CacheHelper.getData(key: "userId").toString();
+    String userName = CacheHelper.getData(key: "userName").toString();
+    String fcmToken = CacheHelper.getData(key: "fcmToken").toString();
+
+    // Handle empty/null userName
+    if (userName.isEmpty || userName == "null") {
+      userName = "Teacher";
+    }
+
+    debugPrint('👤 Zego User Data:');
+    debugPrint('   UserID: $userId');
+    debugPrint('   UserName: $userName');
+    debugPrint('   FCM Token: $fcmToken');
+
+    // Initialize Zego service using original working ZegoService
+    ZegoService().init(userId: userId, userName: userName, fcmToken: fcmToken);
 
     // Handle offline calls after app is ready
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ZegoInitService().handleOfflineCall();
+      ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
     });
 
     debugPrint('✅ Zego services initialized successfully');
