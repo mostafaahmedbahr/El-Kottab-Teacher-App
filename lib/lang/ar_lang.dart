@@ -176,5 +176,6 @@ class ArLang {
     "upload": "رفع",
     "refundPolicy": "سياسة الاسترجاع",
     "pricePolicy": "سياسة الأسعار",
+    "close": "اغلاق",
   };
 }

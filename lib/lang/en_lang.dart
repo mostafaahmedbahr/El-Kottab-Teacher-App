@@ -177,6 +177,6 @@ class EnLang {
     'upload': 'upload',
     "refundPolicy": "Refund policy",
     "pricePolicy": "Price policy",
-
+    "close": "Close",
   };
 }

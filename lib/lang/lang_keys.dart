@@ -178,10 +178,10 @@ abstract class LangKeys {
   static const refundPolicy = "refundPolicy";
   static const pricePolicy = "pricePolicy";
 
-
-  static const theQualificationCertificateMustBeUploaded = "theQualificationCertificateMustBeUploaded";
-  static const theVacationCertificateMustBeUploaded = "theVacationCertificateMustBeUploaded";
+  static const theQualificationCertificateMustBeUploaded =
+      "theQualificationCertificateMustBeUploaded";
+  static const theVacationCertificateMustBeUploaded =
+      "theVacationCertificateMustBeUploaded";
   static const unAvailable = "unAvailable";
+  static const close = "close";
 }
-
-
