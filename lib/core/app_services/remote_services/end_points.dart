@@ -36,6 +36,7 @@ class EndPoints {
   static const String  refundPolicy = 'settings/refund_policy';
   static const String  privacyPolicy = 'settings/privacy_policy';
   static const String  settings = 'settings';
+  static const String  teacherStatisics = 'teacher-statisics';
 
 
 

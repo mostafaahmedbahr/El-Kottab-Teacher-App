@@ -76,12 +76,13 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
+  @override
   Future<Either<Failure, TeacherPerformanceModel>> getTeacherPerformance({
     required int teacherId,
   }) async {
     try {
       var response = await apiService!.getData(
-        endPoint: "${EndPoints.teacherStats}/$teacherId",
+        endPoint: EndPoints.teacherStatisics,
       );
       TeacherPerformanceModel result = TeacherPerformanceModel.fromJson(
         response.data,
