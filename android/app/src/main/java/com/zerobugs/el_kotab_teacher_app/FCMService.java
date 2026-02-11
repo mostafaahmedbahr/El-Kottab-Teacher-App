@@ -26,8 +26,13 @@ public class FCMService extends FirebaseMessagingService {
         
         // Handle Zego call notifications
         if (isZegoCall(remoteMessage)) {
-            Log.d(TAG, "📞 Zego call detected, starting call activity");
-            showCallNotification(remoteMessage);
+            Log.d(TAG, "📞 Zego call detected, // Show persistent call notification");
+            String callerName = remoteMessage.getData().get("callerName");
+            String callId = remoteMessage.getData().get("callID");
+            showCallNotification(callerName, callId);
+            
+            // Start call notification service for persistent ringing
+            startCallNotificationService(callerName, callId);
             startCallActivity();
         }
     }
@@ -45,12 +50,12 @@ public class FCMService extends FirebaseMessagingService {
                message.getData().containsKey("zego");
     }
 
-    private void showCallNotification(RemoteMessage message) {
+    private void showCallNotification(String callerName, String callId) {
         try {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(android.R.drawable.ic_dialog_email)
-                    .setContentTitle("Incoming Call")
-                    .setContentText("Tap to answer")
+                    .setContentTitle("📞 Incoming Call")
+                    .setContentText("Call from " + (callerName != null ? callerName : "Unknown"))
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
                     .setFullScreenIntent(createCallIntent(), true);
@@ -59,6 +64,18 @@ public class FCMService extends FirebaseMessagingService {
             notificationManager.notify(1, builder.build());
         } catch (Exception e) {
             Log.e(TAG, "Error showing notification: " + e.getMessage());
+        }
+    }
+    
+    private void startCallNotificationService(String callerName, String callId) {
+        try {
+            Intent serviceIntent = new Intent(this, CallNotificationService.class);
+            serviceIntent.putExtra("caller_name", callerName);
+            serviceIntent.putExtra("call_id", callId);
+            startService(serviceIntent);
+            Log.d(TAG, "✅ Call notification service started");
+        } catch (Exception e) {
+            Log.e(TAG, "Error starting call notification service: " + e.getMessage());
         }
     }
 

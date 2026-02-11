@@ -25,7 +25,7 @@ android {
         applicationId = "com.zerobugs.el_kotab_teacher_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -35,8 +35,8 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             // ✅ Kotlin DSL الصحيح
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -58,4 +58,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("im.zego:zpns-fcm:2.8.0")
 }

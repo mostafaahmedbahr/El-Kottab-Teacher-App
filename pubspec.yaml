@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ^3.8.1
@@ -76,10 +76,11 @@ dependencies:
   badges: ^3.1.2
   firebase_core:
   firebase_messaging:
-  #zego_uikit_prebuilt_call:
-  #zego_uikit_signaling_plugin:
-  #zego_uikit: ^2.28.44
-  #flutter_dotenv: ^6.0.0
+  zego_uikit_prebuilt_call:
+  zego_uikit_signaling_plugin:
+  zego_uikit: ^2.28.44
+  flutter_dotenv: ^6.0.0
+  zego_zpns: ^2.8.0
 
 dev_dependencies:
   flutter_test:
@@ -105,7 +106,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   # assets:
   assets:
-    #- .env
+    - .env
     - assets/images/svgs/
     - assets/images/pngs/
     - assets/images/jpgs/
