@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<HomeCubit, HomeStates>(
           buildWhen: (previous, current) =>
-          current is GetTeacherStatsLoadingState ||
+              current is GetTeacherStatsLoadingState ||
               current is GetTeacherStatsErrorState ||
               current is GetTeacherStatsSuccessState,
           builder: (context, state) {
@@ -28,8 +28,7 @@ class HomeView extends StatelessWidget {
                 errorState: state.error,
                 onPressed: () {
                   context.read<HomeCubit>().getTeacherStats(
-                    teacherId:
-                    CacheHelper.getData(key: "userId"),
+                    teacherId: CacheHelper.getData(key: "userId"),
                   );
                 },
               );
@@ -43,4 +42,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-

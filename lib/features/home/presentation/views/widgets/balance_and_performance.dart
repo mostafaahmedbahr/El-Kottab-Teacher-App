@@ -71,26 +71,16 @@ class BalanceAndPerformance extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(16.r),
                   decoration: _cardDecoration(),
-                  child: () {
-                    // 🔹 Loading
-                    if (state is GetTeacherPerformanceLoadingState ||
-                        performanceData == null) {
-                      return const PerformanceShimmer();
-                    }
-
-                    // 🔹 Error
-                    if (state is GetTeacherPerformanceErrorState) {
-                      return const Center(
-                        child: Icon(Icons.error_outline, color: Colors.red),
-                      );
-                    }
-
-                    // 🔹 Success
-
-                    return PerformanceContent(performanceData: performanceData);
-                  }(),
+                  child: state is GetTeacherPerformanceLoadingState || performanceData == null
+                      ? const PerformanceShimmer()
+                      : state is GetTeacherPerformanceErrorState
+                      ? const Center(
+                    child: Icon(Icons.error_outline, color: Colors.red),
+                  )
+                      : PerformanceContent(performanceData: performanceData),
                 ),
               ),
+
             ],
           ),
         );
