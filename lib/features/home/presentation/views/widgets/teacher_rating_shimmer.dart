@@ -8,8 +8,8 @@ class TeacherRatingShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade700,
-      highlightColor: Colors.grey.shade500,
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -39,11 +39,7 @@ class TeacherRatingShimmer extends StatelessWidget {
           ),
 
           // الخط الفاصل
-          Container(
-            width: 1.w,
-            height: 40.h,
-            color: Colors.white,
-          ),
+          Container(width: 1.w, height: 40.h, color: Colors.white),
 
           // الجزء اليمين (النجوم + الريفيوز)
           Column(
