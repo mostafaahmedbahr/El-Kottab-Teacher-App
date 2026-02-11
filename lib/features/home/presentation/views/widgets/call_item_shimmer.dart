@@ -17,8 +17,8 @@ class CallItemShimmer extends StatelessWidget {
       child: Column(
         children: [
           Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: CircleAvatar(radius: 28.r, backgroundColor: Colors.grey),
           ),
           Gap(8.h),
