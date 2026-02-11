@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
+import 'package:el_kottab_teacher_app/widgets/overlay_permission_widget.dart';
 
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
@@ -28,7 +29,6 @@ import 'main_imports.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.navigatorKey});
   final GlobalKey navigatorKey;
-
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,8 @@ class MyApp extends StatelessWidget {
                     ..getTeacherStats(
                       teacherId: CacheHelper.getData(key: "userId"),
                     )
-                    ..getSuccessfulCalls()..getTeacherPerformance(),
+                    ..getSuccessfulCalls()
+                    ..getTeacherPerformance(),
                 ),
                 BlocProvider(
                   create: (context) =>
@@ -93,7 +94,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, locale) {
                   context.setLocale(locale);
                   return MaterialApp(
-                    navigatorKey:navigateKey,
+                    navigatorKey: navigateKey,
                     localizationsDelegates: context.localizationDelegates,
                     supportedLocales: context.supportedLocales,
                     locale: context.locale,
@@ -114,7 +115,7 @@ class MyApp extends StatelessWidget {
                             backgroundColor: AppColors.white,
                           ),
                     ),
-                    home: const SplashView(),
+                    home: OverlayPermissionWidget(child: const SplashView()),
                     builder: (context, child) {
                       SystemChrome.setSystemUIOverlayStyle(
                         const SystemUiOverlayStyle(
