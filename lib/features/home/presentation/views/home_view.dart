@@ -9,33 +9,59 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    // Load performance data when HomeView is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userId = CacheHelper.getData(key: "userId");
+      if (userId != null) {
+        context.read<HomeCubit>().getTeacherStats(teacherId: userId);
+        context.read<HomeCubit>().getTeacherPerformance();
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<HomeCubit, HomeStates>(
           buildWhen: (previous, current) =>
               current is GetTeacherStatsLoadingState ||
               current is GetTeacherStatsErrorState ||
-              current is GetTeacherStatsSuccessState,
+              current is GetTeacherStatsSuccessState ||
+              current is GetTeacherPerformanceLoadingState ||
+              current is GetTeacherPerformanceErrorState ||
+              current is GetTeacherPerformanceSuccessState,
           builder: (context, state) {
-            // 🔹 Loading
-            if (state is GetTeacherStatsLoadingState) {
+            // 🔹 Loading (either stats or performance loading)
+            if (state is GetTeacherStatsLoadingState ||
+                state is GetTeacherPerformanceLoadingState) {
               return const HomeStatsShimmer();
             }
 
-            // 🔹 Error
-            if (state is GetTeacherStatsErrorState) {
+            // 🔹 Error (either stats or performance error)
+            if (state is GetTeacherStatsErrorState ||
+                state is GetTeacherPerformanceErrorState) {
               return ErrorUi(
-                errorState: state.error,
+                errorState: state is GetTeacherStatsErrorState
+                    ? state.error
+                    : (state as GetTeacherPerformanceErrorState).error,
                 onPressed: () {
-                  context.read<HomeCubit>().getTeacherStats(
-                    teacherId: CacheHelper.getData(key: "userId"),
-                  );
+                  final userId = CacheHelper.getData(key: "userId");
+                  if (userId != null) {
+                    context.read<HomeCubit>().getTeacherStats(
+                      teacherId: userId,
+                    );
+                    context.read<HomeCubit>().getTeacherPerformance();
+                  }
                 },
               );
             }
 
-            // 🔹 Success
-            return const HomeContent();
+            // 🔹 Success (both stats and performance loaded)
+            if (state is GetTeacherStatsSuccessState ||
+                state is GetTeacherPerformanceSuccessState) {
+              return const HomeContent();
+            }
+
+            // 🔹 Default state
+            return const HomeStatsShimmer();
           },
         ),
       ),

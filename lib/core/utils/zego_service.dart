@@ -33,10 +33,6 @@ class ZegoService {
           isSandboxEnvironment: true,
         ),
       ),
-      ringtoneConfig: ZegoCallRingtoneConfig(
-        // Temporarily disable ringtone to fix audio session issue
-        // incomingCallPath: "assets/sounds/ringTone.mp3",
-      ),
       requireConfig: (ZegoCallInvitationData data) {
         print('📞 Incoming call data: ${data.toString()}');
         try {
