@@ -1,3 +1,6 @@
+import 'package:el_kottab_teacher_app/features/add_appointments/presentation/views/widgets/teacher_bookings_view.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/balance_dialog.dart';
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
 
 import '../../../../../main_imports.dart';
@@ -21,35 +24,57 @@ class ProfileListItems extends StatelessWidget {
           ProfileListItem(
             title: LangKeys.balance,
             svgImage: SvgImages.dollar,
-            onTap: (){
+            onTap: () {
+              final stats = context.read<HomeCubit>().teacherStatsModel?.data;
 
+              if (stats != null) {
+                showBalanceDialog(
+                  context: context,
+                  balance: stats.walletMoney ?? 0,
+                  minutes: stats.walletMinutes ?? 0,
+                  currency: stats.currency ?? 'ج.م',
+                );
+              }
             },
           ),
           ProfileListItem(
             title: LangKeys.changePassword,
             svgImage: SvgImages.lock,
-            onTap: (){
-              AppNav.customNavigator(context: context, screen: ChangePasswordView(screenName: "",));
+            onTap: () {
+              AppNav.customNavigator(
+                context: context,
+                screen: ChangePasswordView(screenName: ""),
+              );
             },
           ),
           ProfileListItem(
             title: LangKeys.contactUs,
             svgImage: SvgImages.callCalling,
-            onTap: (){
+            onTap: () {
               AppNav.customNavigator(context: context, screen: ContactUsView());
             },
           ),
           ProfileListItem(
             title: LangKeys.settings,
             svgImage: SvgImages.settings,
-            isLast: true,
-            onTap: (){
+            isLast: false,
+            onTap: () {
               AppNav.customNavigator(context: context, screen: SettingsView());
             },
           ),
 
+          ProfileListItem(
+            title: "الحجوزات",
+            svgImage: SvgImages.chat,
 
-
+            isLast: true,
+            onTap: () {
+              AppNav.customNavigator(
+                context: context,
+                screen: const TeacherBookingsView(),
+              );
+            },
+          ),
         ],
       ),
     );
