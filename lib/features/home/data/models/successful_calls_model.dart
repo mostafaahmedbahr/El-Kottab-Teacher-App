@@ -27,11 +27,11 @@ class Data {
   int? id;
   int? userId;
   int? teacherId;
-  String? roomId;
-  num? durationMinutes;
+  dynamic roomId;
+  dynamic durationMinutes;
   String? status;
   String? startedAt;
-  dynamic endedAt;
+  String? endedAt;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -75,7 +75,7 @@ class User {
   int? id;
   String? name;
   String? email;
-  String? image;
+  dynamic image;
 
   User({this.id, this.name, this.email, this.image});
 

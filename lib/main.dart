@@ -58,17 +58,20 @@ void main() async {
   // await FirebaseCallService().initialize();
 
   await dotenv.load(fileName: ".env");
-
+  // Initialize cache and services
+  await CacheHelper.init();
   // Initialize Firebase
   await Firebase.initializeApp();
 
   // Configure Firebase Messaging
   await _configureFirebaseMessaging();
 
-  // Initialize cache and services
-  await CacheHelper.init();
-  String? token = await CacheTokenManger.getUserToken();
-  debugPrint("Retrieved token: $token");
+  // Get FCM token after Firebase is configured
+  String? fcmToken = CacheHelper.getData(key: "fcmToken") as String?;
+  debugPrint("🔔 FCM Token from cache: $fcmToken");
+
+  String? userToken = await CacheTokenManger.getUserToken();
+  debugPrint("👤 User token: $userToken");
 
   await EasyLocalization.ensureInitialized();
   setup();
@@ -135,32 +138,98 @@ Future<void> _configureFirebaseMessaging() async {
     // Subscribe to topics
     FirebaseMessaging.instance.subscribeToTopic('all');
 
-    // Get and save FCM token
-    final fcmToken = await FirebaseMessaging.instance.getToken();
-    if (fcmToken != null) {
-      await CacheHelper.saveData(key: "fcmToken", value: fcmToken);
-      debugPrint('🔔 FCM Token saved: $fcmToken');
+    // Check if Firebase is available first
+    bool firebaseAvailable = true;
+    String? fcmToken;
+
+    try {
+      // Quick test to see if Firebase services are available
+      debugPrint('� Checking Firebase availability...');
+      fcmToken = await FirebaseMessaging.instance.getToken();
+
+      if (fcmToken != null && fcmToken.isNotEmpty) {
+        await CacheHelper.saveData(key: "fcmToken", value: fcmToken);
+        debugPrint('🔔 FCM Token saved: $fcmToken');
+      } else {
+        firebaseAvailable = false;
+        debugPrint('⚠️ Firebase services not available on this device');
+      }
+    } catch (e) {
+      firebaseAvailable = false;
+      debugPrint('❌ Firebase not available: $e');
+
+      // Check if it's the common SERVICE_NOT_AVAILABLE error
+      if (e.toString().contains('SERVICE_NOT_AVAILABLE')) {
+        debugPrint('💡 This is likely because:');
+        debugPrint('   - Testing on emulator without Google Play Services');
+        debugPrint('   - No internet connection');
+        debugPrint('   - Device in airplane mode');
+        debugPrint(
+          '🔧 Solution: Test on a real Android device with Google Play',
+        );
+      }
     }
 
-    // Listen for token refresh
-    FirebaseMessaging.instance.onTokenRefresh
-        .listen((newToken) {
-          debugPrint('🔄 FCM Token refreshed: $newToken');
-          CacheHelper.saveData(key: "fcmToken", value: newToken);
-        })
-        .onError((err) {
-          debugPrint('❌ FCM token refresh error: $err');
-        });
+    // If Firebase is not available, use a mock token for development
+    if (!firebaseAvailable || (fcmToken == null || fcmToken.isEmpty)) {
+      debugPrint('🔧 Using mock FCM token for development');
+      fcmToken = 'mock_fcm_token_development_only';
+      await CacheHelper.saveData(key: "fcmToken", value: fcmToken);
+      debugPrint('🔔 Mock FCM Token saved: $fcmToken');
+    }
 
-    debugPrint('✅ Firebase Messaging configured successfully');
+    // Listen for token refresh (only if Firebase is available)
+    if (firebaseAvailable) {
+      FirebaseMessaging.instance.onTokenRefresh
+          .listen((newToken) {
+            debugPrint('🔄 FCM Token refreshed: $newToken');
+            CacheHelper.saveData(key: "fcmToken", value: newToken);
+          })
+          .onError((err) {
+            debugPrint('❌ FCM token refresh error: $err');
+          });
+    }
+
+    if (firebaseAvailable) {
+      debugPrint('✅ Firebase Messaging configured successfully');
+    } else {
+      debugPrint(
+        '⚠️ Firebase Messaging configured with mock token (development mode)',
+      );
+    }
   } catch (e) {
     debugPrint('❌ Error configuring Firebase Messaging: $e');
+    debugPrint('💡 This might be due to:');
+    debugPrint('   - No Google Play Services on device');
+    debugPrint('   - Firebase project not configured');
+    debugPrint('   - Network connectivity issues');
+    debugPrint('   - Device in airplane mode');
+
+    // Save a mock token even if Firebase fails completely
+    String mockToken = 'mock_fcm_token_fallback';
+    await CacheHelper.saveData(key: "fcmToken", value: mockToken);
+    debugPrint('🔔 Fallback FCM Token saved: $mockToken');
   }
 }
 
 Future<void> _initializeZegoServices() async {
   try {
     debugPrint('🎯 Initializing Zego services...');
+
+    // Check if FCM token is available
+    String? fcmToken = CacheHelper.getData(key: "fcmToken") as String?;
+    if (fcmToken == null || fcmToken.isEmpty) {
+      debugPrint('❌ FCM Token is null or empty, waiting for token...');
+      // Wait a bit for token to be available
+      await Future.delayed(const Duration(seconds: 3));
+      fcmToken = CacheHelper.getData(key: "fcmToken") as String?;
+    }
+
+    if (fcmToken == null || fcmToken.isEmpty) {
+      debugPrint('⚠️ FCM Token still null, using fallback for Zego calls');
+      // Use a fallback token for testing (this might not work for actual calls)
+      fcmToken = "fallback_token_for_testing";
+    }
 
     // Set navigator key for Zego
     ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigateKey);
@@ -176,7 +245,6 @@ Future<void> _initializeZegoServices() async {
     // Get user data from cache
     String userId = CacheHelper.getData(key: "userId").toString();
     String userName = CacheHelper.getData(key: "userName").toString();
-    String fcmToken = CacheHelper.getData(key: "fcmToken").toString();
 
     // Handle empty/null userName
     if (userName.isEmpty || userName == "null") {
@@ -186,7 +254,7 @@ Future<void> _initializeZegoServices() async {
     debugPrint('👤 Zego User Data:');
     debugPrint('   UserID: $userId');
     debugPrint('   UserName: $userName');
-    debugPrint('   FCM Token: $fcmToken');
+    debugPrint('   FCM Token: ${fcmToken.substring(0, 10)}...');
 
     // Initialize Zego service using original working ZegoService
     ZegoService().init(userId: userId, userName: userName, fcmToken: fcmToken);
