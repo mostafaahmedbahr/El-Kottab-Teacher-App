@@ -1,5 +1,6 @@
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/views/widgets/teacher_bookings_view.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
+
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/balance_dialog.dart';
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
 

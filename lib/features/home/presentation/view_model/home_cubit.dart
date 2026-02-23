@@ -106,7 +106,7 @@ class HomeCubit extends Cubit<HomeStates> {
   Future<void> getTeacherPerformance() async {
     emit(GetTeacherPerformanceLoadingState());
 
-    var result = await homeRepo!.getTeacherPerformance( );
+    var result = await homeRepo!.getTeacherPerformance();
 
     result.fold(
       (failure) {
