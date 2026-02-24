@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+// import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class CallNotificationService {
   static const MethodChannel _channel = MethodChannel('calls');
-  static final CallNotificationService _instance = CallNotificationService._internal();
+  static final CallNotificationService _instance =
+      CallNotificationService._internal();
   factory CallNotificationService() => _instance;
   CallNotificationService._internal();
 
@@ -15,7 +16,7 @@ class CallNotificationService {
 
   Future<dynamic> _handleMethodCall(MethodCall call) async {
     debugPrint('📱 Method received: ${call.method}');
-    
+
     switch (call.method) {
       case 'onCallReceived':
         await _handleCallReceived(call.arguments);
@@ -31,15 +32,17 @@ class CallNotificationService {
         final action = arguments['action'] as String?;
         final callerName = arguments['caller_name'] as String? ?? 'Unknown';
         final callId = arguments['call_id'] as String? ?? '';
-        
-        debugPrint('📞 Call received - Action: $action, Caller: $callerName, CallID: $callId');
-        
+
+        debugPrint(
+          '📞 Call received - Action: $action, Caller: $callerName, CallID: $callId',
+        );
+
         if (action == 'answer_call') {
           debugPrint('📞 Answering call from $callerName');
-          
+
           // Enter the accepted offline call to show Zego call UI
-          ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
-          
+          // ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
+
           // Show a snackbar to indicate call is being answered
           _showCallAnsweredNotification(callerName);
         }
@@ -51,7 +54,7 @@ class CallNotificationService {
 
   void _showCallAnsweredNotification(String callerName) {
     debugPrint('🔔 Showing call answered notification for $callerName');
-    
+
     // You can show a local notification or snackbar here
     // For now, we'll just log it since Zego handles the UI
     WidgetsBinding.instance.addPostFrameCallback((_) {
