@@ -1,9 +1,10 @@
+import 'package:el_kottab_teacher_app/features/home/data/models/teacher_performance_model.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_states.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 
 import 'balance_card_shimmer.dart';
-import 'Performance_Card_Shimmer.dart';
+
 import 'balance_content.dart';
 import 'performance_content.dart';
 
@@ -21,15 +22,17 @@ class BalanceAndPerformance extends StatelessWidget {
           current is GetTeacherPerformanceSuccessState ||
           current is GetTeacherPerformanceErrorState,
       builder: (context, state) {
+        final cubit = context.read<HomeCubit>();
+
         // ===== Teacher Stats Data =====
-        final statsData = state is GetTeacherStatsSuccessState
-            ? state.teacherStatsModel.data
-            : null;
+        final statsData = cubit.teacherStatsModel?.data;
 
         // ===== Teacher Performance Data =====
-        final performanceData = state is GetTeacherPerformanceSuccessState
-            ? state.teacherPerformanceModel.data
-            : null;
+        // final performanceData = state is GetTeacherPerformanceSuccessState
+        //     ? state.teacherPerformanceModel.data
+        //     : null;
+        // final cubit = context.read<HomeCubit>();
+        // final performanceData = cubit.teacherPerformanceModel?.data;
 
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
@@ -42,8 +45,7 @@ class BalanceAndPerformance extends StatelessWidget {
                   decoration: _cardDecoration(),
                   child: () {
                     // 🔹 Loading
-                    if (state is GetTeacherStatsLoadingState ||
-                        statsData == null) {
+                    if (statsData == null) {
                       return const BalanceCardShimmer();
                     }
 
@@ -71,16 +73,15 @@ class BalanceAndPerformance extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(16.r),
                   decoration: _cardDecoration(),
-                  child: state is GetTeacherPerformanceLoadingState || performanceData == null
-                      ? const PerformanceShimmer()
-                      : state is GetTeacherPerformanceErrorState
-                      ? const Center(
-                    child: Icon(Icons.error_outline, color: Colors.red),
-                  )
-                      : PerformanceContent(performanceData: performanceData),
+                  child: PerformanceContent(
+                    performanceData: PerformanceData(
+                      successCall: "15",
+                      overview: 85,
+                      totalCall: 20,
+                    ),
+                  ),
                 ),
               ),
-
             ],
           ),
         );
