@@ -3,7 +3,7 @@ import 'package:el_kottab_teacher_app/features/chat/presentation/view_model/chat
 import 'package:el_kottab_teacher_app/features/chat/presentation/view_model/chat_states.dart';
 import 'package:el_kottab_teacher_app/features/chat/presentation/views/widgets/right_message_by_me.dart';
 import '../../../../../main_imports.dart';
-import 'left_message_from_teacher.dart';
+import 'left_message_from_student.dart';
 
 class MessageList extends StatelessWidget {
   const MessageList({super.key});
@@ -36,12 +36,12 @@ class MessageList extends StatelessWidget {
             separatorBuilder: (_, __) => Gap(12.h),
             itemBuilder: (context, index) {
               final message = messages[index];
-              return message.senderRole == "user"
+              return message.senderRole == "teacher"
                   ? RightMessageByMe(
                       date: message.createdAt.toString(),
                       message: message.message.toString(),
                     )
-                  : LeftMessageFromTeacher(
+                  : LeftMessageFromStudent(
                       date: message.createdAt.toString(),
                       message: message.message.toString(),
                     );
