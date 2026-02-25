@@ -181,5 +181,7 @@ class ArLang {
     "theQualificationCertificateMustBeUploaded": "يجب رفع شهادة المؤهل",
     "theVacationCertificateMustBeUploaded": "يجب رفع شهادة الإجازة",
     "unAvailable": "غير متاح",
+    "allChats" : "جميع المحادثات",
+    "anErrorOccurredInLoadingTheConversations" : "حدث خطأ أثناء تحميل المحادثات",
   };
 }

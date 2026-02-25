@@ -182,5 +182,7 @@ class EnLang {
     "theQualificationCertificateMustBeUploaded": "The qualification certificate must be uploaded",
     "theVacationCertificateMustBeUploaded": "The vacation certificate must be uploaded",
     "unAvailable": "Unavailable",
+    "allChats" : "All Chats",
+    "anErrorOccurredInLoadingTheConversations" : "An error occurred while loading the conversations",
   };
 }
