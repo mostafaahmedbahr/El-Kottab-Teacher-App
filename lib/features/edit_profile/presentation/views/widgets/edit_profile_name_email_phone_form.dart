@@ -57,7 +57,7 @@ class _EditProfileNameEmailPhoneFormState
               keyboardType: TextInputType.emailAddress,
               hintText: LangKeys.email.tr(),
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0.r),
                 child: SvgPicture.asset(SvgImages.email),
               ),
               validator: (String? value) {

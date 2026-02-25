@@ -10,12 +10,31 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
   EditProfileInfoCubit(this.editProfileInfoRepo)
     : super(EditProfileInfoInitState());
 
-  EditProfileInfoRepo? editProfileInfoRepo;
+  /// Repository
+  final EditProfileInfoRepo? editProfileInfoRepo;
 
+  /// Cubit Getter
   static EditProfileInfoCubit get(context) => BlocProvider.of(context);
 
+  /// Models
   EditProfileInfoModel? editProfileInfoModel;
 
+  /// Controllers
+  final TextEditingController nameCon = TextEditingController();
+  final TextEditingController emailCon = TextEditingController();
+  final TextEditingController phoneCon = TextEditingController();
+  final TextEditingController descriptionCon = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  String phoneNumber = '';
+  String? gender;
+
+  /// Image Picker
+  final ImagePicker picker = ImagePicker();
+  File? profileImage;
+
+  // ================== Methods ==================
+
+  /// Edit Profile Info
   Future<void> editProfileInfoData({
     required String? name,
     required String? email,
@@ -23,14 +42,11 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
     required String? gender,
     required File? image,
     required String? description,
-    // required String? categoryId,
   }) async {
     emit(EditProfileInfoLoadingState());
 
-    // دائماً استخدم FormData لسهولة التعامل مع الحالتين
     FormData formData = FormData();
 
-    // إضافة الحقول النصية
     if (name != null && name.isNotEmpty) {
       formData.fields.add(MapEntry('name', name));
     }
@@ -46,11 +62,6 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
     if (description != null && description.isNotEmpty) {
       formData.fields.add(MapEntry('description', description));
     }
-    // if (categoryId != null) {
-    //   formData.fields.add(MapEntry('category_id', categoryId.toString()));
-    // }
-
-    // إضافة الصورة إذا كانت موجودة
     if (image != null) {
       formData.files.add(
         MapEntry(
@@ -65,22 +76,16 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
 
     var result = await editProfileInfoRepo!.editProfileInfoData(data: formData);
 
-    return result.fold(
-      (failure) {
-        emit(EditProfileInfoErrorState(failure.errMessage));
-      },
-      (data) async {
+    result.fold(
+      (failure) => emit(EditProfileInfoErrorState(failure.errMessage)),
+      (data) {
         editProfileInfoModel = data;
         emit(EditProfileInfoSuccessState(data));
       },
     );
   }
 
-  final TextEditingController categoryController = TextEditingController();
-
-  final ImagePicker picker = ImagePicker();
-  File? profileImage;
-
+  /// Upload Profile Picture
   Future<void> uploadProfilePicture() async {
     try {
       final XFile? pickedFile = await picker.pickImage(
@@ -100,24 +105,19 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
     }
   }
 
+  /// Clear Profile Image
   void clearProfileImage() {
     profileImage = null;
     emit(ClearImageSuccessState());
   }
 
-  var nameCon = TextEditingController();
-  var emailCon = TextEditingController();
-  var phoneCon = TextEditingController();
-  String phoneNumber = '';
-
-  // In your EditProfileInfoCubit
+  /// Initialize Controllers with Profile Data
   void initDateControllers(ProfileModel profile) {
     nameCon.text = profile.data?.name ?? '';
     emailCon.text = profile.data?.email ?? '';
-    phoneNumber = profile.data?.phone ?? '';
-    gender = profile.data?.gender; // Initialize gender from profile
+    descriptionCon.text = profile.data?.description ?? '';
+    gender = profile.data?.gender;
 
-    // Rest of the method remains the same
     String? phone = profile.data?.phone;
     if (phone != null && phone.length > 3) {
       phoneCon.text = phone.substring(3);
@@ -125,35 +125,24 @@ class EditProfileInfoCubit extends Cubit<EditProfileInfoStates> {
       phoneCon.text = phone ?? '';
     }
 
-    // if (profile.data?.plan?.categories != null && profile.data!.plan!.categories!.isNotEmpty) {
-    //   categoryController.text = profile.data!.plan!.categories![0].id.toString();
-    // }
+    phoneNumber = profile.data?.phone ?? '';
+
+    if (profile.data?.categoryId != null) {
+      categoryController.text = profile.data!.categoryId!;
+    }
   }
 
-  // Add this method to clear country/city selection
+  /// Clear Category / Selection
   void clearCountryCitySelection() {
     categoryController.clear();
   }
 
-  // dispose if needed
+  /// Dispose Controllers
   void disposeControllers() {
     nameCon.dispose();
     emailCon.dispose();
     phoneCon.dispose();
+    descriptionCon.dispose();
     categoryController.dispose();
-
-    descriptionCon.dispose(); // Add this line
   }
-
-  // void initCountryCity({
-  //   required CountriesModel? country,
-  //   required Original? city,
-  // }) {
-  //   selectedCountry = country;
-  //   selectedCity = city;
-  // }
-
-  // In EditProfileInfoCubit
-  var descriptionCon = TextEditingController();
-  String? gender; // Add this line to store the selected gender
 }

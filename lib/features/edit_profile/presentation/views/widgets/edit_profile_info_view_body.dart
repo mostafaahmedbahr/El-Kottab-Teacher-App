@@ -1,5 +1,5 @@
+import 'package:el_kottab_teacher_app/main_imports.dart';
  import '../../../../../core/app_services/remote_services/service_locator.dart';
-import '../../../../../main_imports.dart';
 import '../../../data/repos/edit_profile_repo_imple.dart';
 import '../../view_model/edit_profile_info_cubit.dart';
 import '../../view_model/edit_profile_info_states.dart';
@@ -17,7 +17,7 @@ class EditProfileInfoViewBody extends StatelessWidget {
       child: BlocBuilder<EditProfileInfoCubit, EditProfileInfoStates>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding:   EdgeInsets.all(20.0.r),
             child: ListView(
               children: [
                  EditProfileImage(),

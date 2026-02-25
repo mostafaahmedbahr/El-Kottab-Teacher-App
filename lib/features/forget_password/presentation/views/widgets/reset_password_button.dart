@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/otp/presentation/views/otp_view.dart';
 import '../../../../../main_imports.dart';
-import '../../../../otp/presentation/views/otp_view.dart';
 import '../../view_model/forget_password_cubit.dart';
 import '../../view_model/forget_password_states.dart';
 
@@ -22,7 +22,7 @@ class ForgetPasswordButton extends StatelessWidget {
             context: context,
             screen: OtpView(
               goToLayoutOrResetPassword: "",
-              email: context.read<ForgetPasswordCubit>().emailCon.text,
+              email: context.read<ForgetPasswordCubit>().emailCon.text.trim(),
               screenName: "ForgetPasswordView",
             ),
           );

@@ -18,25 +18,17 @@ class EditProfileButton extends StatelessWidget {
       },
       listener: (context, state) {
         if (state is EditProfileInfoErrorState) {
-          Toast.showErrorToast(
-              msg: state.error.toString(),
-              context: context
-          );
+          Toast.showErrorToast(msg: state.error.toString(), context: context);
         }
         if (state is EditProfileInfoSuccessState) {
-          // تحديث بيانات الملف الشخصي
           context.read<ProfileCubit>().getProfileData();
-
-          // العودة للشاشة الرئيسية
           AppNav.customNavigator(
             context: context,
             screen: const LayoutView(),
             finish: true,
           );
-
-          // عرض رسالة النجاح
           Toast.showSuccessToast(
-            msg: state.editProfileInfoModel.message?.toString() ?? "تم التعديل بنجاح",
+            msg: state.editProfileInfoModel.message!.toString(),
             context: context,
           );
         }
@@ -48,42 +40,36 @@ class EditProfileButton extends StatelessWidget {
         return isLoading
             ? const Center(child: CustomLoading())
             : CustomButton(
-          btnText: LangKeys.save.tr(),
-          onPressed: () {
-            // جمع رقم الهاتف الكامل (مع رمز الدولة)
-            String fullPhoneNumber = '';
-            if (editProfileInfoCubit.phoneCon.text.isNotEmpty) {
-              // إذا كان رقم الهاتف يبدأ بـ 0، أضف رمز الدولة
-              if (editProfileInfoCubit.phoneCon.text.startsWith('0')) {
-                fullPhoneNumber = '+20${editProfileInfoCubit.phoneCon.text}';
-              } else {
-                fullPhoneNumber = editProfileInfoCubit.phoneCon.text;
-              }
-            }
-
-            // استدعاء دالة التعديل
-          // Uncomment and update the editProfileInfoData call in the onPressed callback
-editProfileInfoCubit.editProfileInfoData(
-  name: editProfileInfoCubit.nameCon.text.isNotEmpty
-      ? editProfileInfoCubit.nameCon.text
-      : null,
-  email: editProfileInfoCubit.emailCon.text.isNotEmpty
-      ? editProfileInfoCubit.emailCon.text
-      : null,
-  phoneNumber: fullPhoneNumber.isNotEmpty
-      ? fullPhoneNumber
-      : null,
-  gender: editProfileInfoCubit.gender,
-  image: editProfileInfoCubit.profileImage,
-  description: editProfileInfoCubit.descriptionCon.text.isNotEmpty
-      ? editProfileInfoCubit.descriptionCon.text
-      : null,
-  // categoryId: editProfileInfoCubit.categoryController.text.isNotEmpty
-  //     ? editProfileInfoCubit.categoryController.text
-  //     : null,
-);
-          },
-        );
+                btnText: LangKeys.save.tr(),
+                onPressed: () {
+                  String fullPhoneNumber = '';
+                  if (editProfileInfoCubit.phoneCon.text.isNotEmpty) {
+                    if (editProfileInfoCubit.phoneCon.text.startsWith('0')) {
+                      fullPhoneNumber =
+                          '+20${editProfileInfoCubit.phoneCon.text}';
+                    } else {
+                      fullPhoneNumber = editProfileInfoCubit.phoneCon.text;
+                    }
+                  }
+                  editProfileInfoCubit.editProfileInfoData(
+                    name: editProfileInfoCubit.nameCon.text.isNotEmpty
+                        ? editProfileInfoCubit.nameCon.text
+                        : null,
+                    email: editProfileInfoCubit.emailCon.text.isNotEmpty
+                        ? editProfileInfoCubit.emailCon.text
+                        : null,
+                    phoneNumber: fullPhoneNumber.isNotEmpty
+                        ? fullPhoneNumber
+                        : null,
+                    gender: editProfileInfoCubit.gender,
+                    image: editProfileInfoCubit.profileImage,
+                    description:
+                        editProfileInfoCubit.descriptionCon.text.isNotEmpty
+                        ? editProfileInfoCubit.descriptionCon.text
+                        : null,
+                  );
+                },
+              );
       },
     );
   }
