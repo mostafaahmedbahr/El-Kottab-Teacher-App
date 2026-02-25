@@ -188,4 +188,5 @@ abstract class LangKeys {
 
   static const allChats = 'allChats';
   static const anErrorOccurredInLoadingTheConversations = 'anErrorOccurredInLoadingTheConversations';
+
 }
