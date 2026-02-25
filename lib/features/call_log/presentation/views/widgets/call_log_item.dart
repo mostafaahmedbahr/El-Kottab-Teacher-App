@@ -1,3 +1,4 @@
+import 'package:el_kottab_teacher_app/core/helpers/convert_date.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'call_type_indicator.dart';
 import '../../../data/models/calls_model.dart';
@@ -63,27 +64,27 @@ class CallLogItem extends StatelessWidget {
                           size: 14,
                           color: Color(0xFF8BAF9C),
                         ),
-                        const SizedBox(width: 4),
+                        Gap(4.w),
                         Text(
-                          callData.startedAt ?? "",
+                          DateFormatterClass.toTimeAgo(callData.startedAt) ,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 13.sp,
                             color: Color(0xFF7A8A80),
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Icon(Icons.timer, size: 14, color: Color(0xFF8BAF9C)),
-                        const SizedBox(width: 4),
+                        Gap(16.w),
+                        Icon(Icons.timer, size: 14.sp, color: Color(0xFF8BAF9C)),
+                        Gap(4.w),
                         Text(
                           "${callData.durationMinutes ?? 0} دقيقة",
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 13.sp,
                             color: Color(0xFF7A8A80),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    Gap(4.h),
 
                     Row(
                       children: [
@@ -96,7 +97,7 @@ class CallLogItem extends StatelessWidget {
                         Text(
                           _getStatusText(callData.status),
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 13.sp,
                             color: AppColors.gold,
                             fontWeight: FontWeight.w600,
                           ),

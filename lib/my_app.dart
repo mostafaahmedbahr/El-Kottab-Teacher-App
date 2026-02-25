@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
-import 'package:el_kottab_teacher_app/widgets/overlay_permission_widget.dart';
 
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
@@ -115,7 +114,7 @@ class MyApp extends StatelessWidget {
                             backgroundColor: AppColors.white,
                           ),
                     ),
-                    home: OverlayPermissionWidget(child: const SplashView()),
+                    home: const SplashView(),
                     builder: (context, child) {
                       SystemChrome.setSystemUIOverlayStyle(
                         const SystemUiOverlayStyle(

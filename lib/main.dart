@@ -9,7 +9,7 @@ import 'core/utils/bloc_observer.dart';
 import 'core/app_services/local_services/cache_helper.dart';
 import 'core/utils/zego_service.dart';
 import 'services/call_notification_service.dart';
-import 'services/overlay_permission_service.dart';
+// import 'services/overlay_permission_service.dart';
 // import 'services/firebase_call_service.dart'; // TODO: Re-enable after fixing Gradle
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
@@ -28,14 +28,14 @@ Future<void> _requestPermissions() async {
   ].request();
 
   // Check and request overlay permission specifically
-  final overlayService = OverlayPermissionService();
-  final hasOverlayPermission = await overlayService.checkOverlayPermission();
+  // final overlayService = OverlayPermissionService();
+  // final hasOverlayPermission = await overlayService.checkOverlayPermission();
 
-  if (!hasOverlayPermission) {
-    debugPrint('🔔 Overlay permission not granted, will request later in UI');
-  } else {
-    debugPrint('✅ Overlay permission already granted');
-  }
+  // if (!hasOverlayPermission) {
+  //   debugPrint('🔔 Overlay permission not granted, will request later in UI');
+  // } else {
+  //   debugPrint('✅ Overlay permission already granted');
+  // }
 }
 
 final GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
@@ -55,9 +55,9 @@ void main() async {
   }
 
   // TODO: Re-enable Firebase Call Service after fixing Gradle
-  // await FirebaseCallService().initialize();
+  //  await FirebaseCallService().initialize();
 
-  // await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
 
   // Initialize Firebase
   await Firebase.initializeApp();
@@ -111,10 +111,10 @@ Future<void> _configureFirebaseMessaging() async {
 
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+      alert: true,
+      badge: true,
+      sound: true,
+    );
 
     // Handle foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -145,12 +145,12 @@ Future<void> _configureFirebaseMessaging() async {
     // Listen for token refresh
     FirebaseMessaging.instance.onTokenRefresh
         .listen((newToken) {
-          debugPrint('🔄 FCM Token refreshed: $newToken');
-          CacheHelper.saveData(key: "fcmToken", value: newToken);
-        })
+      debugPrint('🔄 FCM Token refreshed: $newToken');
+      CacheHelper.saveData(key: "fcmToken", value: newToken);
+    })
         .onError((err) {
-          debugPrint('❌ FCM token refresh error: $err');
-        });
+      debugPrint('❌ FCM token refresh error: $err');
+    });
 
     debugPrint('✅ Firebase Messaging configured successfully');
   } catch (e) {
@@ -165,7 +165,8 @@ Future<void> _initializeZegoServices() async {
     // Set navigator key for Zego
     ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigateKey);
 
-    // Initialize Zego log
+    // Disable Zego debug logging to prevent getNetworkTimeInfo spam
+    // This reduces the log level from Debug to Info
     await ZegoUIKit().initLog();
 
     // Use system calling UI with signaling plugin
