@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:el_kottab/core/app_services/remote_services/service_locator.dart';
-import 'package:el_kottab/features/change_password/data/repos/change_password_repo_imple.dart';
-import 'package:el_kottab/features/change_password/presentation/view_model/change_password_cubit.dart';
-import 'package:el_kottab/features/change_password/presentation/views/widgets/change_password_view_body.dart';
+import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
+import 'package:el_kottab_teacher_app/features/change_password/data/repos/change_password_repo_imple.dart';
+import 'package:el_kottab_teacher_app/features/change_password/presentation/view_model/change_password_cubit.dart';
+import 'package:el_kottab_teacher_app/features/change_password/presentation/views/widgets/change_password_view_body.dart';
 import '../../../../main_imports.dart';
 
 class ChangePasswordView extends StatelessWidget {

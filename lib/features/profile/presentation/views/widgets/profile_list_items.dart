@@ -5,6 +5,7 @@ import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/b
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/widgets/profile_list_item.dart';
 
 import '../../../../../main_imports.dart';
+import '../../../../all_chats/presentation/views/all_chats_view.dart';
 import '../../../../change_password/presentation/views/change_password_view.dart';
 import '../../../../contact_us/presentation/views/contact_us_view.dart';
 import '../../../../settings/presentation/views/settings_view.dart';
@@ -36,6 +37,13 @@ class ProfileListItems extends StatelessWidget {
                   currency: stats.currency ?? 'ج.م',
                 );
               }
+            },
+          ),
+          ProfileListItem(
+            title: LangKeys.allChats,
+            svgImage: SvgImages.man,
+            onTap: (){
+              AppNav.customNavigator(context: context, screen: AllChatsView());
             },
           ),
           ProfileListItem(

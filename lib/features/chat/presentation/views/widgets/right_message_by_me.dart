@@ -36,13 +36,6 @@ class RightMessageByMe extends StatelessWidget {
                   style: AppStyles.white12SemiBold,
                 ),
               ),
-              // Gap(10.w),
-              // CustomNetWorkImage(
-              //   imageUrl:  image,
-              //   height: 34.h,
-              //   width: 34.w,
-              //   raduis: 50.r,
-              // ),
             ],
           ),
           Padding(

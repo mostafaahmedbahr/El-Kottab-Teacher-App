@@ -16,13 +16,6 @@ class LeftMessageFromTeacher extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // CustomNetWorkImage(
-              //   imageUrl: image,
-              //   height: 34.h,
-              //   width: 34.w,
-              //   raduis: 50.r,
-              // ),
-              // Gap(10.w),
               Expanded(
                 child: Container(
                   padding:   EdgeInsets.all(14.r),

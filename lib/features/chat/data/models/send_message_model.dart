@@ -43,13 +43,13 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["conversation_id"] = conversationId;
-    _data["sender_id"] = senderId;
-    _data["message"] = message;
-    _data["updated_at"] = updatedAt;
-    _data["created_at"] = createdAt;
-    _data["id"] = id;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["conversation_id"] = conversationId;
+    data["sender_id"] = senderId;
+    data["message"] = message;
+    data["updated_at"] = updatedAt;
+    data["created_at"] = createdAt;
+    data["id"] = id;
+    return data;
   }
 }

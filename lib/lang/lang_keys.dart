@@ -184,4 +184,8 @@ abstract class LangKeys {
       "theVacationCertificateMustBeUploaded";
   static const unAvailable = "unAvailable";
   static const close = "close";
+
+
+  static const allChats = 'allChats';
+  static const anErrorOccurredInLoadingTheConversations = 'anErrorOccurredInLoadingTheConversations';
 }

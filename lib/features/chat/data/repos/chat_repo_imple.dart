@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import '../../../../main_imports.dart';
-import '../models/all_messages_model.dart';
-import '../models/send_message_model.dart';
+ import '../../../../main_imports.dart';
+
+import '../models/chat_models.dart';
 import 'chat_repo.dart';
 
 class ChatRepoImpl implements ChatRepo {
@@ -15,12 +15,11 @@ class ChatRepoImpl implements ChatRepo {
   Future<Either<Failure, SendMessageModel>> sendMessage({
     required String message,
     required int teacherId,
-  })
-  async {
+  }) async {
     try {
       var data = json.encode({
-        "recipient_id": teacherId, /// teacherId
-        "message": message
+        "recipient_id": teacherId,
+        "message": message,
       });
       var response = await apiService!.postData(
         endPoint: EndPoints.sendMessage,
@@ -33,20 +32,15 @@ class ChatRepoImpl implements ChatRepo {
     }
   }
 
-
-
   @override
   Future<Either<Failure, AllMessagesModel>> getAllMessages({
-    required int userId , required int teacherId
-  })
-  async {
+    required int userId,
+    required int teacherId,
+  }) async {
     try {
       var response = await apiService!.getData(
         endPoint: EndPoints.sendMessage,
-        query: {
-          "user_id" :userId ,
-          "teacher_id" : teacherId,
-        },
+        query: {"user_id": userId, "teacher_id": teacherId},
       );
       AllMessagesModel result = AllMessagesModel.fromJson(response.data);
       return right(result);
@@ -54,5 +48,4 @@ class ChatRepoImpl implements ChatRepo {
       return left(handleError(e));
     }
   }
-
 }

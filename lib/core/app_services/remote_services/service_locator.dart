@@ -6,6 +6,7 @@ import 'package:el_kottab_teacher_app/features/register/data/repos/register_repo
 import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 import '../../../features/add_appointments/data/repos/add_appointments_repo_impl.dart';
+import '../../../features/all_chats/data/repos/all_chats_repo_impl.dart';
 import '../../../features/call_log/data/repos/call_logs_repo_impl.dart';
 import '../../../features/change_password/data/repos/change_password_repo_imple.dart';
 import '../../../features/chat/data/repos/chat_repo_imple.dart';
@@ -60,10 +61,14 @@ void setup() {
     SettingsRepoImpl(getIt.get<ApiService>()),
   );
 
+
   getIt.registerSingleton<RegisterRepoImpl>(
     RegisterRepoImpl(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<EditProfileInfoRepoImpl>(
     EditProfileInfoRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<AllChatsRepoImpl>(
+    AllChatsRepoImpl(getIt.get<ApiService>()),
   );
 }
