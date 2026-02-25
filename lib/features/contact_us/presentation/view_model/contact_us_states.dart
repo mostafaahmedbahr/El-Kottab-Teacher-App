@@ -1,6 +1,5 @@
-
-import '../../data/models/contact_us_model.dart';
-import '../../data/models/settings_model.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/data/models/contact_us_model.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/data/models/settings_model.dart';
 
 abstract class ContactUsStates{}
 
@@ -29,3 +28,5 @@ class GetSettingsDataSuccessState extends ContactUsStates{
   GetSettingsDataSuccessState(this.settingsModel);
 
 }
+
+

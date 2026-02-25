@@ -21,7 +21,8 @@ Future<Either<Failure, ContactUsModel>> contactUs({
   required String title,
   required String message,
   required String country,
-}) async{
+})
+async{
   try {
     var data = json.encode({
       "email": email,
@@ -42,9 +43,6 @@ Future<Either<Failure, ContactUsModel>> contactUs({
 }
 
 
-
-
-
   @override
   Future<Either<Failure, SettingsModel>> getSettingsData()
   async{
@@ -58,6 +56,11 @@ Future<Either<Failure, ContactUsModel>> contactUs({
       return left(handleError(e));
     }
   }
+
+
+
+
+
 
 
 }

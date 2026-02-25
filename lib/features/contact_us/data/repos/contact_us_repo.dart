@@ -13,6 +13,7 @@ abstract class ContactUsRepo{
     required String message,
     required String country,
 });
+
   Future<Either<Failure,SettingsModel>> getSettingsData();
 
 

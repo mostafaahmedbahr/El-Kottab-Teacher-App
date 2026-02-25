@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-
+import 'package:el_kottab_teacher_app/features/contact_us/presentation/view_model/contact_us_cubit.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/presentation/view_model/contact_us_states.dart';
 import '../../../../../main_imports.dart';
-import '../../view_model/contact_us_cubit.dart';
-import '../../view_model/contact_us_states.dart';
 
 class ContactUsButton extends StatelessWidget {
   const ContactUsButton({super.key, required this.formKey});

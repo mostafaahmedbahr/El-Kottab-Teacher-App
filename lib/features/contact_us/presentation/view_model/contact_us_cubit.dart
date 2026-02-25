@@ -1,7 +1,9 @@
+import 'package:el_kottab_teacher_app/features/contact_us/data/models/settings_model.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/data/repos/contact_us_repo.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/extensions/log_util.dart';
 import '../../../../main_imports.dart';
 import '../../data/models/contact_us_model.dart';
-import '../../data/models/settings_model.dart';
-import '../../data/repos/contact_us_repo.dart';
 import 'contact_us_states.dart';
 
 class ContactUsCubit extends Cubit<ContactUsStates> {
@@ -43,6 +45,25 @@ class ContactUsCubit extends Cubit<ContactUsStates> {
 
 
 
+  @override
+  Future<void> close() {
+    emailCon.dispose();
+    phoneCon.dispose();
+    messageCon.dispose();
+    titleCon.dispose();
+    phoneFocusNode.dispose();
+    titleFocusNode.dispose();
+    messageFocusNode.dispose();
+    return super.close();
+  }
+
+
+
+  /// Focus Nodes
+  final FocusNode phoneFocusNode = FocusNode();
+  final FocusNode titleFocusNode = FocusNode();
+  final FocusNode messageFocusNode = FocusNode();
+
   SettingsModel? settingsModel;
 
   Future<void> getSettingsData() async {
@@ -53,9 +74,24 @@ class ContactUsCubit extends Cubit<ContactUsStates> {
         emit(GetSettingsDataErrorState(failure.errMessage));
       },
           (data) async {
-        settingsModel = data;
+            settingsModel = data;
         emit(GetSettingsDataSuccessState(data));
       },
     );
   }
+  Future<void> launchWhatsApp(String phoneNumber) async {
+    final url = "https://wa.me/$phoneNumber";
+    await launchSocialMedia(url);
+  }
+
+  Future<void> launchSocialMedia(String url) async {
+    try {
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+      }
+    } catch (e) {
+      logError('Error launching URL: $e');
+    }
+  }
+
 }

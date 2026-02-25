@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import '../../../../../core/extensions/log_util.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/presentation/view_model/contact_us_cubit.dart';
+import 'package:el_kottab_teacher_app/features/contact_us/presentation/views/widgets/social_icon.dart';
 import '../../../../../main_imports.dart';
 
 class SocialContent extends StatelessWidget {
@@ -40,24 +39,24 @@ class SocialContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSocialIcon(
+              SocialIcon(
                 iconPath: SvgImages.facebook,
-                onTap: () => _launchSocialMedia(facebook),
+                onTap: () => context.read<ContactUsCubit>().launchSocialMedia(facebook),
               ),
               Gap(10.w),
-              _buildSocialIcon(
+              SocialIcon(
                 iconPath: SvgImages.instagram,
-                onTap: () => _launchSocialMedia(instagram),
+                onTap: () => context.read<ContactUsCubit>().launchSocialMedia(instagram),
               ),
               Gap(10.w),
-              _buildSocialIcon(
+              SocialIcon(
                 iconPath: SvgImages.youtube,
-                onTap: () => _launchSocialMedia(youtube),
+                onTap: () => context.read<ContactUsCubit>().launchSocialMedia(youtube),
               ),
               Gap(10.w),
-              _buildSocialIcon(
+              SocialIcon(
                 iconPath: SvgImages.whatsapp,
-                onTap: () => _launchWhatsApp(whatsapp),
+                onTap: () => context.read<ContactUsCubit>().launchWhatsApp(whatsapp),
               ),
             ],
           ),
@@ -67,41 +66,5 @@ class SocialContent extends StatelessWidget {
   }
 }
 
-Widget _buildSocialIcon({
-  required String iconPath,
-  required VoidCallback onTap,
-}) {
-  return InkWell(
-    onTap: onTap,
-    borderRadius: BorderRadius.circular(50.r),
-    child: Container(
-      padding: EdgeInsets.all(10.r),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.grayLight.withValues(alpha: 0.3),
-      ),
-      child: SvgPicture.asset(
-        iconPath,
-        width: 24.r,
-        height: 24.r,
-
-      ),
-    ),
-  );
-}
 
 
-Future<void> _launchWhatsApp(String phoneNumber) async {
-  final url = "https://wa.me/$phoneNumber";
-  await _launchSocialMedia(url);
-}
-
-Future<void> _launchSocialMedia(String url) async {
-  try {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    }
-  } catch (e) {
-    logError('Error launching URL: $e');
-  }
-}
