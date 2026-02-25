@@ -1,68 +1,85 @@
- import '../../../../main_imports.dart';
+import '../../../../core/app_services/local_services/secure_storage_service.dart';
+import '../../../../main_imports.dart';
+import '../../../layout/presentation/view_model/layout_cubit.dart';
 import '../../data/models/change_password_model.dart';
 import '../../data/repos/change_password_repo.dart';
 import 'change_password_states.dart';
 
-
 class ChangePasswordCubit extends Cubit<ChangePasswordStates> {
-  ChangePasswordCubit(this.changePasswordRepo) : super(ChangePasswordInitState());
+  ChangePasswordCubit(this.changePasswordRepo)
+    : super(ChangePasswordInitState());
 
   static ChangePasswordCubit get(context) => BlocProvider.of(context);
 
   ChangePasswordRepo? changePasswordRepo;
 
-
   var oldPasswordCon = TextEditingController();
   var newPasswordCon = TextEditingController();
   var confirmNewPasswordCon = TextEditingController();
 
-
   ChangePasswordModel? changePasswordModel;
-  Future<void> changePassword({required String oldPassword ,required String newPassword , required String newPasswordConfirmation,
-    required String screenName })
-  async {
+  Future<void> changePassword({
+    required String screenName,
+  }) async {
     emit(ChangePasswordLoadingState());
     var result = await changePasswordRepo!.changePassword(
-        screenName: screenName,
-        oldPassword: oldPassword,
-        newPassword: newPassword,
-        newPasswordConfirmation: newPasswordConfirmation
+      screenName: screenName,
+      oldPassword: oldPasswordCon.text,
+      newPassword: newPasswordCon.text,
+      newPasswordConfirmation: confirmNewPasswordCon.text,
     );
-    return result.fold((failure) {
-      emit(ChangePasswordErrorState(failure.errMessage));
-    }, (data) async {
-      changePasswordModel = data;
-      emit(ChangePasswordSuccessState(data));
-    });
+    return result.fold(
+      (failure) {
+        emit(ChangePasswordErrorState(failure.errMessage));
+      },
+      (data) async {
+        changePasswordModel = data;
+        emit(ChangePasswordSuccessState(data));
+      },
+    );
   }
-
 
   bool isOldPasswordVisible = true;
   bool isNewPasswordVisible = true;
   bool isConfirmNewPasswordVisible = true;
 
-  changeOldPasswordVisible()
-  {
+  changeOldPasswordVisible() {
     isOldPasswordVisible = !isOldPasswordVisible;
     emit(ChangeOldPasswordVisibleState());
   }
 
-  changeNewPasswordVisible()
-  {
+  changeNewPasswordVisible() {
     isNewPasswordVisible = !isNewPasswordVisible;
     emit(ChangeNewPasswordVisibleState());
   }
 
-  changeConfirmNewPasswordVisible()
-  {
+  changeConfirmNewPasswordVisible() {
     isConfirmNewPasswordVisible = !isConfirmNewPasswordVisible;
     emit(ChangeConfirmNewPasswordVisibleState());
   }
+
   @override
   Future<void> close() {
     oldPasswordCon.dispose();
     newPasswordCon.dispose();
     confirmNewPasswordCon.dispose();
     return super.close();
+  }
+
+  /// Focus Nodes
+  final FocusNode newPasswordFocusNode = FocusNode();
+  final FocusNode confirmNewPasswordFocusNode = FocusNode();
+
+
+  void clearUserData() {
+    SecureStorageService.instance.deleteData(key: "userToken");
+    CacheTokenManger.clearUserToken();
+    CacheHelper.removeData(key: "otp");
+    CacheHelper.removeData(key: "userEmail");
+    CacheHelper.removeData(key: "userId");
+    CacheHelper.removeData(key: "userPhone");
+    CacheHelper.removeData(key: "userName");
+    CacheHelper.removeData(key: "userEmail");
+    LayoutCubit.pageIndex = 0;
   }
 }

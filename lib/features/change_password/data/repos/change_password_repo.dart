@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import '../../../../core/errors/failure.dart';
 import '../models/change_password_model.dart';
 

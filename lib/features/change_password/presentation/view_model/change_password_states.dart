@@ -1,8 +1,6 @@
 abstract class ChangePasswordStates{}
 
-
 class ChangePasswordInitState extends ChangePasswordStates{}
-
 
 class ChangePasswordLoadingState extends ChangePasswordStates{}
 class ChangePasswordSuccessState extends ChangePasswordStates{

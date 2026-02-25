@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import '../../../../../main_imports.dart';
 import '../../view_model/change_password_cubit.dart';
 import '../../view_model/change_password_states.dart';
@@ -19,6 +18,9 @@ class ChangePasswordForm extends StatelessWidget {
           children: [
             if(screenName!="ForgetPasswordView")
             CustomTextFormField(
+              onFieldSubmitted: (String value) {
+                FocusScope.of(context).requestFocus(changePasswordCubit.newPasswordFocusNode);
+              },
            controller:  changePasswordCubit.oldPasswordCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.oldPassword.tr(),
@@ -43,6 +45,10 @@ class ChangePasswordForm extends StatelessWidget {
             ),
             Gap(20.h),
             CustomTextFormField(
+              onFieldSubmitted: (String value) {
+                FocusScope.of(context).requestFocus(changePasswordCubit.confirmNewPasswordFocusNode);
+              },
+              focusNode: changePasswordCubit.newPasswordFocusNode,
               controller:  changePasswordCubit.newPasswordCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.newPassword.tr(),
@@ -67,6 +73,7 @@ class ChangePasswordForm extends StatelessWidget {
             ),
              Gap(20.h),
             CustomTextFormField(
+              focusNode: changePasswordCubit.confirmNewPasswordFocusNode,
               controller:  changePasswordCubit.confirmNewPasswordCon,
               keyboardType: TextInputType.visiblePassword,
               hintText: LangKeys.newPassword.tr(),

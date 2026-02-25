@@ -1,5 +1,5 @@
- import '../../../../../main_imports.dart';
-import 'change_password_button.dart';
+import 'package:el_kottab/main_imports.dart';
+ import 'change_password_button.dart';
 import 'change_password_form.dart';
 import 'change_password_image.dart';
 
