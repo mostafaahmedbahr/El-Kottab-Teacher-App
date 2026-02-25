@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,11 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/app_services/remote_services/service_locator.dart';
 import 'core/utils/bloc_observer.dart';
-import 'core/app_services/local_services/cache_helper.dart';
 import 'core/utils/zego_service.dart';
 import 'services/call_notification_service.dart';
-// import 'services/overlay_permission_service.dart';
-// import 'services/firebase_call_service.dart'; // TODO: Re-enable after fixing Gradle
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
@@ -24,24 +20,17 @@ Future<void> _requestPermissions() async {
     Permission.microphone,
     Permission.camera,
     Permission.notification,
-    Permission.systemAlertWindow, // Required for overlay
+    Permission.systemAlertWindow,
   ].request();
 
-  // Check and request overlay permission specifically
-  // final overlayService = OverlayPermissionService();
-  // final hasOverlayPermission = await overlayService.checkOverlayPermission();
-
-  // if (!hasOverlayPermission) {
-  //   debugPrint('🔔 Overlay permission not granted, will request later in UI');
-  // } else {
-  //   debugPrint('✅ Overlay permission already granted');
-  // }
 }
 
 final GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize cache and services
+  await CacheHelper.init();
   await _requestPermissions();
 
   // Configure ZPNS for FCM
@@ -65,8 +54,7 @@ void main() async {
   // Configure Firebase Messaging
   await _configureFirebaseMessaging();
 
-  // Initialize cache and services
-  await CacheHelper.init();
+
   String? token = await CacheTokenManger.getUserToken();
   debugPrint("Retrieved token: $token");
 

@@ -1,4 +1,4 @@
-import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/performance_Card_Shimmer.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/performance_card_shimmer.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/balance_card_shimmer.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 

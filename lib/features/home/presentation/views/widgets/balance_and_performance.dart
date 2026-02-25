@@ -2,9 +2,9 @@ import 'package:el_kottab_teacher_app/features/home/data/models/teacher_performa
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_states.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
-
+import '../../../../../core/errors/error_ui.dart';
+import 'Performance_Card_Shimmer.dart';
 import 'balance_card_shimmer.dart';
-
 import 'balance_content.dart';
 import 'performance_content.dart';
 
@@ -13,79 +13,76 @@ class BalanceAndPerformance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeStates>(
-      buildWhen: (_, current) =>
-          current is GetTeacherStatsLoadingState ||
-          current is GetTeacherStatsSuccessState ||
-          current is GetTeacherStatsErrorState ||
-          current is GetTeacherPerformanceLoadingState ||
-          current is GetTeacherPerformanceSuccessState ||
-          current is GetTeacherPerformanceErrorState,
-      builder: (context, state) {
-        final cubit = context.read<HomeCubit>();
-
-        // ===== Teacher Stats Data =====
-        final statsData = cubit.teacherStatsModel?.data;
-
-        // ===== Teacher Performance Data =====
-        // final performanceData = state is GetTeacherPerformanceSuccessState
-        //     ? state.teacherPerformanceModel.data
-        //     : null;
-        // final cubit = context.read<HomeCubit>();
-        // final performanceData = cubit.teacherPerformanceModel?.data;
-
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-          child: Row(
-            children: [
-              // ================= Balance Container =================
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.all(11.r),
-                  decoration: _cardDecoration(),
-                  child: () {
-                    // 🔹 Loading
-                    if (statsData == null) {
-                      return const BalanceCardShimmer();
-                    }
-
-                    // 🔹 Error
-                    if (state is GetTeacherStatsErrorState) {
-                      return const Center(
-                        child: Icon(Icons.error_outline, color: Colors.red),
-                      );
-                    }
-
-                    // 🔹 Success
-                    return BalanceContent(
-                      balance: statsData.walletMoney ?? 0,
-                      minutes: statsData.walletMinutes ?? 0,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      child: Row(
+        children: [
+          // ================= Balance Container =================
+          BlocBuilder<HomeCubit, HomeStates>(
+            buildWhen: (previous, current){
+              return current is GetTeacherStatsSuccessState ||
+                  current is GetTeacherStatsErrorState ||
+                  current is GetTeacherStatsLoadingState;
+            },
+            builder: (context,state){
+              var homeCubit = context.read<HomeCubit>();
+              return
+                state is GetTeacherStatsLoadingState || homeCubit.teacherStatsModel==null? BalanceCardShimmer():
+                state is GetTeacherStatsErrorState ? ErrorUi(
+                  errorState: state.error,
+                  onPressed: () {
+                    HomeCubit.get(context).getTeacherStats(teacherId: CacheHelper.getData(key: "userId"));
+                  },
+                ):
+                Flexible(
+                  child: Container(
+                    padding: EdgeInsets.all(11.r),
+                    decoration: _cardDecoration(),
+                    child: BalanceContent(
+                      balance: homeCubit.teacherStatsModel?.data?.walletMoney ?? 0,
+                      minutes: homeCubit.teacherStatsModel?.data?.walletMinutes ?? 0,
                       currency: 'ج.م',
-                    );
-                  }(),
-                ),
-              ),
+                    ),
+                  ),
+                );
+            },
+          ),
 
-              Gap(12.w),
+          Gap(12.w),
 
-              // ================= Performance Container =================
-              Expanded(
-                child: Container(
+          // ================= Performance Container =================
+          BlocBuilder<HomeCubit, HomeStates>(
+            buildWhen: (_, current) =>
+            current is GetTeacherPerformanceLoadingState ||
+                current is GetTeacherPerformanceSuccessState ||
+                current is GetTeacherPerformanceErrorState,
+            builder: (context,state){
+              final homeCubit = context.read<HomeCubit>();
+              return Expanded(
+                child:
+                state is GetTeacherPerformanceLoadingState || homeCubit.teacherPerformanceModel==null?PerformanceShimmer() :
+                    state is GetTeacherPerformanceErrorState ? ErrorUi(
+                      errorState: state.error,
+                      onPressed: () {
+                        HomeCubit.get(context).getTeacherPerformance();
+                      },
+                    ):
+                Container(
                   padding: EdgeInsets.all(16.r),
                   decoration: _cardDecoration(),
                   child: PerformanceContent(
                     performanceData: PerformanceData(
-                      successCall: "15",
-                      overview: 85,
-                      totalCall: 20,
+                      successCall: homeCubit.teacherPerformanceModel!.data.successCall,
+                      overview:  homeCubit.teacherPerformanceModel!.data.overview,
+                      totalCall: homeCubit.teacherPerformanceModel!.data.totalCall,
                     ),
                   ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 
@@ -97,7 +94,7 @@ class BalanceAndPerformance extends StatelessWidget {
       border: Border.all(color: Colors.grey[300]!),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.1),
+          color: Colors.grey.withValues(alpha: 0.1),
           blurRadius: 8,
           spreadRadius: 2,
         ),

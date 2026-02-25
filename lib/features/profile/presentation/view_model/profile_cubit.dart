@@ -27,9 +27,12 @@ class ProfileCubit extends Cubit<ProfileStates> {
   }
 
   ProfileModel? profileModel;
-  Future<void> getProfileData()
+  Future<void> getProfileData({bool isLoading=true})
   async {
-    emit(GetProfileDataLoadingState());
+    if(isLoading){
+      emit(GetProfileDataLoadingState());
+    }
+
     var result = await profileRepo!.getProfileData();
     return result.fold((failure) {
       emit(GetProfileDataErrorState(failure.errMessage));

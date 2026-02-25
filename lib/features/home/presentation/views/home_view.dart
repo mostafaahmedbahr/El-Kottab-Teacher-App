@@ -1,6 +1,3 @@
-// rahma
-//2
-
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_content.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/widgets/home_stats_shimmer.dart';
 import '../../../../core/errors/error_ui.dart';
@@ -32,39 +29,40 @@ class HomeView extends StatelessWidget {
               current is GetTeacherPerformanceErrorState ||
               current is GetTeacherPerformanceSuccessState,
           builder: (context, state) {
+            return HomeContent();
             // 🔹 Loading (either stats or performance loading)
-            if (state is GetTeacherStatsLoadingState ||
-                state is GetTeacherPerformanceLoadingState) {
-              return const HomeStatsShimmer();
-            }
+            // if (state is GetTeacherStatsLoadingState ||
+            //     state is GetTeacherPerformanceLoadingState) {
+            //   return const HomeStatsShimmer();
+            // }
 
             // 🔹 Error (either stats or performance error)
-            if (state is GetTeacherStatsErrorState ||
-                state is GetTeacherPerformanceErrorState) {
-              return ErrorUi(
-                errorState: state is GetTeacherStatsErrorState
-                    ? state.error
-                    : (state as GetTeacherPerformanceErrorState).error,
-                onPressed: () {
-                  final userId = CacheHelper.getData(key: "userId");
-                  if (userId != null) {
-                    context.read<HomeCubit>().getTeacherStats(
-                      teacherId: userId,
-                    );
-                    context.read<HomeCubit>().getTeacherPerformance();
-                  }
-                },
-              );
-            }
+            // if (state is GetTeacherStatsErrorState ||
+            //     state is GetTeacherPerformanceErrorState) {
+            //   return ErrorUi(
+            //     errorState: state is GetTeacherStatsErrorState
+            //         ? state.error
+            //         : (state as GetTeacherPerformanceErrorState).error,
+            //     onPressed: () {
+            //       final userId = CacheHelper.getData(key: "userId");
+            //       if (userId != null) {
+            //         context.read<HomeCubit>().getTeacherStats(
+            //           teacherId: userId,
+            //         );
+            //         context.read<HomeCubit>().getTeacherPerformance();
+            //       }
+            //     },
+            //   );
+            // }
 
             // 🔹 Success (both stats and performance loaded)
-            if (state is GetTeacherStatsSuccessState ||
-                state is GetTeacherPerformanceSuccessState) {
-              return const HomeContent();
-            }
+            // if (state is GetTeacherStatsSuccessState ||
+            //     state is GetTeacherPerformanceSuccessState) {
+            //   return const HomeContent();
+            // }
 
             // 🔹 Default state
-            return const HomeStatsShimmer();
+            // return const HomeStatsShimmer();
           },
         ),
       ),
