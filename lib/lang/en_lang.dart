@@ -178,5 +178,9 @@ class EnLang {
     "refundPolicy": "Refund policy",
     "pricePolicy": "Price policy",
     "close": "Close",
+    "noSuccessfulCallsYet": "No successful calls yet",
+    "theQualificationCertificateMustBeUploaded": "The qualification certificate must be uploaded",
+    "theVacationCertificateMustBeUploaded": "The vacation certificate must be uploaded",
+    "unAvailable": "Unavailable",
   };
 }

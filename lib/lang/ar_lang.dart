@@ -177,5 +177,9 @@ class ArLang {
     "refundPolicy": "سياسة الاسترجاع",
     "pricePolicy": "سياسة الأسعار",
     "close": "اغلاق",
+    "noSuccessfulCallsYet": "لا توجد مكالمات ناجحة بعد",
+    "theQualificationCertificateMustBeUploaded": "يجب رفع شهادة المؤهل",
+    "theVacationCertificateMustBeUploaded": "يجب رفع شهادة الإجازة",
+    "unAvailable": "غير متاح",
   };
 }
