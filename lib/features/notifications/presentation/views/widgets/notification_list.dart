@@ -18,21 +18,6 @@ class NotificationList extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<NotificationsCubit>();
         final notifications = cubit.notificationsModel?.data ?? [];
-
-        if (notifications.isEmpty &&
-            state is! GetAllNotificationsLoadingState &&
-            state is! GetAllNotificationsLoadingMoreState) {
-          return Center(
-            child: Text(
-              LangKeys.noNotifications.tr(),
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
-            ),
-          );
-        }
-
         return Column(
           children: [
             Expanded(
@@ -40,7 +25,19 @@ class NotificationList extends StatelessWidget {
                   state is GetAllNotificationsErrorState ? CustomErrorWidget(onTap: (){
                     context.read<NotificationsCubit>().getAllNotifications();
                   }, errorMsg: state.error.toString())
-                  : ListView.separated(
+                  :
+        notifications.isEmpty &&
+        state is! GetAllNotificationsLoadingState &&
+        state is! GetAllNotificationsLoadingMoreState ? Center(
+          child: Text(
+            LangKeys.noNotifications.tr(),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[600],
+            ),
+          ),
+        ):
+                  ListView.separated(
                 padding: EdgeInsets.all(16),
                itemCount: notifications.length  ,
                 separatorBuilder: (context, index) => Gap(12.h),

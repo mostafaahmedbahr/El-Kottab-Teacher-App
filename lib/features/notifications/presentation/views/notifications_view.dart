@@ -29,8 +29,6 @@ class _NotificationViewState extends State<NotificationView> {
             context: context,
           );
           context.read<NotificationsCubit>().getAllNotifications();
-          // context.read<NotificationsCubit>().getNotificationsCount();
-          // context.read<NotificationsCubit>().readAllNotifications();
         } else if (state is DeleteNotificationsErrorState) {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         }
