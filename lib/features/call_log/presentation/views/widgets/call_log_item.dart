@@ -1,9 +1,8 @@
 import 'package:el_kottab_teacher_app/core/helpers/convert_date.dart';
+import 'package:el_kottab_teacher_app/features/chat/presentation/views/chat_view.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'call_type_indicator.dart';
 import '../../../data/models/calls_model.dart';
-import '../../view_models/call_logs_cubit.dart';
-import '../../view_models/call_logs_states.dart';
 
 class CallLogItem extends StatelessWidget {
   final Data callData;
@@ -126,6 +125,7 @@ class CallLogItem extends StatelessWidget {
   void _showOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: AppColors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -143,38 +143,19 @@ class CallLogItem extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.edit, color: Colors.orange),
-                title: const Text('مراجعة المكالمة'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showRevisionDialog(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.call, color: Colors.green),
-                title: const Text('الاتصال مرة أخرى'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // Implement call back logic
-                },
-              ),
-              ListTile(
                 leading: const Icon(Icons.message, color: Colors.purple),
                 title: const Text('إرسال رسالة'),
                 onTap: () {
-                  Navigator.pop(context);
+                  AppNav.customNavigator(context: context, screen: ChatView(
+                    studentName:callData.user?.name  ,
+                    studentImage: callData.user?.image,
+                    studentId: callData.user?.id,
+                  ));
+                  // Navigator.pop(context);
                   // Implement message logic
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.delete, color: Colors.red),
-                title: const Text('حذف السجل'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showDeleteConfirmation(context);
-                },
-              ),
-              const SizedBox(height: 8),
+              Gap(8.h),
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: const Text('إلغاء'),
@@ -190,13 +171,14 @@ class CallLogItem extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: AppColors.white,
         title: Text('تفاصيل المكالمة'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildDetailRow('الطالب:', callData.user?.name ?? "Unknown"),
-            _buildDetailRow('الوقت:', callData.startedAt ?? ""),
+            _buildDetailRow('الوقت:', DateFormatterClass.toTimeAgo(callData.startedAt)),
             _buildDetailRow('المدة:', "${callData.durationMinutes ?? 0} دقيقة"),
             _buildDetailRow('الحالة:', _getStatusText(callData.status)),
           ],
@@ -211,97 +193,6 @@ class CallLogItem extends StatelessWidget {
     );
   }
 
-  void _showRevisionDialog(BuildContext context) {
-    final TextEditingController revisionController = TextEditingController();
-    final cubit = context.read<CallLogsCubit>();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('مراجعة المكالمة'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('أضف ملاحظاتك حول هذه المكالمة:'),
-            const SizedBox(height: 16),
-            TextField(
-              controller: revisionController,
-              maxLines: 4,
-              decoration: const InputDecoration(
-                hintText: 'اكتب ملاحظاتك هنا...',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          BlocListener<CallLogsCubit, CallLogsStates>(
-            listener: (context, state) {
-              if (state is AddRevisionSuccessState) {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('تم حفظ المراجعة بنجاح'),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-              } else if (state is AddRevisionErrorState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('خطأ: ${state.error}'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-            child: ElevatedButton(
-              onPressed: () {
-                if (revisionController.text.isNotEmpty) {
-                  cubit.addCallRevision(callData.id!, revisionController.text);
-                }
-              },
-              child: const Text('حفظ المراجعة'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showDeleteConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('حذف سجل المكالمة'),
-        content: const Text(
-          'هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('تم حذف سجل المكالمة'),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('حذف'),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
@@ -309,7 +200,7 @@ class CallLogItem extends StatelessWidget {
       child: Row(
         children: [
           Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
-          const SizedBox(width: 8),
+          Gap(8.w),
           Expanded(
             child: Text(value, style: const TextStyle(color: Colors.grey)),
           ),

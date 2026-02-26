@@ -8,43 +8,56 @@ import '../../../../main_imports.dart';
 class ChatView extends StatelessWidget {
   const ChatView({
     super.key,
-    this.teacherName,
-    this.teacherImage,
-    this.teacherId,
+    this.studentName,
+    this.studentImage,
+    this.studentId,
   });
-  final String? teacherName;
-  final String? teacherImage;
-  final int? teacherId;
+  final String? studentName;
+  final String? studentImage;
+  final int? studentId;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           ChatCubit(getIt.get<ChatRepoImpl>())
-            ..getAllMessages( teacherId: teacherId!),
-      child: Scaffold(
-        backgroundColor: const Color(0xffF5F7FA),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Row(
-            children: [
-              CustomNetWorkImage(
-                imageUrl: teacherImage.toString(),
-                height: 40.h,
-                width: 40.w,
-                raduis: 50,
+            ..getAllMessages(teacherId: studentId!),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            backgroundColor: const Color(0xffF5F7FA),
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.white,
+              title: Row(
+                children: [
+                  CustomNetWorkImage(
+                    imageUrl: studentImage.toString(),
+                    height: 40.h,
+                    width: 40.w,
+                    raduis: 50,
+                  ),
+                  Gap(10.w),
+                  Text(
+                    studentName.toString(),
+                    style: AppStyles.black16SemiBold,
+                  ),
+                ],
               ),
-              Gap(10.w),
-              Text(teacherName.toString(), style: AppStyles.black16SemiBold),
-            ],
-          ),
-        ),
-        body: Column(
-          children: [
-            Expanded(child: MessageList()),
-            MessageInput(teacherId: teacherId!),
-          ],
-        ),
+            ),
+            body: Column(
+              children: [
+                Expanded(child: MessageList()),
+                if (context
+                        .read<ChatCubit>()
+                        .allMessagesModel
+                        ?.data
+                        ?.isNotEmpty ==
+                    true)
+                  MessageInput(teacherId: studentId!),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

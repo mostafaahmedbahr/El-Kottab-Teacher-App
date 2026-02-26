@@ -78,9 +78,9 @@ class ChatTile extends StatelessWidget {
       ),
       onTap: () {
         AppNav.customNavigator(context: context, screen: ChatView(
-          teacherId: chat.otherUser!.id,
-          teacherImage: chat.otherUser!.image!,
-          teacherName: chat.otherUser!.name,
+          studentId: chat.otherUser!.id,
+          studentImage: chat.otherUser!.image!,
+          studentName: chat.otherUser!.name,
         ));
       },
     );

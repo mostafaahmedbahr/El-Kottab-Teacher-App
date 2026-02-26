@@ -33,7 +33,9 @@ class MessageInput extends StatelessWidget {
               ),
             ],
           ),
-          child: Row(
+          child:
+
+          Row(
             children: [
               Expanded(
                 child: Container(
@@ -68,7 +70,7 @@ class MessageInput extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
         );
       },
     );
