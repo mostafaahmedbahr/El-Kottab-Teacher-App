@@ -99,9 +99,9 @@ class ZegoService {
               ZegoCallMenuBarButtonName.switchCameraButton,
               ZegoCallMenuBarButtonName.hangUpButton,
             ];
-            config.foreground = Container(
-              color: AppColors.darkOlive,
-            );
+            // config.foreground = Container(
+            //   color: AppColors.darkOlive,
+            // );
             config.enableAccidentalTouchPrevention=false;
             config.bottomMenuBar.margin = const EdgeInsets.only(bottom: 20);
             config.bottomMenuBar.padding = const EdgeInsets.symmetric(horizontal: 20);
