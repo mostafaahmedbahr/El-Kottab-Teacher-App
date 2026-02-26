@@ -24,7 +24,7 @@ class ChatView extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            backgroundColor: const Color(0xffF5F7FA),
+            backgroundColor: AppColors.white,
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.white,
@@ -47,12 +47,7 @@ class ChatView extends StatelessWidget {
             body: Column(
               children: [
                 Expanded(child: MessageList()),
-                if (context
-                        .read<ChatCubit>()
-                        .allMessagesModel
-                        ?.data
-                        ?.isNotEmpty ==
-                    true)
+                if (context.watch<ChatCubit>().allMessagesModel?.data?.isNotEmpty ?? false)
                   MessageInput(teacherId: studentId!),
               ],
             ),
