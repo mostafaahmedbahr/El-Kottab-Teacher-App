@@ -8,14 +8,11 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
-
-// Load keystore properties
 val keystoreProperties = Properties()
-val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
-
 android {
     namespace = "com.zerobugs.el_kotab_teacher_app"
     compileSdk = 36
@@ -39,44 +36,27 @@ android {
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        
-        // Enable multiDex for large apps
-        multiDexEnabled = true
     }
-
     signingConfigs {
         create("release") {
             keyAlias = keystoreProperties.getProperty("keyAlias")
             keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = file(keystoreProperties.getProperty("storeFile") ?: "keystore/release-key.keystore")
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
             storePassword = keystoreProperties.getProperty("storePassword")
         }
     }
-
     buildTypes {
-        release {
-            // Enable code shrinking and resource shrinking
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
-            
-            // Enable ProGuard/R8
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            
-            // Use release signing config
-            signingConfig = signingConfigs.getByName("release")
-            
-            // Optimize build
-            ndk {
-                debugSymbolLevel = "SYMBOL_TABLE"
-            }
-        }
-        
-        debug {
-            // Debug configuration
-            isDebuggable = true
         }
     }
 }
@@ -87,11 +67,11 @@ flutter {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("androidx.multidex:multidex:2.0.1")
-    
+
     // Firebase dependencies for FCM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
-   implementation("im.zego:zpns-fcm:2.8.0")
+    implementation("im.zego:zpns-fcm:2.8.0")
+    implementation("com.google.android.play:core:1.10.3")
 }

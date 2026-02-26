@@ -176,7 +176,7 @@ keytool -genkey -v -keystore android/keystore/release-key.keystore -keyalg RSA -
 #### **2. Signing Errors:**
 ```bash
 # Verify keystore properties
-cat android/keystore.properties
+cat android/key.properties
 
 # Test signing
 flutter build apk --release --verbose
