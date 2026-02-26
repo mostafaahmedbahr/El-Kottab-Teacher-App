@@ -44,3 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 *.env
+
+# Keystore and signing files (SECURITY: Never commit these!)
+/android/keystore.properties
+/android/keystore/
+*.keystore
+*.jks
