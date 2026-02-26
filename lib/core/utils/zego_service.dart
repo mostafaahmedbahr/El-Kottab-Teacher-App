@@ -3,6 +3,8 @@ import 'package:zego_uikit/zego_uikit.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
+import '../../main_imports.dart';
+
 class ZegoService {
   static final ZegoService _instance = ZegoService._();
 
@@ -87,7 +89,32 @@ class ZegoService {
             config.layout = ZegoLayout.gallery(
               addBorderRadiusAndSpacingBetweenView: false,
             );
-
+            config.background = Container(
+              color: AppColors.darkOlive,
+            );
+            config.bottomMenuBar.hideAutomatically = false;
+            config.bottomMenuBar.buttons = [
+              ZegoCallMenuBarButtonName.toggleMicrophoneButton,
+              ZegoCallMenuBarButtonName.toggleCameraButton,
+              ZegoCallMenuBarButtonName.switchCameraButton,
+              ZegoCallMenuBarButtonName.hangUpButton,
+            ];
+            config.foreground = Container(
+              color: AppColors.darkOlive,
+            );
+            config.enableAccidentalTouchPrevention=false;
+            config.bottomMenuBar.margin = const EdgeInsets.only(bottom: 20);
+            config.bottomMenuBar.padding = const EdgeInsets.symmetric(horizontal: 20);
+            config..topMenuBar.height = 100
+              ..topMenuBar.padding = const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 0,
+              )
+              ..topMenuBar.margin = const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 0,
+              )
+              ..topMenuBar.backgroundColor = Colors.red.withValues(alpha: 0.2);
             // Set the caller name in the config if available
             if (data.inviter?.name?.isNotEmpty == true) {
               print('📞 Setting caller name: ${data.inviter?.name}');

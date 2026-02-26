@@ -16,9 +16,9 @@ class _LayoutViewState extends State<LayoutView> {
   @override
   void initState() {
     context.read<LayoutCubit>().initializeZegoServices(
-      CacheHelper.getData(key: "userName".toString()),
-      CacheHelper.getData(key: "userId".toString()),
-        CacheHelper.getData(key: "fcmToken".toString()),
+      CacheHelper.getData(key: "userName").toString(),
+      CacheHelper.getData(key: "userId").toString(),
+      CacheHelper.getData(key: "fcmToken").toString(),
     );
     super.initState();
   }
