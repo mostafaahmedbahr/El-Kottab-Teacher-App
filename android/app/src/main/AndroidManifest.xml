@@ -48,6 +48,9 @@
 
     <!-- تشغيل بعد إعادة تشغيل الموبايل (للاستقبال حتى لو التطبيق مقفول) -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:label="el_kottab_teacher_app"
         android:name="${applicationName}"

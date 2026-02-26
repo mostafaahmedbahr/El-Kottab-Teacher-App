@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
+       return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       child: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
               providers: [
                 BlocProvider(create: (context) => AuthCubit()),
                 BlocProvider(create: (context) => LanguageCubit()),
-                BlocProvider(create: (context) => LayoutCubit()),
+                BlocProvider(create: (context) => LayoutCubit() ),
                 BlocProvider(
                   create: (context) =>
                       ForgetPasswordCubit(getIt<ForgetPasswordRepoImpl>()),

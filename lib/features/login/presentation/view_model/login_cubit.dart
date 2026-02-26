@@ -4,6 +4,7 @@ import '../../data/models/login_model.dart';
 import '../../data/repos/login_repo.dart';
 import 'login_states.dart';
 
+
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit(this.loginRepo) : super(LoginInitState());
   LoginRepo? loginRepo;
@@ -24,6 +25,7 @@ class LoginCubit extends Cubit<LoginStates> {
         CacheHelper.saveData(key: "userPhone", value: loginModel?.data?.phone);
         CacheHelper.saveData(key: "userId", value: loginModel?.data?.id);
         CacheHelper.saveData(key: "userEmail", value: loginModel?.data?.email);
+        CacheHelper.saveData(key: "userName", value: loginModel?.data?.name);
 
         emit(LoginSuccessState(data));
 
@@ -52,5 +54,8 @@ class LoginCubit extends Cubit<LoginStates> {
     isPasswordVisible = !isPasswordVisible;
     emit(ChangePasswordVisibleState());
   }
+
+
+
 
 }

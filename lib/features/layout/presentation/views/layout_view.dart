@@ -5,12 +5,26 @@ import '../../../../main_imports.dart';
 import '../view_model/layout_cubit.dart';
 import '../view_model/layout_states.dart';
 
-class LayoutView extends StatelessWidget {
+class LayoutView extends StatefulWidget {
   const LayoutView({super.key});
+
+  @override
+  State<LayoutView> createState() => _LayoutViewState();
+}
+
+class _LayoutViewState extends State<LayoutView> {
+  @override
+  void initState() {
+    context.read<LayoutCubit>().initializeZegoServices(
+      CacheHelper.getData(key: "userName".toString()),
+      CacheHelper.getData(key: "userId".toString()),
+        CacheHelper.getData(key: "fcmToken".toString()),
+    );
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LayoutCubit, LayoutStates>(
-
       builder: (context, state) {
         var layoutCubit = LayoutCubit.get(context);
         logSuccess(CacheTokenManger.userToken.toString());
@@ -32,7 +46,4 @@ class LayoutView extends StatelessWidget {
       },
     );
   }
-
-
-
 }

@@ -66,7 +66,7 @@ void main() async {
   CallNotificationService().initialize();
 
   // Initialize Zego services
-  await _initializeZegoServices();
+  // await _initializeZegoServices(userName,userId,fcmToken);
 
   // Run the app
   runApp(
@@ -146,47 +146,4 @@ Future<void> _configureFirebaseMessaging() async {
   }
 }
 
-Future<void> _initializeZegoServices() async {
-  try {
-    debugPrint('🎯 Initializing Zego services...');
 
-    // Set navigator key for Zego
-    ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigateKey);
-
-    // Disable Zego debug logging to prevent getNetworkTimeInfo spam
-    // This reduces the log level from Debug to Info
-    await ZegoUIKit().initLog();
-
-    // Use system calling UI with signaling plugin
-    await ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI([
-      ZegoUIKitSignalingPlugin(),
-    ]);
-
-    // Get user data from cache
-    String userId = CacheHelper.getData(key: "userId").toString();
-    String userName = CacheHelper.getData(key: "userName").toString();
-    String fcmToken = CacheHelper.getData(key: "fcmToken").toString();
-
-    // Handle empty/null userName
-    if (userName.isEmpty || userName == "null") {
-      userName = "Teacher";
-    }
-
-    debugPrint('👤 Zego User Data:');
-    debugPrint('   UserID: $userId');
-    debugPrint('   UserName: $userName');
-    debugPrint('   FCM Token: $fcmToken');
-
-    // Initialize Zego service using original working ZegoService
-    ZegoService().init(userId: userId, userName: userName, fcmToken: fcmToken);
-
-    // Handle offline calls after app is ready
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
-    });
-
-    debugPrint('✅ Zego services initialized successfully');
-  } catch (e) {
-    debugPrint('❌ Error initializing Zego services: $e');
-  }
-}

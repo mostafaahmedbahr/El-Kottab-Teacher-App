@@ -1,3 +1,5 @@
+-keep class **.zego.** { *; }
+
 # Flutter ProGuard/R8 Rules
 # Add these rules to protect your Flutter app from code obfuscation issues
 
