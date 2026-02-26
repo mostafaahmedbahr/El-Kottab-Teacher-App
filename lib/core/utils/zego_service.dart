@@ -136,6 +136,7 @@ class ZegoService {
         ringtoneConfig: ZegoCallRingtoneConfig(),
         uiConfig: ZegoCallInvitationUIConfig(
           inviter:ZegoCallInvitationInviterUIConfig(
+
             showAvatar: true,
             showCentralName: true,
             showMainButtonsText: true,
