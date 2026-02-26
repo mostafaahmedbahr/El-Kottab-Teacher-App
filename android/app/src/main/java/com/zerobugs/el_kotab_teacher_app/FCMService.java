@@ -18,17 +18,45 @@ public class FCMService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "📩 FCM Message received: " + remoteMessage.getData());
         
-        // Check if this is a Zego call
-        Bundle data = new Bundle();
-        for (String key : remoteMessage.getData().keySet()) {
-            data.putString(key, remoteMessage.getData().get(key));
-        }
-        
         // Handle Zego call notifications
         if (isZegoCall(remoteMessage)) {
-            Log.d(TAG, "📞 Zego call detected, // Show persistent call notification");
-            String callerName = remoteMessage.getData().get("callerName");
-            String callId = remoteMessage.getData().get("callID");
+            Log.d(TAG, "📞 Zego call detected, showing persistent call notification");
+            
+            // Try multiple possible keys for caller name
+            String callerName = null;
+            String callId = null;
+            
+            // Try different possible keys for caller name
+            if (remoteMessage.getData().containsKey("caller_name")) {
+                callerName = remoteMessage.getData().get("caller_name");
+            } else if (remoteMessage.getData().containsKey("callerName")) {
+                callerName = remoteMessage.getData().get("callerName");
+            } else if (remoteMessage.getData().containsKey("inviter_name")) {
+                callerName = remoteMessage.getData().get("inviter_name");
+            } else if (remoteMessage.getData().containsKey("userName")) {
+                callerName = remoteMessage.getData().get("userName");
+            } else if (remoteMessage.getData().containsKey("user_name")) {
+                callerName = remoteMessage.getData().get("user_name");
+            }
+            
+            // Try different possible keys for call ID
+            if (remoteMessage.getData().containsKey("call_id")) {
+                callId = remoteMessage.getData().get("call_id");
+            } else if (remoteMessage.getData().containsKey("callID")) {
+                callId = remoteMessage.getData().get("callID");
+            } else if (remoteMessage.getData().containsKey("invitationID")) {
+                callId = remoteMessage.getData().get("invitationID");
+            }
+            
+            // Log what we found
+            Log.d(TAG, "📞 Extracted - Caller: " + callerName + ", CallID: " + callId);
+            
+            // Use default name if caller is null
+            if (callerName == null || callerName.trim().isEmpty()) {
+                callerName = "Student";
+                Log.d(TAG, "📞 Using default caller name: " + callerName);
+            }
+            
             showCallNotification(callerName, callId);
             
             // Start call notification service for persistent ringing
