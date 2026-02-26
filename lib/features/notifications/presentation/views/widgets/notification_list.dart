@@ -36,7 +36,7 @@ class NotificationList extends StatelessWidget {
         return Column(
           children: [
             Expanded(
-              child:state is GetAllNotificationsLoadingState ? CustomLoading() :
+              child:state is GetAllNotificationsLoadingState || cubit.notificationsModel==null? CustomLoading() :
                   state is GetAllNotificationsErrorState ? CustomErrorWidget(onTap: (){
                     context.read<NotificationsCubit>().getAllNotifications();
                   }, errorMsg: state.error.toString())
