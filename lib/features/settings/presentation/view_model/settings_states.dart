@@ -1,5 +1,7 @@
+import 'package:el_kottab_teacher_app/features/settings/data/models/add_payment_method_model.dart';
 import 'package:el_kottab_teacher_app/features/settings/data/models/delete_account_model.dart';
 
+import '../../data/models/get_payment_methods_model.dart';
 import '../../data/models/privacy_policy_model.dart';
 import '../../data/models/refund_policy_model.dart';
 import '../../data/models/terms_and_conditions_model.dart';
@@ -68,4 +70,30 @@ class GetPrivacyPolicyErrorState extends SettingsStates {
 class GetPrivacyPolicySuccessState extends SettingsStates {
   final PrivacyPolicyModel privacyPolicyModel;
   GetPrivacyPolicySuccessState(this.privacyPolicyModel);
+}
+
+
+class AddPaymentMethodLoadingState extends SettingsStates {}
+
+class AddPaymentMethodErrorState extends SettingsStates {
+  final String error;
+  AddPaymentMethodErrorState(this.error);
+}
+
+class AddPaymentMethodSuccessState extends SettingsStates {
+  final AddPaymentMethodModel addPaymentMethodModel;
+  AddPaymentMethodSuccessState(this.addPaymentMethodModel);
+}
+
+
+class GetPaymentMethodLoadingState extends SettingsStates {}
+
+class GetPaymentMethodErrorState extends SettingsStates {
+  final String error;
+  GetPaymentMethodErrorState(this.error);
+}
+
+class GetPaymentMethodSuccessState extends SettingsStates {
+  final GetPaymentMethodsModel getPaymentMethodsModel;
+  GetPaymentMethodSuccessState(this.getPaymentMethodsModel);
 }

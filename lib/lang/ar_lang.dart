@@ -183,5 +183,6 @@ class ArLang {
     "unAvailable": "غير متاح",
     "allChats" : "جميع المحادثات",
     "anErrorOccurredInLoadingTheConversations" : "حدث خطأ أثناء تحميل المحادثات",
+    "paymentMethods" : "طرق الدفع",
   };
 }

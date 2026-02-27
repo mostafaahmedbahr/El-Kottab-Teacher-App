@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/extensions/lang.dart';
+import 'package:el_kottab_teacher_app/features/settings/presentation/views/payment_methods_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/price_policy_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/refund_policy_view.dart';
 import 'package:el_kottab_teacher_app/features/settings/presentation/views/terms_view.dart';
@@ -17,8 +18,19 @@ class SettingsView extends StatelessWidget {
       appBar: AppBar(title: Text(LangKeys.settings.tr())),
       body: Padding(
         padding: EdgeInsets.all(12.0.r),
-        child: Column(
+        child: ListView(
           children: [
+            Gap(12.h),
+            ProfileListItem(
+              title: LangKeys.paymentMethods,
+              svgImage: SvgImages.dollar,
+              onTap: () {
+                AppNav.customNavigator(
+                  context: context,
+                  screen: PaymentMethodsView(),
+                );
+              },
+            ),
             Gap(12.h),
             ProfileListItem(
               title: LangKeys.aboutUs,

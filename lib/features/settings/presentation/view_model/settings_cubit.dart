@@ -4,6 +4,8 @@ import 'package:el_kottab_teacher_app/features/settings/data/models/who_we_are_m
 import 'package:el_kottab_teacher_app/features/settings/presentation/view_model/settings_states.dart';
 
 import '../../../../main_imports.dart';
+import '../../data/models/add_payment_method_model.dart';
+import '../../data/models/get_payment_methods_model.dart';
 import '../../data/models/privacy_policy_model.dart';
 import '../../data/models/refund_policy_model.dart';
 import '../../data/repos/settings_repo.dart';
@@ -86,6 +88,39 @@ class SettingsCubit extends Cubit<SettingsStates> {
           (data) async {
         privacyPolicyModel = data;
         emit(GetPrivacyPolicySuccessState(data));
+      },
+    );
+  }
+
+  GetPaymentMethodsModel? getPaymentMethodsModel;
+  Future<void> getPaymentMethods() async {
+    emit(GetPaymentMethodLoadingState());
+    var result = await settingsRepo!.getPaymentMethods();
+    return result.fold(
+          (failure) {
+        emit(GetPaymentMethodErrorState(failure.errMessage));
+      },
+          (data) async {
+            getPaymentMethodsModel = data;
+        emit(GetPaymentMethodSuccessState(data));
+      },
+    );
+  }
+
+
+
+  AddPaymentMethodModel? addPaymentMethodModel;
+  Future<void> addPaymentMethod(String? methodType , String? phoneNumber,
+      String? bankName,String accountNumber , String? receiverName , String? isDefault) async {
+    emit(AddPaymentMethodLoadingState());
+    var result = await settingsRepo!.addPaymentMethod(methodType, phoneNumber, bankName, accountNumber, receiverName, isDefault);
+    return result.fold(
+          (failure) {
+        emit(AddPaymentMethodErrorState(failure.errMessage));
+      },
+          (data) async {
+            addPaymentMethodModel = data;
+        emit(AddPaymentMethodSuccessState(data));
       },
     );
   }

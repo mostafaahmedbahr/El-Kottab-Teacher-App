@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:el_kottab_teacher_app/features/settings/data/repos/settings_repo.dart';
 
 import '../../../../main_imports.dart';
+import '../models/add_payment_method_model.dart';
 import '../models/delete_account_model.dart';
+import '../models/get_payment_methods_model.dart';
 import '../models/privacy_policy_model.dart';
 import '../models/refund_policy_model.dart';
 import '../models/terms_and_conditions_model.dart';
@@ -80,6 +82,65 @@ class SettingsRepoImpl implements SettingsRepo {
       PrivacyPolicyModel result = PrivacyPolicyModel.fromJson(
         response.data,
       );
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetPaymentMethodsModel>> getPaymentMethods() async {
+    try {
+      var response = await apiService!.getData(
+        endPoint: EndPoints.teacherPaymentMethods,
+      );
+      GetPaymentMethodsModel result = GetPaymentMethodsModel.fromJson(
+        response.data,
+      );
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, AddPaymentMethodModel>> addPaymentMethod(
+      String? methodType,
+      String? phoneNumber,
+      String? bankName,
+      String? accountNumber,
+      String? receiverName,
+      String? isDefault,
+      ) async {
+    try {
+      final Map<String, dynamic> body = {};
+
+      /// ضيف بس القيم اللي مش فاضية
+      void addIfNotEmpty(String key, dynamic value) {
+        if (value != null &&
+            value.toString().isNotEmpty) {
+          body[key] = value;
+        }
+      }
+
+      addIfNotEmpty('method_type', methodType);
+      addIfNotEmpty('phone_number', phoneNumber);
+      addIfNotEmpty('bank_name', bankName);
+      addIfNotEmpty('account_number', accountNumber);
+      addIfNotEmpty('receiver_name', receiverName);
+      addIfNotEmpty('is_default', isDefault);
+
+      final data = FormData.fromMap(body);
+
+      var response = await apiService!.postData(
+        endPoint: EndPoints.teacherPaymentMethods,
+        data: data,
+      );
+
+      AddPaymentMethodModel result =
+      AddPaymentMethodModel.fromJson(response.data);
+
       return right(result);
     } catch (e) {
       return left(handleError(e));

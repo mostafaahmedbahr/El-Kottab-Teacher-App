@@ -184,5 +184,6 @@ class EnLang {
     "unAvailable": "Unavailable",
     "allChats" : "All Chats",
     "anErrorOccurredInLoadingTheConversations" : "An error occurred while loading the conversations",
+    "paymentMethods" : "Payment Methods",
   };
 }

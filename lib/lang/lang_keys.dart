@@ -185,5 +185,6 @@ abstract class LangKeys {
   static const close = "close";
   static const allChats = 'allChats';
   static const anErrorOccurredInLoadingTheConversations = 'anErrorOccurredInLoadingTheConversations';
+  static const paymentMethods = 'paymentMethods';
 
 }

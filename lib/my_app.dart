@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
                     ..getWhoWeAre()
                     ..getTermsAndConditions()
                     ..getRefundPolicy()
-                    ..getPrivacyPolicy(),
+                    ..getPrivacyPolicy()
+                    ..getPaymentMethods(),
                 ),
                 BlocProvider(
                   create: (context) =>

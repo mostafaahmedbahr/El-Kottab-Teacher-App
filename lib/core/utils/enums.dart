@@ -8,3 +8,7 @@ enum RegisterFileType {
 }
 
 enum AppointmentResult { success, endBeforeStart, conflict }
+
+// enum PaymentType { instapay, vodafoneCash, bank }
+enum PaymentType { none, bank, wallet }
+

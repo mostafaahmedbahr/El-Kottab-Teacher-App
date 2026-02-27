@@ -39,6 +39,8 @@ class EndPoints {
   static const String  teacherStatisics = 'teacher-statisics';
   static const String chats  = 'chats';
   static const String rate  = 'rate';
+  static const String teacherPaymentMethods  = 'teacher/payment-methods';
+
 
 
 
