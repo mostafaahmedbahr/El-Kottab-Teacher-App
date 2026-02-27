@@ -5,6 +5,8 @@ import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
 import '../../../call_log/presentation/views/call_log_view.dart';
 import '../../../reviews/presentation/views/reviews_view.dart';
+import '../../data/models/rate_student_model.dart';
+import '../../data/repos/layout_repo.dart';
 import 'layout_states.dart';
 import 'package:zego_uikit/zego_uikit.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
@@ -13,8 +15,8 @@ import '../../../../core/utils/zego_service.dart';
 import '../../../../main.dart';
 
 class LayoutCubit extends Cubit<LayoutStates> {
-  LayoutCubit() : super(LayoutInitState());
-
+  LayoutCubit(this.layoutRepo) : super(LayoutInitState());
+  final LayoutRepo? layoutRepo;
   static LayoutCubit get(context) => BlocProvider.of(context);
 
 
@@ -101,5 +103,27 @@ class LayoutCubit extends Cubit<LayoutStates> {
     }
   }
 
+
+
+  RateStudentModel? rateStudentModel;
+
+  Future<void> rateStudent({
+    required dynamic comment,
+    required dynamic rate,
+    required dynamic targetId,
+  }) async {
+    emit(RateStudentLoadingState());
+    var result = await layoutRepo!.rateStudent(
+      comment: comment,
+      rate: rate,
+      targetId: targetId,
+    );
+    result.fold((failure) => emit(RateStudentErrorState(failure.errMessage)), (
+        data,
+        ) {
+      rateStudentModel = data;
+      emit(RateStudentSuccessState(data));
+    });
+  }
 
 }

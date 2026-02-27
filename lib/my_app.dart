@@ -15,6 +15,7 @@ import 'features/add_appointments/data/repos/add_appointments_repo_impl.dart';
 import 'features/forget_password/data/repos/forget_password_repo_impl.dart';
 import 'features/home/data/repos/home_repo_impl.dart';
 import 'features/home/presentation/view_model/home_cubit.dart';
+import 'features/layout/data/repos/layout_repo_imple.dart';
 import 'features/notifications/data/repos/notifications_repo_imple.dart';
 import 'features/notifications/presentation/view_model/notifications_cubit.dart';
 import 'features/profile/presentation/view_model/profile_cubit.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
               providers: [
                 BlocProvider(create: (context) => AuthCubit()),
                 BlocProvider(create: (context) => LanguageCubit()),
-                BlocProvider(create: (context) => LayoutCubit() ),
+                BlocProvider(create: (context) => LayoutCubit(getIt<LayoutRepoImpl>()) ),
                 BlocProvider(
                   create: (context) =>
                       ForgetPasswordCubit(getIt<ForgetPasswordRepoImpl>()),

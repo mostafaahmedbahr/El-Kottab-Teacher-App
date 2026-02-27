@@ -42,7 +42,7 @@ void main() async {
   } catch (e) {
     debugPrint('❌ Error configuring ZPNS: $e');
   }
-
+  ZPNs.getInstance().applyNotificationPermission();
   // TODO: Re-enable Firebase Call Service after fixing Gradle
   //  await FirebaseCallService().initialize();
 

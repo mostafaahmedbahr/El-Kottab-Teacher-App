@@ -1,9 +1,13 @@
+import 'package:el_kottab_teacher_app/core/utils/rate_student_dialog.dart';
+import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:zego_uikit/zego_uikit.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
+import '../../main.dart';
 import '../../main_imports.dart';
+import '../extensions/log_util.dart';
 
 class ZegoService {
   static final ZegoService _instance = ZegoService._();
@@ -14,32 +18,67 @@ class ZegoService {
 
   final appID = int.parse(dotenv.env['ZEGO_APP_ID'] ?? '1234567890');
   final appSign = dotenv.env['ZEGO_APP_SIGN'] ?? 'your_app_sign_here';
-
+  BuildContext? get _context => navigateKey.currentContext;
   Future<void> init({
     required String userId,
     required String userName,
     required String fcmToken,
   }) async {
     try {
-      print(
+      logWarning(
         '🔔 ZegoService Init - UserID: $userId, UserName: $userName, FCM: $fcmToken',
       );
 
       // First initialize ZegoUIKit
       await ZegoUIKit().init(appID: appID, appSign: appSign);
-      print('✅ ZegoUIKit initialized');
+      logSuccess('✅ ZegoUIKit initialized');
 
       // Then initialize the invitation service
       final service = ZegoUIKitPrebuiltCallInvitationService();
 
       await service.init(
+        events : ZegoUIKitPrebuiltCallEvents(
+          onCallEnd:
+              (ZegoCallEndEvent event,
+
+              /// defaultAction to return to the previous page or hide the minimize page
+              VoidCallback defaultAction,) {
+            logSuccess(
+              "Call ended: ${event.callID}, reason: ${event.reason}",
+            );
+            // Call the default action first to ensure proper UI cleanup
+            defaultAction();
+            final invitees = event.invitationData?.invitees ?? [];
+            if (invitees.isEmpty) {
+              logWarning("No invitees found in call end event");
+              return;
+            }
+            final student = invitees.first;
+
+            showDialog(
+              context: _context!,
+              builder: (_) =>
+                  RateStudentDialog(
+                    studentId: student.id,
+                    studentName: student.name,
+                    onSubmit: (rating, message) {
+                      _context?.read<LayoutCubit>().rateStudent(
+                        rate: rating,
+                        comment: message,
+                        targetId: student.id.toString(),
+                      );
+                    },
+                  ),
+            );
+          },
+        ),
         notificationConfig: ZegoCallInvitationNotificationConfig(
           androidNotificationConfig: ZegoCallAndroidNotificationConfig(
             callIDVisibility: true,
             showOnFullScreen: true,
             showOnLockedScreen: true,
-            channelID: "zego_call_channel",
-            channelName: "Zego Calls",
+            // channelID: "zego_call_channel",
+            // channelName: "Zego Calls",
           ),
           iOSNotificationConfig: ZegoCallIOSNotificationConfig(
             isSandboxEnvironment: true,
@@ -67,13 +106,12 @@ class ZegoService {
           ),
         ),
         requireConfig: (ZegoCallInvitationData data) {
-          print("ddddddddddddddsfgsdgsdfg");
-          print('📞 Incoming call data: ${data.toString()}');
-          print(
+          debugPrint('📞 Incoming call data: ${data.toString()}');
+          debugPrint(
             '📞 Inviter: ${data.inviter?.name ?? "Unknown"} (${data.inviter?.id ?? "Unknown"})',
           );
-          print(
-            '📞 Invitees: ${data.invitees.map((e) => e.name ?? "Unknown").toList()}',
+          debugPrint(
+            '📞 Invitees: ${data.invitees.map((e) => e.name ).toList()}',
           );
 
           try {
@@ -116,14 +154,14 @@ class ZegoService {
               )
               ..topMenuBar.backgroundColor = Colors.red.withValues(alpha: 0.2);
             // Set the caller name in the config if available
-            if (data.inviter?.name?.isNotEmpty == true) {
-              print('📞 Setting caller name: ${data.inviter?.name}');
+            if (data.inviter?.name.isNotEmpty == true) {
+              debugPrint('📞 Setting caller name: ${data.inviter?.name}');
               // You can customize the UI to show the caller name
             }
 
             return config;
           } catch (e) {
-            print('❌ Error in requireConfig: $e');
+            logError('❌ Error in requireConfig: $e');
             // Return a default config if there's an error
             return ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall();
           }
@@ -156,9 +194,9 @@ class ZegoService {
         ),
       );
 
-      print('✅ ZegoService initialized successfully');
+      logSuccess('✅ ZegoService initialized successfully');
     } catch (e) {
-      print('❌ Error initializing ZegoService: $e');
+      logError('❌ Error initializing ZegoService: $e');
       rethrow;
     }
   }
@@ -167,9 +205,9 @@ class ZegoService {
     try {
       ZegoUIKitPrebuiltCallInvitationService().uninit();
       ZegoUIKit().uninit();
-      print('✅ ZegoService uninitialized successfully');
+      logSuccess('✅ ZegoService uninitialized successfully');
     } catch (e) {
-      print('❌ Error uninitializing ZegoService: $e');
+      logError('❌ Error uninitializing ZegoService: $e');
     }
   }
 }

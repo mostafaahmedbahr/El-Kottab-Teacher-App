@@ -14,6 +14,7 @@ import '../../../features/contact_us/data/repos/contact_us_repo_impl.dart';
 import '../../../features/forget_password/data/repos/forget_password_repo_impl.dart';
 import '../../../features/home/data/repos/home_repo_impl.dart';
 
+import '../../../features/layout/data/repos/layout_repo_imple.dart';
 import '../../../features/notifications/data/repos/notifications_repo_imple.dart';
 import '../../../features/otp/data/repos/otp_repo_imple.dart';
 import '../../../features/reviews/data/repos/reviews_repo_impl.dart';
@@ -70,5 +71,8 @@ void setup() {
   );
   getIt.registerSingleton<AllChatsRepoImpl>(
     AllChatsRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<LayoutRepoImpl>(
+    LayoutRepoImpl(getIt.get<ApiService>()),
   );
 }

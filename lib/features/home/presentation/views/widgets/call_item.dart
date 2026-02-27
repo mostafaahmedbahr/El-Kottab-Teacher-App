@@ -11,11 +11,11 @@ class CallItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        AppNav.customNavigator(context: context, screen:StudentProfileView(
-            personId: "1",
-            personName: call.user!.name.toString(),
-            personImage: call.user!.image.toString(),
-        ) );
+        // AppNav.customNavigator(context: context, screen:StudentProfileView(
+        //     personId: "1",
+        //     personName: call.user!.name.toString(),
+        //     personImage: call.user!.image.toString(),
+        // ) );
       },
       child: Container(
         width: 280.w,
