@@ -88,6 +88,7 @@ abstract class LangKeys {
   static const reviews = "reviews";
   static const balance = "balance";
   static const minuteRemaining = "minuteRemaining";
+  static const minuteUsed = "minuteUsed";
   static const withdrawBalance = "withdrawBalance";
   static const performanceIndicator = "performanceIndicator";
   static const successfulCalls = "successfulCalls";

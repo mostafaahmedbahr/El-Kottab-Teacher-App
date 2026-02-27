@@ -65,7 +65,7 @@ class BalanceContent extends StatelessWidget {
             ),
             Gap(4.w),
             Text(
-              '$minutes ${LangKeys.minuteRemaining.tr()}',
+              '$minutes ${LangKeys.minuteUsed.tr()}',
               style: TextStyle(
                 fontSize: 12.sp,
                 color: Colors.grey[600],

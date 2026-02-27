@@ -77,6 +77,7 @@ class ArLang {
     "reviews": "التقييمات",
     "balance": "الرصيد",
     "minuteRemaining": "الدقائق المتبقية",
+    "minuteUsed": "الدقائق المستخدمة",
     "withdrawBalance": "سحب الرصيد",
     "performanceIndicator": "مؤشر الأداء",
     "successfulCalls": "المكالمات الناجحة",

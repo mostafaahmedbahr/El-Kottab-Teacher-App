@@ -77,6 +77,7 @@ class EnLang {
     "reviews": "Reviews",
     "balance": "Balance",
     "minuteRemaining": "Minute Remaining",
+    "minuteUsed": "Minute Used",
     "withdrawBalance": "Withdraw Balance",
     "performanceIndicator": "Performance Indicator",
     "successfulCalls": "Successful Calls",
