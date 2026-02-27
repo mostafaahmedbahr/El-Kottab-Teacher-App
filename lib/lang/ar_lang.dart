@@ -184,5 +184,6 @@ class ArLang {
     "allChats" : "جميع المحادثات",
     "anErrorOccurredInLoadingTheConversations" : "حدث خطأ أثناء تحميل المحادثات",
     "paymentMethods" : "طرق الدفع",
+    "aboutMe" : "نبذة عني",
   };
 }

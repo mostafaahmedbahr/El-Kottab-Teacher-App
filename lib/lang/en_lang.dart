@@ -185,5 +185,6 @@ class EnLang {
     "allChats" : "All Chats",
     "anErrorOccurredInLoadingTheConversations" : "An error occurred while loading the conversations",
     "paymentMethods" : "Payment Methods",
+    "aboutMe" : "About Me",
   };
 }

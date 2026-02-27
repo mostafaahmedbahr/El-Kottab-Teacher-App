@@ -117,6 +117,17 @@ class _EditProfileNameEmailPhoneFormState
                 return null;
               },
             ),
+            Gap(10.h),
+            CustomTextFormField(
+          isChat: true,
+              controller: editProfileInfoCubit.descriptionCon,
+              keyboardType: TextInputType.text,
+              hintText: LangKeys.aboutMe.tr(),
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(10.0.r),
+                child: SvgPicture.asset(SvgImages.summary),
+              ),
+            ),
           ],
         );
       },
