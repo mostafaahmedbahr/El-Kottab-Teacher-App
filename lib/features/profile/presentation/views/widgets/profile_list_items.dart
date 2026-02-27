@@ -66,24 +66,24 @@ class ProfileListItems extends StatelessWidget {
           ProfileListItem(
             title: LangKeys.settings,
             svgImage: SvgImages.settings,
-            isLast: false,
+            isLast: true,
             onTap: () {
               AppNav.customNavigator(context: context, screen: SettingsView());
             },
           ),
 
-          ProfileListItem(
-            title: "الحجوزات",
-            svgImage: SvgImages.chat,
-
-            isLast: true,
-            onTap: () {
-              AppNav.customNavigator(
-                context: context,
-                screen: const TeacherBookingsView(),
-              );
-            },
-          ),
+          // ProfileListItem(
+          //   title: "الحجوزات",
+          //   svgImage: SvgImages.chat,
+          //
+          //   isLast: true,
+          //   onTap: () {
+          //     AppNav.customNavigator(
+          //       context: context,
+          //       screen: const TeacherBookingsView(),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
