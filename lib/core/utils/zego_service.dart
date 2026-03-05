@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:el_kottab_teacher_app/core/utils/rate_student_dialog.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -11,19 +13,96 @@ import '../extensions/log_util.dart';
 
 class ZegoService {
   static final ZegoService _instance = ZegoService._();
-
   factory ZegoService() => _instance;
-
   ZegoService._();
 
-  final appID = int.parse(dotenv.env['ZEGO_APP_ID'] ?? '1234567890');
-  final appSign = dotenv.env['ZEGO_APP_SIGN'] ?? 'your_app_sign_here';
   BuildContext? get _context => navigateKey.currentContext;
+  final appID = int.parse(dotenv.env['ZEGO_APP_ID'] ?? '0');
+  final appSign = dotenv.env['ZEGO_APP_SIGN'] ?? '';
+
+  DateTime? _startTime;
+  Timer? _checkerTimer;
+  bool _isInitialized = false;
+  String? _currentCallID;
+  ZegoCallUser? _currentStudent;
+
+  // الحساب بالدقائق للـ API
+  int get callMinutes {
+    if (_startTime == null) return 0;
+    final duration = DateTime.now().difference(_startTime!);
+    return (duration.inSeconds / 60).ceil();
+  }
+
+  // الحساب بالثواني للمقارنة الدقيقة مع الرصيد
+  int get callSeconds {
+    if (_startTime == null) return 0;
+    return DateTime.now().difference(_startTime!).inSeconds;
+  }
+
+  void _startCallTimer(String callID, ZegoCallUser student) {
+    _startTime = DateTime.now();
+    _currentCallID = callID;
+    _currentStudent = student;
+    _checkerTimer?.cancel();
+    _checkerTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+        logWarning("Balance finished! Forced hang up.");
+        // 1. أغلق المكالمة فوراً
+        ZegoUIKitPrebuiltCallController().hangUp(_context!, showConfirmation: false);
+        // 2. إيقاف التايمر
+        _stopCallTimer();
+        // 3. تأخير بسيط جداً لضمان خروج شاشة Zego قبل فتح التقييم (بيحل الشاشة السوداء)
+        Future.delayed(const Duration(milliseconds: 500), () {
+          _handleCallEndLogic(_currentCallID ?? "", _currentStudent);
+        });
+
+    });
+  }
+
+  void _stopCallTimer() {
+    _checkerTimer?.cancel();
+    _checkerTimer = null;
+  }
+
+
+  void _handleCallEndLogic(String callID, dynamic student) {
+    if (_startTime == null) return;
+    final finalMinutes = callMinutes;
+    logSuccess("Handling End Logic. Minutes: $finalMinutes");
+    if (student != null && _context != null) {
+      // ✅ التأكد من أن الـ Context لا يزال صالحاً قبل فتح الديالوج
+      showDialog(
+        context: _context!,
+        barrierDismissible: false, // لضمان إتمام عملية التقييم أو الإغلاق
+        builder: (_) => RateStudentDialog(
+          studentId: student.id,
+          studentName: student.name,
+          onSubmit: (rating, message) {
+            _context?.read<LayoutCubit>().rateStudent(
+              rate: rating,
+              comment: message,
+              targetId: student.id.toString(),
+            );
+          },
+        ),
+      );
+
+      _context?.read<LayoutCubit>().endCall(
+        durationMinutes: finalMinutes,
+        roomId: callID,
+        context: _context!,
+      );
+    }
+
+    _startTime = null;
+  }
+
   Future<void> init({
     required String userId,
     required String userName,
     required String fcmToken,
   }) async {
+    if (_isInitialized) return;
+    _isInitialized = true;
     try {
       logWarning(
         '🔔 ZegoService Init - UserID: $userId, UserName: $userName, FCM: $fcmToken',
@@ -35,9 +114,23 @@ class ZegoService {
 
       // Then initialize the invitation service
       final service = ZegoUIKitPrebuiltCallInvitationService();
-
       await service.init(
         events : ZegoUIKitPrebuiltCallEvents(
+          user: ZegoCallUserEvents(
+            onLeave: (user) {
+              print("000000000000000000000000000000000 user leave 000000000000000000000000000000000");
+              final currentUsers = ZegoUIKit().getAllUsers();
+              if (currentUsers.length <= 1 && _startTime != null) {
+                logWarning("Other party disconnected!");
+                ZegoUIKitPrebuiltCallController()
+                    .hangUp(_context!, showConfirmation: false);
+                _stopCallTimer();
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  _handleCallEndLogic(_currentCallID ?? "", _currentStudent);
+                });
+              }
+            },
+          ),
           onCallEnd:
               (ZegoCallEndEvent event,
 

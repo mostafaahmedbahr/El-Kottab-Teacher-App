@@ -40,6 +40,8 @@ class EndPoints {
   static const String chats  = 'chats';
   static const String rate  = 'rate';
   static const String teacherPaymentMethods  = 'teacher/payment-methods';
+  static const String calls  = 'calls';
+  static const String callsEnd  = 'calls/end';
 
 
 

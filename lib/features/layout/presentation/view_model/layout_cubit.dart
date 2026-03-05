@@ -4,7 +4,9 @@ import 'package:el_kottab_teacher_app/features/profile/presentation/views/profil
 import '../../../../main_imports.dart';
 import '../../../appointments/presentation/views/appointments_view.dart';
 import '../../../call_log/presentation/views/call_log_view.dart';
+import '../../../profile/presentation/view_model/profile_cubit.dart';
 import '../../../reviews/presentation/views/reviews_view.dart';
+import '../../data/models/end_call_model.dart';
 import '../../data/models/rate_student_model.dart';
 import '../../data/repos/layout_repo.dart';
 import 'layout_states.dart';
@@ -123,6 +125,28 @@ class LayoutCubit extends Cubit<LayoutStates> {
         ) {
       rateStudentModel = data;
       emit(RateStudentSuccessState(data));
+    });
+  }
+
+
+  EndCallModel? endCallModel;
+
+  Future<void> endCall({
+    required dynamic durationMinutes,
+    required dynamic roomId,
+    required BuildContext context,
+  }) async {
+    emit(EndCallLoadingState());
+    var result = await layoutRepo!.endCall(
+      durationMinutes: durationMinutes,
+      roomId: roomId,
+    );
+    result.fold((failure) => emit(EndCallErrorState(failure.errMessage)), (
+        data,
+        ) {
+      endCallModel = data;
+      emit(EndCallSuccessState(data));
+      context.read<ProfileCubit>().getProfileData();
     });
   }
 
