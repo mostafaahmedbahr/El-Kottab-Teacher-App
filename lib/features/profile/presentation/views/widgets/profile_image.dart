@@ -29,7 +29,7 @@ class ProfileImage extends StatelessWidget {
             height: 70.h,
             width: 70.w,
             fit: BoxFit.cover,
-            raduis: 0,
+            raduis: 50.r,
           ),
         ),
       ),

@@ -24,22 +24,25 @@ class LoginButton extends StatelessWidget {
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
           if (loginCubit.loginModel!.data!.isVerified == true) {
-            context.read<LoginCubit>().cacheUserInfo(
+            await   context.read<LoginCubit>().cacheUserInfo(
               token: loginCubit.loginModel?.data?.token ?? "",
               phone: loginCubit.loginModel?.data?.phone ?? "",
               id: loginCubit.loginModel?.data?.id ?? 0,
               email: loginCubit.loginModel?.data?.email ?? "",
               name: loginCubit.loginModel?.data?.name ?? "",
             );
-            AppNav.customNavigator(
-              context: context,
-              screen: LayoutView(),
-              finish: true,
-            );
-            Toast.showSuccessToast(
-              msg: state.loginModel.message.toString(),
-              context: context,
-            );
+            if(context.mounted){
+              AppNav.customNavigator(
+                context: context,
+                screen: LayoutView(),
+                finish: true,
+              );
+              Toast.showSuccessToast(
+                msg: state.loginModel.message.toString(),
+                context: context,
+              );
+            }
+
           } else {
             Toast.showErrorToast(
               msg: LangKeys.accountMustBeVerified.tr(),

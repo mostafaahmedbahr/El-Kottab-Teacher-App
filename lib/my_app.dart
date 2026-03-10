@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
                   create: (_) => HomeCubit(getIt.get<HomeRepoImpl>())
                     ..getHomeBanners()
                     ..getTeacherStats(
-                      teacherId: CacheHelper.getData(key: "userId"),
+                      teacherId: CacheHelper.getData(key: "userId")?? 0,
                     )
                     ..getSuccessfulCalls()
                     ..getTeacherPerformance(),

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:el_kottab_teacher_app/features/home/presentation/views/home_view.dart';
 import 'package:el_kottab_teacher_app/features/profile/presentation/views/profile_view.dart';
 import '../../../../main_imports.dart';
@@ -137,17 +138,36 @@ class LayoutCubit extends Cubit<LayoutStates> {
     required BuildContext context,
   }) async {
     emit(EndCallLoadingState());
+
     var result = await layoutRepo!.endCall(
       durationMinutes: durationMinutes,
       roomId: roomId,
     );
-    result.fold((failure) => emit(EndCallErrorState(failure.errMessage)), (
-        data,
-        ) {
-      endCallModel = data;
-      emit(EndCallSuccessState(data));
-      context.read<ProfileCubit>().getProfileData();
-    });
+
+    result.fold(
+          (failure) => emit(EndCallErrorState(failure.errMessage)),
+          (data) {
+        endCallModel = data;
+        emit(EndCallSuccessState(data));
+
+        // تأكد أن الـ context لا يزال موجوداً في الشجرة (Widget Tree)
+        if (!context.mounted) return;
+
+        // تحديث البيانات في الـ Cubits الأخرى
+        final userId = CacheHelper.getData(key: "userId");
+
+        context.read<ProfileCubit>().getProfileData();
+
+        // دمج استدعاءات الـ HomeCubit
+        final homeCubit = context.read<HomeCubit>();
+        homeCubit.getTeacherPerformance();
+        homeCubit.getSuccessfulCalls();
+
+        if (userId != null) {
+          homeCubit.getTeacherStats(teacherId: userId);
+        }
+      },
+    );
   }
 
 }
