@@ -16,7 +16,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Photo library access is required</string>
 	<key>CFBundleDisplayName</key>
-	<string>El Kottab Teacher App</string>
+	<string>El Kottab Teacher</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

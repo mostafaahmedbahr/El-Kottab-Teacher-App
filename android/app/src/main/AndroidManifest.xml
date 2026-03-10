@@ -1,22 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>-->
-<!--    <uses-permission android:name="android.permission.WAKE_LOCK"/>-->
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="android.permission.CAMERA"/>-->
-<!--    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>-->
-<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-<!--    <uses-permission android:name="android.permission.BLUETOOTH" />-->
-<!--    <uses-permission android:name="android.permission.VIBRATE"/>-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>-->
-<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>-->
-<!--    &lt;!&ndash;for bring app to foreground from background in Android 10 &ndash;&gt;-->
-<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
-<!--    &lt;!&ndash; Critical for receiving calls when app is closed &ndash;&gt;-->
-<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
-<!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
-<!--    <uses-permission android:name="android.permission.RECORD_AUDIO" />-->
-<!--    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>-->
     <!-- Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -52,7 +34,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:label="el_kottab_teacher_app"
+        android:label="El-Kottab-Teacher- منصة تعليم القرآن"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
