@@ -129,7 +129,8 @@ class ZegoService {
             );
             config.bottomMenuBar.hideAutomatically = false;
             config.bottomMenuBar.buttons = [
-               ZegoCallMenuBarButtonName.toggleMicrophoneButton,
+               // ZegoCallMenuBarButtonName.toggleMicrophoneButton,
+               ZegoCallMenuBarButtonName.switchAudioOutputButton,
               // ZegoCallMenuBarButtonName.toggleCameraButton,
               // ZegoCallMenuBarButtonName.switchCameraButton,
               ZegoCallMenuBarButtonName.hangUpButton,
