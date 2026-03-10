@@ -26,7 +26,7 @@ class LoginButton extends StatelessWidget {
           if (loginCubit.loginModel!.data!.isVerified == true) {
             context.read<LoginCubit>().cacheUserInfo(
               token: loginCubit.loginModel?.data?.token ?? "",
-              phone: loginCubit.loginModel?.data?.phone?.toString() ?? "",
+              phone: loginCubit.loginModel?.data?.phone ?? "",
               id: loginCubit.loginModel?.data?.id ?? 0,
               email: loginCubit.loginModel?.data?.email ?? "",
               name: loginCubit.loginModel?.data?.name ?? "",
@@ -68,17 +68,16 @@ class LoginButton extends StatelessWidget {
               onPressed: () {
                  // loginCubit.emailCon.text = "teratronics.apps@gmail.com";
                  //  loginCubit.passwordCon.text = "Mostafa@123456";
-               //  loginCubit.emailCon.text = "teacher_male_1@kotab.test";
-             //      loginCubit.passwordCon.text = "password123";
-             //     loginCubit.emailCon.text = "test-techer@test.com";
-             //      loginCubit.passwordCon.text = "123456789";
+                 loginCubit.emailCon.text = "teacher_male_1@kotab.test";
+                  loginCubit.passwordCon.text = "password123";
+              // loginCubit.emailCon.text = "test-techer@test.com";
+              //     loginCubit.passwordCon.text = "123456789";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,
                     password: loginCubit.passwordCon.text,
                   );
                 }
-                // AppNav.customNavigator(context: context, screen: LayoutView());
               },
             );
           },

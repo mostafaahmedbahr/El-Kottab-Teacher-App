@@ -7,6 +7,7 @@ import 'package:el_kottab_teacher_app/features/profile/presentation/view_model/p
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../../core/errors/error_ui.dart';
+import '../../../../../core/utils/card_decoration.dart';
 
 class TeacherRatingAndStatus extends StatelessWidget {
   const TeacherRatingAndStatus({super.key});
@@ -43,23 +44,27 @@ class TeacherRatingAndStatus extends StatelessWidget {
             Row(
             children: [
               /// ================= Availability =================
-              Column(
-                children: [
-                  Text(
-                    homeCubit.status == true
-                        ? LangKeys.available.tr()
-                        : LangKeys.unAvailable.tr(),
-                    style: AppStyles.black16SemiBold,
-                  ),
+              Container(
+                padding: EdgeInsets.all(11.r),
+                decoration: cardDecoration(),
+                child: Column(
+                  children: [
+                    Text(
+                      homeCubit.status == true
+                          ? LangKeys.available.tr()
+                          : LangKeys.unAvailable.tr(),
+                      style: AppStyles.black16SemiBold,
+                    ),
 
-                  Gap(6.h),
+                    Gap(6.h),
 
-                  CupertinoSwitch(
-                    activeTrackColor: AppColors.darkOlive,
-                    value: homeCubit.status,
-                    onChanged: homeCubit.changeStatus,
-                  ),
-                ],
+                    CupertinoSwitch(
+                      activeTrackColor: AppColors.darkOlive,
+                      value: homeCubit.status,
+                      onChanged: homeCubit.changeStatus,
+                    ),
+                  ],
+                ),
               ),
 
               Gap(12.w),

@@ -5,14 +5,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/app_services/remote_services/service_locator.dart';
 import 'core/utils/bloc_observer.dart';
-import 'core/utils/zego_service.dart';
 import 'services/call_notification_service.dart';
 import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
-import 'package:zego_uikit/zego_uikit.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
-import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 import 'package:zego_zpns/zego_zpns.dart';
 
 Future<void> _requestPermissions() async {
@@ -43,14 +39,9 @@ void main() async {
     debugPrint('❌ Error configuring ZPNS: $e');
   }
   ZPNs.getInstance().applyNotificationPermission();
-  // TODO: Re-enable Firebase Call Service after fixing Gradle
-  //  await FirebaseCallService().initialize();
-
   await dotenv.load(fileName: ".env");
-
   // Initialize Firebase
   await Firebase.initializeApp();
-
   // Configure Firebase Messaging
   await _configureFirebaseMessaging();
 

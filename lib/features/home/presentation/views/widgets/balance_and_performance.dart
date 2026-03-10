@@ -3,6 +3,7 @@ import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home
 import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_states.dart';
 import 'package:el_kottab_teacher_app/main_imports.dart';
 import '../../../../../core/errors/error_ui.dart';
+import '../../../../../core/utils/card_decoration.dart';
 import 'Performance_Card_Shimmer.dart';
 import 'balance_card_shimmer.dart';
 import 'balance_content.dart';
@@ -37,7 +38,7 @@ class BalanceAndPerformance extends StatelessWidget {
                 Flexible(
                   child: Container(
                     padding: EdgeInsets.all(11.r),
-                    decoration: _cardDecoration(),
+                    decoration: cardDecoration(),
                     child: BalanceContent(
                       balance: homeCubit.teacherStatsModel?.data?.walletMoney ?? 0,
                       minutes: homeCubit.teacherStatsModel?.data?.walletMinutes ?? 0,
@@ -69,7 +70,7 @@ class BalanceAndPerformance extends StatelessWidget {
                     ):
                 Container(
                   padding: EdgeInsets.all(16.r),
-                  decoration: _cardDecoration(),
+                  decoration: cardDecoration(),
                   child: PerformanceContent(
                     performanceData: PerformanceData(
                       successCall: homeCubit.teacherPerformanceModel!.data.successCall,
@@ -86,19 +87,5 @@ class BalanceAndPerformance extends StatelessWidget {
     );
   }
 
-  // ===== Card Decoration =====
-  BoxDecoration _cardDecoration() {
-    return BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16.r),
-      border: Border.all(color: Colors.grey[300]!),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withValues(alpha: 0.1),
-          blurRadius: 8,
-          spreadRadius: 2,
-        ),
-      ],
-    );
-  }
+
 }
