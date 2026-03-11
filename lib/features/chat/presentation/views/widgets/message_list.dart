@@ -26,7 +26,7 @@ class MessageList extends StatelessWidget {
         }
 
         if (messages.isEmpty) {
-          return EmptyWidget(msg: LangKeys.noMessagesFound);
+          return Center(child: EmptyWidget(msg: LangKeys.noMessagesFound));
         }
 
         return Padding(
