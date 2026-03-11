@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../../../main_imports.dart';
 import '../../../../home/presentation/view_model/home_cubit.dart';
 import '../../../../layout/presentation/view_model/layout_cubit.dart';
@@ -31,28 +32,27 @@ void showLogoutDialog(BuildContext context) {
       },
       builder: (context, state) {
         var profileCubit = context.read<ProfileCubit>();
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: Text(LangKeys.confirmLogout.tr()),
-          content: Text(LangKeys.areYouSureLogout.tr()),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(LangKeys.areYouSureLogout.tr()),
+          ),
           actions: [
-            TextButton(
+            CupertinoDialogAction(
               onPressed: () => Navigator.pop(context),
               child: Text(LangKeys.cancel.tr()),
             ),
-            TextButton(
+            CupertinoDialogAction(
+              isDestructiveAction: true,
               onPressed: () {
                 profileCubit.logout();
               },
-              child: ConditionalBuilder(
-                condition: state is! LogoutLoadingState,
-                fallback: (context) =>
-                    SizedBox(height: 30.h, width: 30.w, child: CustomLoading()),
-                builder: (context) {
-                  return Text(
-                    LangKeys.logout.tr(),
-                    style: TextStyle(color: AppColors.errorDark),
-                  );
-                },
+              child: state is LogoutLoadingState
+                  ? SizedBox(height: 30, width: 30, child: CustomLoading())
+                  : Text(
+                LangKeys.logout.tr(),
+                style: TextStyle(color: AppColors.errorDark),
               ),
             ),
           ],
