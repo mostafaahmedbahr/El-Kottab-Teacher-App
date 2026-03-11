@@ -68,6 +68,7 @@ class _ProfileNameAndNotificationIconState extends State<ProfileNameAndNotificat
                   builder: (context,state){
                     final int count = context.read<NotificationsCubit>().notificationsCountModel?.data?.count ?? 0;
                     return InkWell(
+                      borderRadius: BorderRadius.circular(50.r),
                       onTap: () {
                         AppNav.customNavigator(
                           context: context,
