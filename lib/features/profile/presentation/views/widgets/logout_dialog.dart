@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../../main_imports.dart';
+import '../../../../home/presentation/view_model/home_cubit.dart';
 import '../../../../layout/presentation/view_model/layout_cubit.dart';
 import '../../../../login/presentation/views/login_view.dart';
 import '../../view_model/profile_cubit.dart';
@@ -9,18 +10,26 @@ void showLogoutDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => BlocConsumer<ProfileCubit, ProfileStates>(
-      listener: (context,state){
-        if(state is LogoutSuccessState){
-          Toast.showSuccessToast(msg: state.logoutModel.message.toString(), context: context);
-          AppNav.customNavigator(context: context, screen: LoginView(),finish: true);
-          LayoutCubit.pageIndex=0;
+      listener: (context, state) {
+        if (state is LogoutSuccessState) {
+          CacheTokenManger.userToken=null;
           CacheTokenManger.clearUserToken();
-        }
-        else if(state is LogoutErrorState){
+          context.read<HomeCubit>().resetHomeModels();
+          Toast.showSuccessToast(
+            msg: state.logoutModel.message.toString(),
+            context: context,
+          );
+          AppNav.customNavigator(
+            context: context,
+            screen: LoginView(),
+            finish: true,
+          );
+          LayoutCubit.pageIndex = 0;
+        } else if (state is LogoutErrorState) {
           Toast.showErrorToast(msg: state.error.toString(), context: context);
         }
       },
-      builder:  (context,state){
+      builder: (context, state) {
         var profileCubit = context.read<ProfileCubit>();
         return AlertDialog(
           title: Text(LangKeys.confirmLogout.tr()),
@@ -35,15 +44,15 @@ void showLogoutDialog(BuildContext context) {
                 profileCubit.logout();
               },
               child: ConditionalBuilder(
-                condition: state is ! LogoutLoadingState,
-                fallback: (context)=>SizedBox(height : 30.h,width: 30.w,child: CustomLoading()),
-                builder: (context){
-                  return  Text(
+                condition: state is! LogoutLoadingState,
+                fallback: (context) =>
+                    SizedBox(height: 30.h, width: 30.w, child: CustomLoading()),
+                builder: (context) {
+                  return Text(
                     LangKeys.logout.tr(),
                     style: TextStyle(color: AppColors.errorDark),
                   );
                 },
-
               ),
             ),
           ],

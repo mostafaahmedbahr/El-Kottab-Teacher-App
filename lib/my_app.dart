@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/app_services/remote_services/service_locator.dart';
 import 'package:el_kottab_teacher_app/core/shared_cubits/auth_cubit/auth_cubit.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
-
 import 'package:el_kottab_teacher_app/features/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:el_kottab_teacher_app/features/profile/data/repos/profile_repo_imple.dart';
@@ -72,18 +71,12 @@ class MyApp extends StatelessWidget {
                       NotificationsCubit(getIt.get<NotificationsRepoImpl>()),
                 ),
                 BlocProvider(
+                  create: (_) => HomeCubit(getIt.get<HomeRepoImpl>())
+                ),
+                BlocProvider(
                   create: (context) =>
                       ReviewsCubit(getIt.get<ReviewsRepoImpl>())
                         ..getTeacherReviews(type: "teacher"),
-                ),
-                BlocProvider(
-                  create: (_) => HomeCubit(getIt.get<HomeRepoImpl>())
-                    ..getHomeBanners()
-                    ..getTeacherStats(
-                      teacherId: CacheHelper.getData(key: "userId")?? 0,
-                    )
-                    ..getSuccessfulCalls()
-                    ..getTeacherPerformance(),
                 ),
                 BlocProvider(
                   create: (context) =>

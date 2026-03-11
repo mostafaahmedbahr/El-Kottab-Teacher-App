@@ -116,4 +116,13 @@ class HomeCubit extends Cubit<HomeStates> {
       },
     );
   }
+
+
+  resetHomeModels(){
+     teacherPerformanceModel=null;
+     successfulCallsModel=null;
+     teacherStatsModel=null;
+     homeBannersModel=null;
+     status = false;
+  }
 }

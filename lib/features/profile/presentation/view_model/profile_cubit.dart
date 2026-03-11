@@ -1,5 +1,4 @@
 import 'package:el_kottab_teacher_app/features/profile/presentation/view_model/profile_states.dart';
-
 import '../../../../main_imports.dart';
 import '../../data/models/logout_model.dart';
 import '../../data/models/profile_model.dart';
@@ -22,6 +21,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
       emit(LogoutErrorState(failure.errMessage));
     }, (data) async {
       logoutModel = data;
+       profileModel = null;
       emit(LogoutSuccessState(data));
     });
   }
