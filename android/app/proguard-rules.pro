@@ -50,7 +50,13 @@
 
 # Keep model classes
 -keep class com.zerobugs.el_kotab_teacher_app.** { *; }
+# حل مشكلة Play Core Tasks مع Flutter
+-keep class com.google.android.play.core.tasks.** { *; }
+-dontwarn com.google.android.play.core.tasks.**
 
+# (اختياري لكن يفضل)
+-keep class com.google.android.play.core.splitinstall.** { *; }
+-dontwarn com.google.android.play.core.splitinstall.**
 # Keep native methods
 -keepclasseswithmembernames class * {
     native <methods>;
