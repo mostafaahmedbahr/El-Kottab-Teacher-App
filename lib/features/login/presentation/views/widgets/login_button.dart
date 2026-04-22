@@ -74,9 +74,9 @@ class LoginButton extends StatelessWidget {
                  // loginCubit.emailCon.text = "teratronics.apps@gmail.com";
                  //  loginCubit.passwordCon.text = "Mostafa@123456";
                  //  loginCubit.emailCon.text = "teacher_male_1@kotab.test";
-                 //    loginCubit.passwordCon.text = "password123";
-              // loginCubit.emailCon.text = "test-techer@test.com";
-              //     loginCubit.passwordCon.text = "123456789";
+                   //  loginCubit.passwordCon.text = "password123";
+                // loginCubit.emailCon.text = "abdullahimachevy@gmail.com";
+                //     loginCubit.passwordCon.text = "Mostafa@12345";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,

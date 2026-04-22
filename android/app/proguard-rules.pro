@@ -49,7 +49,7 @@
 -dontwarn retrofit2.**
 
 # Keep model classes
--keep class com.zerobugs.el_kotab_teacher_app.** { *; }
+-keep class com.zerobugs.el_kotab_teacher.** { *; }
 # حل مشكلة Play Core Tasks مع Flutter
 -keep class com.google.android.play.core.tasks.** { *; }
 -dontwarn com.google.android.play.core.tasks.**
@@ -105,8 +105,8 @@
 }
 
 # Keep your app's main activity
--keep class com.zerobugs.el_kotab_teacher_app.MainActivity { *; }
+-keep class com.zerobugs.el_kotab_teacher.MainActivity { *; }
 
 # Keep FCM services
--keep class com.zerobugs.el_kotab_teacher_app.FCMService { *; }
--keep class com.zerobugs.el_kotab_teacher_app.CallNotificationService { *; }
+-keep class com.zerobugs.el_kotab_teacher.FCMService { *; }
+-keep class com.zerobugs.el_kotab_teacher.CallNotificationService { *; }
