@@ -20,7 +20,47 @@ class LoginButton extends StatelessWidget {
       },
       listener: (context, state) async {
         if (state is LoginErrorState) {
-          Toast.showErrorToast(msg: state.error.toString(), context: context);
+          if (state.error.toString().contains("not approved yet")) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text("تنبيه"),
+                  content: const Text(
+                    "حسابك لم يتم قبوله بعد، برجاء انتظار الموافقة.",
+                  ),
+                  actions: [
+                    TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(AppColors.darkOlive),
+                        foregroundColor: WidgetStateProperty.all(AppColors.darkOlive),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child:   Text("حسناً",style: TextStyle(
+                        color: AppColors.white
+                      ),),
+                    ),
+                  ],
+                );
+              },
+            );
+
+          } else {
+            Toast.showErrorToast(
+              msg: state.error.toString(),
+              context: context,
+            );
+          }
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
           if (loginCubit.loginModel!.data!.isVerified == true) {
@@ -75,8 +115,9 @@ class LoginButton extends StatelessWidget {
                  //  loginCubit.passwordCon.text = "Mostafa@123456";
                  //  loginCubit.emailCon.text = "teacher_male_1@kotab.test";
                    //  loginCubit.passwordCon.text = "password123";
-                // loginCubit.emailCon.text = "abdullahimachevy@gmail.com";
-                //     loginCubit.passwordCon.text = "Mostafa@12345";
+              //  loginCubit.emailCon.text = "as@gmail.com";
+              //   loginCubit.emailCon.text = "ga10101971@gmail.com";
+              //        loginCubit.passwordCon.text = "Mm@123456";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,
