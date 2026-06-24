@@ -59,7 +59,7 @@ class CallLogItem extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.access_time,
+                          Icons.timer,
                           size: 14,
                           color: Color(0xFF8BAF9C),
                         ),
@@ -72,7 +72,7 @@ class CallLogItem extends StatelessWidget {
                           ),
                         ),
                         Gap(16.w),
-                        Icon(Icons.timer, size: 14.sp, color: Color(0xFF8BAF9C)),
+                        Icon(Icons.access_time, size: 14.sp, color: Color(0xFF8BAF9C)),
                         Gap(4.w),
                         Text(
                           "${callData.durationMinutes ?? 0} دقيقة",
