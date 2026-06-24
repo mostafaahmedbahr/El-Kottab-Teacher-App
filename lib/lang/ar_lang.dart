@@ -186,5 +186,14 @@ class ArLang {
     "anErrorOccurredInLoadingTheConversations" : "حدث خطأ أثناء تحميل المحادثات",
     "paymentMethods" : "طرق الدفع",
     "aboutMe" : "نبذة عني",
+    "accept": "قبول",
+    "decline": "رفض",
+    "voice_call": "مكالمة صوتية",
+    "video_call": "مكالمة فيديو",
+    "is_calling_you": "يتصل بك",
+    "calling": "جاري الاتصال...",
+    "voiceCall": "مكالمة صوتية",
+    "videoCall": "مكالمة فيديو",
+
   };
 }

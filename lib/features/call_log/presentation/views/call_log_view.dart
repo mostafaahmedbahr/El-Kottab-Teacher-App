@@ -49,8 +49,8 @@ class CallLogView extends StatelessWidget {
 
                       return Column(
                         children: [
-                          const StatusSummary(),
-                          Gap(16.h),
+                          // const StatusSummary(),
+                          // Gap(16.h),
                           const Expanded(child: CallList()),
                         ],
                       );

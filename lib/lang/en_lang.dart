@@ -187,5 +187,13 @@ class EnLang {
     "anErrorOccurredInLoadingTheConversations" : "An error occurred while loading the conversations",
     "paymentMethods" : "Payment Methods",
     "aboutMe" : "About Me",
+    "accept": "Accept",
+    "decline": "Decline",
+    "voice_call": "Voice Call",
+    "video_call": "Video Call",
+    "is_calling_you": "is calling you",
+    "calling": "Calling...",
+    "voiceCall": "Voice Call",
+    "videoCall": "Video Call",
   };
 }

@@ -188,5 +188,11 @@ abstract class LangKeys {
   static const anErrorOccurredInLoadingTheConversations = 'anErrorOccurredInLoadingTheConversations';
   static const paymentMethods = 'paymentMethods';
   static const aboutMe = 'aboutMe';
+  static const decline = 'decline';
+  static const accept = 'accept';
+  static const isCallingYou = 'isCallingYou';
+  static const calling = 'calling';
+  static const voiceCall = "voiceCall";
+  static const videoCall = "videoCall";
 
 }

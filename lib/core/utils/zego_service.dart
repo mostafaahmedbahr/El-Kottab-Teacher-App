@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/utils/rate_student_dialog.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -81,6 +82,22 @@ class ZegoService {
             isSandboxEnvironment: true,
           ),
         ),
+        innerText: ZegoCallInvitationInnerText(
+          incomingCallPageDeclineButton: LangKeys.decline.tr(),
+          incomingCallPageAcceptButton: LangKeys.accept.tr(),
+
+          incomingVoiceCallPageTitle: LangKeys.voiceCall.tr(),
+          incomingVoiceCallPageMessage: LangKeys.isCallingYou.tr(),
+
+          incomingVideoCallPageTitle: LangKeys.videoCall.tr(),
+          incomingVideoCallPageMessage: LangKeys.isCallingYou.tr(),
+
+          outgoingVoiceCallPageTitle: LangKeys.voiceCall.tr(),
+          outgoingVoiceCallPageMessage: LangKeys.calling.tr(),
+
+          outgoingVideoCallPageTitle: LangKeys.videoCall.tr(),
+          outgoingVideoCallPageMessage: LangKeys.calling.tr(),
+        ),
         config: ZegoCallInvitationConfig(
           endCallWhenInitiatorLeave: true,
           permissions: [
@@ -128,6 +145,7 @@ class ZegoService {
               color: AppColors.darkOlive,
             );
             config.bottomMenuBar.hideAutomatically = false;
+            config.bottomMenuBar.hideByClick = false;
             config.bottomMenuBar.buttons = [
                // ZegoCallMenuBarButtonName.toggleMicrophoneButton,
                ZegoCallMenuBarButtonName.switchAudioOutputButton,
