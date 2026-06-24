@@ -42,46 +42,38 @@ class SendMessageModel {
 
 class MessageData {
   int? id;
-  int? conversationId;
-  int? senderId;
   String? message;
+  String? senderId;
   String? senderRole;
   String? isRead;
   String? createdAt;
-  String? updatedAt;
 
   MessageData({
     this.id,
-    this.conversationId,
     this.senderId,
     this.message,
     this.senderRole,
     this.isRead,
     this.createdAt,
-    this.updatedAt,
   });
 
   MessageData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    conversationId = json["conversation_id"];
     senderId = json["sender_id"];
     message = json["message"];
     senderRole = json["sender_role"];
     isRead = json["is_read"];
     createdAt = json["created_at"];
-    updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "conversation_id": conversationId,
       "sender_id": senderId,
       "message": message,
       "sender_role": senderRole,
       "is_read": isRead,
       "created_at": createdAt,
-      "updated_at": updatedAt,
     };
   }
 }
