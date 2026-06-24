@@ -10,7 +10,7 @@ import 'lang/codegen_loader.g.dart';
 import 'main_imports.dart';
 import 'my_app.dart';
 import 'package:zego_zpns/zego_zpns.dart';
-
+import 'package:timeago/timeago.dart' as timeago;
 Future<void> _requestPermissions() async {
   await [
     Permission.microphone,
@@ -29,6 +29,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  timeago.setLocaleMessages('ar', timeago.ArMessages());
   // Initialize cache and services
   await CacheHelper.init();
   await _requestPermissions();

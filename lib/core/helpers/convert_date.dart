@@ -5,18 +5,17 @@ class DateFormatterClass {
   // Format: "2025-10-12 00:00:00.000" to various styles
 
   /// Convert to timeago format (e.g., "in about a year")
-  static String toTimeAgo(String? dateTimeString) {
+  static String toTimeAgo(String? dateTimeString, {String locale = 'ar'}) {
     if (dateTimeString == null || dateTimeString.isEmpty) {
       return 'Just now';
     }
     try {
       DateTime parsedDate = DateTime.parse(dateTimeString);
-      return timeago.format(parsedDate, locale: 'en');
+      return timeago.format(parsedDate, locale: "ar");
     } catch (e) {
       return 'Just now';
     }
   }
-
   /// Convert to date only: "2025-10-12"
   static String toDateOnly(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
