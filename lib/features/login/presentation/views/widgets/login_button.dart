@@ -55,7 +55,19 @@ class LoginButton extends StatelessWidget {
               },
             );
 
-          } else {
+          }
+          else if (state.error.toString().contains("حسابك غير مفعل")){
+            AppNav.customNavigator(
+              context: context,
+              screen: OtpView(
+                goToLayoutOrResetPassword: "Layout",
+                email: context.read<LoginCubit>().emailCon.text,
+                screenName: "LoginView",
+              ),
+              finish: false,
+            );
+          }
+          else {
             Toast.showErrorToast(
               msg: state.error.toString(),
               context: context,
@@ -109,15 +121,10 @@ class LoginButton extends StatelessWidget {
             return CustomButton(
               btnText: LangKeys.signIn.tr(),
               onPressed: () {
-                // loginCubit.emailCon.text = "bahr@admin.com";
-                //  loginCubit.passwordCon.text = "Mostafa@123";
-                 // loginCubit.emailCon.text = "teratronics.apps@gmail.com";
-                 //  loginCubit.passwordCon.text = "Mostafa@123456";
-                 //  loginCubit.emailCon.text = "teacher_male_1@kotab.test";
-                   //  loginCubit.passwordCon.text = "password123";
-              //  loginCubit.emailCon.text = "as@gmail.com";
-              //   loginCubit.emailCon.text = "ga10101971@gmail.com";
-              //        loginCubit.passwordCon.text = "Mm@123456";
+                 // loginCubit.emailCon.text = "mohamed.elsayed@gmail.com";
+                 //  loginCubit.passwordCon.text = "Mo**2019**";
+                loginCubit.emailCon.text = "test555@gmail.com";
+                loginCubit.passwordCon.text = "Mm@123456";
                 if (formKey.currentState!.validate()) {
                   loginCubit.login(
                     email: loginCubit.emailCon.text,
