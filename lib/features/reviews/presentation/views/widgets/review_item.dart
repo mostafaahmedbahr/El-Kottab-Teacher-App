@@ -47,14 +47,25 @@ class ReviewItem extends StatelessWidget {
                       Gap(4.h),
                       Row(
                         children: [
-                          // Star rating
                           ...List.generate(5, (index) {
+                            if (index < rating.floor()) {
+                              return Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 16.sp,
+                              );
+                            } else if (index < rating) {
+                              return Icon(
+                                Icons.star_half,
+                                color: Colors.amber,
+                                size: 16.sp,
+                              );
+                            }
+
                             return Icon(
-                              index < rating.floor()
-                                  ? Icons.star
-                                  : Icons.star_border,
+                              Icons.star_border,
                               color: Colors.amber,
-                              size: 16,
+                              size: 16.sp,
                             );
                           }),
                           Gap(4.h),
@@ -63,7 +74,7 @@ class ReviewItem extends StatelessWidget {
                             style: AppStyles.black14Medium,
                           ),
                         ],
-                      ),
+                      )
                     ],
                   ),
                 ),
