@@ -97,6 +97,12 @@ class ZegoService {
 
           outgoingVideoCallPageTitle: LangKeys.videoCall.tr(),
           outgoingVideoCallPageMessage: LangKeys.calling.tr(),
+          incomingVideoCallDialogMessage: LangKeys.calling.tr(),
+          incomingVoiceCallDialogMessage: LangKeys.calling.tr(),
+          incomingVideoCallDialogTitle:  LangKeys.videoCall.tr(),
+          incomingVoiceCallDialogTitle: LangKeys.voiceCall.tr(),
+
+
         ),
         config: ZegoCallInvitationConfig(
           endCallWhenInitiatorLeave: true,
