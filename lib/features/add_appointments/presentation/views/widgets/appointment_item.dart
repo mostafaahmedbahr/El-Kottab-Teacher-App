@@ -99,16 +99,41 @@ class AppointmentItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: isLoading
                     ? null
-                    : () {
+                    : () async {
                         if (isEdit) {
-                          print(appointment.scheduleId!);
-                          print(dayName);
+                          // 1️⃣ فتح time picker لوقت البداية
+                          final startTime = await customTimePicker(
+                            context,
+                            appointment.start ?? TimeOfDay.now(),
+                          );
+                          if (!context.mounted || startTime == null) return;
+
+                          final startResult =
+                              cubit.setStartTime(dayName, index, startTime);
+                          if (!context.mounted) return;
+                          _handleResult(context, startResult);
+                          if (startResult != AppointmentResult.success) return;
+
+                          // 2️⃣ فتح time picker لوقت النهاية
+                          final endTime = await customTimePicker(
+                            context,
+                            appointment.end ?? startTime,
+                          );
+                          if (!context.mounted || endTime == null) return;
+
+                          final endResult =
+                              cubit.setEndTime(dayName, index, endTime);
+                          if (!context.mounted) return;
+                          _handleResult(context, endResult);
+                          if (endResult != AppointmentResult.success) return;
+
+                          // 3️⃣ حفظ التعديل
                           cubit.updateSchedule(
                             scheduleId: appointment.scheduleId!,
                             day: dayName,
-                            from: formatTimeTo24H(appointment.start!),
-                            to: formatTimeTo24H(appointment.end!),
-                            index: index, // 👈 مهم
+                            from: formatTimeTo24H(startTime),
+                            to: formatTimeTo24H(endTime),
+                            index: index,
                           );
                         } else {
                           cubit.addAppointment(
