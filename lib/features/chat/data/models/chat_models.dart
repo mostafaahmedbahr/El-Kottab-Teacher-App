@@ -57,12 +57,13 @@ class MessageData {
     this.createdAt,
   });
 
+  // Fix: API returns sender_id, sender_role, is_read as int, but model expects String → used .toString()
   MessageData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    senderId = json["sender_id"];
+    senderId = json["sender_id"]?.toString();
     message = json["message"];
-    senderRole = json["sender_role"];
-    isRead = json["is_read"];
+    senderRole = json["sender_role"]?.toString();
+    isRead = json["is_read"]?.toString();
     createdAt = json["created_at"];
   }
 

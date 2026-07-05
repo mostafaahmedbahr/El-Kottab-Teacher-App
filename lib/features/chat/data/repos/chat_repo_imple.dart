@@ -17,13 +17,12 @@ class ChatRepoImpl implements ChatRepo {
     required int teacherId,
   }) async {
     try {
-      var data = json.encode({
-        "recipient_id": teacherId,
-        "message": message,
-      });
       var response = await apiService!.postData(
         endPoint: EndPoints.sendMessage,
-        data: data,
+        data: {
+          "recipient_id": teacherId,
+          "message": message,
+        },
       );
       SendMessageModel result = SendMessageModel.fromJson(response.data);
       return right(result);
