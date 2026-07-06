@@ -75,7 +75,7 @@ class CallLogItem extends StatelessWidget {
                         Icon(Icons.access_time, size: 14.sp, color: Color(0xFF8BAF9C)),
                         Gap(4.w),
                         Text(
-                          "${callData.durationMinutes ?? 0} دقيقة",
+                          "${_getDuration()} دقيقة",
                           style: TextStyle(
                             fontSize: 13.sp,
                             color: Color(0xFF7A8A80),
@@ -179,7 +179,7 @@ class CallLogItem extends StatelessWidget {
           children: [
             _buildDetailRow('الطالب:', callData.user?.name ?? "Unknown"),
             _buildDetailRow('الوقت:', DateFormatterClass.toTimeAgo(callData.startedAt)),
-            _buildDetailRow('المدة:', "${callData.durationMinutes ?? 0} دقيقة"),
+            _buildDetailRow('المدة:', "${_getDuration()} دقيقة"),
             _buildDetailRow('الحالة:', _getStatusText(callData.status)),
           ],
         ),
@@ -193,6 +193,22 @@ class CallLogItem extends StatelessWidget {
     );
   }
 
+  int _getDuration() {
+    if (callData.durationMinutes != null && callData.durationMinutes! > 0) {
+      return callData.durationMinutes!.toInt();
+    }
+    if (callData.startedAt != null && callData.endedAt != null) {
+      try {
+        DateTime start = DateTime.parse(callData.startedAt!).toLocal();
+        DateTime end = DateTime.parse(callData.endedAt!).toLocal();
+        int diff = end.difference(start).inMinutes;
+        return diff > 0 ? diff : 0;
+      } catch (e) {
+        return 0;
+      }
+    }
+    return 0;
+  }
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(

@@ -43,9 +43,9 @@ class SendMessageModel {
 class MessageData {
   int? id;
   String? message;
-  String? senderId;
-  String? senderRole;
-  String? isRead;
+  dynamic senderId;
+  dynamic senderRole;
+  dynamic isRead;
   String? createdAt;
 
   MessageData({
@@ -57,13 +57,13 @@ class MessageData {
     this.createdAt,
   });
 
-  // Fix: API returns sender_id, sender_role, is_read as int, but model expects String → used .toString()
+  // Fix: Made fields dynamic to handle both int and String from API
   MessageData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    senderId = json["sender_id"]?.toString();
+    senderId = json["sender_id"];
     message = json["message"];
-    senderRole = json["sender_role"]?.toString();
-    isRead = json["is_read"]?.toString();
+    senderRole = json["sender_role"];
+    isRead = json["is_read"];
     createdAt = json["created_at"];
   }
 

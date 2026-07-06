@@ -36,7 +36,7 @@ class MessageList extends StatelessWidget {
             separatorBuilder: (_, __) => Gap(12.h),
             itemBuilder: (context, index) {
               final message = messages[index];
-              return message.senderRole == "teacher"
+              return message.senderRole.toString() == "teacher"
                   ? RightMessageByMe(
                       date: message.createdAt.toString(),
                       message: message.message.toString(),

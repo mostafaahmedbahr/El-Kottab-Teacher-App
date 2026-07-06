@@ -31,8 +31,10 @@ class CallLogsCubit extends Cubit<CallLogsStates> {
 
   CallsModel? callsModel;
 
-  Future<void> getAllCalls(String? type) async {
-    emit(GetCallsLoadingState());
+  Future<void> getAllCalls(String? type, {bool isRefresh = false}) async {
+    if (!isRefresh) {
+      emit(GetCallsLoadingState());
+    }
     var result = await callLogsRepo.getAllCalls(type);
     result.fold(
       (failure) {

@@ -47,7 +47,8 @@ class ChatView extends StatelessWidget {
             body: Column(
               children: [
                 Expanded(child: MessageList()),
-                MessageInput(teacherId: studentId!),
+                if (context.watch<ChatCubit>().allMessagesModel?.data?.isNotEmpty ?? false)
+                  MessageInput(teacherId: studentId!),
               ],
             ),
           );
