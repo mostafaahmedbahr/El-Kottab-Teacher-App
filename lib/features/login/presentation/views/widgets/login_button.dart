@@ -32,10 +32,17 @@ class LoginButton extends StatelessWidget {
                   actions: [
                     TextButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(AppColors.darkOlive),
-                        foregroundColor: WidgetStateProperty.all(AppColors.darkOlive),
+                        backgroundColor: WidgetStateProperty.all(
+                          AppColors.darkOlive,
+                        ),
+                        foregroundColor: WidgetStateProperty.all(
+                          AppColors.darkOlive,
+                        ),
                         padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
                         ),
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
@@ -46,17 +53,16 @@ class LoginButton extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child:   Text("حسناً",style: TextStyle(
-                        color: AppColors.white
-                      ),),
+                      child: Text(
+                        "حسناً",
+                        style: TextStyle(color: AppColors.white),
+                      ),
                     ),
                   ],
                 );
               },
             );
-
-          }
-          else if (state.error.toString().contains("حسابك غير مفعل")){
+          } else if (state.error.toString().contains("حسابك غير مفعل")) {
             AppNav.customNavigator(
               context: context,
               screen: OtpView(
@@ -66,24 +72,20 @@ class LoginButton extends StatelessWidget {
               ),
               finish: false,
             );
-          }
-          else {
-            Toast.showErrorToast(
-              msg: state.error.toString(),
-              context: context,
-            );
+          } else {
+            Toast.showErrorToast(msg: state.error.toString(), context: context);
           }
         } else if (state is LoginSuccessState) {
           var loginCubit = context.read<LoginCubit>();
           if (loginCubit.loginModel!.data!.isVerified == true) {
-            await   context.read<LoginCubit>().cacheUserInfo(
+            await context.read<LoginCubit>().cacheUserInfo(
               token: loginCubit.loginModel?.data?.token ?? "",
               phone: loginCubit.loginModel?.data?.phone ?? "",
               id: loginCubit.loginModel?.data?.id ?? 0,
               email: loginCubit.loginModel?.data?.email ?? "",
               name: loginCubit.loginModel?.data?.name ?? "",
             );
-            if(context.mounted){
+            if (context.mounted) {
               AppNav.customNavigator(
                 context: context,
                 screen: LayoutView(),
@@ -94,7 +96,6 @@ class LoginButton extends StatelessWidget {
                 context: context,
               );
             }
-
           } else {
             Toast.showErrorToast(
               msg: LangKeys.accountMustBeVerified.tr(),
@@ -121,8 +122,8 @@ class LoginButton extends StatelessWidget {
             return CustomButton(
               btnText: LangKeys.signIn.tr(),
               onPressed: () {
-                 // loginCubit.emailCon.text = "mohamed.elsayed@gmail.com";
-                 //  loginCubit.passwordCon.text = "Mo**2019**";
+                loginCubit.emailCon.text = "mohamed.elsayed@gmail.com";
+                loginCubit.passwordCon.text = "Mo**2019**";
                 // loginCubit.emailCon.text = "test555@gmail.com";
                 // loginCubit.passwordCon.text = "Mm@123456";
                 if (formKey.currentState!.validate()) {
