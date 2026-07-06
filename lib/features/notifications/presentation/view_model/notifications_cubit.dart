@@ -57,13 +57,48 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
   Future<void> deleteNotification()
   async {
     emit(DeleteNotificationsLoadingState());
-    var result = await notificationsRepo!.deleteAllNotification();
-    return result.fold((failure) {
-      emit(DeleteNotificationsErrorState(failure.errMessage));
-    }, (data) async {
-      deleteAllNotificationsModel = data;
-        emit(DeleteNotificationsSuccessState(data));
 
+    if (notificationsModel?.data == null || notificationsModel!.data!.isEmpty) {
+      emit(DeleteNotificationsSuccessState(DeleteAllNotificationsModel(message: "No notifications to delete", status: 200)));
+      return;
+    }
+
+    bool hasError = false;
+    String errorMessage = "";
+
+    for (var notification in notificationsModel!.data!) {
+      if (notification.id != null) {
+        var result = await notificationsRepo!.deleteNotificationById(notification.id!);
+        result.fold((failure) {
+          hasError = true;
+          errorMessage = failure.errMessage;
+        }, (data) {
+          deleteAllNotificationsModel = data;
+        });
+      }
+    }
+
+    if (hasError && deleteAllNotificationsModel == null) {
+      emit(DeleteNotificationsErrorState(errorMessage));
+    } else {
+      deleteAllNotificationsModel ??= DeleteAllNotificationsModel(message: "Success", status: 200);
+      notificationsModel?.data?.clear();
+      emit(DeleteNotificationsSuccessState(deleteAllNotificationsModel!));
+    }
+  }
+
+  Future<void> deleteSingleNotification(int notifyId) async {
+    print("Test: Deleting single notification with id: $notifyId");
+    emit(DeleteNotificationsLoadingState());
+
+    var result = await notificationsRepo!.deleteNotificationById(notifyId);
+    
+    result.fold((failure) {
+      emit(DeleteNotificationsErrorState(failure.errMessage));
+    }, (data) {
+      // Remove from the local list to update UI immediately
+      notificationsModel?.data?.removeWhere((element) => element.id == notifyId);
+      emit(DeleteNotificationsSuccessState(data));
     });
   }
 

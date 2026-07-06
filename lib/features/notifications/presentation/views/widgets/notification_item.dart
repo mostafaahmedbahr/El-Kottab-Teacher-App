@@ -85,7 +85,8 @@ class NotificationItem extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: (){
-                         //     context.read<NotificationsCubit>().deleteNotification(notifyId: id);
+                              print("Test: Trash icon clicked for notification id: $id");
+                              context.read<NotificationsCubit>().deleteSingleNotification(id);
                             },
                             child: Container(
                                 padding: EdgeInsets.all(4),

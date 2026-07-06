@@ -11,6 +11,7 @@ abstract class NotificationsRepo{
   Future<Either<Failure , ReadAllNotificationsModel>> readAllNotifications();
   Future<Either<Failure , NotificationsCountModel>> getNotificationsCount();
    Future<Either<Failure , DeleteAllNotificationsModel>> deleteAllNotification();
+   Future<Either<Failure , DeleteAllNotificationsModel>> deleteNotificationById(int id);
 
 }
 

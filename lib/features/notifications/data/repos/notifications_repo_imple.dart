@@ -71,4 +71,17 @@ class NotificationsRepoImpl implements NotificationsRepo {
       return left(handleError(e));
     }
   }
+
+  @override
+  Future<Either<Failure, DeleteAllNotificationsModel>> deleteNotificationById(int id) async{
+    try {
+      var response = await apiService!.deleteData(
+        endPoint: '${EndPoints.notifications}/$id',
+      );
+      DeleteAllNotificationsModel result = DeleteAllNotificationsModel.fromJson(response.data);
+      return right(result);
+    } catch (e) {
+      return left(handleError(e));
+    }
+  }
 }
