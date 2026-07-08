@@ -24,8 +24,9 @@ class AddPaymentMethodModel {
 }
 
 class Data {
-  int? userId;
-  String? methodType;
+  int? id;
+  dynamic userId;
+  dynamic methodType;
   dynamic phoneNumber;
   dynamic bankName;
   dynamic accountNumber;
@@ -33,7 +34,7 @@ class Data {
   bool? isDefault;
   String? updatedAt;
   String? createdAt;
-  int? id;
+
 
   Data({this.userId, this.methodType, this.phoneNumber, this.bankName, this.accountNumber, this.receiverName, this.isDefault, this.updatedAt, this.createdAt, this.id});
 

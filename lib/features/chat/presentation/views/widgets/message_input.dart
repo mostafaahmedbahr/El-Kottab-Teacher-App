@@ -22,7 +22,10 @@ class MessageInput extends StatelessWidget {
       builder: (context, state) {
         var chatCubit = context.read<ChatCubit>();
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          padding: EdgeInsets.only(
+            left: 16.w, right: 16.w, top: 16.h,
+            bottom: 16.h + MediaQuery.of(context).padding.bottom,
+          ),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [

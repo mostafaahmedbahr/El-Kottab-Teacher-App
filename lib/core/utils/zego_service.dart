@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/utils/rate_student_dialog.dart';
+import 'package:el_kottab_teacher_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:el_kottab_teacher_app/features/layout/presentation/view_model/layout_cubit.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:zego_uikit/zego_uikit.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
+import '../../features/call_log/presentation/view_models/call_logs_cubit.dart';
 import '../../main.dart';
 import '../../main_imports.dart';
 import '../extensions/log_util.dart';
@@ -63,11 +65,15 @@ class ZegoService {
                       _context?.read<LayoutCubit>().rateStudent(
                         rate: rating,
                         comment: message,
-                        targetId: event.invitationData!.inviter!.id.toString(),
+                        targetId: event.invitationData!.inviter!.id.toString(), context:_context! ,
                       );
                     },
                   ),
             );
+
+            _context!.read<CallLogsCubit>().getAllCalls(null);
+            _context!.read<HomeCubit>().getTeacherPerformance();
+            _context!.read<HomeCubit>().getSuccessfulCalls();
           },
         ),
         notificationConfig: ZegoCallInvitationNotificationConfig(
@@ -153,8 +159,8 @@ class ZegoService {
             config.bottomMenuBar.hideAutomatically = false;
             config.bottomMenuBar.hideByClick = false;
             config.bottomMenuBar.buttons = [
-               // ZegoCallMenuBarButtonName.toggleMicrophoneButton,
-               ZegoCallMenuBarButtonName.switchAudioOutputButton,
+              // ZegoCallMenuBarButtonName.toggleMicrophoneButton,
+              ZegoCallMenuBarButtonName.switchAudioOutputButton,
               // ZegoCallMenuBarButtonName.toggleCameraButton,
               // ZegoCallMenuBarButtonName.switchCameraButton,
               ZegoCallMenuBarButtonName.hangUpButton,

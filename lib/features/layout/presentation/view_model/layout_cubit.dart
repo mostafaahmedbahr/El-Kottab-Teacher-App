@@ -114,6 +114,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     required dynamic comment,
     required dynamic rate,
     required dynamic targetId,
+    required BuildContext context,
   }) async {
     emit(RateStudentLoadingState());
     var result = await layoutRepo!.rateStudent(
@@ -126,6 +127,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
         ) {
       rateStudentModel = data;
       emit(RateStudentSuccessState(data));
+
+      if (!context.mounted) return;
+      final userId = CacheHelper.getData(key: "userId");
+      final homeCubit = context.read<HomeCubit>();
+      homeCubit.getTeacherPerformance();
+      homeCubit.getSuccessfulCalls();
+      if (userId != null) {
+        homeCubit.getTeacherStats(teacherId: userId);
+      }
     });
   }
 
