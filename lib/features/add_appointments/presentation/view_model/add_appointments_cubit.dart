@@ -40,7 +40,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
   //   emit(UpdateAppointmentsState());
   // }
 
-  /// تعيين وقت البداية
+  /// تعيين وقت البداية (مع التحقق)
   AppointmentResult setStartTime(String day, int index, TimeOfDay start) {
     final current = appointments[day]![index];
 
@@ -57,7 +57,7 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
     return AppointmentResult.success;
   }
 
-  /// تعيين وقت النهاية
+  /// تعيين وقت النهاية (مع التحقق)
   AppointmentResult setEndTime(String day, int index, TimeOfDay end) {
     final current = appointments[day]![index];
 
@@ -77,6 +77,33 @@ class AddAppointmentsCubit extends Cubit<AddAppointmentsStates> {
 
     current.end = end;
     emit(UpdateAppointmentsState());
+    return AppointmentResult.success;
+  }
+
+  /// تعيين وقت البداية بدون تحقق (للتعديل)
+  void setStartTimeDirect(String day, int index, TimeOfDay start) {
+    appointments[day]![index].start = start;
+    emit(UpdateAppointmentsState());
+  }
+
+  /// تعيين وقت النهاية بدون تحقق (للتعديل)
+  void setEndTimeDirect(String day, int index, TimeOfDay end) {
+    appointments[day]![index].end = end;
+    emit(UpdateAppointmentsState());
+  }
+
+  /// التحقق من عدم وجود تعارض بعد اختيار كلا الوقتين
+  AppointmentResult validateTimes(String day, int index) {
+    final current = appointments[day]![index];
+    if (current.start == null || current.end == null) {
+      return AppointmentResult.success;
+    }
+    if (!_isEndAfterStart(current.start!, current.end!)) {
+      return AppointmentResult.endBeforeStart;
+    }
+    if (_hasConflict(day, current.start!, current.end!, index)) {
+      return AppointmentResult.conflict;
+    }
     return AppointmentResult.success;
   }
 

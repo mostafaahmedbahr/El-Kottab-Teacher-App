@@ -5,7 +5,6 @@ import '../../../../../core/utils/enums.dart';
 import '../../../../../main_imports.dart';
 import '../../../data/models/appointment_model.dart';
 import '../../view_model/add_appointments_cubit.dart';
-import '../../view_model/add_appointments_states.dart';
 
 class AppointmentItem extends StatelessWidget {
   final AppointmentModel appointment;
@@ -23,7 +22,6 @@ class AppointmentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddAppointmentsCubit>();
 
-    /// 👇 هنا السر
     final bool isLoading = context.select<AddAppointmentsCubit, bool>(
       (cubit) => cubit.loadingIndex == index,
     );
@@ -40,7 +38,6 @@ class AppointmentItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          /// TIME ROW
           Row(
             children: [
               InkWell(
@@ -51,8 +48,7 @@ class AppointmentItem extends StatelessWidget {
                   );
                   if (!context.mounted || time == null) return;
 
-                  final result = cubit.setStartTime(dayName, index, time);
-                  _handleResult(context, result);
+                  cubit.setStartTimeDirect(dayName, index, time);
                 },
                 child: Text(
                   appointment.start == null
@@ -70,8 +66,7 @@ class AppointmentItem extends StatelessWidget {
                   );
                   if (!context.mounted || time == null) return;
 
-                  final result = cubit.setEndTime(dayName, index, time);
-                  _handleResult(context, result);
+                  cubit.setEndTimeDirect(dayName, index, time);
                 },
                 child: Text(
                   appointment.end == null
@@ -89,8 +84,6 @@ class AppointmentItem extends StatelessWidget {
               ),
             ],
           ),
-
-          /// SAVE / EDIT BUTTON
           if (canSave) ...[
             Gap(8.h),
             SizedBox(
@@ -99,48 +92,28 @@ class AppointmentItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: isLoading
                     ? null
-                    : () async {
-                        if (isEdit) {
-                          // 1️⃣ فتح time picker لوقت البداية
-                          final startTime = await customTimePicker(
-                            context,
-                            appointment.start ?? TimeOfDay.now(),
-                          );
-                          if (!context.mounted || startTime == null) return;
+                    : () {
+                          if (isEdit) {
+                            final validation =
+                                cubit.validateTimes(dayName, index);
+                            if (validation != AppointmentResult.success) {
+                              _handleResult(context, validation);
+                              return;
+                            }
 
-                          final startResult =
-                              cubit.setStartTime(dayName, index, startTime);
-                          if (!context.mounted) return;
-                          _handleResult(context, startResult);
-                          if (startResult != AppointmentResult.success) return;
-
-                          // 2️⃣ فتح time picker لوقت النهاية
-                          final endTime = await customTimePicker(
-                            context,
-                            appointment.end ?? startTime,
-                          );
-                          if (!context.mounted || endTime == null) return;
-
-                          final endResult =
-                              cubit.setEndTime(dayName, index, endTime);
-                          if (!context.mounted) return;
-                          _handleResult(context, endResult);
-                          if (endResult != AppointmentResult.success) return;
-
-                          // 3️⃣ حفظ التعديل
-                          cubit.updateSchedule(
-                            scheduleId: appointment.scheduleId!,
-                            day: dayName,
-                            from: formatTimeTo24H(startTime),
-                            to: formatTimeTo24H(endTime),
-                            index: index,
-                          );
+                            cubit.updateSchedule(
+                              scheduleId: appointment.scheduleId!,
+                              day: dayName,
+                              from: formatTimeTo24H(appointment.start!),
+                              to: formatTimeTo24H(appointment.end!),
+                              index: index,
+                            );
                         } else {
                           cubit.addAppointment(
                             day: dayName,
                             from: formatTimeTo24H(appointment.start!),
                             to: formatTimeTo24H(appointment.end!),
-                            index: index, // 👈 مهم
+                            index: index,
                           );
                         }
                       },

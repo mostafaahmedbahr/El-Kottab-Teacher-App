@@ -13,9 +13,38 @@ class DayAppointmentsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppBar(title: dayName),
-      body: BlocBuilder<AddAppointmentsCubit, AddAppointmentsStates>(
-        builder: (context, state) {
+      appBar: GlobalAppBar(title: dayName.tr()),
+      body: BlocListener<AddAppointmentsCubit, AddAppointmentsStates>(
+        listenWhen: (previous, current) =>
+            current is AddAppointmentsSuccessState ||
+            current is AddAppointmentsErrorState ||
+            current is UpdateScheduleSuccessState ||
+            current is UpdateScheduleErrorState,
+        listener: (context, state) {
+          if (state is AddAppointmentsSuccessState) {
+            Toast.showSuccessToast(
+              msg: state.addAppointmentModel.message.toString(),
+              context: context,
+            );
+          } else if (state is AddAppointmentsErrorState) {
+            Toast.showErrorToast(
+              msg: state.error.toString(),
+              context: context,
+            );
+          } else if (state is UpdateScheduleSuccessState) {
+            Toast.showSuccessToast(
+              msg: state.updateScheduleModel.message.toString(),
+              context: context,
+            );
+          } else if (state is UpdateScheduleErrorState) {
+            Toast.showErrorToast(
+              msg: state.error.toString(),
+              context: context,
+            );
+          }
+        },
+        child: BlocBuilder<AddAppointmentsCubit, AddAppointmentsStates>(
+          builder: (context, state) {
           final cubit = context.read<AddAppointmentsCubit>();
           final list = cubit.appointments[dayName] ?? [];
           if (list.isEmpty) {
@@ -40,6 +69,7 @@ class DayAppointmentsView extends StatelessWidget {
           );
         },
       ),
+    ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final cubit = context.read<AddAppointmentsCubit>();

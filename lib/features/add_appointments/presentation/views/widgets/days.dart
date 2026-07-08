@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:el_kottab_teacher_app/core/errors/error_ui.dart';
-import 'package:el_kottab_teacher_app/features/add_appointments/data/models/appointment_model.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_cubit.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/view_model/add_appointments_states.dart';
 import 'package:el_kottab_teacher_app/features/add_appointments/presentation/views/day_appointments_view.dart';
@@ -72,7 +71,7 @@ class Days extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            day,
+                            day.tr(),
                             style: hasAppointments
                                 ? AppStyles.white12SemiBold
                                 : AppStyles.black16SemiBold,
@@ -80,7 +79,7 @@ class Days extends StatelessWidget {
                           Gap(4.h),
                           Text(
                             hasAppointments
-                                ? _formatTime(list, context)
+                                ? '${list.length} ${LangKeys.appointments.tr()}'
                                 : LangKeys.noAppointments.tr(),
                             style: hasAppointments
                                 ? AppStyles.white12SemiBold
@@ -103,10 +102,8 @@ class Days extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Text(
-                        hasAppointments ? LangKeys.edit.tr() : LangKeys.add.tr(),
-                        style: hasAppointments
-                            ? AppStyles.white12SemiBold
-                            : AppStyles.white12SemiBold,
+                        LangKeys.addAppointment.tr(),
+                        style: AppStyles.white12SemiBold,
                       ),
                     ),
                   ],
@@ -118,11 +115,4 @@ class Days extends StatelessWidget {
       },
 
     );
-  }
-
-  String _formatTime(List<AppointmentModel> list, BuildContext context) {
-    final first = list.first;
-    if (first.start == null || first.end == null) return '';
-    return '${first.start!.format(context)} - ${first.end!.format(context)}';
-  }
-}
+  }}
