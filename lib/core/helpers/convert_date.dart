@@ -10,7 +10,7 @@ class DateFormatterClass {
       return 'Just now';
     }
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       return timeago.format(parsedDate, locale: "ar");
     } catch (e) {
       return 'Just now';
@@ -20,8 +20,8 @@ class DateFormatterClass {
   static String toDateOnly(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('yyyy-MM-dd').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('yyyy-MM-dd', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -31,8 +31,8 @@ class DateFormatterClass {
   static String toReadableDate(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('MMMM dd, yyyy').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('MMMM dd, yyyy', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -42,8 +42,8 @@ class DateFormatterClass {
   static String toShortDate(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('MMM dd, yyyy').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('MMM dd, yyyy', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -53,8 +53,8 @@ class DateFormatterClass {
   static String toTimeOnly(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('hh:mm a').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('hh:mm a', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -64,21 +64,21 @@ class DateFormatterClass {
   static String to24HourTime(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('HH:mm').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('HH:mm', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
   }
 
-  /// Convert to date and time: "October 12, 2025 at 12:00 AM"
+  /// Convert to date and time: "الأحد, 12 أكتوبر 2025, 12:00 م"
   static String toDateTime(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('MMMM dd, yyyy \'at\' hh:mm a').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('EEEE, d MMMM yyyy, hh:mm a', 'ar').format(parsedDate);
     } catch (e) {
-      return '';
+      return dateTimeString;
     }
   }
 
@@ -86,8 +86,8 @@ class DateFormatterClass {
   static String toCompactDateTime(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('MM/dd/yyyy, hh:mm a').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('MM/dd/yyyy, hh:mm a', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -97,7 +97,7 @@ class DateFormatterClass {
   static String toIsoFormat(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       return parsedDate.toIso8601String();
     } catch (e) {
       return '';
@@ -108,19 +108,19 @@ class DateFormatterClass {
   static String toRelativeDay(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       DateTime now = DateTime.now();
       DateTime today = DateTime(now.year, now.month, now.day);
       DateTime inputDate = DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
 
       if (inputDate == today) {
-        return 'Today';
+        return 'اليوم';
       } else if (inputDate == today.add(Duration(days: 1))) {
-        return 'Tomorrow';
+        return 'غداً';
       } else if (inputDate == today.subtract(Duration(days: 1))) {
-        return 'Yesterday';
+        return 'أمس';
       } else {
-        return DateFormat('MMM dd, yyyy').format(parsedDate);
+        return DateFormat('MMM dd, yyyy', 'ar').format(parsedDate);
       }
     } catch (e) {
       return '';
@@ -131,8 +131,8 @@ class DateFormatterClass {
   static String toDayOfWeek(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('EEEE').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('EEEE', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -142,8 +142,8 @@ class DateFormatterClass {
   static String toShortDayOfWeek(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('EEE').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('EEE', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -153,8 +153,8 @@ class DateFormatterClass {
   static String toMonthYear(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return '';
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
-      return DateFormat('MMMM yyyy').format(parsedDate);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
+      return DateFormat('MMMM yyyy', 'ar').format(parsedDate);
     } catch (e) {
       return '';
     }
@@ -164,7 +164,7 @@ class DateFormatterClass {
   static int toTimestamp(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return 0;
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       return parsedDate.millisecondsSinceEpoch;
     } catch (e) {
       return 0;
@@ -175,7 +175,7 @@ class DateFormatterClass {
   static bool isToday(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return false;
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       DateTime now = DateTime.now();
       return parsedDate.year == now.year &&
           parsedDate.month == now.month &&
@@ -189,7 +189,7 @@ class DateFormatterClass {
   static bool isFuture(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return false;
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       return parsedDate.isAfter(DateTime.now());
     } catch (e) {
       return false;
@@ -200,7 +200,7 @@ class DateFormatterClass {
   static int daysFromNow(String? dateTimeString) {
     if (dateTimeString == null || dateTimeString.isEmpty) return 0;
     try {
-      DateTime parsedDate = DateTime.parse(dateTimeString);
+      DateTime parsedDate = DateTime.parse(dateTimeString).toLocal();
       return DateTime.now().difference(parsedDate).inDays;
     } catch (e) {
       return 0;

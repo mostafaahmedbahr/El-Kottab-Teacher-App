@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../../core/helpers/convert_date.dart';
 import '../../../../../core/shared_widgets/custom_error_widget.dart';
 import '../../../../../main_imports.dart';
 import '../../view_model/notifications_cubit.dart';
@@ -47,7 +48,7 @@ class NotificationList extends StatelessWidget {
                     id: notify.id!,
                     title: notify.title!,
                     message: notify.body!,
-                    time: notify.createdAt.toString(),
+                    time: DateFormatterClass.toDateTime(notify.createdAt?.toString()),
                     icon: Icons.rice_bowl,
                     onTap: () {
                       // Handle notification tap
