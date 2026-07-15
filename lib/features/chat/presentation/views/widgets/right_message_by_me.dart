@@ -40,7 +40,7 @@ class RightMessageByMe extends StatelessWidget {
           ),
           Padding(
             padding:   EdgeInsets.only(right: 50.w),
-            child: Text(DateFormatterClass.toTimeAgo(date)),
+            child: Text(DateFormatterClass.toTimeOnly(date)),
           ),
         ],
       ),

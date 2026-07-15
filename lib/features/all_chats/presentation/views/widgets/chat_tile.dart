@@ -2,6 +2,7 @@ import 'package:el_kottab_teacher_app/features/all_chats/data/models/all_chats_m
 import 'package:el_kottab_teacher_app/features/chat/presentation/views/chat_view.dart';
 
 import '../../../../../main_imports.dart';
+import '../../../../../core/helpers/convert_date.dart';
 
 class ChatTile extends StatelessWidget {
   final Data chat;
@@ -87,25 +88,19 @@ class ChatTile extends StatelessWidget {
   }
 
   String _formatTime(dynamic dateTime) {
-    // لو dateTime String, حاول تحويله
-    DateTime parsedDate;
+    String dateStr = '';
     if (dateTime is String) {
-      parsedDate = DateTime.parse(dateTime);
+      dateStr = dateTime;
     } else if (dateTime is DateTime) {
-      parsedDate = dateTime;
+      dateStr = dateTime.toIso8601String();
     } else {
-      return ''; // لو مش String ولا DateTime
+      return ''; 
     }
-
-    final now = DateTime.now();
-    final difference = now.difference(parsedDate);
-
-    if (difference.inDays > 0) {
-      return '${parsedDate.day}/${parsedDate.month}/${parsedDate.year}';
-    } else if (difference.inHours > 0) {
-      return '${parsedDate.hour}:${parsedDate.minute.toString().padLeft(2, '0')}';
+    
+    if (DateFormatterClass.isToday(dateStr)) {
+       return DateFormatterClass.toTimeOnly(dateStr);
     } else {
-      return '${difference.inMinutes} دقيقة';
+       return DateFormatterClass.toRelativeDay(dateStr);
     }
   }
 
