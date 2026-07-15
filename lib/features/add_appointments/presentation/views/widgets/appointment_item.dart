@@ -57,7 +57,7 @@ class AppointmentItem extends StatelessWidget {
                   style: AppStyles.white16SemiBold,
                 ),
               ),
-              Text('  →  ', style: AppStyles.white24SemiBold),
+              Text('  ←  ', style: AppStyles.white24SemiBold),
               InkWell(
                 onTap: () async {
                   final time = await customTimePicker(
