@@ -11,88 +11,93 @@ import 'main_imports.dart';
 import 'my_app.dart';
 import 'package:zego_zpns/zego_zpns.dart';
 import 'package:timeago/timeago.dart' as timeago;
-Future<void> _requestPermissions() async {
-  await [
-    Permission.microphone,
-    Permission.camera,
-    Permission.notification,
-    Permission.systemAlertWindow,
-  ].request();
-
-}
+// Future<void> _requestPermissions() async {
+//   await [
+//     Permission.microphone,
+//     Permission.camera,
+//     Permission.notification,
+//     Permission.systemAlertWindow,
+//   ].request();
+//
+// }
 
 final GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  timeago.setLocaleMessages('ar', timeago.ArMessages());
-  // Initialize cache and services
-  await CacheHelper.init();
-  await _requestPermissions();
 
-  // Configure ZPNS for FCM
+  timeago.setLocaleMessages('ar', timeago.ArMessages());
+
+  await CacheHelper.init();
+
+  await dotenv.load(fileName: ".env");
+
+  await Firebase.initializeApp();
+
+  await EasyLocalization.ensureInitialized();
+
+  setup();
+
+  Bloc.observer = MyBlocObserver();
+
+  CallNotificationService().initialize();
+
   try {
     ZPNsConfig zpnsConfig = ZPNsConfig();
-    zpnsConfig.enableFCMPush; // Enable Google push notification channel
-    // Note: ZPNsManager may need to be imported or configured differently
-    debugPrint('✅ ZPNS configured for FCM');
+    zpnsConfig.enableFCMPush;
+    debugPrint("✅ ZPNS configured");
   } catch (e) {
-    debugPrint('❌ Error configuring ZPNS: $e');
+    debugPrint(e.toString());
   }
-  ZPNs.getInstance().applyNotificationPermission();
-  await dotenv.load(fileName: ".env");
-  // Initialize Firebase
-  await Firebase.initializeApp();
-  // Configure Firebase Messaging
-  await _configureFirebaseMessaging();
-
 
   String? token = await CacheTokenManger.getUserToken();
   debugPrint("Retrieved token: $token");
 
-  await EasyLocalization.ensureInitialized();
-  setup();
-  Bloc.observer = MyBlocObserver();
-
-  // Initialize call notification service
-  CallNotificationService().initialize();
-
-  // Initialize Zego services
-  // await _initializeZegoServices(userName,userId,fcmToken);
-
-  // Run the app
   runApp(
     EasyLocalization(
-      startLocale: const Locale('en', ""),
-      supportedLocales: const [Locale('ar', ""), Locale('en', "")],
+      startLocale: const Locale('en'),
+      supportedLocales: const [
+        Locale('ar'),
+        Locale('en'),
+      ],
       path: 'lib/lang',
       saveLocale: true,
-      fallbackLocale: const Locale('en', ""),
+      fallbackLocale: const Locale('en'),
       useOnlyLangCode: true,
       assetLoader: const CodegenLoader(),
-      child: MyApp(navigatorKey: navigateKey),
+      child: MyApp(
+        navigatorKey: navigateKey,
+      ),
     ),
   );
+
+  _configureFirebaseMessaging();
 }
 
 Future<void> _configureFirebaseMessaging() async {
   try {
     FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-    await firebaseMessaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+    // await firebaseMessaging.requestPermission(
+    //   alert: true,
+    //   announcement: false,
+    //   badge: true,
+    //   carPlay: false,
+    //   criticalAlert: false,
+    //   provisional: false,
+    //   sound: true,
+    // );
+    final status = await Permission.notification.request();
 
+    if (!status.isGranted) {
+      debugPrint("❌ Notification permission denied");
+      return;
+    }
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,

@@ -74,6 +74,7 @@ class ZegoService {
             _context!.read<CallLogsCubit>().getAllCalls(null);
             _context!.read<HomeCubit>().getTeacherPerformance();
             _context!.read<HomeCubit>().getSuccessfulCalls();
+            _context!.read<HomeCubit>().getTeacherStats(teacherId: CacheHelper.getData(key: "userId"));
           },
         ),
         notificationConfig: ZegoCallInvitationNotificationConfig(
