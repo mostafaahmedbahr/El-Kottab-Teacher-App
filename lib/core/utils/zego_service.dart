@@ -21,6 +21,7 @@ class ZegoService {
 
   final appID = int.parse(dotenv.env['ZEGO_APP_ID'] ?? '1234567890');
   final appSign = dotenv.env['ZEGO_APP_SIGN'] ?? 'your_app_sign_here';
+  DateTime? _initCompletionTime;
   BuildContext? get _context => navigateKey.currentContext;
   Future<void> init({
     required String userId,
@@ -39,6 +40,7 @@ class ZegoService {
       // Then initialize the invitation service
       final service = ZegoUIKitPrebuiltCallInvitationService();
 
+      _initCompletionTime = DateTime.now();
       await service.init(
         events : ZegoUIKitPrebuiltCallEvents(
           onCallEnd:
@@ -112,25 +114,48 @@ class ZegoService {
 
         ),
         config: ZegoCallInvitationConfig(
+          requiredInviter: ZegoCallRequiredInviterConfig(
+            detectSeconds: 1,
+            enabledOnGroupCall: true,
+            enabledOnOneOnOneCall: true,
+          ),
           endCallWhenInitiatorLeave: true,
           permissions: [
             ZegoCallInvitationPermission.microphone,
             ZegoCallInvitationPermission.camera,
           ],
           pip: ZegoCallInvitationPIPConfig(),
-          inCalling: ZegoCallInvitationInCallingConfig(
-            // // Ensure proper cleanup when leaving call
-            // endCallAfterLeaving: true,
+          inCalling: ZegoCallInvitationInCallingConfig(),
+          missedCall: ZegoCallInvitationMissedCallConfig(
+            enabled: true,
+            enableDialBack: false,
+            resourceID: "zego_push",
           ),
-          // missedCall: ZegoCallInvitationMissedCallConfig(
-          //   enabled: true,
-          //   enableDialBack: true,
-          //   resourceID: "zego_push",
-          // ),
           systemWindowConfirmDialog: ZegoCallSystemConfirmDialogConfig(),
           offline: ZegoCallInvitationOfflineConfig(
-            autoEnterAcceptedOfflineCall: false,
+              autoEnterAcceptedOfflineCall: false,
           ),
+        ),
+        invitationEvents: ZegoUIKitPrebuiltCallInvitationEvents(
+          onIncomingCallCanceled: (callID, caller, customData) {
+            logWarning('🔔 Incoming call cancelled: $callID by ${caller.name}');
+          },
+          onIncomingCallTimeout: (callID, caller) {
+            logWarning('🔔 Incoming call timed out: $callID from ${caller.name}');
+          },
+          onIncomingCallReceived: (callID, caller, callType, callees, customData) {
+            logWarning('🔔 Incoming call: $callID from ${caller.name}');
+            final sinceInit = _initCompletionTime != null
+                ? DateTime.now().difference(_initCompletionTime!).inSeconds
+                : 99;
+            // Calls arriving within 2s of init are stale cached calls
+            if (sinceInit < 2) {
+              logWarning('Stale call (${sinceInit}s post-init), rejecting');
+              Future.delayed(const Duration(milliseconds: 100), () {
+                ZegoUIKitPrebuiltCallInvitationService().reject();
+              });
+            }
+          },
         ),
         requireConfig: (ZegoCallInvitationData data) {
           debugPrint('📞 Incoming call data: ${data.toString()}');
@@ -222,6 +247,17 @@ class ZegoService {
           ),
         ),
       );
+
+      // After init, reject any stale/cached call invitations
+      // (calls that ended while app was closed should not show incoming UI)
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await Future.delayed(const Duration(milliseconds: 300));
+        try {
+          await ZegoUIKitPrebuiltCallInvitationService().reject();
+        } catch (e) {
+          logWarning('Stale invitation cleanup (expected if none): $e');
+        }
+      });
 
       logSuccess('✅ ZegoService initialized successfully');
     } catch (e) {

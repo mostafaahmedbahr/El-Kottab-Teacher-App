@@ -55,11 +55,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
       // Initialize Zego service using original working ZegoService
       ZegoService().init(userId: userId, userName: userName, fcmToken: fcmToken);
 
-      // Handle offline calls after app is ready
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ZegoUIKitPrebuiltCallInvitationService().enterAcceptedOfflineCall();
-      });
-
       debugPrint('✅ Zego services initialized successfully');
     } catch (e) {
       debugPrint('❌ Error initializing Zego services: $e');
