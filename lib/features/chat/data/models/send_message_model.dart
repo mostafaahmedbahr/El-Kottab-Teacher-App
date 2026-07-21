@@ -24,12 +24,12 @@ class SendMessageModel {
 }
 
 class Data {
-  int? conversationId;
-  int? senderId;
-  String? message;
-  String? updatedAt;
-  String? createdAt;
-  int? id;
+  dynamic  conversationId;
+  dynamic  senderId;
+  dynamic  message;
+  dynamic  updatedAt;
+  dynamic  createdAt;
+  dynamic  id;
 
   Data({this.conversationId, this.senderId, this.message, this.updatedAt, this.createdAt, this.id});
 

@@ -24,10 +24,10 @@ class AllChatsModel {
 }
 
 class Data {
-  int? id;
+  dynamic id;
   OtherUser? otherUser;
   LastMessage? lastMessage;
-  String? createdAt;
+  dynamic createdAt;
 
   Data({this.id, this.otherUser, this.lastMessage, this.createdAt});
 
@@ -53,11 +53,11 @@ class Data {
 }
 
 class LastMessage {
-  int? id;
-  String? message;
-  String? senderRole;
-  String? isRead;
-  String? createdAt;
+  dynamic  id;
+  dynamic  message;
+  dynamic  senderRole;
+  dynamic  isRead;
+  dynamic  createdAt;
 
   LastMessage({this.id, this.message, this.senderRole, this.isRead, this.createdAt});
 
@@ -81,14 +81,14 @@ class LastMessage {
 }
 
 class OtherUser {
-  int? id;
-  String? name;
-  String? image;
-  List<String>? languages;
-  String? category;
-  String? phone;
-  int? rate;
-  bool? isFav;
+  dynamic  id;
+  dynamic  name;
+  dynamic  image;
+  List<dynamic>? languages;
+  dynamic category;
+  dynamic phone;
+  dynamic rate;
+  dynamic isFav;
 
   OtherUser({this.id, this.name, this.image, this.languages, this.category, this.phone, this.rate, this.isFav});
 

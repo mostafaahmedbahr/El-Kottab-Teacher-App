@@ -41,12 +41,12 @@ class SendMessageModel {
 }
 
 class MessageData {
-  int? id;
-  String? message;
+  dynamic id;
+  dynamic message;
   dynamic senderId;
   dynamic senderRole;
   dynamic isRead;
-  String? createdAt;
+  dynamic createdAt;
 
   MessageData({
     this.id,
