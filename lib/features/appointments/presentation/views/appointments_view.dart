@@ -31,7 +31,7 @@ class AppointmentsView extends StatelessWidget {
               padding: EdgeInsets.all(12.r),
               child: Column(
                 children: [
-                  AppointmentsInstructionsTexts(),
+                  // AppointmentsInstructionsTexts(),
                   Gap(32.h),
                   EmptyCalendar(
                     hasAppointments: hasAppointments,
